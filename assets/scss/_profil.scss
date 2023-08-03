@@ -1,0 +1,89 @@
+.bg {
+    height: 60px;
+    background-color: $pr_blue_color;
+}
+
+.profil_page {
+    padding-top: 100px;
+    background-color: $pr_bg_color;
+    height: 90vh;
+
+    .container {
+        .information {
+            margin-left: 300px;
+            @include flex(flex-start, flex-start);
+            gap: 150px;
+
+            &_inputs {
+                .info {
+                    display: flex;
+                    flex-direction: column;
+
+                    &_label {
+                        @include fond(400, 13);
+                        color: $pr_black_color;
+                        text-transform: capitalize;
+                        margin-bottom: 10px;
+                    }
+
+                    &_input {
+                        @include fond(400, 13);
+                        color: $pr_black_color;
+                        outline: none;
+                        background: none;
+                        width: 300px;
+                        height: 43px;
+                        border-radius: 5px;
+                        border: none;
+                        background: $pr_white_color;
+                        padding: 0 10px;
+                        margin-bottom: 10px;
+
+                        &::placeholder {
+                            @include fond(400, 13);
+                            color: $pr_black_color;
+                            text-transform: capitalize;
+                        }
+                    }
+
+                }
+            }
+            &_image{
+                input{
+                    display: none;
+                }
+                label{
+                    cursor: pointer;
+                    img{
+                        margin-bottom: 40px;
+                        width: 180px;
+                        height: 210px;
+                        object-fit: cover;
+                        border-radius: 15px;
+                        filter: invert(0.5)
+                    }
+                }
+                &_btns{
+                    @include flex(cover,space-between);
+                    .btn{
+                        @include fond(400,15);
+                        color: $pr_black_color;
+                        text-transform: capitalize;
+                        padding: 5px 10px;
+                        border-radius: 8px;
+                        background-color: $pr_white_color;
+                        cursor: pointer;
+                        &.btn_exit:hover{
+                            background-color: red;
+                            color: $pr_white_color;
+                        }
+                        &.btn_save:hover{
+                            background-color: $pr_blue_color;
+                            color: $pr_white_color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
