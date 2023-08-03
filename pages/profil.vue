@@ -49,9 +49,11 @@
             </div>
           </div>
           <div class="information_image">
-            <input type="file" id="file_input" />
+            <input type="file" id="file_input" @change="imgFunc($event)" />
             <label for="file_input"
-              ><img src="../assets/image/4211763.png" alt=""
+              ><img
+              id="uploadedImage"
+              src="../assets/image/4211763.png" alt=""
             /></label>
             <div class="information_image_btns">
               <div class="btn_exit btn">oraga</div>
@@ -66,6 +68,17 @@
 </template>
 
 <script setup>
+function imgFunc(e) {
+  if (e.target.files[0]) {
+    var picture = new FileReader();
+    picture.readAsDataURL(e.target.files[0]);
+    picture.addEventListener("load", function (event) {
+      document
+        .getElementById("uploadedImage")
+        .setAttribute("src", event.target.result);
+    });
+  }
+}
 </script>
 
 <style lang="scss" scoped>

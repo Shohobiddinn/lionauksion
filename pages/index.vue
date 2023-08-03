@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="banner">
+      <add />
       <div class="container">
         <div class="banner_top">
           <div class="search">
@@ -75,7 +76,9 @@
           <div class="info_top">
             <div class="categorys">
               <div class="categorys_content">
-                <div class="categorys_content_title">Qo'shish</div>
+                <div class="categorys_content_title">
+                  <NuxtLink class="categorys_content_title" to="/add"> Qo'shish </NuxtLink>
+                </div>
                 <div class="categorys_content_title">azo qo'shish</div>
                 <div class="categorys_content_title">eksport (exel)</div>
               </div>
@@ -256,7 +259,6 @@
     "postinstall": "nuxt prepare netlify-lambda"  -->
 <script setup>
 const filterModal = ref(false);
-
 </script>
 
 <style lang="scss" scoped>
