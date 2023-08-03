@@ -1,0 +1,118 @@
+.product_page {
+    background-color: $pr_bg_color;
+    padding-top: 50px;
+
+    .container {
+        .history {
+            margin-left: 300px;
+            margin-bottom: 30px;
+            @include flex(center, center);
+            gap: 40px;
+
+            &_info {
+                width: calc(50% - 20px);
+                background-color: $pr_white_color;
+                border-radius: 15px;
+                padding: 10px 20px;
+                box-shadow: 0px -5px 2px #3F968D, 3px 3px 10px #3F968D;
+
+
+                &_title {
+                    @include fond(400, 15);
+                    color: $pr_black_color;
+                    text-align: center;
+                    margin-bottom: 15px;
+                }
+
+                &_contents {
+                    @include flex(center, space-between);
+
+                    &_content {
+                        width: 50%;
+                        position: relative;
+
+                        &_title {
+                            @include fond(400, 15);
+                            color: $pr_black_color;
+                            text-transform: capitalize;
+                            text-align: center;
+                        }
+
+                        &_count {
+                            text-align: right;
+                            @include fond(400, 15);
+                            color: $pr_black_color;
+                            margin-bottom: 5px;
+                        }
+
+                        &_price {
+                            text-align: right;
+                            @include fond(400, 15);
+                            color: $pr_black_color;
+                        }
+
+                        &:nth-child(1)::after {
+                            content: "";
+                            position: absolute;
+                            top: 0;
+                            right: -35px;
+                            width: 2px;
+                            height: 100%;
+                            background-color: #3F968D;
+                        }
+                    }
+                }
+            }
+        }
+
+        .product {
+            margin-left: 300px;
+            @include flex(flex-start, space-evenly);
+            background-color: $pr_white_color;
+            border-radius: 15px;
+            padding-top: 100px;
+
+            &_info {
+                width: calc(50% - 20px);
+
+                &_name {
+                    @include fond(400, 18);
+                    color: $pr_black_color;
+                    padding-bottom: 10px;
+                    border-bottom: 1px solid $pr_black_color;
+                    margin-bottom: 10px;
+                }
+
+                &_contents {
+                    @include flex(flex-start, space-between);
+                    padding: 3px 10px;
+                    margin-bottom: 10px;
+                    border-bottom: 2px solid $pr_bg_color;
+
+                    &_content {
+                        @include fond(400, 15);
+                        text-transform: capitalize;
+                        width: 50%;
+                    }
+
+                    &_title {
+                        @include fond(500, 15);
+                        color: $pr_black_color;
+                        width: 50%;
+                        text-align: right;
+                        text-transform: capitalize;
+                    }
+                }
+            }
+
+            &_image {
+                img {
+                    width: 450px;
+                    height: 450px;
+                    object-fit: cover;
+                    border-radius: 15px;
+                }
+            }
+        }
+    }
+}

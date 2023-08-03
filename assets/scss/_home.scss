@@ -1,0 +1,365 @@
+nav {
+    background-color: $pr_blue_color;
+    height: 60px;
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    z-index: 3;
+
+    .container {
+        @include flex(center, flex-start);
+        gap: 50px;
+        padding: 0;
+
+        .menu {
+            width: 300px;
+
+
+            &_logo {
+                width: 203px;
+                height: 50px;
+                padding: 0 20px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            &_content {
+                background-color: $sc_blue_color;
+                height: 100vh;
+                padding-top: 40px;
+
+                &_title {
+                    @include flex(center, flex-start);
+                    gap: 20px;
+                    position: relative;
+                    // cursor: pointer;
+
+                    &_link {
+                        @include flex(center, flex-start);
+                        gap: 20px;
+
+                        &_icon {
+
+                            padding-left: 20px;
+
+                            svg {
+                                width: 25px;
+                                height: 25px;
+                            }
+                        }
+
+                        &_text {
+                            padding: 15px 0;
+                            @include fond(400, 18);
+                            color: $pr_white_color;
+                            text-transform: capitalize;
+                            width: 230px;
+
+                        }
+                    }
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        width: 2px;
+                        height: 100%;
+                        background-color: $pr_white_color;
+                        display: none;
+                    }
+
+                    &:hover {
+                        background-color: $hover_color;
+
+                        &::before {
+                            display: block;
+                        }
+                    }
+                }
+            }
+
+        }
+
+
+    }
+}
+
+.banner {
+    background-color: $pr_blue_color;
+    height: 60px;
+    padding: 10px 0;
+
+    .container {
+        padding: 5px 20px;
+
+        .banner_top {
+            margin-left: 300px;
+            @include flex(center, space-between);
+
+            .search {
+                .form {
+                    width: 400px;
+                    height: 35px;
+                    background-color: $pr_white_color;
+                    @include flex(center, flex-start);
+                    gap: 10px;
+                    border-radius: 5px;
+                    padding: 5px;
+
+                    &_icon {
+                        cursor: pointer;
+
+                        svg {
+                            width: 20px;
+                            height: 20px;
+                        }
+
+                    }
+
+                    input {
+                        width: calc(100% - 20px);
+                        height: 100%;
+                        border: none;
+                        outline: none;
+                        background: none;
+                        @include fond(400, 13);
+                        color: $pr_black_color;
+
+                        &::placeholder {
+                            @include fond(400, 13);
+                            color: $pr_black_color;
+                            text-transform: capitalize;
+                        }
+                    }
+                }
+            }
+
+            .profil {
+                @include flex(center, flex-start);
+                gap: 30px;
+
+                &_info {
+                    @include flex(center, flex-start);
+                    gap: 15px;
+
+                    &_image {
+                        img {
+                            width: 25px;
+                            height: 25px;
+                        }
+                    }
+
+                    &_content {
+                        &_name {
+                            @include fond(400, 15);
+                            color: $pr_white_color;
+                            text-transform: capitalize;
+                            line-height: 1.2;
+                        }
+
+                        &_businns {
+                            @include fond(400, 13);
+                            text-transform: capitalize;
+                            color: $pr_white_color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.informotion {
+    background-color: $pr_bg_color;
+
+    .container {
+        .info {
+            margin-left: 300px;
+
+            &_top {
+                .categorys {
+                    @include flex(center, space-between);
+                    padding-top: 82px;
+                    margin-bottom: 17px;
+
+                    &_content {
+                        @include flex(center, flex-start);
+                        gap: 20px;
+
+                        &_title {
+                            @include fond(400, 15);
+                            color: $pr_black_color;
+                            text-transform: capitalize;
+                            background-color: $pr_white_color;
+                            padding: 8px 27px;
+                            border-radius: 5px;
+                            cursor: pointer;
+
+                            &:hover {
+                                background-color: $pr_blue_color;
+                                color: $pr_white_color;
+                            }
+                        }
+                    }
+
+                    &_filter {
+                        position: relative;
+
+                        &_option {
+                            @include flex(center, flex-start);
+                            background-color: $pr_white_color;
+                            border-radius: 5px;
+                            padding: 8px 27px;
+                            gap: 10px;
+                            cursor: pointer;
+
+                            &_icon {
+                                svg {
+                                    width: 20px;
+                                    height: 20px;
+                                }
+                            }
+
+                            &_title {
+                                @include fond(400, 15);
+                                color: $pr_black_color;
+                                text-transform: capitalize;
+                            }
+
+                            &:hover {
+                                background-color: $pr_blue_color;
+
+                                .categorys_filter_option_title {
+                                    color: $pr_white_color;
+
+                                }
+
+                                .categorys_filter_option_icon {
+                                    svg {
+                                        filter: invert(1);
+                                    }
+                                }
+                            }
+                        }
+
+                        &_content {
+                            width: 250px;
+                            background-color: $pr_white_color;
+                            border-radius: 15px;
+                            padding: 20px;
+                            position: absolute;
+                            z-index: 2;
+                            top: calc(100% + 20px);
+                            right: 10px;
+                            transition: 1s;
+                            transform: translateX(110%);
+                            opacity: 0;
+                            visibility: hidden;
+
+                            &_title {
+                                @include flex(center, flex-start);
+                                gap: 20px;
+                                margin-bottom: 10px;
+
+                                &_text {
+                                    @include fond(400, 15);
+                                    color: $pr_black_color;
+                                    text-transform: capitalize;
+                                    cursor: pointer;
+
+                                    &.nds {
+                                        text-transform: uppercase;
+                                    }
+                                }
+                            }
+
+                            &_btn {
+                                @include flex(center, center);
+                                background-color: $pr_blue_color;
+                                color: $pr_white_color;
+                                @include fond (400, 15);
+                                border-radius: 10px;
+                                text-transform: capitalize;
+                                cursor: pointer;
+                            }
+
+                            &.active {
+                                transform: translateX(0%);
+                                visibility: visible;
+                                opacity: 1;
+                                transition: 0.3s;
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            &_bottom {
+                background-color: $pr_white_color;
+                border-radius: 15px;
+
+                &_page {
+                    padding: 20px;
+                    @include flex(center, space-between);
+                    border-bottom: 2px solid #BDBBBB;
+                    position: sticky;
+                    top: 0;
+                    background-color: $pr_white_color;
+
+                    &_title {
+                        @include fond(400, 15);
+                        color: $pr_black_color;
+                        text-transform: capitalize;
+
+                        &.nds {
+                            text-transform: uppercase;
+                        }
+                    }
+                }
+
+                &_deliverys {
+
+
+
+
+                    padding-top: 48px;
+                    overflow-y: auto;
+                    height: 750px;
+
+                    .delivery {
+                        &_link {
+                            @include flex(center, space-between);
+                            padding: 0 20px;
+                            margin-bottom: 10px;
+
+                            &_logo {
+                                width: 48px;
+                                height: 48px;
+                                background-color: #E2E2E2;
+                                @include flex(center, center);
+                                border-radius: 10px;
+
+                                svg {
+                                    border-radius: 50%;
+
+                                }
+                            }
+
+                            .item {
+                                @include fond(400, 15);
+                                color: $pr_black_color;
+                                text-transform: capitalize;
+                            }
+
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+}

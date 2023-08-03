@@ -1,0 +1,10 @@
+@mixin fond($fw,$fs){
+    font-family: $pr_fond;
+    font-weight: $fw;
+    font-size: $fs + px;
+}
+@mixin flex($ai,$jc){
+    display: flex;
+    align-items: $ai;
+    justify-content: $jc;
+}
