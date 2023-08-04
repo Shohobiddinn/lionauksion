@@ -43,7 +43,11 @@
             </div>
             <div class="profil_info">
               <div class="profil_info_image">
-                <img src="../assets/image/user-solid.svg" alt="" />
+                <NuxtLink to="/profil">
+                  <img src="../assets/image/user-solid.svg" alt="" />
+
+                </NuxtLink>
+              
               </div>
               <div class="profil_info_content">
                 <div class="profil_info_content_name">luke asote</div>
@@ -112,7 +116,7 @@
                   :class="{ active: filterModal }"
                 >
                   <div class="categorys_filter_content_title">
-                    <input id="filter-1" name="filter" type="checkbox" />
+                    <input id="filter-1" value="Hello Shahobiddin baby" name="filter" type="checkbox" />
 
                     <label
                       for="filter-1"
@@ -153,7 +157,7 @@
                   </div>
                   <div
                     class="categorys_filter_content_btn"
-                    @click="filterModal = false"
+                    @click="filterModal = false,func()"
                   >
                     yuborish
                   </div>
@@ -259,6 +263,13 @@
     "postinstall": "nuxt prepare netlify-lambda"  -->
 <script setup>
 const filterModal = ref(false);
+function func() {
+  document.getElementsByName('filter').forEach(el => {
+    if(el.checked) {
+      console.log(el.value);
+    }
+  })
+}
 </script>
 
 <style lang="scss" scoped>
