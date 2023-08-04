@@ -88,12 +88,73 @@
                                 }
                             }
                         }
-                        &_title{
-                            @include fond(600,24);
+
+                        &_title {
+                            @include fond(600, 24);
                             color: $pr_black_color;
                             margin-bottom: 20px;
                         }
-                        
+
+                        .categorys {
+                            position: relative;
+
+                            &_category {
+                                width: 50%;
+                                border-right: 2px solid $pr_black_color;
+                                padding: 0 10px 0 0;
+
+                                &_title {
+                                    @include flex(center, space-between);
+                                    cursor: pointer;
+                                    padding: 20px 10px;
+                                    border-radius: 5px;
+
+                                    &:hover {
+                                        background-color: $sc_blue_color;
+                                    }
+
+                                    &_text {
+                                        @include fond(500, 18);
+                                        color: $pr_black_color;
+                                        text-transform: capitalize;
+                                    }
+
+                                    &_icon {
+                                        svg {
+                                            rotate: 90deg;
+                                        }
+                                    }
+                                }
+
+                                &_content {
+                                    position: absolute;
+                                    top: 0;
+                                    left: calc(50% + 20px);
+                                    width: 50%;
+                                    display: none;
+
+                                    &_title {
+                                        @include fond(500, 18);
+                                        color: $pr_black_color;
+                                        text-transform: capitalize;
+                                        padding: 20px 10px;
+                                        cursor: pointer;
+                                        border-radius: 5px;
+
+                                        &:hover {
+                                            background-color: $sc_blue_color;
+                                        }
+                                    }
+                                }
+
+                                &.active {
+                                    .categorys_category_content {
+                                        display: block;
+                                    }
+                                }
+                            }
+                        }
+
                     }
                 }
             }
