@@ -45,6 +45,55 @@
                         user-select: none;
                         @include fond(400, 15);
                         color: $pr_black_color;
+                        background-color: $sc_blue_color;
+                    }
+
+                    &_modal {
+                        width: 1000px;
+                        height: 800px;
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        border-radius: 15px;
+                        border: 1px solid;
+                        background-color: $pr_white_color;
+                        padding: 20px;
+
+                        .close_btn {
+                            @include flex(flex-start, flex-end);
+                            margin-bottom: 20px;
+                            margin-right: 10px;
+
+                            .btn {
+                                position: relative;
+                                cursor: pointer;
+
+                                &::after,
+                                &::before {
+                                    content: "";
+                                    position: absolute;
+                                    width: 3px;
+                                    height: 20px;
+                                    background-color: $pr_black_color;
+                                    border-radius: 3px;
+                                }
+
+                                &::after {
+                                    rotate: 45deg;
+                                }
+
+                                &::before {
+                                    rotate: -45deg;
+                                }
+                            }
+                        }
+                        &_title{
+                            @include fond(600,24);
+                            color: $pr_black_color;
+                            margin-bottom: 20px;
+                        }
+                        
                     }
                 }
             }

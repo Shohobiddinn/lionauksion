@@ -6,7 +6,7 @@
           <div class="menu_logo">
             <NuxtLink to="/">
 
-              <img src="../assets/image/Group 10.png" alt="" />
+              <img src="@/assets/image/Group 10.png" alt="" />
             </NuxtLink>
           </div>
           <div class="menu_content">

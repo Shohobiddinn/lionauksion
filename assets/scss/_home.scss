@@ -91,7 +91,9 @@ nav {
     background-color: $pr_blue_color;
     height: 60px;
     padding: 10px 0;
-
+    position: fixed;
+    top: 0;
+width: 100%;
     .container {
         padding: 5px 20px;
 
