@@ -86,7 +86,7 @@
                 <div class="categorys_content_title">azo qo'shish</div>
                 <div class="categorys_content_title">eksport (exel)</div>
               </div>
-              <div class="categorys_filter">
+              <div class="categorys_filter" :class="{ active: filterModal }">
                 <div
                   class="categorys_filter_option"
                   @click="filterModal = !filterModal"
@@ -113,7 +113,7 @@
                 </div>
                 <div
                   class="categorys_filter_content"
-                  :class="{ active: filterModal }"
+               
                 >
                   <div class="categorys_filter_content_title">
                     <input id="filter-1" value="Hello Shahobiddin baby" name="filter" type="checkbox" />
@@ -259,9 +259,8 @@
     </div>
   </div>
 </template>
-<!-- ,
-    "postinstall": "nuxt prepare netlify-lambda"  -->
 <script setup>
+const baseUrl = useRuntimeConfig().public.baseUrl;
 const filterModal = ref(false);
 function func() {
   document.getElementsByName('filter').forEach(el => {
@@ -269,7 +268,20 @@ function func() {
       console.log(el.value);
     }
   })
-}
+};
+const company = ref(null);
+async function companyApi(){
+  const data = await $fetch(baseUrl + "/user/all",{
+    method:"GET",
+    headers:{
+      Authorization:'Bearer ' + localStorage.getItem("userToken")
+    }
+  });
+  company.value = data;
+  console.log(data);
+};
+companyApi()
+
 </script>
 
 <style lang="scss" scoped>

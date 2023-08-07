@@ -93,7 +93,9 @@ nav {
     padding: 10px 0;
     position: fixed;
     top: 0;
-width: 100%;
+    width: 100%;
+    z-index: 2;
+
     .container {
         padding: 5px 20px;
 
@@ -257,7 +259,7 @@ width: 100%;
                             top: calc(100% + 20px);
                             right: 10px;
                             transition: 1s;
-                            transform: translateX(110%);
+                            transform: translateX(100%);
                             opacity: 0;
                             visibility: hidden;
 
@@ -288,13 +290,18 @@ width: 100%;
                                 cursor: pointer;
                             }
 
-                            &.active {
+
+                        }
+
+                        &.active {
+                            .categorys_filter_content {
                                 transform: translateX(0%);
                                 visibility: visible;
                                 opacity: 1;
                                 transition: 0.3s;
 
                             }
+
                         }
                     }
                 }
@@ -309,7 +316,7 @@ width: 100%;
                     @include flex(center, space-between);
                     border-bottom: 2px solid #BDBBBB;
                     position: sticky;
-                    top: 0;
+                    top: 60px;
                     background-color: $pr_white_color;
 
                     &_title {

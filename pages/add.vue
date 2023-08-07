@@ -98,15 +98,18 @@
 </template>
   
   <script setup>
+
 function activeFun(e) {
   document.querySelectorAll(".categorys .categorys_category").forEach((el) => {
-    if (e.target.parentElement.id == el.id) {
-      e.target.parentElement.classList.toggle("active");
-    } else {
-      e.target.parentElement.classList.remove("active");
-    }
+    // if (e.target.parentElement.id == el.id) {
+    //   e.target.parentElement.classList.toggle("active");
+    //   console.log("hello");
+    // } else {
+    //   e.target.parentElement.classList.remove("active");
+    //   console.log("bug");
+    // }
   });
-  // console.log(e.target.parentElement.id);
+  console.log(e.target);
 }
 </script>
 
