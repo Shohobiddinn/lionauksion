@@ -75,7 +75,12 @@
       <div class="container">
         <div class="company_info">
           <div class="company_info_top">
-            <div class="company_info_top_add">Kampaniya qo'shish</div>
+            <div class="company_info_top_add">
+              <NuxtLink class="company_info_top_add_link" to="/companyadd">
+                Kampaniya qo'shish
+
+              </NuxtLink>
+            </div>
             <div class="company_filter" :class="{ active: filterModal }">
               <div
                 class="company_filter_option"

@@ -1,3 +1,6 @@
+body{
+    background-color: $pr_bg_color;
+}
 .company_page {
     background-color: $pr_bg_color;
     padding-top: 60px;
@@ -5,17 +8,27 @@
     .container {
         .company_info {
             margin-left: 300px;
-            &_top{
-                @include flex (center,space-between);
+
+            &_top {
+                @include flex (center, space-between);
                 margin-top: 25px;
                 margin-bottom: 35px;
-                &_add{
-                    @include fond(400,15);
-                    color: $pr_black_color;
-                    padding: 5px 10px;
-                    border-radius: 5px;
-                    background-color: $pr_white_color;
+
+                &_add {
+                    &_link {
+                        @include fond(400, 15);
+                        color: $pr_black_color;
+                        padding: 5px 10px;
+                        border-radius: 5px;
+                        background-color: $pr_white_color;
+
+                        &:hover {
+                            background-color: $pr_blue_color;
+                            color: $pr_white_color;
+                        }
+                    }
                 }
+
                 .company_filter {
                     position: relative;
 
@@ -111,9 +124,10 @@
                     }
                 }
             }
-            &_bottom{
-                &_top{
-                    @include flex(flex-start,flex-start);
+
+            &_bottom {
+                &_top {
+                    @include flex(flex-start, flex-start);
                     gap: 100px;
                     background-color: $pr_white_color;
                     padding: 10px 20px;
@@ -121,55 +135,66 @@
                     margin-bottom: 20px;
                     position: sticky;
                     top: 60px;
-                    &_title{
-                        @include fond(500,15);
+
+                    &_title {
+                        @include fond(500, 15);
                         color: $pr_black_color;
                         text-transform: capitalize;
                         width: 200px;
-                        &:nth-child(1){
-                            width:50px;   
+
+                        &:nth-child(1) {
+                            width: 50px;
                         }
                     }
                 }
-                &_companys{
-                    .company{
+
+                &_companys {
+                    .company {
                         padding: 5px 20px;
-                        @include flex(center,flex-start);
+                        @include flex(center, flex-start);
                         gap: 100px;
                         background-color: $pr_white_color;
                         border-radius: 10px;
                         margin-bottom: 10px;
-                        &_title{
-                            @include fond(400,15);
+
+                        &_title {
+                            @include fond(400, 15);
                             color: $pr_black_color;
                             text-transform: capitalize;
                             width: 200px;
-                            &_logo{
+
+                            &_logo {
                                 width: 50px;
                                 height: 50px;
-                                @include flex(center,center);
+                                @include flex(center, center);
                                 background-color: #E2E2E2;
                                 border-radius: 7px;
-                                svg{
+
+                                svg {
                                     border-radius: 50%;
                                 }
                             }
-                            &.lock{
+
+                            &.lock {
                                 cursor: pointer;
                             }
-                            &.lock_open{
+
+                            &.lock_open {
                                 cursor: pointer;
                             }
-                            &:nth-child(1){
-                                width:50px;   
+
+                            &:nth-child(1) {
+                                width: 50px;
                             }
-                            &:nth-child(5){
-                                width:50px;   
+
+                            &:nth-child(5) {
+                                width: 50px;
                             }
                         }
                     }
                 }
             }
+
             .pagination {
                 @include flex(center, center);
                 position: fixed;
@@ -182,7 +207,7 @@
                 &_icon {
                     cursor: pointer;
                 }
-                
+
                 &_count {
                     @include fond(500, 15);
                     color: $pr_black_color;

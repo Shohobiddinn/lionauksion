@@ -319,7 +319,7 @@ nav {
                     background-color: $pr_white_color;
 
                     &_title {
-                        @include fond(500, 15);
+                        @include fond(00, 15);
                         color: $pr_black_color;
                         text-transform: capitalize;
 
