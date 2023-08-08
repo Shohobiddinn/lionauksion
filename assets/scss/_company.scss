@@ -170,6 +170,25 @@
                     }
                 }
             }
+            .pagination {
+                @include flex(center, center);
+                position: fixed;
+                bottom: 50px;
+                left: 50%;
+                transform: translateX(-25%);
+                background-color: $pr_white_color;
+                gap: 10px;
+
+                &_icon {
+                    cursor: pointer;
+                }
+                
+                &_count {
+                    @include fond(500, 15);
+                    color: $pr_black_color;
+                    cursor: pointer;
+                }
+            }
         }
     }
 }
