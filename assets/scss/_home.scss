@@ -259,7 +259,6 @@ nav {
                             top: calc(100% + 20px);
                             right: 10px;
                             transition: 1s;
-                            transform: translateX(100%);
                             opacity: 0;
                             visibility: hidden;
 
@@ -331,13 +330,20 @@ nav {
                 }
 
                 &_deliverys {
-
-
-
-
                     padding-top: 48px;
                     overflow-y: auto;
                     height: 750px;
+
+                    &::-webkit-scrollbar {
+                        cursor: pointer;
+                        width: 10px;
+                        height: 8px;
+                        background-color: $pr_blue_color;
+                    }
+
+                    &::-webkit-scrollbar-thumb {
+                        background-color: $hover_color ;
+                    }
 
                     .delivery {
                         &_link {
@@ -363,10 +369,29 @@ nav {
                                 color: $pr_black_color;
                                 text-transform: capitalize;
                             }
-
                         }
                     }
 
+                }
+
+                .pagination {
+                    @include flex(center, center);
+                    position: fixed;
+                    bottom: 50px;
+                    left: 50%;
+                    transform: translateX(-25%);
+                    background-color: $pr_white_color;
+                    gap: 10px;
+
+                    &_icon {
+                        cursor: pointer;
+                    }
+                    
+                    &_count {
+                        @include fond(500, 15);
+                        color: $pr_black_color;
+                        cursor: pointer;
+                    }
                 }
             }
         }

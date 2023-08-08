@@ -33,7 +33,7 @@
               </NuxtLink>
             </div>
             <div class="menu_content_title">
-              <NuxtLink class="menu_content_title_link" to="/">
+              <NuxtLink class="menu_content_title_link" to="/company">
                 <div class="menu_content_title_link_icon">
                   <svg
                     width="30"

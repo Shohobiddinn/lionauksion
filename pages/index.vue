@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="banner">
-      <add />
+      <!-- <add /> -->
       <div class="container">
         <div class="banner_top">
           <div class="search">
@@ -45,9 +45,7 @@
               <div class="profil_info_image">
                 <NuxtLink to="/profil">
                   <img src="../assets/image/user-solid.svg" alt="" />
-
                 </NuxtLink>
-              
               </div>
               <div class="profil_info_content">
                 <div class="profil_info_content_name">luke asote</div>
@@ -81,7 +79,9 @@
             <div class="categorys">
               <div class="categorys_content">
                 <div class="categorys_content_title">
-                  <NuxtLink class="categorys_content_title" to="/add"> Qo'shish </NuxtLink>
+                  <NuxtLink class="categorys_content_title" to="/add">
+                    Qo'shish
+                  </NuxtLink>
                 </div>
                 <div class="categorys_content_title">azo qo'shish</div>
                 <div class="categorys_content_title">eksport (exel)</div>
@@ -111,12 +111,14 @@
                   </div>
                   <div class="categorys_filter_option_title">filter</div>
                 </div>
-                <div
-                  class="categorys_filter_content"
-               
-                >
+                <div class="categorys_filter_content">
                   <div class="categorys_filter_content_title">
-                    <input id="filter-1" value="Hello Shahobiddin baby" name="filter" type="checkbox" />
+                    <input
+                      id="filter-1"
+                      value="Hello Shahobiddin baby"
+                      name="filter"
+                      type="checkbox"
+                    />
 
                     <label
                       for="filter-1"
@@ -157,7 +159,7 @@
                   </div>
                   <div
                     class="categorys_filter_content_btn"
-                    @click="filterModal = false,func()"
+                    @click="(filterModal = false), func()"
                   >
                     yuborish
                   </div>
@@ -253,6 +255,45 @@
                 </NuxtLink>
               </div>
             </div>
+            <div class="pagination">
+              <div class="pagination_icon">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15 6L9 12L15 18"
+                    stroke="black"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              <div class="pagination_count" v-for="p in 5" :key="p">
+                {{ p }}
+              </div>
+              <div class="pagination_icon">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9 18L15 12L9 6"
+                    stroke="black"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -263,25 +304,23 @@
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const filterModal = ref(false);
 function func() {
-  document.getElementsByName('filter').forEach(el => {
-    if(el.checked) {
+  document.getElementsByName("filter").forEach((el) => {
+    if (el.checked) {
       console.log(el.value);
     }
-  })
-};
+  });
+}
 const company = ref(null);
-async function companyApi(){
-  const data = await $fetch(baseUrl + "/user/all",{
-    method:"GET",
-    headers:{
-      Authorization:'Bearer ' + localStorage.getItem("userToken")
-    }
+async function companyApi() {
+  const data = await $fetch(baseUrl + "/user/all", {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("userToken"),
+    },
   });
   company.value = data;
-  console.log(data);
-};
-companyApi()
-
+}
+companyApi();
 </script>
 
 <style lang="scss" scoped>
