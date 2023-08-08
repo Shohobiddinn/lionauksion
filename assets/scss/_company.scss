@@ -126,6 +126,9 @@
                         color: $pr_black_color;
                         text-transform: capitalize;
                         width: 200px;
+                        &:nth-child(1){
+                            width:50px;   
+                        }
                     }
                 }
                 &_companys{
@@ -135,6 +138,7 @@
                         gap: 100px;
                         background-color: $pr_white_color;
                         border-radius: 10px;
+                        margin-bottom: 10px;
                         &_title{
                             @include fond(400,15);
                             color: $pr_black_color;
@@ -150,9 +154,18 @@
                                     border-radius: 50%;
                                 }
                             }
-                            // &:nth-child(1){
-                            //     width:50px;   
-                            // }
+                            &.lock{
+                                cursor: pointer;
+                            }
+                            &.lock_open{
+                                cursor: pointer;
+                            }
+                            &:nth-child(1){
+                                width:50px;   
+                            }
+                            &:nth-child(5){
+                                width:50px;   
+                            }
                         }
                     }
                 }

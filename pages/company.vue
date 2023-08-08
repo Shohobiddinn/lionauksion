@@ -162,6 +162,8 @@
               <div class="company_info_bottom_top_title">kompaniya nomi</div>
               <div class="company_info_bottom_top_title">kompaniya rahbari</div>
               <div class="company_info_bottom_top_title">kompaniya raqami</div>
+              <div class="company_info_bottom_top_title">kompaniyani bloklash</div>
+            
             </div>
             <div class="company_info_bottom_companys">
               <div class="company" v-for="c in 20" :key="c">
@@ -205,6 +207,12 @@
                 <div class="company_title">Lion Print</div>
                 <div class="company_title">falonchi pistonchi</div>
                 <div class="company_title">+998900000000</div>
+                <div class="company_title lock" v-if="lock" @click="lock = false">
+                  <svg width="25" height="25" xmlns="http://www.w3.org/2000/svg" fill="#52438F" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/></svg>
+                </div>
+                <div class="company_title lock_open" v-else @click="lock = true">
+                  <svg width="25" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="#52438F"><path d="M352 144c0-44.2 35.8-80 80-80s80 35.8 80 80v48c0 17.7 14.3 32 32 32s32-14.3 32-32V144C576 64.5 511.5 0 432 0S288 64.5 288 144v48H64c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V256c0-35.3-28.7-64-64-64H352V144z"/></svg>
+                </div>
               </div>
             </div>
           </div>
@@ -216,6 +224,7 @@
 
 <script setup>
 const filterModal = ref(false);
+const lock = ref(false);
 </script>
 
 <style lang="scss" scoped>

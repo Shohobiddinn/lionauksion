@@ -29,7 +29,7 @@
                     />
                   </svg>
                 </div>
-                <div class="menu_content_title_link_text">profil</div>
+                <div class="menu_content_title_link_text">mahsulotlar</div>
               </NuxtLink>
             </div>
             <div class="menu_content_title">
@@ -51,7 +51,7 @@
                     />
                   </svg>
                 </div>
-                <div class="menu_content_title_link_text">users</div>
+                <div class="menu_content_title_link_text">kompaniyalar</div>
               </NuxtLink>
             </div>
             <div class="menu_content_title">
