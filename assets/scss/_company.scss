@@ -5,6 +5,141 @@
     .container {
         .company_info {
             margin-left: 300px;
+            &_top{
+                @include flex (center,space-between);
+                margin-top: 25px;
+                margin-bottom: 35px;
+                &_add{
+                    @include fond(400,15);
+                    color: $pr_black_color;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    background-color: $pr_white_color;
+                }
+                .company_filter {
+                    position: relative;
+
+                    &_option {
+                        @include flex(center, flex-start);
+                        background-color: $pr_white_color;
+                        border-radius: 5px;
+                        padding: 8px 27px;
+                        gap: 10px;
+                        cursor: pointer;
+
+                        &_icon {
+                            svg {
+                                width: 20px;
+                                height: 20px;
+                            }
+                        }
+
+                        &_title {
+                            @include fond(400, 15);
+                            color: $pr_black_color;
+                            text-transform: capitalize;
+                        }
+
+                        &:hover {
+                            background-color: $pr_blue_color;
+
+                            .company_filter_option_title {
+                                color: $pr_white_color;
+
+                            }
+
+                            .company_filter_option_icon {
+                                svg {
+                                    filter: invert(1);
+                                }
+                            }
+                        }
+                    }
+
+                    &_content {
+                        width: 250px;
+                        background-color: $pr_white_color;
+                        border-radius: 15px;
+                        padding: 20px;
+                        position: absolute;
+                        z-index: 2;
+                        top: calc(100% + 20px);
+                        right: 10px;
+                        transition: 1s;
+                        opacity: 0;
+                        visibility: hidden;
+
+                        &_title {
+                            @include flex(center, flex-start);
+                            gap: 20px;
+                            margin-bottom: 10px;
+
+                            &_text {
+                                @include fond(400, 15);
+                                color: $pr_black_color;
+                                text-transform: capitalize;
+                                cursor: pointer;
+
+                                &.nds {
+                                    text-transform: uppercase;
+                                }
+                            }
+                        }
+
+                        &_btn {
+                            @include flex(center, center);
+                            background-color: $pr_blue_color;
+                            color: $pr_white_color;
+                            @include fond (400, 15);
+                            border-radius: 10px;
+                            text-transform: capitalize;
+                            cursor: pointer;
+                        }
+
+
+                    }
+
+                    &.active {
+                        .company_filter_content {
+                            transform: translateX(0%);
+                            visibility: visible;
+                            opacity: 1;
+                            transition: 0.3s;
+
+                        }
+
+                    }
+                }
+            }
+            &_bottom{
+                &_top{
+                    @include flex(flex-start,flex-start);
+                    gap: 150px;
+                    background-color: $pr_white_color;
+                    padding: 5px 20px;
+                    border-radius: 10px;
+                    &_title{
+                        @include fond(500,15);
+                        color: $pr_black_color;
+                        text-transform: capitalize;
+                    }
+                }
+                &_companys{
+                    .company{
+                        padding: 5px 20px;
+                        @include flex(center,flex-start);
+                        gap: 150px;
+                        &_title{
+                            @include fond(400,15);
+                            color: $pr_black_color;
+                            text-transform: capitalize;
+                            &:nth-child(1){
+                                width:50px;   
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
