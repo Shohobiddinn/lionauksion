@@ -114,28 +114,45 @@
             &_bottom{
                 &_top{
                     @include flex(flex-start,flex-start);
-                    gap: 150px;
+                    gap: 100px;
                     background-color: $pr_white_color;
-                    padding: 5px 20px;
+                    padding: 10px 20px;
                     border-radius: 10px;
+                    margin-bottom: 20px;
+                    position: sticky;
+                    top: 60px;
                     &_title{
                         @include fond(500,15);
                         color: $pr_black_color;
                         text-transform: capitalize;
+                        width: 200px;
                     }
                 }
                 &_companys{
                     .company{
                         padding: 5px 20px;
                         @include flex(center,flex-start);
-                        gap: 150px;
+                        gap: 100px;
+                        background-color: $pr_white_color;
+                        border-radius: 10px;
                         &_title{
                             @include fond(400,15);
                             color: $pr_black_color;
                             text-transform: capitalize;
-                            &:nth-child(1){
-                                width:50px;   
+                            width: 200px;
+                            &_logo{
+                                width: 50px;
+                                height: 50px;
+                                @include flex(center,center);
+                                background-color: #E2E2E2;
+                                border-radius: 7px;
+                                svg{
+                                    border-radius: 50%;
+                                }
                             }
+                            // &:nth-child(1){
+                            //     width:50px;   
+                            // }
                         }
                     }
                 }
