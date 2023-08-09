@@ -1,14 +1,13 @@
 <template>
   <div>
     <div class="login">
-      <!-- <pre>{{ login }}</pre> -->
       <div class="login_modal">
         <img src="../assets/image/logo.png" alt="logo" />
         <div class="login_modal_inputs">
           <label for="input-1" class="login_modal_inputs_label"
             >foydalanuvchi nomi</label
           >
-          <input class="login_modal_inputs_input" ref="username" type="text" />
+          <input class="login_modal_inputs_input" placeholder="login" ref="username" type="text" />
         </div>
         <div class="login_modal_inputs">
           <label for="input-1" class="login_modal_inputs_label">parol</label>
@@ -16,7 +15,7 @@
             class="login_modal_inputs_input"
             ref="password"
             type="password"
-            placeholder="paro'l"
+            placeholder="password"
             @keyup.enter="loginApi"
           />
           <div class="login_modal_inputs_icon" @click="passeye">
