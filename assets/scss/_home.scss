@@ -1,10 +1,7 @@
 nav {
     background-color: $pr_blue_color;
     height: 60px;
-    padding: 10px 0;
-    position: fixed;
-    top: 0;
-    z-index: 3;
+
 
     .container {
         @include flex(center, flex-start);
@@ -13,7 +10,11 @@ nav {
 
         .menu {
             width: 300px;
-
+            position: fixed;
+            top: 0;
+            z-index: 3;
+            padding: 10px 0;
+            // left: -20px;
 
             &_logo {
                 width: 203px;
@@ -84,6 +85,19 @@ nav {
         }
 
 
+    }
+}
+
+body {
+    &::-webkit-scrollbar {
+        cursor: pointer;
+        width: 10px;
+        height: 8px;
+        background-color: $pr_blue_color;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $hover_color ;
     }
 }
 
@@ -319,7 +333,7 @@ nav {
                     background-color: $pr_white_color;
 
                     &_title {
-                        @include fond(00, 15);
+                        @include fond(400, 15);
                         color: $pr_black_color;
                         text-transform: capitalize;
 
@@ -331,8 +345,8 @@ nav {
 
                 &_deliverys {
                     padding-top: 48px;
-                    overflow-y: auto;
-                    height: 750px;
+                    // overflow-y: auto;
+                    // height: 750px;
 
                     &::-webkit-scrollbar {
                         cursor: pointer;
@@ -386,7 +400,7 @@ nav {
                     &_icon {
                         cursor: pointer;
                     }
-                    
+
                     &_count {
                         @include fond(500, 15);
                         color: $pr_black_color;
