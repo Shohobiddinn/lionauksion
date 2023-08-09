@@ -11,7 +11,7 @@
         // left: 50%;
         // transform: translate(-50%, -50%);
         border: 2px solid rgb(26, 196, 212);
-        background-color:rgb(25, 25, 121);
+        background-color: rgb(25, 25, 121);
         border-radius: 10px;
         @include flex(center, center);
         flex-direction: column;
@@ -68,12 +68,13 @@
         }
 
         &_send {
-            background-color:rgb(43, 43, 157) ;
+            background-color: rgb(43, 43, 157);
             margin-top: 50px;
             @include flex(center, center);
             width: 100%;
             border-radius: 10px;
             cursor: pointer;
+            transition: 0.3s;
 
             &_btn {
                 @include fond(400, 15);
