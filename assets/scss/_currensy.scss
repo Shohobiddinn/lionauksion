@@ -1,0 +1,73 @@
+.currensy_page {
+    background-color: $pr_bg_color;
+
+    .container {
+        .currensy_info {
+            margin-left: 300px;
+
+            &_top {
+                padding-top: 100px;
+                margin-bottom: 100px;
+
+                .currensy_add {
+                    @include fond(400, 15);
+                    color: $pr_black_color;
+                    background-color: $pr_white_color;
+                    padding: 5px 20px;
+                    border-radius: 5px;
+                    display: inline-block;
+                    text-transform: capitalize;
+                }
+            }
+
+            &_bottom {
+                .currensytype {
+                    @include flex(center, flex-start);
+                    gap: 50px;
+                    background-color: $pr_white_color;
+                    border-radius: 10px;
+                    padding: 10px 20px;
+                    margin-bottom: 10px;
+
+                    &_name {
+                        @include fond(400, 15);
+                        color: $pr_black_color;
+                        text-transform: capitalize;
+
+                        span {
+                            @include fond(400, 15);
+                            color: $pr_blue_color;
+                            text-transform: uppercase;
+                        }
+                        &.icon{
+                            cursor: pointer;
+                        }
+                    }
+                }
+                .currensy {
+                    @include flex(center, flex-start);
+                    gap: 50px;
+                    background-color: $pr_white_color;
+                    border-radius: 10px;
+                    padding: 10px 20px;
+                    margin-bottom: 10px;
+
+                    &_name {
+                        @include fond(400, 15);
+                        color: $pr_black_color;
+                        text-transform: capitalize;
+
+                        span {
+                            @include fond(400, 15);
+                            color: $pr_blue_color;
+                            text-transform: uppercase;
+                        }
+                        &.icon{
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

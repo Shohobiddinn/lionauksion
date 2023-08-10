@@ -61,6 +61,7 @@ async function loginApi() {
     router.push("/login")
   } else {
     localStorage.setItem("userToken",res.accessToken);
+    localStorage.setItem("userId",res.user.id);
     router.push("/");
   }
   login.value = res;
