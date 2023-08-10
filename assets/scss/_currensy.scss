@@ -7,7 +7,7 @@
 
             &_top {
                 padding-top: 100px;
-                margin-bottom: 100px;
+                margin-bottom: 50px;
 
                 .currensy_add {
                     @include fond(400, 15);
@@ -17,10 +17,18 @@
                     border-radius: 5px;
                     display: inline-block;
                     text-transform: capitalize;
+                    cursor: pointer;
                 }
             }
 
             &_bottom {
+                &_title{
+                    @include fond(500,18);
+                    color: $pr_black_color;
+                    text-transform: capitalize;
+                    margin-bottom: 20px;
+                    padding-left: 20px;
+                }
                 .currensytype {
                     @include flex(center, flex-start);
                     gap: 50px;
@@ -43,6 +51,17 @@
                             cursor: pointer;
                         }
                     }
+                }
+                &_currensy_add{
+                    @include fond(400, 15);
+                    color: $pr_black_color;
+                    background-color: $pr_white_color;
+                    padding: 5px 20px;
+                    border-radius: 5px;
+                    display: inline-block;
+                    text-transform: capitalize;
+                    margin: 50px 0;
+                    cursor: pointer;
                 }
                 .currensy {
                     @include flex(center, flex-start);

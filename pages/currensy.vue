@@ -5,9 +5,10 @@
         <div class="currensy_info">
           <!-- <pre>{{ currensy }}</pre> -->
           <div class="currensy_info_top">
-            <div class="currensy_add">valyuta qo'shish</div>
+            <div class="currensy_add">valyuta turini qo'shish</div>
           </div>
           <div class="currensy_info_bottom">
+            <div class="currensy_info_bottom_title">valyuta turlari</div>
             <div class="currensytype" v-for="c in currensyType" :key="c.id">
               <div class="currensytype_name uz">
                 uz : <span>{{ c?.nameUz }}</span>
@@ -45,7 +46,10 @@
                 </svg>
               </div>
             </div>
-            <div class="currensy_info_bottom_title"></div>
+            <div class="currensy_info_bottom_currensy_add">
+                valtyuta qo'shish
+            </div>
+            <div class="currensy_info_bottom_title">valyuta</div>
             <div class="currensy" v-for="c in currensy" :key="c.id">
                 <div class="currensy_name cymbol">
                 kampaniya : <span>{{ c?.companyName }}</span>
