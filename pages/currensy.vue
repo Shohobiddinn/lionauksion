@@ -8,7 +8,7 @@
             <div class="currensy_add">valyuta turini qo'shish</div>
           </div> -->
           <div class="currensy_info_bottom">
-              <!-- <div class="currensy_info_bottom_title">valyuta turlari</div>
+            <!-- <div class="currensy_info_bottom_title">valyuta turlari</div>
               <div class="currensytype" v-for="c in currensyType" :key="c.id">
                 <div class="currensytype_name uz">
                   uz : <span>{{ c?.nameUz }}</span>
@@ -46,15 +46,15 @@
                   </svg>
                 </div>
               </div> -->
-            <div class="currensy_info_bottom_currensy_add">
-                valtyuta qo'shish
+            <div class="currensy_info_bottom_currensy_add" @click="curModal = !curModal">
+              valtyuta qo'shish
             </div>
             <div class="currensy_info_bottom_title">valyuta</div>
             <div class="currensy" v-for="c in currensy" :key="c.id">
-                <div class="currensy_name cymbol">
+              <div class="currensy_name cymbol">
                 kampaniya : <span>{{ c?.companyName }}</span>
               </div>
-                <div class="currensy_name uz">
+              <div class="currensy_name uz">
                 uz : <span>{{ c?.nameUz }}</span>
               </div>
               <div class="currensy_name ru">
@@ -96,19 +96,55 @@
                 </svg>
               </div>
             </div>
-            <div class="currensy_modal">
+            <div class="currensy_modal" v-if="curModal">
+              <div class="currensy_modal_close" @click="curModal = false"></div>
               <div class="currensy_modal_inputs">
                 <div class="info">
                   <label for="c-1">valyuta UZS</label>
-                  <input type="text" name="" id="c-1">
+                  <input
+                    type="text"
+                    name=""
+                    id="c-1"
+                    placeholder="valyutani kirgizing"
+                    v-model="currenPrice"
+                  />
                 </div>
-                <div class="info">
-                  <label for="c-2"></label>
-                  <input type="text" name="" id="c-2">
+                <div class="current" :class="{ active: currenyModal }">
+                  <div
+                    class="current_option"
+                    @click="currenyModal = !currenyModal"
+                  >
+                    <div class="current_option_title">
+                      {{ curInfo }}
+                    </div>
+                    <div class="current_option_icon">
+                      <svg
+                        width="17"
+                        height="10"
+                        viewBox="0 0 17 10"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M8.5 10L0.272758 0.25L16.7272 0.25L8.5 10Z"
+                          fill="black"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="current_content">
+                    <div
+                      class="current_content_title"
+                      @click="curChange(ct)"
+                      v-for="ct in currensyType"
+                      :key="ct.id"
+                    >
+                      {{ ct?.symbol }}
+                    </div>
+                  </div>
                 </div>
-                <div class="info">
-                  <label for="c-3"></label>
-                  <input type="text" name="" id="c-3">
+                <div class="click_btn" @click="currentAdd">
+                  yuborish
                 </div>
               </div>
             </div>
@@ -122,6 +158,7 @@
 <script setup>
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const currensyType = ref(null);
+const curModal = ref(false);
 async function currensyTypeApi() {
   const data = await $fetch(baseUrl + "/currency-type/all", {
     method: "GET",
@@ -137,15 +174,39 @@ async function currensyApi() {
   const data = await $fetch(baseUrl + "/currency/all", {
     method: "GET",
     params: {
-      companyId:localStorage.getItem("userId"),
+      companyId: localStorage.getItem("userId"),
     },
-    headers:{
-        Authorization: "Bearer " + localStorage.getItem("userToken"),
-    }
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("userToken"),
+    },
   });
   currensy.value = data;
 }
 currensyApi();
+const currenyModal = ref(false);
+const curInfo = ref("valyuta turini tanlang");
+const curId = ref("");
+function curChange(e) {
+  curId.value = e.id;
+  curInfo.value = e.symbol;
+  currenyModal.value = false;
+ 
+};
+const currenPrice = ref('');
+async function currentAdd(){
+  const data = await $fetch(baseUrl + "/currency",{
+    method:"POST",
+    headers:{
+      Authorization: "Bearer " + localStorage.getItem("userToken"),
+    },
+    body:JSON.stringify({
+      "currencyValueInUzs": currenPrice.value,
+    "companyId": localStorage.getItem("userId"),
+    "currencyTypeId": curId.value,
+    })
+  });
+  console.log(data);
+}
 </script>
 
 <style lang="scss" scoped>
