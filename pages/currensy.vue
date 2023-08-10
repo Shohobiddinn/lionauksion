@@ -3,7 +3,7 @@
     <div class="currensy_page">
       <div class="container">
         <div class="currensy_info">
-          <pre>{{ currensy }}</pre>
+          <!-- <pre>{{ currensy }}</pre> -->
           <div class="currensy_info_top">
             <div class="currensy_add">valyuta qo'shish</div>
           </div>
