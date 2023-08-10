@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bg"></div>
+    <!-- <div class="bg"></div> -->
 
     <div class="add_page">
       <div class="container">

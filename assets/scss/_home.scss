@@ -1,9 +1,7 @@
 nav {
     background-color: $pr_blue_color;
     height: 60px;
-    // position: sticky;
-    // top: 0;
-    // z-index: 0;
+
     .container {
         @include flex(center, flex-start);
         gap: 50px;
@@ -15,10 +13,9 @@ nav {
             top: 0;
             z-index: 3;
             padding: 10px 0;
-            // left: -20px;
-margin-right: 20px;
+
             &_logo {
-                width: 203px;
+                width: 233px;
                 height: 50px;
                 padding: 0 20px;
 

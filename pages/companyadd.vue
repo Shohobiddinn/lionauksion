@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bg"></div>
+    <!-- <div class="bg"></div> -->
     <div class="companyadd_page">
       <div class="container">
         <div class="information">
@@ -33,6 +33,7 @@
                 class="info_input"
                 type="text"
                 placeholder="telefon raqami"
+                ref="tel"
                 id="com_name"
                 v-model="phone"
               />
@@ -64,7 +65,7 @@
             /></label>
             <div class="information_image_btns">
               <div class="btn_exit btn">oraga</div>
-              <div class="btn_save btn" @click="companyApi">yuborish</div>
+              <div class="btn_save btn" @click="tek">yuborish</div>
             </div>
           </div>
         </div>
@@ -74,40 +75,56 @@
 </template>
 
 <script setup>
+import IMask from "imask";
 const fullName = ref("");
 const username = ref("");
 const password = ref("");
 const companyName = ref("");
 const phone = ref("");
+const tel = ref();
 const atvet = ref(null);
 const router = useRouter();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 async function companyApi() {
-  const data = await $fetch(baseUrl + "/company", {
-    method: "POST",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-    body: JSON.stringify({
-      name: companyName.value,
-      director: fullName.value,
-      phone: phone.value,
-      userFullName: fullName.value,
-      username: username.value,
-      password: password.value,
-    }),
-  });
-  console.log(data);
-//   atvet.value = data;
-  if (!data.error) {
-    router.push("/company");
-  }else{
-    alert('error')
+  if(!companyName.value == "" && !fullName.value == "" && !password.value == "" && !username.value == ""){
+    const data = await $fetch(baseUrl + "/company", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+      },
+      body: JSON.stringify({
+        name: companyName.value,
+        director: fullName.value,
+        phone: phone.value,
+        userFullName: fullName.value,
+        username: username.value,
+        password: password.value,
+      }),
+    });
+    console.log(data);
+  //   atvet.value = data;
+    if (!data.error) {
+      router.push("/company");
+    }else{
+      alert('error')
+    }
+
   }
 }
 function tek() {
-  console.log(companyName.value);
+  if(!companyName.value == "" && !fullName.value == "" && !password.value == "" && !username.value == ""){
+    console.log("hello");
+  }else{
+    console.log("bug");
+  }
 }
+onMounted(() => {
+  var maskOptions = {
+    mask: "+{998}(00) 000-00-00",
+    lazy: false,
+  };
+  var mask = new IMask(tel.value, maskOptions);
+});
 </script>
 
 <style lang="scss" scoped>
