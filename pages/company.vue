@@ -75,10 +75,11 @@
       <div class="container">
         <div class="company_info">
           <div class="company_info_top">
+            <!-- <pre>{{ company }}</pre> -->
+
             <div class="company_info_top_add">
               <NuxtLink class="company_info_top_add_link" to="/companyadd">
                 Kampaniya qo'shish
-
               </NuxtLink>
             </div>
             <div class="company_filter" :class="{ active: filterModal }">
@@ -167,11 +168,12 @@
               <div class="company_info_bottom_top_title">kompaniya nomi</div>
               <div class="company_info_bottom_top_title">kompaniya rahbari</div>
               <div class="company_info_bottom_top_title">kompaniya raqami</div>
-              <div class="company_info_bottom_top_title">kompaniyani bloklash</div>
-            
+              <div class="company_info_bottom_top_title">
+                kompaniyani bloklash
+              </div>
             </div>
             <div class="company_info_bottom_companys">
-              <div class="company" v-for="c in 20" :key="c">
+              <div class="company" v-for="c in company" :key="c.id">
                 <div class="company_title">
                   <div class="company_title_logo">
                     <svg
@@ -209,57 +211,85 @@
                     </svg>
                   </div>
                 </div>
-                <div class="company_title">Lion Print</div>
-                <div class="company_title">falonchi pistonchi</div>
-                <div class="company_title">+998900000000</div>
-                <div class="company_title lock" v-if="lock" @click="lock = false">
-                  <svg width="25" height="25" xmlns="http://www.w3.org/2000/svg" fill="#52438F" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/></svg>
+                <div class="company_title">{{ c?.name }}</div>
+                <div class="company_title">{{ c?.director }}</div>
+                <div class="company_title">{{ c?.phone }}</div>
+                <div
+                  class="company_title lock"
+                  v-if="c?.isBlocked"
+                  @click="companyIsBlocked(c)"
+                >
+                  <svg
+                    width="25"
+                    height="25"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#52438F"
+                    viewBox="0 0 448 512"
+                  >
+                    <path
+                      d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"
+                    />
+                  </svg>
                 </div>
-                <div class="company_title lock_open" v-else @click="lock = true">
-                  <svg width="25" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="#52438F"><path d="M352 144c0-44.2 35.8-80 80-80s80 35.8 80 80v48c0 17.7 14.3 32 32 32s32-14.3 32-32V144C576 64.5 511.5 0 432 0S288 64.5 288 144v48H64c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V256c0-35.3-28.7-64-64-64H352V144z"/></svg>
+                <div
+                  class="company_title lock_open"
+                  v-else
+                  @click="companyUnBlocked(c)"
+                >
+                  <svg
+                    width="25"
+                    height="25"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 576 512"
+                    fill="#52438F"
+                  >
+                    <path
+                      d="M352 144c0-44.2 35.8-80 80-80s80 35.8 80 80v48c0 17.7 14.3 32 32 32s32-14.3 32-32V144C576 64.5 511.5 0 432 0S288 64.5 288 144v48H64c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V256c0-35.3-28.7-64-64-64H352V144z"
+                    />
+                  </svg>
                 </div>
               </div>
             </div>
           </div>
           <div class="pagination">
-              <div class="pagination_icon">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M15 6L9 12L15 18"
-                    stroke="black"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
-              <div class="pagination_count" v-for="p in 5" :key="p">
-                {{ p }}
-              </div>
-              <div class="pagination_icon">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9 18L15 12L9 6"
-                    stroke="black"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
+            <div class="pagination_icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15 6L9 12L15 18"
+                  stroke="black"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </div>
+            <div class="pagination_count" v-for="p in 5" :key="p">
+              {{ p }}
+            </div>
+            <div class="pagination_icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9 18L15 12L9 6"
+                  stroke="black"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -267,8 +297,64 @@
 </template>
 
 <script setup>
+const baseUrl = useRuntimeConfig().public.baseUrl;
 const filterModal = ref(false);
 const lock = ref(false);
+const company = ref(null);
+const page = ref(0)
+async function companyApi() {
+  const data = await $fetch(baseUrl + "/company", {
+    method: "GET",
+    params: {
+      page: 0,
+      size: 10,
+    },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("userToken"),
+    },
+  });
+  company.value = data.content;
+}
+companyApi();
+async function companyIsBlocked(e) {
+  const data = await $fetch(baseUrl + "/company", {
+    method: "PUT",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("userToken"),
+    },
+    body: JSON.stringify({
+      id: e.id,
+      name: e.name,
+      director: e.director,
+      phone: e.phone,
+      isBlocked: false,
+      userFullName: e.userFullName,
+      username: e.username,
+      password: e.password,
+    }),
+  });
+ 
+  companyApi();
+}
+async function companyUnBlocked(e) {
+  const data = await $fetch(baseUrl + "/company", {
+    method: "PUT",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("userToken"),
+    },
+    body: JSON.stringify({
+      id: e.id,
+      name: e.name,
+      director: e.director,
+      phone: e.phone,
+      isBlocked: true,
+      userFullName: e.userFullName,
+      username: e.username,
+      password: e.password,
+    }),
+  });
+  companyApi();
+}
 </script>
 
 <style lang="scss" scoped>

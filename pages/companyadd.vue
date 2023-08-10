@@ -65,7 +65,7 @@
             /></label>
             <div class="information_image_btns">
               <div class="btn_exit btn">oraga</div>
-              <div class="btn_save btn" @click="tek">yuborish</div>
+              <div class="btn_save btn" @click="companyApi">yuborish</div>
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@ const username = ref("");
 const password = ref("");
 const companyName = ref("");
 const phone = ref("");
-const tel = ref();
+const tel = ref();  
 const atvet = ref(null);
 const router = useRouter();
 const baseUrl = useRuntimeConfig().public.baseUrl;

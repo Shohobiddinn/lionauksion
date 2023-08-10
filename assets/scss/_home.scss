@@ -1,6 +1,8 @@
 nav {
     background-color: $pr_blue_color;
     height: 60px;
+    position: sticky;
+    top: 0;
 
     .container {
         @include flex(center, flex-start);

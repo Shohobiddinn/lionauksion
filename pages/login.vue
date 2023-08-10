@@ -51,9 +51,6 @@ const password = ref("");
 async function loginApi() {
   const data = await fetch(baseUrl + "/login", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
     body: new URLSearchParams({
       username: username.value.value,
       password: password.value.value,
