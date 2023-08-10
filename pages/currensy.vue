@@ -46,7 +46,10 @@
                   </svg>
                 </div>
               </div> -->
-            <div class="currensy_info_bottom_currensy_add" @click="curModal = !curModal">
+            <div
+              class="currensy_info_bottom_currensy_add"
+              @click="curModal = !curModal"
+            >
               valtyuta qo'shish
             </div>
             <div class="currensy_info_bottom_title">valyuta</div>
@@ -69,7 +72,7 @@
               <div class="currensy_name cymbol">
                 o'zgartirilgan sana : <span>{{ c?.modifiedDate }}</span>
               </div>
-              <div class="currensy_name icon">
+              <div class="currensy_name icon" @click="etidFun(c.id)">
                 <svg
                   width="24"
                   height="24"
@@ -143,10 +146,16 @@
                     </div>
                   </div>
                 </div>
-                <div class="click_btn" @click="currentAdd">
-                  yuborish
-                </div>
+                <div class="click_btn" @click="currentAdd">yuborish</div>
               </div>
+            </div>
+            <div class="edit_modal" v-if="editModal">
+              <div class="edit_modal_close_btn" @click="editModal = false"></div>
+              <div class="info">
+                <label for="e-1">yangi valyutani kiriting</label>
+                <input type="text" id="e-1" v-model="editInfo" @keyup.enter="editApi" placeholder="yangi valyutani kiriting"/>
+              </div>
+              <div class="edit_modal_send" @click="editApi">yuborish</div>
             </div>
           </div>
         </div>
@@ -183,6 +192,30 @@ async function currensyApi() {
   currensy.value = data;
 }
 currensyApi();
+const editModal = ref(false);
+const editInfo = ref("");
+const editId = ref("");
+function etidFun(e){
+  editId.value = e;
+  editModal.value = true;
+}
+async function editApi(){
+  const data = await $fetch(baseUrl + "/currency",{
+    method:"PUT",
+    headers:{
+      Authorization: "Bearer " + localStorage.getItem("userToken")
+    },
+    body:JSON.stringify({
+      id: editId.value,
+      currencyValueInUzs:editInfo.value
+    })
+  });
+  console.log(data);
+  editModal.value = false;
+  currensyApi();
+  currensyTypeApi();
+}
+
 const currenyModal = ref(false);
 const curInfo = ref("valyuta turini tanlang");
 const curId = ref("");
@@ -190,22 +223,22 @@ function curChange(e) {
   curId.value = e.id;
   curInfo.value = e.symbol;
   currenyModal.value = false;
- 
-};
-const currenPrice = ref('');
-async function currentAdd(){
-  const data = await $fetch(baseUrl + "/currency",{
-    method:"POST",
-    headers:{
+}
+const currenPrice = ref("");
+async function currentAdd() {
+  const data = await $fetch(baseUrl + "/currency", {
+    method: "POST",
+    headers: {
       Authorization: "Bearer " + localStorage.getItem("userToken"),
     },
-    body:JSON.stringify({
-      "currencyValueInUzs": currenPrice.value,
-    "companyId": localStorage.getItem("userId"),
-    "currencyTypeId": curId.value,
-    })
+    body: JSON.stringify({
+      currencyValueInUzs: currenPrice.value,
+      companyId: localStorage.getItem("userId"),
+      currencyTypeId: curId.value,
+    }),
   });
-  console.log(data);
+  currensyApi();
+  currensyTypeApi();
 }
 </script>
 

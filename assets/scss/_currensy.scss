@@ -238,6 +238,152 @@
                         }
                     }
                 }
+                .edit_modal {
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background-color: $pr_white_color;
+                    padding: 20px;
+                    border-radius: 20px;
+
+                    &_close_btn {
+                        position: relative;
+                        width: 16px;
+                        height: 16px;
+                        margin-left: auto;
+                        cursor: pointer;
+
+                        &::after,
+                        &::before {
+                            content: "";
+                            position: absolute;
+                            width: 2px;
+                            height: 16px;
+                            background-color: $pr_black_color;
+                        }
+
+                        ;
+
+                        &:hover {
+                            &::after {
+                                background-color: red;
+                            }
+
+                           &::before {
+                                background-color: red;
+                            }
+                        }
+
+                        &::after {
+                            rotate: -45deg;
+                        }
+
+                        ;
+
+                        &::before {
+                            rotate: 45deg;
+                        }
+                    }
+
+                    .info {
+                        @include flex(flex-start, flex-start);
+                        flex-direction: column;
+                        margin-bottom: 10px;
+
+                        label {
+                            @include fond(500, 15);
+                            color: $pr_black_color;
+                            text-transform: capitalize;
+                            margin-bottom: 10px;
+                        }
+
+                        input {
+                            width: 300px;
+                            height: 35px;
+                            border-radius: 5px;
+                            outline: none;
+                            border: 2px solid $pr_blue_color;
+                            padding: 0 10px;
+                            @include fond(400, 13);
+                            color: $pr_black_color ;
+
+                            &::placeholder {
+                                @include fond(400, 12);
+                                color: $pr_black_color ;
+                                text-transform: capitalize;
+                            }
+                        }
+                    }
+
+                    // .current {
+                    //     position: relative;
+
+                    //     &_option {
+                    //         @include flex(center, space-between);
+                    //         border: 2px solid $pr_blue_color;
+                    //         border-radius: 5px;
+                    //         padding: 5px 10px;
+                    //         cursor: pointer;
+                    //         margin-bottom: 10px;
+
+                    //         &_title {
+                    //             @include fond(500, 15);
+                    //             color: $pr_black_color;
+                    //             text-transform: capitalize;
+                    //         }
+                    //     }
+
+                    //     &_content {
+                    //         position: absolute;
+                    //         width: 110%;
+                    //         left: -10px;
+                    //         @include flex(flex-start, flex-start);
+                    //         flex-direction: column;
+                    //         background-color: $pr_white_color;
+                    //         display: none;
+
+                    //         &_title {
+                    //             @include fond(400, 15);
+                    //             color: $pr_black_color;
+                    //             width: 100%;
+                    //             background-color: $pr_bg_color;
+                    //             margin-bottom: 10px;
+                    //             cursor: pointer;
+                    //             padding: 0 10px;
+                    //             border-radius: 5px;
+
+                    //             &:hover {
+                    //                 background-color: $pr_blue_color;
+                    //                 color: $pr_white_color;
+                    //             }
+                    //         }
+                    //     }
+
+                    //     &.active {
+                    //         .current_content {
+                    //             display: block;
+                    //         }
+                    //     }
+                    // }
+
+                    &_send {
+                        @include flex(center, center);
+                        @include fond(400, 15);
+                        text-transform: capitalize;
+                        background-color: $pr_blue_color;
+                        color: $pr_white_color;
+                        border-radius: 5px;
+                        margin-top: 50px;
+                        margin-bottom: 20px;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: $sc_blue_color;
+                            color: $pr_black_color;
+                        }
+                    }
+                }
             }
         }
     }
