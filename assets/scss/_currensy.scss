@@ -100,6 +100,7 @@
                     background-color: $pr_white_color;
                     padding: 20px;
                     border-radius: 20px;
+                    z-index: 3;
 
                     &_close {
                         position: relative;
@@ -124,7 +125,7 @@
                                 background-color: red;
                             }
 
-                           &::before {
+                            &::before {
                                 background-color: red;
                             }
                         }
@@ -231,13 +232,14 @@
                         margin-top: 50px;
                         margin-bottom: 20px;
                         cursor: pointer;
+                        padding: 5px 10px;
 
                         &:hover {
-                            background-color: $sc_blue_color;
-                            color: $pr_black_color;
+                            background-color: $sc_blue_color; 
                         }
                     }
                 }
+
                 .edit_modal {
                     position: fixed;
                     top: 50%;
@@ -270,7 +272,7 @@
                                 background-color: red;
                             }
 
-                           &::before {
+                            &::before {
                                 background-color: red;
                             }
                         }

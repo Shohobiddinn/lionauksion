@@ -65,6 +65,7 @@ async function loginApi() {
     router.push("/");
   }
   login.value = res;
+  console.log(res);
 }
 function passeye() {
   if (password.value.type == "password") {
@@ -72,7 +73,10 @@ function passeye() {
   } else {
     password.value.type = "password";
   }
-}
+};
+// async function login() {
+  
+// }
 </script>
 
 <style lang="scss" scoped>

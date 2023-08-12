@@ -1,5 +1,6 @@
 <template>
   <div>
+    <bgmodal v-if="bgModal" />
     <div class="currensy_page">
       <div class="container">
         <div class="currensy_info">
@@ -48,7 +49,7 @@
               </div> -->
             <div
               class="currensy_info_bottom_currensy_add"
-              @click="curModal = !curModal"
+              @click="(curModal = !curModal), (bgModal = true)"
             >
               valtyuta qo'shish
             </div>
@@ -100,7 +101,10 @@
               </div>
             </div>
             <div class="currensy_modal" v-if="curModal">
-              <div class="currensy_modal_close" @click="curModal = false"></div>
+              <div
+                class="currensy_modal_close"
+                @click="(curModal = false), (bgModal = false)"
+              ></div>
               <div class="currensy_modal_inputs">
                 <div class="info">
                   <label for="c-1">valyuta UZS</label>
@@ -150,10 +154,19 @@
               </div>
             </div>
             <div class="edit_modal" v-if="editModal">
-              <div class="edit_modal_close_btn" @click="editModal = false"></div>
+              <div
+                class="edit_modal_close_btn"
+                @click="editModal = false"
+              ></div>
               <div class="info">
                 <label for="e-1">yangi valyutani kiriting</label>
-                <input type="text" id="e-1" v-model="editInfo" @keyup.enter="editApi" placeholder="yangi valyutani kiriting"/>
+                <input
+                  type="text"
+                  id="e-1"
+                  v-model="editInfo"
+                  @keyup.enter="editApi"
+                  placeholder="yangi valyutani kiriting"
+                />
               </div>
               <div class="edit_modal_send" @click="editApi">yuborish</div>
             </div>
@@ -166,6 +179,7 @@
 
 <script setup>
 const baseUrl = useRuntimeConfig().public.baseUrl;
+const bgModal = ref(false);
 const currensyType = ref(null);
 const curModal = ref(false);
 async function currensyTypeApi() {
@@ -195,20 +209,20 @@ currensyApi();
 const editModal = ref(false);
 const editInfo = ref("");
 const editId = ref("");
-function etidFun(e){
+function etidFun(e) {
   editId.value = e;
   editModal.value = true;
 }
-async function editApi(){
-  const data = await $fetch(baseUrl + "/currency",{
-    method:"PUT",
-    headers:{
-      Authorization: "Bearer " + localStorage.getItem("userToken")
+async function editApi() {
+  const data = await $fetch(baseUrl + "/currency", {
+    method: "PUT",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("userToken"),
     },
-    body:JSON.stringify({
+    body: JSON.stringify({
       id: editId.value,
-      currencyValueInUzs:editInfo.value
-    })
+      currencyValueInUzs: editInfo.value,
+    }),
   });
   console.log(data);
   editModal.value = false;
@@ -226,7 +240,7 @@ function curChange(e) {
 }
 const currenPrice = ref("");
 async function currentAdd() {
-  const data = await $fetch(baseUrl + "/currency", {
+  const res = await fetch(baseUrl + "/currency", {
     method: "POST",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("userToken"),
@@ -237,6 +251,8 @@ async function currentAdd() {
       currencyTypeId: curId.value,
     }),
   });
+  const data = await res.json();
+  console.log(res);
   currensyApi();
   currensyTypeApi();
 }
