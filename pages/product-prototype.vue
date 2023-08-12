@@ -1,15 +1,42 @@
 <template>
   <div>
+    <bgmodal v-if="bgModal" />
     <div class="product_prototype_page">
       <div class="container">
         <div class="protatype">
           <div class="protatype_content">
             <div class="protatype_content_add">
-              <div class="protatype_content_add_content">
+              <div
+                class="protatype_content_add_content"
+                @click="(contentModal = true), (bgModal = true)"
+              >
                 <div class="protatype_content_add_content_icon"></div>
                 <div class="protatype_content_add_content_title">
                   tovar kategorya qo'shish
                 </div>
+              </div>
+              <div
+                class="protatype_content_add_modal"
+                :class="{ active: contentModal }"
+              >
+              <div class="close_btn"    @click="(contentModal = false), (bgModal = false)"></div>
+                <div class="info">
+                  <label for="c-1">kategoriya nomini kiriting UZ</label>
+                  <input
+                    type="text"
+                    id="c-1"
+                    placeholder="kategoriya nomini kiriting UZ"
+                  />
+                </div>
+                <div class="info">
+                  <label for="c-2">kategoriya nomini kiriting RU</label>
+                  <input
+                    type="text"
+                    id="c-2"
+                    placeholder="kategoriya nomini kiriting RU"
+                  />
+                </div>
+                <div class="add_btn">yuborish</div>
               </div>
             </div>
             <div class="protatype_content_title" v-for="p in 10" :key="p">
@@ -30,11 +57,34 @@
           </div>
           <div class="protatype_title">
             <div class="protatype_title_add">
-              <div class="protatype_title_add_content">
+              <div class="protatype_title_add_content" @click="titleModal = true ,bgModal = true">
                 <div class="protatype_title_add_content_icon"></div>
                 <div class="protatype_title_add_content_title">
                   tovar kategorya qo'shish
                 </div>
+              </div>
+              <div
+                class="protatype_title_add_modal"
+                :class="{ active: titleModal }"
+              >
+              <div class="close_btn"    @click="(titleModal = false), (bgModal = false)"></div>
+                <div class="info">
+                  <label for="c-1">kategoriya nomini kiriting UZ</label>
+                  <input
+                    type="text"
+                    id="c-1"
+                    placeholder="kategoriya nomini kiriting UZ"
+                  />
+                </div>
+                <div class="info">
+                  <label for="c-2">kategoriya nomini kiriting RU</label>
+                  <input
+                    type="text"
+                    id="c-2"
+                    placeholder="kategoriya nomini kiriting RU"
+                  />
+                </div>
+                <div class="add_btn">yuborish</div>
               </div>
             </div>
             <div class="protatype_title_content" v-for="p in 10" :key="p">
@@ -60,6 +110,10 @@
 </template>
 
 <script setup>
+const bgModal = ref(false);
+const baseUrl = useRuntimeConfig().public.baseUrl;
+const contentModal = ref(false);
+const titleModal = ref(false);
 </script>
 
 <style lang="scss" scoped>

@@ -16,32 +16,13 @@
                     margin-top: 20px;
                     overflow: hidden;
                     cursor: pointer;
-                    &:hover {
-                        .protatype_content_add_content {
-                            background-color: $pr_blue_color;
-
-                            &_icon {
-
-                                &::after,
-                                &::before {
-                                    background-color: $pr_white_color
-                                }
-                            }
-
-                            &_title {
-                                color: $pr_white_color ;
-                            }
-                        }
-                    }
-
+            
                     &_content {
                         @include flex(center, flex-start);
                         gap: 50px;
                         padding: 10px 20px;
                         background-color: $pr_white_color;
-
                         &_icon {
-
                             &::after,
                             &::before {
                                 content: "";
@@ -61,6 +42,106 @@
                             color: $pr_black_color ;
                             text-transform: capitalize;
                         }
+                        &:hover {
+                            background-color: $pr_blue_color;
+                            .protatype_content_add_content {
+    
+                                &_icon {
+    
+                                    &::after,
+                                    &::before {
+                                        background-color: $pr_white_color
+                                    }
+                                }
+    
+                                &_title {
+                                    color: $pr_white_color ;
+                                }
+                            }
+                        }
+    
+                    }
+                    &_modal{
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%,-50%);
+                        background-color:$pr_white_color;
+                        padding: 20px;
+                        border-radius: 10px;
+                        transition: 0.3s;
+                        opacity: 0;
+                        visibility: hidden;
+                        z-index: 3;
+                        .close_btn{
+                            margin-left: auto;
+                            width: 16px;
+                            height: 16px;
+                            position: relative;
+                            cursor: pointer;
+                            margin-bottom: 20px;
+                            &::before,&::after{
+                                content: "";
+                                position: absolute;
+                                width: 2px;
+                                height: 16px;
+                                background-color:$pr_blue_color ;
+                            };
+                            &::before{
+                                rotate: -45deg;
+                            };
+                            &::after{
+                                rotate: 45deg;
+                            }
+                            &:hover{
+                                &::before,&::after{
+                                    background-color:red ;
+                                }
+                            }
+                        }
+                        .info{
+                            @include flex(flex-start,flex-start);
+                            flex-direction: column;
+                            label{
+                                @include fond(400,13);
+                                color:$pr_black_color ;
+                                text-transform: capitalize;
+                                margin-bottom: 10px;
+                            };
+                            input{
+                                width: 250px;
+                                height: 35px;
+                                border-radius: 5px;
+                                background:$pr_bg_color ;
+                                padding: 0 10px;
+                                @include fond(400,12);
+                                color:$pr_black_color ;
+                                margin-bottom: 10px;
+                                outline: none;
+                                &::placeholder{
+                                    @include fond(400,12);
+                                    color:$pr_black_color ;
+                                    text-transform: capitalize;
+                                }
+                            }
+                            
+                        };
+                        .add_btn{
+                            @include flex(center,center);
+                            background-color: $pr_blue_color;
+                            color: $pr_white_color;
+                            @include fond(400,15);
+                            border-radius: 5px;
+                            cursor: pointer;
+                            text-transform: capitalize;
+                            margin-top: 20px;
+                            padding: 3px 20px;
+                        };
+                        &.active{
+                            transform: translate(-50%,-50%);
+                            opacity: 1;
+                            visibility:visible;
+                        };
                     }
                 };
                 &_title {
@@ -93,20 +174,7 @@
                     margin-top: 20px;
                     overflow: hidden;
                     cursor: pointer;
-                    &:hover {
-                        .protatype_title_add_content {
-                            background-color: $pr_blue_color;
-                            &_icon {
-                                &::after,
-                                &::before {
-                                    background-color: $pr_white_color
-                                }
-                            };
-                            &_title {
-                                color: $pr_white_color ;
-                            };
-                        }
-                    };
+               
                     &_content {
                         @include flex(center, flex-start);
                         gap: 50px;
@@ -132,6 +200,102 @@
                             color: $pr_black_color ;
                             text-transform: capitalize;
                         }
+                        &:hover {
+                            background-color: $pr_blue_color;
+                            .protatype_title_add_content {
+                                &_icon {
+                                    &::after,
+                                    &::before {
+                                        background-color: $pr_white_color
+                                    }
+                                };
+                                &_title {
+                                    color: $pr_white_color ;
+                                };
+                            }
+                        };
+                    }
+                    &_modal{
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%,-50%);
+                        background-color:$pr_white_color;
+                        padding: 20px;
+                        border-radius: 10px;
+                        transition: 0.3s;
+                        opacity: 0;
+                        visibility: hidden;
+                        z-index: 3;
+                        .close_btn{
+                            margin-left: auto;
+                            width: 16px;
+                            height: 16px;
+                            position: relative;
+                            cursor: pointer;
+                            margin-bottom: 20px;
+                            &::before,&::after{
+                                content: "";
+                                position: absolute;
+                                width: 2px;
+                                height: 16px;
+                                background-color:$pr_blue_color ;
+                            };
+                            &::before{
+                                rotate: -45deg;
+                            };
+                            &::after{
+                                rotate: 45deg;
+                            }
+                            &:hover{
+                                &::before,&::after{
+                                    background-color:red ;
+                                }
+                            }
+                        }
+                        .info{
+                            @include flex(flex-start,flex-start);
+                            flex-direction: column;
+                            label{
+                                @include fond(400,13);
+                                color:$pr_black_color ;
+                                text-transform: capitalize;
+                                margin-bottom: 10px;
+                            };
+                            input{
+                                width: 250px;
+                                height: 35px;
+                                border-radius: 5px;
+                                background:$pr_bg_color ;
+                                padding: 0 10px;
+                                @include fond(400,12);
+                                color:$pr_black_color ;
+                                margin-bottom: 10px;
+                                outline: none;
+                                &::placeholder{
+                                    @include fond(400,12);
+                                    color:$pr_black_color ;
+                                    text-transform: capitalize;
+                                }
+                            }
+                            
+                        };
+                        .add_btn{
+                            @include flex(center,center);
+                            background-color: $pr_blue_color;
+                            color: $pr_white_color;
+                            @include fond(400,15);
+                            border-radius: 5px;
+                            cursor: pointer;
+                            text-transform: capitalize;
+                            margin-top: 20px;
+                            padding: 3px 20px;
+                        };
+                        &.active{
+                            transform: translate(-50%,-50%);
+                            opacity: 1;
+                            visibility:visible;
+                        };
                     }
                 }
                 &_content {
