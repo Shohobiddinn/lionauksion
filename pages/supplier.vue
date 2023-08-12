@@ -1,6 +1,6 @@
 <template>
     <div>
-      <div class="banner">
+      <!-- <div class="banner">
         <div class="container">
           <div class="banner_top">
             <div class="search">
@@ -70,7 +70,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="company_page">
         <div class="container">
           <div class="company_info">
