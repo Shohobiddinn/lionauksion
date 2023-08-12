@@ -1,5 +1,6 @@
 <template>
   <div>
+    <bgmodal v-if="bgmodal"/>
     <div class="banner">
       <div class="container">
         <div class="banner_top">
@@ -298,6 +299,7 @@
 
 <script setup>
 const baseUrl = useRuntimeConfig().public.baseUrl;
+const bgmodal = ref(false);
 const filterModal = ref(false);
 const lock = ref(false);
 const company = ref(null);
