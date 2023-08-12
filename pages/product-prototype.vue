@@ -191,8 +191,8 @@ async function categoryChildAddApi() {
       Authorization: "Bearer " + localStorage.getItem("userToken"),
     },
     body: JSON.stringify({
-      nameUz: "Test Detail Uz 2",
-      nameRu: "Test Detail Ru 2",
+      nameUz: childAddUz.value,
+      nameRu: childAddRu.value,
       categoryId: categoryId.value,
     }),
   });

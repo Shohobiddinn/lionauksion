@@ -24,7 +24,7 @@
                         @include flex(center, flex-start);
                         gap: 50px;
                         padding: 10px 20px;
-                        background-color: $pr_white_color;
+                        background-color: $pr_blue_color;
 
                         &_icon {
 
@@ -34,7 +34,7 @@
                                 position: absolute;
                                 width: 16px;
                                 height: 2px;
-                                background-color: $pr_blue_color;
+                                background-color: $pr_white_color;
                             }
 
                             &::after {
@@ -44,27 +44,12 @@
 
                         &_title {
                             @include fond(400, 15);
-                            color: $pr_black_color ;
+                            color: $pr_white_color ;
                             text-transform: capitalize;
                         }
 
                         &:hover {
-                            background-color: $pr_blue_color;
-
-                            .protatype_content_add_content {
-
-                                &_icon {
-
-                                    &::after,
-                                    &::before {
-                                        background-color: $pr_white_color
-                                    }
-                                }
-
-                                &_title {
-                                    color: $pr_white_color ;
-                                }
-                            }
+                            background-color: $sc_blue_color;
                         }
 
                     }
@@ -134,7 +119,7 @@
                             ;
 
                             input {
-                                width: 250px;
+                                width: 700px;
                                 height: 35px;
                                 border-radius: 5px;
                                 background: $pr_bg_color ;
@@ -224,7 +209,7 @@
                         @include flex(center, flex-start);
                         gap: 50px;
                         padding: 10px 20px;
-                        background-color: $pr_white_color;
+                        background-color: $pr_blue_color;
 
                         &_icon {
 
@@ -234,7 +219,7 @@
                                 position: absolute;
                                 width: 16px;
                                 height: 2px;
-                                background-color: $pr_blue_color;
+                                background-color: $pr_white_color;
                             }
 
                             &::after {
@@ -244,30 +229,12 @@
 
                         &_title {
                             @include fond(400, 15);
-                            color: $pr_black_color ;
+                            color: $pr_white_color ;
                             text-transform: capitalize;
                         }
 
                         &:hover {
-                            background-color: $pr_blue_color;
-
-                            .protatype_title_add_content {
-                                &_icon {
-
-                                    &::after,
-                                    &::before {
-                                        background-color: $pr_white_color
-                                    }
-                                }
-
-                                ;
-
-                                &_title {
-                                    color: $pr_white_color ;
-                                }
-
-                                ;
-                            }
+                            background-color: $sc_blue_color;
                         }
 
                         ;
