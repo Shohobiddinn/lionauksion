@@ -1,0 +1,162 @@
+.product_prototype_page {
+    .container {
+        .protatype {
+            margin-left: 300px;
+            @include flex(flex-start, flex-start);
+            border: 2px solid $pr_blue_color;
+            border-radius: 20px;
+            margin-top: 30px;
+
+            &_content {
+                width: 50%;
+                &_add {
+                    display: inline-block;
+                    border-radius: 10px;
+                    margin-left: 20px;
+                    margin-top: 20px;
+                    overflow: hidden;
+                    cursor: pointer;
+                    &:hover {
+                        .protatype_content_add_content {
+                            background-color: $pr_blue_color;
+
+                            &_icon {
+
+                                &::after,
+                                &::before {
+                                    background-color: $pr_white_color
+                                }
+                            }
+
+                            &_title {
+                                color: $pr_white_color ;
+                            }
+                        }
+                    }
+
+                    &_content {
+                        @include flex(center, flex-start);
+                        gap: 50px;
+                        padding: 10px 20px;
+                        background-color: $pr_white_color;
+
+                        &_icon {
+
+                            &::after,
+                            &::before {
+                                content: "";
+                                position: absolute;
+                                width: 16px;
+                                height: 2px;
+                                background-color: $pr_blue_color;
+                            }
+
+                            &::after {
+                                rotate: -90deg;
+                            }
+                        }
+
+                        &_title {
+                            @include fond(400, 15);
+                            color: $pr_black_color ;
+                            text-transform: capitalize;
+                        }
+                    }
+                };
+                &_title {
+                    @include flex(center, flex-start);
+                    gap: 250px;
+                    padding: 10px 20px;
+                    cursor: pointer;
+                    // background-color: $pr_white_color;
+                    &_name {
+                        @include fond(400, 15);
+                        color: $pr_black_color;
+                        text-transform: capitalize;
+                    }
+                    &_icon {
+                        rotate: 90deg;
+                        svg {
+                            width: 25px;
+                            height: 25px;
+                        }
+                    }
+                }
+            }
+
+            &_title {
+                width: 50%;
+                &_add {
+                    display: inline-block;
+                    border-radius: 10px;
+                    margin-left: 20px;
+                    margin-top: 20px;
+                    overflow: hidden;
+                    cursor: pointer;
+                    &:hover {
+                        .protatype_title_add_content {
+                            background-color: $pr_blue_color;
+                            &_icon {
+                                &::after,
+                                &::before {
+                                    background-color: $pr_white_color
+                                }
+                            };
+                            &_title {
+                                color: $pr_white_color ;
+                            };
+                        }
+                    };
+                    &_content {
+                        @include flex(center, flex-start);
+                        gap: 50px;
+                        padding: 10px 20px;
+                        background-color: $pr_white_color;
+                        &_icon {
+                            &::after,
+                            &::before {
+                                content: "";
+                                position: absolute;
+                                width: 16px;
+                                height: 2px;
+                                background-color: $pr_blue_color;
+                            }
+
+                            &::after {
+                                rotate: -90deg;
+                            }
+                        }
+
+                        &_title {
+                            @include fond(400, 15);
+                            color: $pr_black_color ;
+                            text-transform: capitalize;
+                        }
+                    }
+                }
+                &_content {
+                    @include flex(center, flex-start);
+                    gap: 250px;
+                    padding: 10px 20px;
+                    cursor: pointer;
+                    // background-color: $pr_white_color;
+
+                    &_name {
+                        @include fond(400, 15);
+                        color: $pr_black_color;
+                        text-transform: capitalize;
+                    }
+
+                    &_icon {
+                        rotate: 90deg;
+
+                        svg {
+                            width: 25px;
+                            height: 25px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
