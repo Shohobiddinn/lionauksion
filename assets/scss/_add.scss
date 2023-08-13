@@ -4,157 +4,98 @@
     .container {
         .add_info {
             margin-left: 300px;
+            margin-top: 20px;
 
-            .product {
-                padding: 50px;
+            .product_add {
+                @include flex(center, space-between);
 
-                &_name {
-                    @include fond(400, 15);
+                &_father {
+                    width: 50%;
 
-                    color: $pr_black_color;
-                    margin-bottom: 7px;
-                }
+                    .selected {
+                        width: 250px;
+                        position: relative;
 
-                &_input {
-                    width: 700px;
-                    height: 50px;
-                    outline: none;
-                    background: none;
-                    border: none;
-                    border-radius: 7px;
-                    border: 1px solid $pr_black_color;
-                    padding: 0 10px;
-                    @include fond(400, 14);
-                    color: $pr_black_color;
-                    margin-bottom: 15px;
+                        &_option {
+                            @include flex(center, space-between);
+                            border: 1px solid $pr_blue_color;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            padding: 2px 10px;
 
-                    &::placeholder {
-                        @include fond(400, 14);
-                        color: $pr_black_color;
-                        text-transform: capitalize;
-                    }
-                }
+                            &_title {
+                                @include fond(500, 15);
+                                color: $pr_black_color;
+                                text-transform: capitalize;
+                            }
 
-                &_category {
-                    &_option {
-                        width: 400px;
-                        border: 1px solid $pr_black_color;
-                        border-radius: 7px;
-                        padding: 7px 10px;
-                        cursor: pointer;
-                        user-select: none;
-                        @include fond(400, 15);
-                        color: $pr_black_color;
-                        background-color: $sc_blue_color;
-                    }
+                            &_icon {
+                                svg {
+                                    width: 25px;
+                                    height: 25px;
+                                    rotate: -180deg;
+                                }
+                            }
+                        }
 
-                    &_modal {
-                        width: 1000px;
-                        height: 800px;
-                        position: fixed;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        border-radius: 15px;
-                        border: 1px solid;
-                        background-color: $pr_white_color;
-                        padding: 20px;
+                        &_content {
+                            position: absolute;
+                            width: 100%;
+                            top: calc(100% + 10px);
+                            overflow-y: auto;
+                            height: 150px;
+                            display: none;
 
-                        .close_btn {
-                            @include flex(flex-start, flex-end);
-                            margin-bottom: 20px;
-                            margin-right: 10px;
+                            &::-webkit-scrollbar {
+                                display: none;
+                            }
 
-                            .btn {
-                                position: relative;
+                            &_title {
+                                @include fond(400, 15);
+                                color: $pr_black_color;
+                                text-transform: capitalize;
+                                border: 1px solid $pr_black_color;
+                                border-radius: 3px;
+                                margin-bottom: 5px;
                                 cursor: pointer;
-
-                                &::after,
-                                &::before {
-                                    content: "";
-                                    position: absolute;
-                                    width: 3px;
-                                    height: 20px;
-                                    background-color: $pr_black_color;
-                                    border-radius: 3px;
-                                }
-
-                                &::after {
-                                    rotate: 45deg;
-                                }
-
-                                &::before {
-                                    rotate: -45deg;
-                                }
                             }
                         }
 
-                        &_title {
-                            @include fond(600, 24);
+                        &.active {
+                            .selected_content {
+                                display: block;
+                            }
+                        }
+                    }
+                }
+
+                &_child {
+                    width: 50%;
+
+                    .info {
+                        @include flex(flex-start, flex-start);
+                        flex-direction: column;
+
+                        &_label {
+                            @include fond(400, 15);
                             color: $pr_black_color;
-                            margin-bottom: 20px;
+                            text-transform: capitalize;
+                            margin-bottom: 5px;
+                            cursor: pointer;
                         }
-
-                        .categorys {
-                            position: relative;
-
-                            &_category {
-                                width: 50%;
-                                border-right: 2px solid $pr_black_color;
-                                padding: 0 10px 0 0;
-
-                                &_title {
-                                    @include flex(center, space-between);
-                                    cursor: pointer;
-                                    padding: 20px 10px;
-                                    border-radius: 5px;
-
-                                    &:hover {
-                                        background-color: $sc_blue_color;
-                                    }
-
-                                    &_text {
-                                        @include fond(500, 18);
-                                        color: $pr_black_color;
-                                        text-transform: capitalize;
-                                    }
-
-                                    &_icon {
-                                        svg {
-                                            rotate: 90deg;
-                                        }
-                                    }
-                                }
-
-                                &_content {
-                                    position: absolute;
-                                    top: 0;
-                                    left: calc(50% + 20px);
-                                    width: 50%;
-                                    display: none;
-
-                                    &_title {
-                                        @include fond(500, 18);
-                                        color: $pr_black_color;
-                                        text-transform: capitalize;
-                                        padding: 20px 10px;
-                                        cursor: pointer;
-                                        border-radius: 5px;
-
-                                        &:hover {
-                                            background-color: $sc_blue_color;
-                                        }
-                                    }
-                                }
-
-                                &.active {
-                                    .categorys_category_content {
-                                        display: block;
-                                    }
-                                }
+                        &_input{
+                            width: 300px;
+                            height: 35px;
+                            border-radius: 5px;
+                            outline: none;
+                            padding: 2px 10px;
+                            @include fond(400, 13);
+                            color: $pr_black_color;
+                            &::placeholder{
+                                @include fond(400, 15);
+                                color: $pr_black_color;
                             }
                         }
-
                     }
                 }
             }

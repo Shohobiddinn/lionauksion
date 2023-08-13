@@ -101,94 +101,94 @@ body {
     }
 }
 
-.banner {
-    background-color: $pr_blue_color;
-    height: 60px;
-    padding: 10px 0;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 2;
+// .banner {
+//     background-color: $pr_blue_color;
+//     height: 60px;
+//     padding: 10px 0;
+//     position: fixed;
+//     top: 0;
+//     width: 100%;
+//     z-index: 2;
 
-    .container {
-        padding: 5px 20px;
+//     .container {
+//         padding: 5px 20px;
 
-        .banner_top {
-            margin-left: 300px;
-            @include flex(center, space-between);
+//         .banner_top {
+//             margin-left: 300px;
+//             @include flex(center, space-between);
 
-            .search {
-                .form {
-                    width: 400px;
-                    height: 35px;
-                    background-color: $pr_white_color;
-                    @include flex(center, flex-start);
-                    gap: 10px;
-                    border-radius: 5px;
-                    padding: 5px;
+//             .search {
+//                 .form {
+//                     width: 400px;
+//                     height: 35px;
+//                     background-color: $pr_white_color;
+//                     @include flex(center, flex-start);
+//                     gap: 10px;
+//                     border-radius: 5px;
+//                     padding: 5px;
 
-                    &_icon {
-                        cursor: pointer;
+//                     &_icon {
+//                         cursor: pointer;
 
-                        svg {
-                            width: 20px;
-                            height: 20px;
-                        }
+//                         svg {
+//                             width: 20px;
+//                             height: 20px;
+//                         }
 
-                    }
+//                     }
 
-                    input {
-                        width: calc(100% - 20px);
-                        height: 100%;
-                        border: none;
-                        outline: none;
-                        background: none;
-                        @include fond(400, 13);
-                        color: $pr_black_color;
+//                     input {
+//                         width: calc(100% - 20px);
+//                         height: 100%;
+//                         border: none;
+//                         outline: none;
+//                         background: none;
+//                         @include fond(400, 13);
+//                         color: $pr_black_color;
 
-                        &::placeholder {
-                            @include fond(400, 13);
-                            color: $pr_black_color;
-                            text-transform: capitalize;
-                        }
-                    }
-                }
-            }
+//                         &::placeholder {
+//                             @include fond(400, 13);
+//                             color: $pr_black_color;
+//                             text-transform: capitalize;
+//                         }
+//                     }
+//                 }
+//             }
 
-            .profil {
-                @include flex(center, flex-start);
-                gap: 30px;
+//             .profil {
+//                 @include flex(center, flex-start);
+//                 gap: 30px;
 
-                &_info {
-                    @include flex(center, flex-start);
-                    gap: 15px;
+//                 &_info {
+//                     @include flex(center, flex-start);
+//                     gap: 15px;
 
-                    &_image {
-                        img {
-                            width: 25px;
-                            height: 25px;
-                        }
-                    }
+//                     &_image {
+//                         img {
+//                             width: 25px;
+//                             height: 25px;
+//                         }
+//                     }
 
-                    &_content {
-                        &_name {
-                            @include fond(400, 15);
-                            color: $pr_white_color;
-                            text-transform: capitalize;
-                            line-height: 1.2;
-                        }
+//                     &_content {
+//                         &_name {
+//                             @include fond(400, 15);
+//                             color: $pr_white_color;
+//                             text-transform: capitalize;
+//                             line-height: 1.2;
+//                         }
 
-                        &_businns {
-                            @include fond(400, 13);
-                            text-transform: capitalize;
-                            color: $pr_white_color;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
+//                         &_businns {
+//                             @include fond(400, 13);
+//                             text-transform: capitalize;
+//                             color: $pr_white_color;
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
 
 .informotion {
     background-color: $pr_bg_color;
