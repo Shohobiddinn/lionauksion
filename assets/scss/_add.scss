@@ -7,7 +7,7 @@
             margin-top: 20px;
 
             .product_add {
-                @include flex(center, space-between);
+                @include flex(flex-start, space-between);
 
                 &_father {
                     width: 50%;
@@ -71,6 +71,12 @@
 
                 &_child {
                     width: 50%;
+                    height: 700px;
+                    overflow-y: auto;
+
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
 
                     .info {
                         @include flex(flex-start, flex-start);
@@ -83,16 +89,18 @@
                             margin-bottom: 5px;
                             cursor: pointer;
                         }
-                        &_input{
+
+                        &_input {
                             width: 300px;
                             height: 35px;
                             border-radius: 5px;
                             outline: none;
                             padding: 2px 10px;
-                            @include fond(400, 13);
+                            @include fond(400, 10);
                             color: $pr_black_color;
-                            &::placeholder{
-                                @include fond(400, 15);
+
+                            &::placeholder {
+                                @include fond(400, 10);
                                 color: $pr_black_color;
                             }
                         }

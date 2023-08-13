@@ -29,21 +29,29 @@
                 <div class="selected_content">
                   <div
                     class="selected_content_title"
-                    @click="categoryFather()"
-                    v-for="p in 10"
-                    :key="p"
+                    v-for="c in categoryFatherInfo?.content"
+                    :key="c?.id"
+                    @click="categoryChildApi(c?.id)"
                   >
-                    kiyilar
+                    {{ c?.name }}
                   </div>
                 </div>
               </div>
-
             </div>
             <div class="product_add_child">
-              <div class="info" >
-                <label class="info_label" for="child-1">children</label>
-                <input class="info_input" type="text" id="child-1">
+              <div class="info" v-for="child in categoryChild" :key="child?.id">
+                <label class="info_label" :for="`child-${child?.id}`">{{
+                  child?.name
+                }}</label>
+                <input
+                  ref="input"
+                  class="info_input"
+                  type="text"
+                  :id="`child-${child?.id}`"
+                  :placeholder="`${child?.name}`"
+                />
               </div>
+              <button @click="sbmt()">click me</button>
             </div>
           </div>
         </div>
@@ -53,9 +61,55 @@
 </template>
   
   <script setup>
+const baseUrl = useRuntimeConfig().public.baseUrl;
 const selectModal = ref(false);
-function categoryFather() {
+
+const categoryFatherInfo = ref(null);
+async function categoryFatherApi() {
+  const data = await $fetch(baseUrl + "/category", {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("userToken"),
+    },
+    params: {
+      page: 0,
+      size: 10,
+    },
+  });
+  categoryFatherInfo.value = data;
+}
+const input = ref(null);
+async function sbmt() {
+  const arr = []
+  input.value.forEach((elem, i) => {
+    arr.push({
+      categoryDetailId: categoryChild.value[i].id,
+      value: elem.value,
+    });
+  });
+  // console.log(arr);
+  const data = await $fetch(baseUrl + "/product", {
+    method: "POST",
+    body: {
+      details: arr,
+    },
+  });
+}
+categoryFatherApi();
+const categoryChild = ref(null);
+async function categoryChildApi(e) {
   selectModal.value = false;
+
+  const data = await $fetch(baseUrl + "/category-detail/all", {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("userToken"),
+    },
+    params: {
+      categoryId: e,
+    },
+  });
+  categoryChild.value = data;
 }
 </script>
 
