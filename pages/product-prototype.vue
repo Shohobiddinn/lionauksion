@@ -50,7 +50,8 @@
               class="protatype_content_title"
               v-for="p in categoryFather?.content"
               :key="p"
-              @click="categoryChildApi(p?.id)"
+              @click="categoryChildApi(p?.id, $event)"
+              ref="protatype"
             >
               <div class="protatype_content_title_name">{{ p?.name }}</div>
               <div class="protatype_content_title_icon">
@@ -155,7 +156,16 @@ async function categoryFatherApi() {
 categoryFatherApi();
 const categoryChild = ref(null);
 const categoryId = ref(null);
-async function categoryChildApi(e) {
+const protatype = ref();
+async function categoryChildApi(e, event) {
+  protatype.value.forEach((el) => {
+    if (el == event.target) {
+      el.classList.add("active");
+      console.log(el);
+    } else {
+      el.classList.remove("active");
+    }
+  });
   const data = await $fetch(baseUrl + "/category-detail/all", {
     method: "GET",
     headers: {
@@ -167,6 +177,14 @@ async function categoryChildApi(e) {
   });
   categoryChild.value = data;
   categoryId.value = e;
+  protatype.value.forEach((el) => {
+    if (el == event.target) {
+      el.classList.add("active");
+      console.log(el);
+    } else {
+      el.classList.remove("active");
+    }
+  });
 }
 const fatherAddUz = ref("");
 const fatherAddRu = ref("");

@@ -190,7 +190,7 @@ async function currensyTypeApi() {
     },
   });
   currensyType.value = data;
-}
+};
 currensyTypeApi();
 const currensy = ref(null);
 async function currensyApi() {
@@ -204,7 +204,8 @@ async function currensyApi() {
     },
   });
   currensy.value = data;
-}
+  console.log(data);
+};
 currensyApi();
 const editModal = ref(false);
 const editInfo = ref("");
@@ -212,7 +213,7 @@ const editId = ref("");
 function etidFun(e) {
   editId.value = e;
   editModal.value = true;
-}
+};
 async function editApi() {
   const data = await $fetch(baseUrl + "/currency", {
     method: "PUT",
@@ -224,12 +225,10 @@ async function editApi() {
       currencyValueInUzs: editInfo.value,
     }),
   });
-  console.log(data);
   editModal.value = false;
   currensyApi();
   currensyTypeApi();
-}
-
+};
 const currenyModal = ref(false);
 const curInfo = ref("valyuta turini tanlang");
 const curId = ref("");
@@ -237,9 +236,9 @@ function curChange(e) {
   curId.value = e.id;
   curInfo.value = e.symbol;
   currenyModal.value = false;
-}
+};
 const currenPrice = ref("");
-async function currentAdd() {
+async function currentAdd() { 
   const res = await fetch(baseUrl + "/currency", {
     method: "POST",
     headers: {
@@ -255,7 +254,7 @@ async function currentAdd() {
   console.log(res);
   currensyApi();
   currensyTypeApi();
-}
+};
 </script>
 
 <style lang="scss" scoped>

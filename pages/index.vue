@@ -74,6 +74,7 @@
     <div class="informotion">
       <div class="container">
         <div class="info">
+          {{ products }}
           <div class="info_top">
             <div class="categorys">
               <div class="categorys_content">
@@ -320,6 +321,21 @@ async function companyApi() {
   company.value = data;
 }
 companyApi();
+const products = ref(null);
+async function productApi(){
+  const data = await $fetch(baseUrl + "/product",{
+    method:"GET",
+    headers:{
+      Authorization:"Bearer " + localStorage.getItem("userToken")
+    },
+    params:{
+      page:0,
+      size:10
+    }
+  });
+  products.value = data
+};
+productApi();
 </script>
 
 <style lang="scss" scoped>
