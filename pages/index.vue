@@ -74,7 +74,6 @@
     <div class="informotion">
       <div class="container">
         <div class="info">
-          {{ products }}
           <div class="info_top">
             <div class="categorys">
               <div class="categorys_content">
