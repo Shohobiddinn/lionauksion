@@ -12,7 +12,9 @@
                   class="selected_option"
                   @click="selectModal = !selectModal"
                 >
-                  <div class="selected_option_title">{{ inputFatherTitle }}</div>
+                  <div class="selected_option_title">
+                    {{ inputFatherTitle }}
+                  </div>
                   <div class="selected_option_icon">
                     <svg
                       width="30"
@@ -38,13 +40,29 @@
                 </div>
               </div>
               <div class="info">
-                <input class="info_input" type="checkbox" id="nds">
+                <input class="info_input" type="checkbox" id="nds" />
                 <label class="info_label" for="nds">QQS</label>
               </div>
               <div class="info">
-                <input class="info_input" type="checkbox" id="delivery">
+                <input class="info_input" type="checkbox" id="delivery" />
                 <label class="info_label" for="delivery">yetkazib berish</label>
               </div>
+              <div class="infos">
+                <label class="infos_date_label" for="delivery"
+                  >ishlab chiqarilgan sana</label
+                >
+                <input
+                  class="infos_date_input"
+                  type="date"
+                  value="2017-10-10"
+                  id="delivery"
+                />
+              </div>
+              
+              <!-- <div class="textarea">
+                <label class="textarea_label" for="text" >Qo'shimcha ma'lumot</label>
+                <textarea class="textarea_title" name="" id="text" v-model="textarea" cols="30" rows="10"></textarea>
+              </div> -->
             </div>
             <div class="product_add_child">
               <div class="info" v-for="child in categoryChild" :key="child?.id">
@@ -88,7 +106,7 @@ async function categoryFatherApi() {
 }
 const input = ref(null);
 async function sbmt() {
-  const arr = []
+  const arr = [];
   input.value.forEach((elem, i) => {
     arr.push({
       categoryDetailId: categoryChild.value[i].id,
@@ -106,6 +124,7 @@ async function sbmt() {
 categoryFatherApi();
 const inputFatherTitle = ref("kategoriyalar");
 const categoryChild = ref(null);
+const textarea = ref("");
 async function categoryChildApi(e) {
   selectModal.value = false;
   inputFatherTitle.value = e.name;
