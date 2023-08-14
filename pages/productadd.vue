@@ -37,6 +37,8 @@
                   </div>
                 </div>
               </div>
+
+              
             </div>
             <div class="product_add_child">
               <div class="info" v-for="child in categoryChild" :key="child?.id">
