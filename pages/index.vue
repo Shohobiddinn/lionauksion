@@ -74,7 +74,7 @@
     <div class="informotion">
       <div class="container">
         <div class="info">
-          <pre>{{ products }}</pre>
+          <!-- <pre>{{ products }}</pre> -->
           <div class="info_top">
             <div class="categorys">
               <div class="categorys_content">
