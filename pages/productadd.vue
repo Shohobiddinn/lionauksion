@@ -40,11 +40,21 @@
                 </div>
               </div>
               <div class="info">
-                <input class="info_input" v-model="ndsInput" type="checkbox" id="nds" />
+                <input
+                  class="info_input"
+                  v-model="ndsInput"
+                  type="checkbox"
+                  id="nds"
+                />
                 <label class="info_label" for="nds">QQS</label>
               </div>
               <div class="info">
-                <input class="info_input" v-model="deliveryInput" type="checkbox" id="delivery" />
+                <input
+                  class="info_input"
+                  v-model="deliveryInput"
+                  type="checkbox"
+                  id="delivery"
+                />
                 <label class="info_label" for="delivery">yetkazib berish</label>
               </div>
               <div class="infos">
@@ -56,7 +66,7 @@
                   type="date"
                   value="2017-10-10"
                   id="delivery"
-                 ref="productDate"
+                  ref="productDate"
                 />
               </div>
               <div class="inputs">
@@ -66,7 +76,6 @@
                 <input
                   type="text"
                   id="amount-1"
-                  placeholder="min yetkazib berish miqdori"
                   class="inputs_input"
                   v-model="min"
                 />
@@ -77,17 +86,47 @@
                 >
                 <input
                   type="text"
-                  placeholder="max yetkazib berish miqdori"
                   id="amount-2"
                   class="inputs_input"
                   v-model="max"
                 />
               </div>
+              <div class="selected" :class="{ active: currensyModal }">
+                <div
+                  class="selected_option"
+                  @click="currensyModal = !currensyModal"
+                >
+                  <div class="selected_option_title">
+                    {{ currensyTitle }}
+                  </div>
+                  <div class="selected_option_icon">
+                    <svg
+                      width="30"
+                      height="30"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 448 512"
+                    >
+                      <path
+                        d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div class="selected_content">
+                  <div
+                    class="selected_content_title"
+                    v-for="c in currensy"
+                    :key="c?.id"
+                    @click="currensyChildApi(c)"
+                  >
+                    {{ c?.nameUz }}
+                  </div>
+                </div>
+              </div>
               <div class="price">
                 <label for="amount-2" class="price_label">mahsulot narxi</label>
                 <input
                   type="text"
-                  placeholder="mahsulot narxi"
                   id="amount-2"
                   class="price_input"
                   v-model="price"
@@ -122,13 +161,12 @@
                     class="info_input"
                     type="text"
                     :id="`child-${child?.id}`"
-                    placeholder="narxini kiriting"
                   />
                 </div>
               </div>
-              <div class="submit_icons">
+              <div class="submit_icons" v-if="categoryChild">
                 <div class="submit_icons_btn exit">Orqaga</div>
-                <div class="submit_icons_btn send" @click="sbmt">
+                <div class="submit_icons_btn send" @click="productAddApi">
                   yuborish
                 </div>
               </div>
@@ -143,7 +181,28 @@
   <script setup>
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const selectModal = ref(false);
-
+const currensyModal = ref(false);
+const currensyTitle = ref("valyuta turi");
+const currensy = ref(null);
+const currencyId = ref(null);
+async function currensyApi() {
+  const data = await $fetch(baseUrl + "/currency-type/all", {
+    method: "GET",
+    params: {
+      companyId: localStorage.getItem("userId"),
+    },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("userToken"),
+    },
+  });
+  currensy.value = data;
+}
+function currensyChildApi(e) {
+  currensyModal.value = false;
+  currencyId.value = e.id;
+  currensyTitle.value = e.nameUz
+}
+currensyApi();
 const categoryFatherInfo = ref(null);
 async function categoryFatherApi() {
   const data = await $fetch(baseUrl + "/category", {
@@ -190,7 +249,7 @@ const textarea = ref();
 function tekshiruv() {
   console.log(categoryFatherId.value);
 }
-async function sbmt() {
+async function productAddApi() {
   const arr = [];
   input.value.forEach((elem, i) => {
     arr.push({
@@ -201,18 +260,19 @@ async function sbmt() {
   // console.log(arr);
   const data = await $fetch(baseUrl + "/product", {
     method: "POST",
-    headers:{
-      Authorization:"Bearer " + localStorage.getItem("userToken")
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("userToken"),
     },
-    body:{
-      description:textarea.value,
+    body: JSON.stringify({
+      description: textarea.value,
       price: price.value,
-      hasDelivery:deliveryInput.value,
-      hasNds:ndsInput.value,
-      categoryId:categoryFatherId.value ,
-      supplierId:localStorage.getItem("userId"),
+      hasDelivery: deliveryInput.value,
+      hasNds: ndsInput.value,
+      currencyId: currencyId.value,
+      categoryId: categoryFatherId.value,
+      supplierId: 6,
       details: arr,
-    },
+    }),
   });
 }
 </script>

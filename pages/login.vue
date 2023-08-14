@@ -57,12 +57,15 @@ async function loginApi() {
     }),
   });
   const res = await data.json();
+  console.log(res);
   if (res.error) {
     router.push("/login")
   } else {
+    router.push("/");
     localStorage.setItem("userToken",res.accessToken);
     localStorage.setItem("userId",res.user.id);
-    router.push("/");
+    localStorage.setItem("userSupplierId",res?.user.supplierId);
+    localStorage.setItem("userCompanyId".res?.user.companyId);
   }
   login.value = res;
 }
