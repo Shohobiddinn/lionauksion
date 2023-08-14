@@ -186,7 +186,7 @@
             <div class="info_bottom_deliverys">
               <div class="delivery" v-for="p in products?.content" :key="p?.id">
                 <NuxtLink class="delivery_link" to="/product">
-                  <div class="delivery_link_logo item">
+                  <div class="delivery_link_logo item"> 
                     <svg
                       width="39"
                       height="32"
@@ -254,7 +254,7 @@
                           stroke-linejoin="round"
                         />
                       </svg>
-                    </NuxtLink>
+                    </NuxtLink> 
                   </div>
                 </NuxtLink>
               </div>
