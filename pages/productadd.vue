@@ -59,32 +59,75 @@
                 />
               </div>
               <div class="inputs">
-                <label for="amount-1" class="inputs_label">min yetkazib berish miqdori</label>
-                <input type="text" id="amount-1" placeholder="min yetkazib berish miqdori" class="inputs_input">
-              </div>
-              <div class="inputs">
-                <label for="amount-2" class="inputs_label">max yetkazib berish miqdori</label>
-                <input type="text" placeholder="max yetkazib berish miqdori" id="amount-2" class="inputs_input">
-              </div>
-              <!-- <div class="textarea">
-                <label class="textarea_label" for="text" >Qo'shimcha ma'lumot</label>
-                <textarea class="textarea_title" name="" id="text" v-model="textarea" cols="30" rows="10"></textarea>
-              </div> -->
-            </div>
-            <div class="product_add_child">
-              <div class="info" v-for="child in categoryChild" :key="child?.id">
-                <label class="info_label" :for="`child-${child?.id}`">{{
-                  child?.name
-                }}</label>
+                <label for="amount-1" class="inputs_label"
+                  >min yetkazib berish miqdori</label
+                >
                 <input
-                  ref="input"
-                  class="info_input"
                   type="text"
-                  :id="`child-${child?.id}`"
-                  placeholder="narxini kiriting"
+                  id="amount-1"
+                  placeholder="min yetkazib berish miqdori"
+                  class="inputs_input"
                 />
               </div>
-              <!-- <button @click="sbmt()">click me</button> -->
+              <div class="inputs">
+                <label for="amount-2" class="inputs_label"
+                  >max yetkazib berish miqdori</label
+                >
+                <input
+                  type="text"
+                  placeholder="max yetkazib berish miqdori"
+                  id="amount-2"
+                  class="inputs_input"
+                />
+              </div>
+              <div class="price">
+                <label for="amount-2" class="price_label">mahsulot narxi</label>
+                <input
+                  type="text"
+                  placeholder="mahsulot narxi"
+                  id="amount-2"
+                  class="price_input"
+                />
+              </div>
+              <div class="textarea">
+                <label class="textarea_label" for="text"
+                  >Qo'shimcha ma'lumot</label
+                >
+                <textarea
+                  class="textarea_title"
+                  name=""
+                  id="text"
+                  v-model="textarea"
+                  cols="30"
+                  rows="10"
+                ></textarea>
+              </div>
+            </div>
+            <div class="product_add_child">
+              <div class="product_add_child_contents">
+                <div
+                  class="info"
+                  v-for="child in categoryChild"
+                  :key="child?.id"
+                >
+                  <label class="info_label" :for="`child-${child?.id}`">{{
+                    child?.name
+                  }}</label>
+                  <input
+                    ref="input"
+                    class="info_input"
+                    type="text"
+                    :id="`child-${child?.id}`"
+                    placeholder="narxini kiriting"
+                  />
+                </div>
+              </div>
+              <div class="submit_icons">
+                <div class="submit_icons_btn exit">Orqaga</div>
+                <div class="submit_icons_btn send" @click="tekshiruv">
+                  yuborish
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -129,7 +172,7 @@ async function sbmt() {
   });
 }
 categoryFatherApi();
-const inputFatherTitle = ref("kategoriyalar");
+const inputFatherTitle = ref("mahsulotlar katalogi");
 const categoryChild = ref(null);
 const textarea = ref("");
 async function categoryChildApi(e) {
@@ -145,6 +188,9 @@ async function categoryChildApi(e) {
     },
   });
   categoryChild.value = data;
+}
+function tekshiruv() {
+  console.log();
 }
 </script>
 
