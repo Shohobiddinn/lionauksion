@@ -1,5 +1,5 @@
 .login {
-    background-color: rgb(87, 74, 233);
+    background-color:$pr_bg_color;
     position: relative;
     z-index: 3;
     @include flex(center, center);
