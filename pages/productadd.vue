@@ -37,8 +37,14 @@
                   </div>
                 </div>
               </div>
-
-
+              <div class="info">
+                <input class="info_input" type="checkbox" id="nds">
+                <label class="info_label" for="nds">QQS</label>
+              </div>
+              <div class="info">
+                <input class="info_input" type="checkbox" id="delivery">
+                <label class="info_label" for="delivery">yetkazib berish</label>
+              </div>
             </div>
             <div class="product_add_child">
               <div class="info" v-for="child in categoryChild" :key="child?.id">

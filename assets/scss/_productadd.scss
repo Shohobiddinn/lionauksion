@@ -12,7 +12,7 @@
                 border: 2px solid $sc_blue_color;
                 border-radius: 20px;
                 padding: 50px;
-                height: 700px;
+                height: 100vh;
                 gap: 50px;
 
                 &_father {
@@ -21,9 +21,11 @@
                     background-color: $pr_bg_color;
                     border-radius: 20px;
                     padding: 20px;
+
                     .selected {
                         width: 70%;
                         position: relative;
+                        margin-bottom: 50px;
 
                         &_option {
                             @include flex(center, space-between);
@@ -97,6 +99,27 @@
                                 visibility: visible;
                             }
                         }
+                    }
+
+                    .info {
+                        @include flex(center, flex-start);
+                        gap: 20px;
+
+                        &_input {
+                            width: 15px;
+                            height: 15px;
+                            &[type='checkbox'] {
+                                background-color: red;
+                                color: red;
+                            }
+                        }
+                        &_label{
+                            @include fond(500,17);
+                            color: $pr_black_color;
+                            text-transform: capitalize;
+                            cursor: pointer;
+                        }
+
                     }
                 }
 
