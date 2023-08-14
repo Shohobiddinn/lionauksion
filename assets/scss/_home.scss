@@ -209,7 +209,20 @@ body {
                         gap: 20px;
 
                         &_title {
-                            @include fond(400, 15);
+                            // @include fond(400, 15);
+                            // color: $pr_black_color;
+                            // text-transform: capitalize;
+                            // background-color: $pr_white_color;
+                            // padding: 8px 27px;
+                            // border-radius: 5px;
+                            // cursor: pointer;
+
+                            // &:hover {
+                            //     background-color: $pr_blue_color;
+                            //     color: $pr_white_color;
+                            // }
+                            &_link{
+                                    @include fond(400, 15);
                             color: $pr_black_color;
                             text-transform: capitalize;
                             background-color: $pr_white_color;
@@ -220,6 +233,7 @@ body {
                             &:hover {
                                 background-color: $pr_blue_color;
                                 color: $pr_white_color;
+                            }
                             }
                         }
                     }

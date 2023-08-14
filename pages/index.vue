@@ -78,11 +78,15 @@
             <div class="categorys">
               <div class="categorys_content">
                 <div class="categorys_content_title">
-                  <NuxtLink class="categorys_content_title" to="/add">
+                  <NuxtLink class="categorys_content_title_link" to="/add">
                     Qo'shish
                   </NuxtLink>
                 </div>
-                <div class="categorys_content_title">azo qo'shish</div>
+                <div class="categorys_content_title">
+                  <NuxtLink class="categorys_content_title_link">
+                    azo qo'shish
+                  </NuxtLink>
+                  </div>
                 <!-- <div class="categorys_content_title">eksport (exel)</div> -->
               </div>
               <div class="categorys_filter" :class="{ active: filterModal }">
