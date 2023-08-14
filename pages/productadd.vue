@@ -40,11 +40,11 @@
                 </div>
               </div>
               <div class="info">
-                <input class="info_input" type="checkbox" id="nds" />
+                <input class="info_input" v-model="ndsInput" type="checkbox" id="nds" />
                 <label class="info_label" for="nds">QQS</label>
               </div>
               <div class="info">
-                <input class="info_input" type="checkbox" id="delivery" />
+                <input class="info_input" v-model="deliveryInput" type="checkbox" id="delivery" />
                 <label class="info_label" for="delivery">yetkazib berish</label>
               </div>
               <div class="infos">
@@ -56,6 +56,7 @@
                   type="date"
                   value="2017-10-10"
                   id="delivery"
+                 ref="productDate"
                 />
               </div>
               <div class="inputs">
@@ -67,6 +68,7 @@
                   id="amount-1"
                   placeholder="min yetkazib berish miqdori"
                   class="inputs_input"
+                  v-model="min"
                 />
               </div>
               <div class="inputs">
@@ -78,6 +80,7 @@
                   placeholder="max yetkazib berish miqdori"
                   id="amount-2"
                   class="inputs_input"
+                  v-model="max"
                 />
               </div>
               <div class="price">
@@ -87,6 +90,7 @@
                   placeholder="mahsulot narxi"
                   id="amount-2"
                   class="price_input"
+                  v-model="price"
                 />
               </div>
               <div class="textarea">
@@ -124,7 +128,7 @@
               </div>
               <div class="submit_icons">
                 <div class="submit_icons_btn exit">Orqaga</div>
-                <div class="submit_icons_btn send" @click="tekshiruv">
+                <div class="submit_icons_btn send" @click="sbmt">
                   yuborish
                 </div>
               </div>
@@ -155,28 +159,14 @@ async function categoryFatherApi() {
   categoryFatherInfo.value = data;
 }
 const input = ref(null);
-async function sbmt() {
-  const arr = [];
-  input.value.forEach((elem, i) => {
-    arr.push({
-      categoryDetailId: categoryChild.value[i].id,
-      value: elem.value,
-    });
-  });
-  // console.log(arr);
-  const data = await $fetch(baseUrl + "/product", {
-    method: "POST",
-    body: {
-      details: arr,
-    },
-  });
-}
+
 categoryFatherApi();
 const inputFatherTitle = ref("mahsulotlar katalogi");
 const categoryChild = ref(null);
-const textarea = ref("");
+const categoryFatherId = ref(null);
 async function categoryChildApi(e) {
   selectModal.value = false;
+  categoryFatherId.value = e.id;
   inputFatherTitle.value = e.name;
   const data = await $fetch(baseUrl + "/category-detail/all", {
     method: "GET",
@@ -189,8 +179,41 @@ async function categoryChildApi(e) {
   });
   categoryChild.value = data;
 }
+
+const ndsInput = ref(false);
+const deliveryInput = ref(false);
+const productDate = ref(null);
+const min = ref(null);
+const max = ref(null);
+const price = ref(null);
+const textarea = ref();
 function tekshiruv() {
-  console.log();
+  console.log(categoryFatherId.value);
+}
+async function sbmt() {
+  const arr = [];
+  input.value.forEach((elem, i) => {
+    arr.push({
+      categoryDetailId: categoryChild.value[i].id,
+      value: elem.value,
+    });
+  });
+  // console.log(arr);
+  const data = await $fetch(baseUrl + "/product", {
+    method: "POST",
+    headers:{
+      Authorization:"Bearer " + localStorage.getItem("userToken")
+    },
+    body:{
+      description:textarea.value,
+      price: price.value,
+      hasDelivery:deliveryInput.value,
+      hasNds:ndsInput.value,
+      categoryId:categoryFatherId.value ,
+      supplierId:localStorage.getItem("userId"),
+      details: arr,
+    },
+  });
 }
 </script>
 
