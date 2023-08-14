@@ -58,7 +58,14 @@
                   id="delivery"
                 />
               </div>
-              
+              <div class="inputs">
+                <label for="amount-1" class="inputs_label">min yetkazib berish miqdori</label>
+                <input type="text" id="amount-1" placeholder="min yetkazib berish miqdori" class="inputs_input">
+              </div>
+              <div class="inputs">
+                <label for="amount-2" class="inputs_label">max yetkazib berish miqdori</label>
+                <input type="text" placeholder="max yetkazib berish miqdori" id="amount-2" class="inputs_input">
+              </div>
               <!-- <div class="textarea">
                 <label class="textarea_label" for="text" >Qo'shimcha ma'lumot</label>
                 <textarea class="textarea_title" name="" id="text" v-model="textarea" cols="30" rows="10"></textarea>

@@ -116,6 +116,8 @@
                             }
                         }
 
+                        ;
+
                         &_label {
                             @include fond(500, 17);
                             color: $pr_black_color;
@@ -123,12 +125,13 @@
                             cursor: pointer;
                         }
 
-
+                        ;
                     }
 
                     .infos {
                         @include flex(flex-start, flex-start);
                         flex-direction: column;
+                        margin-bottom: 15px;
 
                         &_date_label {
                             @include fond (400, 15);
@@ -136,7 +139,8 @@
                             text-transform: capitalize;
                             margin-bottom: 10px;
                         }
-                        &_date_input{
+
+                        &_date_input {
                             width: 50%;
                             height: 40px;
                             padding: 5px 20px;
@@ -147,6 +151,40 @@
                             border-radius: 5px;
                         }
                     }
+
+                    ;
+
+                    .inputs {
+                        @include flex(flex-start, flex-start);
+                        flex-direction: column;
+                        margin-bottom: 15px;
+
+                        &_label {
+                            @include fond (400, 15);
+                            color: $pr_black_color;
+                            text-transform: capitalize;
+                            margin-bottom: 10px;
+                        }
+
+                        &_input {
+                            width: 50%;
+                            height: 40px;
+                            padding: 5px 20px;
+                            @include fond (400, 15);
+                            color: $pr_black_color;
+                            text-transform: capitalize;
+                            outline: none;
+                            border-radius: 5px;
+
+                            &::placeholder {
+                                @include fond (400, 13);
+                                color: $pr_black_color;
+                            }
+                        }
+                    }
+
+                    ;
+
                 }
 
                 &_child {
