@@ -51,7 +51,7 @@
                   :placeholder="`${child?.name}`"
                 />
               </div>
-              <button @click="sbmt()">click me</button>
+              <!-- <button @click="sbmt()">click me</button> -->
             </div>
           </div>
         </div>
