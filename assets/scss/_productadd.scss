@@ -19,13 +19,14 @@
                         &_option {
                             @include flex(center, space-between);
                             border: 1px solid $pr_blue_color;
+                            background-color: $pr_blue_color;
                             border-radius: 5px;
                             cursor: pointer;
                             padding: 2px 10px;
 
                             &_title {
                                 @include fond(500, 15);
-                                color: $pr_black_color;
+                                color: $pr_white_color;
                                 text-transform: capitalize;
                             }
 
@@ -33,7 +34,9 @@
                                 svg {
                                     width: 25px;
                                     height: 25px;
-                                    rotate: -180deg;
+                                    rotate: 180deg;
+                                    transition: 0.3s;
+                                    filter: invert(1);
                                 }
                             }
                         }
@@ -44,7 +47,10 @@
                             top: calc(100% + 10px);
                             overflow-y: auto;
                             height: 150px;
-                            display: none;
+                            transition: 0.3s;
+                            transform: scale(0);
+                            opacity: 0;
+                            visibility: hidden;
 
                             &::-webkit-scrollbar {
                                 display: none;
@@ -54,16 +60,30 @@
                                 @include fond(400, 15);
                                 color: $pr_black_color;
                                 text-transform: capitalize;
-                                border: 1px solid $pr_black_color;
+                                border: 1px solid $pr_blue_color;
                                 border-radius: 3px;
                                 margin-bottom: 5px;
                                 cursor: pointer;
+                                padding: 0 5px;
+                                &:hover{
+                                    color: $pr_white_color;
+                                    background-color: $pr_blue_color;
+                                }
                             }
                         }
 
                         &.active {
+                            .selected_option{
+                                &_icon{
+                                    svg{
+                                        rotate: 0deg;
+                                    }
+                                }
+                            }
                             .selected_content {
-                                display: block;
+                                transform: scale(1);
+                                opacity: 1;
+                                visibility: visible;
                             }
                         }
                     }

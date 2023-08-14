@@ -74,11 +74,12 @@
     <div class="informotion">
       <div class="container">
         <div class="info">
+          <pre>{{ products }}</pre>
           <div class="info_top">
             <div class="categorys">
               <div class="categorys_content">
                 <div class="categorys_content_title">
-                  <NuxtLink class="categorys_content_title_link" to="/add">
+                  <NuxtLink class="categorys_content_title_link" to="/productadd">
                     Qo'shish
                   </NuxtLink>
                 </div>
@@ -183,7 +184,7 @@
               <div class="info_bottom_page_title edit">tahrirlash</div>
             </div>
             <div class="info_bottom_deliverys">
-              <div class="delivery" v-for="c in 20" :key="c">
+              <div class="delivery" v-for="p in products?.content" :key="p?.id">
                 <NuxtLink class="delivery_link" to="/product">
                   <div class="delivery_link_logo item">
                     <svg
@@ -220,7 +221,7 @@
                       </defs>
                     </svg>
                   </div>
-                  <div class="delivery_link_name item">Lion Print</div>
+                  <div class="delivery_link_name item">{{ p?.supplierName }}</div>
                   <div class="delivery_link_phone item">+998942836006</div>
                   <div class="delivery_link_product item">paper</div>
                   <div class="delivery_link_status item">active</div>

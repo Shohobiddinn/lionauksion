@@ -65,7 +65,6 @@ async function loginApi() {
     router.push("/");
   }
   login.value = res;
-  console.log(res);
 }
 function passeye() {
   if (password.value.type == "password") {
