@@ -12,7 +12,7 @@
                   class="selected_option"
                   @click="selectModal = !selectModal"
                 >
-                  <div class="selected_option_title">kategoriyalar</div>
+                  <div class="selected_option_title">{{ inputFatherTitle }}</div>
                   <div class="selected_option_icon">
                     <svg
                       width="30"
@@ -31,14 +31,14 @@
                     class="selected_content_title"
                     v-for="c in categoryFatherInfo?.content"
                     :key="c?.id"
-                    @click="categoryChildApi(c?.id)"
+                    @click="categoryChildApi(c)"
                   >
                     {{ c?.name }}
                   </div>
                 </div>
               </div>
 
-              
+
             </div>
             <div class="product_add_child">
               <div class="info" v-for="child in categoryChild" :key="child?.id">
@@ -50,7 +50,7 @@
                   class="info_input"
                   type="text"
                   :id="`child-${child?.id}`"
-                  :placeholder="`${child?.name}`"
+                  placeholder="narxini kiriting"
                 />
               </div>
               <!-- <button @click="sbmt()">click me</button> -->
@@ -98,17 +98,18 @@ async function sbmt() {
   });
 }
 categoryFatherApi();
+const inputFatherTitle = ref("kategoriyalar");
 const categoryChild = ref(null);
 async function categoryChildApi(e) {
   selectModal.value = false;
-
+  inputFatherTitle.value = e.name;
   const data = await $fetch(baseUrl + "/category-detail/all", {
     method: "GET",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("userToken"),
     },
     params: {
-      categoryId: e,
+      categoryId: e.id,
     },
   });
   categoryChild.value = data;

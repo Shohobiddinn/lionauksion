@@ -22,7 +22,7 @@
                     border-radius: 20px;
                     padding: 20px;
                     .selected {
-                        width: 250px;
+                        width: 70%;
                         position: relative;
 
                         &_option {
@@ -125,7 +125,7 @@
                         }
 
                         &_input {
-                            width: 300px;
+                            width: 70%;
                             height: 35px;
                             border-radius: 5px;
                             outline: none;
@@ -136,6 +136,7 @@
                             &::placeholder {
                                 @include fond(400, 10);
                                 color: $pr_black_color;
+                                text-transform: capitalize;
                             }
                         }
                     }
