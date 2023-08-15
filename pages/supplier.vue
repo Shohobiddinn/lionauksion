@@ -78,7 +78,7 @@
               <!-- <pre>{{ company }}</pre> -->
   
               <div class="company_info_top_add">
-                <NuxtLink class="company_info_top_add_link" to="/companyadd">
+                <NuxtLink class="company_info_top_add_link" to="/supplieradd">
                  Taminotchi qo'shish
                 </NuxtLink>
               </div>
