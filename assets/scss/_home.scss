@@ -221,19 +221,19 @@ body {
                             //     background-color: $pr_blue_color;
                             //     color: $pr_white_color;
                             // }
-                            &_link{
-                                    @include fond(400, 15);
-                            color: $pr_black_color;
-                            text-transform: capitalize;
-                            background-color: $pr_white_color;
-                            padding: 8px 27px;
-                            border-radius: 5px;
-                            cursor: pointer;
+                            &_link {
+                                @include fond(400, 15);
+                                color: $pr_black_color;
+                                text-transform: capitalize;
+                                background-color: $pr_white_color;
+                                padding: 8px 27px;
+                                border-radius: 5px;
+                                cursor: pointer;
 
-                            &:hover {
-                                background-color: $pr_blue_color;
-                                color: $pr_white_color;
-                            }
+                                &:hover {
+                                    background-color: $pr_blue_color;
+                                    color: $pr_white_color;
+                                }
                             }
                         }
                     }
@@ -336,7 +336,7 @@ body {
             }
 
             &_bottom {
-                background-color: $pr_white_color;
+                background-color: $pr_bg_color;
                 border-radius: 15px;
 
                 &_page {
@@ -348,9 +348,21 @@ body {
                     background-color: $pr_white_color;
 
                     &_title {
-                        @include fond(400, 15);
+                        @include fond(600, 15);
                         color: $pr_black_color;
                         text-transform: capitalize;
+                        width: 100px;   
+                        &:nth-child(2) {
+                            width: 200px;
+                        }
+
+                        &:nth-child(3) {
+                            width: 200px;
+                        }
+
+                        &:nth-child(4) {
+                            width: 200px;
+                        }
 
                         &.nds {
                             text-transform: uppercase;
@@ -360,8 +372,6 @@ body {
 
                 &_deliverys {
                     padding-top: 48px;
-                    // overflow-y: auto;
-                    // height: 750px;
 
                     &::-webkit-scrollbar {
                         cursor: pointer;
@@ -375,29 +385,59 @@ body {
                     }
 
                     .delivery {
-                        &_link {
-                            @include flex(center, space-between);
-                            padding: 0 20px;
-                            margin-bottom: 10px;
+                        @include flex(center, space-between);
+                        padding: 0 20px;
+                        margin-bottom: 10px;
+                        background-color: $pr_white_color;
 
-                            &_logo {
-                                width: 48px;
-                                height: 48px;
-                                background-color: #E2E2E2;
+                        &_content {
+                            @include fond(400, 17);
+                            color: $pr_black_color ;
+                            text-transform: capitalize;
+                            @include flex(flex-start, flex-start);
+                            flex-direction: column;
+                            overflow-y: auto;
+                            width: 100px;
+
+                            &.logo {
+                                width: 100px;
+                                height: 60px;
                                 @include flex(center, center);
-                                border-radius: 10px;
+                                border-radius: 5px;
+                                background-color: $pr_bg_color;
+                            }
 
-                                svg {
-                                    border-radius: 50%;
+                            img {
+                                width: 50px;
+                                height: 50px;
+                                border-radius: 50%;
+                            }
 
+                            &_title {
+                                @include fond(400, 15);
+                                color: $pr_black_color ;
+                                &.icon {
+                                    cursor: pointer;
                                 }
                             }
 
-                            .item {
-                                @include fond(400, 15);
-                                color: $pr_black_color;
-                                text-transform: capitalize;
+                            &:nth-child(2) {
+                                width: 200px;
                             }
+
+                            &:nth-child(3) {
+                                width: 200px;
+                            }
+
+                            &:nth-child(4) {
+                                width: 200px;
+                            }
+
+                            &::-webkit-scrollbar {
+                                width: 5px;
+                            }
+
+
                         }
                     }
 
