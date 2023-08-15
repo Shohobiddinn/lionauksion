@@ -418,6 +418,10 @@ body {
                                 color: $pr_black_color ;
                                 &.icon {
                                     cursor: pointer;
+                                    svg{
+                                        width: 25px;
+                                        height: 25px;
+                                    }
                                 }
                             }
 

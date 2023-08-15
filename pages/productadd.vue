@@ -257,7 +257,6 @@ async function productAddApi() {
       value: elem.value,
     });
   });
-  // console.log(arr);
   const data = await $fetch(baseUrl + "/product", {
     method: "POST",
     headers: {
@@ -270,6 +269,8 @@ async function productAddApi() {
       hasNds: ndsInput.value,
       currencyId: currencyId.value,
       categoryId: categoryFatherId.value,
+      maxAmount: max.value,
+      minAmount: min.value,
       supplierId: 6,
       details: arr,
     }),
