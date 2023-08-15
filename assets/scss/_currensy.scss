@@ -1,93 +1,85 @@
 .currensy_page {
-    background-color: $pr_bg_color;
-
     .container {
         .currensy_info {
+            padding: 50px;
             margin-left: 300px;
 
             &_top {
-                padding-top: 100px;
+                display: inline-block;
                 margin-bottom: 50px;
 
-                .currensy_add {
-                    @include fond(400, 15);
-                    color: $pr_black_color;
-                    background-color: $pr_white_color;
+                .currensy_content {
+                    @include flex(center, flex-start);
+                    background-color: $pr_blue_color;
+                    gap: 20px;
                     padding: 5px 20px;
                     border-radius: 5px;
-                    display: inline-block;
-                    text-transform: capitalize;
                     cursor: pointer;
+
+                    &:hover {
+                        filter: invert(0.1)
+                    }
+
+                    &_title {
+                        @include fond(600, 16);
+                        color: $pr_white_color;
+                    }
+
+                    &_icon {
+                        svg {
+                            width: 25px;
+                            height: 25px;
+
+                        }
+                    }
                 }
             }
 
             &_bottom {
-                &_title {
-                    @include fond(500, 18);
-                    color: $pr_black_color;
-                    text-transform: capitalize;
-                    margin-bottom: 20px;
-                    padding-left: 20px;
-                }
-
-                .currensytype {
-                    @include flex(center, flex-start);
-                    gap: 50px;
+                &_page {
                     background-color: $pr_white_color;
-                    border-radius: 10px;
                     padding: 10px 20px;
-                    margin-bottom: 10px;
+                    border-radius: 10px;
+                    margin-bottom: 20px;
+                    position: sticky;
+                    top: 60px;
 
-                    &_name {
-                        @include fond(400, 15);
-                        color: $pr_black_color;
-                        text-transform: capitalize;
+                    .page {
+                        @include flex(center, flex-start);
+                        gap: 50px;
 
-                        span {
-                            @include fond(400, 15);
-                            color: $pr_blue_color;
-                            text-transform: uppercase;
-                        }
-
-                        &.icon {
-                            cursor: pointer;
+                        &_title {
+                            @include fond(600, 18);
+                            color: $pr_black_color;
+                            text-transform: capitalize;
+                            width: 200px;
                         }
                     }
-                }
-
-                &_currensy_add {
-                    @include fond(400, 15);
-                    color: $pr_black_color;
-                    background-color: $pr_white_color;
-                    padding: 5px 20px;
-                    border-radius: 5px;
-                    display: inline-block;
-                    text-transform: capitalize;
-                    margin: 50px 0;
-                    cursor: pointer;
                 }
 
                 .currensy {
                     @include flex(center, flex-start);
                     gap: 50px;
-                    background-color: $pr_white_color;
-                    border-radius: 10px;
                     padding: 10px 20px;
+                    border-radius: 10px;
+                    background-color: $pr_white_color;
                     margin-bottom: 10px;
 
-                    &_name {
-                        @include fond(400, 15);
+                    &_title {
+                        @include fond(600, 18);
                         color: $pr_black_color;
                         text-transform: capitalize;
+                        width: 200px;
 
-                        span {
-                            @include fond(400, 15);
-                            color: $pr_blue_color;
-                            text-transform: uppercase;
-                        }
-
-                        &.icon {
+                        &_icon {
                             cursor: pointer;
+
+                            svg {
+                                width: 25px;
+                                height: 25px;
+
+
+                            }
                         }
                     }
                 }
@@ -98,291 +90,339 @@
                     left: 50%;
                     transform: translate(-50%, -50%);
                     background-color: $pr_white_color;
+                    width: 500px;
+                    height: 500px;
+                    z-index: 2;
+                    border-radius: 15px;
                     padding: 20px;
-                    border-radius: 20px;
-                    z-index: 3;
 
-                    &_close {
-                        position: relative;
-                        width: 16px;
-                        height: 16px;
+                    &_close_btn {
+                        width: 20px;
+                        height: 20px;
                         margin-left: auto;
                         cursor: pointer;
+                        margin-bottom: 20px;
+
+                        &:hover {
+
+                            &::after,
+                            &::before {
+                                background-color: red;
+                            }
+                        }
 
                         &::after,
                         &::before {
                             content: "";
                             position: absolute;
-                            width: 2px;
-                            height: 16px;
-                            background-color: $pr_black_color;
-                        }
-
-                        ;
-
-                        &:hover {
-                            &::after {
-                                background-color: red;
-                            }
-
-                            &::before {
-                                background-color: red;
-                            }
+                            width: 3px;
+                            height: 18px;
+                            background-color: $pr_blue_color;
+                            border-radius: 3px;
                         }
 
                         &::after {
                             rotate: -45deg;
                         }
 
-                        ;
-
                         &::before {
-                            rotate: 45deg;
+                            rotate: 45deg
                         }
                     }
 
-                    .info {
+                    &_info {
                         @include flex(flex-start, flex-start);
                         flex-direction: column;
-                        margin-bottom: 10px;
+                        gap: 15px;
+                        margin-bottom: 20px;
 
-                        label {
-                            @include fond(500, 15);
+                        &_label {
+                            @include fond(500, 20);
                             color: $pr_black_color;
                             text-transform: capitalize;
-                            margin-bottom: 10px;
                         }
 
-                        input {
-                            width: 300px;
-                            height: 35px;
-                            border-radius: 5px;
+                        &_input {
+                            width: 100%;
+                            height: 50px;
+                            border: 3px solid $pr_blue_color;
+                            border-radius: 7px;
                             outline: none;
-                            border: 2px solid $pr_blue_color;
-                            padding: 0 10px;
-                            @include fond(400, 13);
-                            color: $pr_black_color ;
-
-                            &::placeholder {
-                                @include fond(400, 12);
-                                color: $pr_black_color ;
-                                text-transform: capitalize;
-                            }
+                            padding: 2px 20px;
+                            @include fond(500, 16);
+                            color: $pr_black_color;
                         }
                     }
 
-                    .current {
+                    .selected {
+                        width: 100%;
                         position: relative;
+                        margin-bottom: 230px;
 
                         &_option {
                             @include flex(center, space-between);
-                            border: 2px solid $pr_blue_color;
+                            border: 1px solid $pr_blue_color;
+                            background-color: $pr_blue_color;
                             border-radius: 5px;
-                            padding: 5px 10px;
                             cursor: pointer;
-                            margin-bottom: 10px;
+                            padding: 2px 10px;
 
                             &_title {
                                 @include fond(500, 15);
-                                color: $pr_black_color;
+                                color: $pr_white_color;
                                 text-transform: capitalize;
+                            }
+
+                            &_icon {
+                                svg {
+                                    width: 25px;
+                                    height: 25px;
+                                    rotate: 180deg;
+                                    transition: 0.3s;
+                                    filter: invert(1);
+                                }
                             }
                         }
 
                         &_content {
                             position: absolute;
-                            width: 110%;
-                            left: -10px;
-                            @include flex(flex-start, flex-start);
-                            flex-direction: column;
+                            width: 100%;
+                            top: calc(100% + 10px);
+                            overflow-y: auto;
+                            max-height: 250px;
+                            transition: 0.3s;
+                            transform: scale(0);
+                            opacity: 0;
+                            visibility: hidden;
+                            padding: 15px;
+                            border-radius: 15px;
                             background-color: $pr_white_color;
-                            display: none;
+
+                            &::-webkit-scrollbar {
+                                display: none;
+                            }
 
                             &_title {
                                 @include fond(400, 15);
                                 color: $pr_black_color;
-                                width: 100%;
-                                background-color: $pr_bg_color;
-                                margin-bottom: 10px;
+                                text-transform: capitalize;
+                                border: 1px solid $pr_blue_color;
+                                border-radius: 3px;
+                                margin-bottom: 5px;
                                 cursor: pointer;
-                                padding: 0 10px;
+                                padding: 5px 10px;
                                 border-radius: 5px;
 
                                 &:hover {
-                                    background-color: $pr_blue_color;
                                     color: $pr_white_color;
+                                    background-color: $pr_blue_color;
                                 }
                             }
                         }
 
                         &.active {
-                            .current_content {
-                                display: block;
+                            .selected_option {
+                                &_icon {
+                                    svg {
+                                        rotate: 0deg;
+                                    }
+                                }
+                            }
+
+                            .selected_content {
+                                transform: scale(1);
+                                opacity: 1;
+                                visibility: visible;
                             }
                         }
                     }
 
-                    .click_btn {
+                    &_send {
                         @include flex(center, center);
-                        @include fond(400, 15);
-                        text-transform: capitalize;
                         background-color: $pr_blue_color;
-                        color: $pr_white_color;
-                        border-radius: 5px;
-                        margin-top: 50px;
-                        margin-bottom: 20px;
+                        border-radius: 10px;
+                        padding: 3px 20px;
                         cursor: pointer;
-                        padding: 5px 10px;
+
+                        &_btn {
+                            @include fond(600, 20);
+                            color: $pr_white_color;
+                            text-transform: capitalize;
+                        }
 
                         &:hover {
-                            background-color: $sc_blue_color; 
+                            filter: invert(0.1);
                         }
                     }
                 }
-
-                .edit_modal {
+                .currensy_edit_modal {
                     position: fixed;
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
                     background-color: $pr_white_color;
+                    width: 500px;
+                    height: 500px;
+                    z-index: 2;
+                    border-radius: 15px;
                     padding: 20px;
-                    border-radius: 20px;
 
                     &_close_btn {
-                        position: relative;
-                        width: 16px;
-                        height: 16px;
+                        width: 20px;
+                        height: 20px;
                         margin-left: auto;
                         cursor: pointer;
+                        margin-bottom: 20px;
+
+                        &:hover {
+
+                            &::after,
+                            &::before {
+                                background-color: red;
+                            }
+                        }
 
                         &::after,
                         &::before {
                             content: "";
                             position: absolute;
-                            width: 2px;
-                            height: 16px;
-                            background-color: $pr_black_color;
-                        }
-
-                        ;
-
-                        &:hover {
-                            &::after {
-                                background-color: red;
-                            }
-
-                            &::before {
-                                background-color: red;
-                            }
+                            width: 3px;
+                            height: 18px;
+                            background-color: $pr_blue_color;
+                            border-radius: 3px;
                         }
 
                         &::after {
                             rotate: -45deg;
                         }
 
-                        ;
-
                         &::before {
-                            rotate: 45deg;
+                            rotate: 45deg
                         }
                     }
 
-                    .info {
+                    &_info {
                         @include flex(flex-start, flex-start);
                         flex-direction: column;
-                        margin-bottom: 10px;
+                        gap: 15px;
+                        margin-bottom: 20px;
 
-                        label {
-                            @include fond(500, 15);
+                        &_label {
+                            @include fond(500, 20);
                             color: $pr_black_color;
                             text-transform: capitalize;
-                            margin-bottom: 10px;
                         }
 
-                        input {
-                            width: 300px;
-                            height: 35px;
-                            border-radius: 5px;
+                        &_input {
+                            width: 100%;
+                            height: 50px;
+                            border: 3px solid $pr_blue_color;
+                            border-radius: 7px;
                             outline: none;
-                            border: 2px solid $pr_blue_color;
-                            padding: 0 10px;
-                            @include fond(400, 13);
-                            color: $pr_black_color ;
+                            padding: 2px 20px;
+                            @include fond(500, 16);
+                            color: $pr_black_color;
+                        }
+                    }
 
-                            &::placeholder {
-                                @include fond(400, 12);
-                                color: $pr_black_color ;
+                    .selected {
+                        width: 100%;
+                        position: relative;
+                        margin-bottom: 230px;
+
+                        &_option {
+                            @include flex(center, space-between);
+                            border: 1px solid $pr_blue_color;
+                            background-color: $pr_blue_color;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            padding: 2px 10px;
+
+                            &_title {
+                                @include fond(500, 15);
+                                color: $pr_white_color;
                                 text-transform: capitalize;
+                            }
+
+                            &_icon {
+                                svg {
+                                    width: 25px;
+                                    height: 25px;
+                                    rotate: 180deg;
+                                    transition: 0.3s;
+                                    filter: invert(1);
+                                }
+                            }
+                        }
+
+                        &_content {
+                            position: absolute;
+                            width: 100%;
+                            top: calc(100% + 10px);
+                            overflow-y: auto;
+                            max-height: 250px;
+                            transition: 0.3s;
+                            transform: scale(0);
+                            opacity: 0;
+                            visibility: hidden;
+                            padding: 15px;
+                            border-radius: 15px;
+                            background-color: $pr_white_color;
+
+                            &::-webkit-scrollbar {
+                                display: none;
+                            }
+
+                            &_title {
+                                @include fond(400, 15);
+                                color: $pr_black_color;
+                                text-transform: capitalize;
+                                border: 1px solid $pr_blue_color;
+                                border-radius: 3px;
+                                margin-bottom: 5px;
+                                cursor: pointer;
+                                padding: 5px 10px;
+                                border-radius: 5px;
+
+                                &:hover {
+                                    color: $pr_white_color;
+                                    background-color: $pr_blue_color;
+                                }
+                            }
+                        }
+
+                        &.active {
+                            .selected_option {
+                                &_icon {
+                                    svg {
+                                        rotate: 0deg;
+                                    }
+                                }
+                            }
+
+                            .selected_content {
+                                transform: scale(1);
+                                opacity: 1;
+                                visibility: visible;
                             }
                         }
                     }
 
-                    // .current {
-                    //     position: relative;
-
-                    //     &_option {
-                    //         @include flex(center, space-between);
-                    //         border: 2px solid $pr_blue_color;
-                    //         border-radius: 5px;
-                    //         padding: 5px 10px;
-                    //         cursor: pointer;
-                    //         margin-bottom: 10px;
-
-                    //         &_title {
-                    //             @include fond(500, 15);
-                    //             color: $pr_black_color;
-                    //             text-transform: capitalize;
-                    //         }
-                    //     }
-
-                    //     &_content {
-                    //         position: absolute;
-                    //         width: 110%;
-                    //         left: -10px;
-                    //         @include flex(flex-start, flex-start);
-                    //         flex-direction: column;
-                    //         background-color: $pr_white_color;
-                    //         display: none;
-
-                    //         &_title {
-                    //             @include fond(400, 15);
-                    //             color: $pr_black_color;
-                    //             width: 100%;
-                    //             background-color: $pr_bg_color;
-                    //             margin-bottom: 10px;
-                    //             cursor: pointer;
-                    //             padding: 0 10px;
-                    //             border-radius: 5px;
-
-                    //             &:hover {
-                    //                 background-color: $pr_blue_color;
-                    //                 color: $pr_white_color;
-                    //             }
-                    //         }
-                    //     }
-
-                    //     &.active {
-                    //         .current_content {
-                    //             display: block;
-                    //         }
-                    //     }
-                    // }
-
                     &_send {
                         @include flex(center, center);
-                        @include fond(400, 15);
-                        text-transform: capitalize;
                         background-color: $pr_blue_color;
-                        color: $pr_white_color;
-                        border-radius: 5px;
-                        margin-top: 50px;
-                        margin-bottom: 20px;
+                        border-radius: 10px;
+                        padding: 3px 20px;
                         cursor: pointer;
 
+                        &_btn {
+                            @include fond(600, 20);
+                            color: $pr_white_color;
+                            text-transform: capitalize;
+                        }
+
                         &:hover {
-                            background-color: $sc_blue_color;
-                            color: $pr_black_color;
+                            filter: invert(0.1);
                         }
                     }
                 }

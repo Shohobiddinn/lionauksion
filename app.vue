@@ -1,7 +1,12 @@
 <template>
   <div>
+    <Head>
+        <Title>LionPrint</Title>
+        <Link rel="icon" href="/logo.png" type="image/x-icon" sizes="16x16" />
+    </Head>
     <NuxtLayout/>
-    <!-- <load/>  -->
+    <load/> 
+    <!-- <i class="fa-brands fa-telegram"></i> -->
   </div>
 </template>
 <script setup>
