@@ -170,7 +170,7 @@ body{
                                 background-color: #E2E2E2;
                                 border-radius: 7px;
 
-                                svg {
+                                img {
                                     border-radius: 50%;
                                 }
                             }
@@ -197,10 +197,10 @@ body{
 
             .pagination {
                 @include flex(center, center);
-                position: fixed;
-                bottom: 50px;
-                left: 50%;
-                transform: translateX(-25%);
+                // position: fixed;
+                // bottom: 50px;
+                // left: 50%;
+                // transform: translateX(-25%);
                 background-color: $pr_white_color;
                 gap: 10px;
 

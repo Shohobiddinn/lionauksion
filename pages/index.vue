@@ -321,7 +321,7 @@
               </div>
             </div>
             <div class="pagination">
-              <div class="pagination_icon">
+              <div class="pagination_icon" @click="pageDown">
                 <svg
                   width="24"
                   height="24"
@@ -338,10 +338,15 @@
                   />
                 </svg>
               </div>
-              <div class="pagination_count" v-for="p in 5" :key="p">
+              <div
+                class="pagination_count"
+                v-for="p in products?.totalPages"
+                :key="p"
+                @click="pageApi(p)"
+              >
                 {{ p }}
               </div>
-              <div class="pagination_icon">
+              <div class="pagination_icon" @click="pageUpDown">
                 <svg
                   width="24"
                   height="24"
@@ -369,6 +374,7 @@
 const { locale } = useI18n();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const filterModal = ref(false);
+const page = ref(0);
 function func() {
   document.getElementsByName("filter").forEach((el) => {
     if (el.checked) {
@@ -397,13 +403,32 @@ async function productApi() {
       "Accept-Language": locale.value,
     },
     params: {
-      page: 0,
+      page: page.value,
       size: 10,
     },
   });
   products.value = data;
 }
 productApi();
+function pageDown() {
+  if (page.value !== 0) {
+    page.value--;
+    productApi();
+  }
+}
+function pageUpDown() {
+  if (products.value.totalPages - 1 > page.value) {
+    page.value++;
+    productApi();
+    console.log("hello");
+  } else {
+    console.log("bug");
+  }
+}
+function pageApi(p) {
+  page.value = p - 1;
+  productApi();
+}
 async function productDelete(e) {
   const data = await $fetch(baseUrl + `/product/${e}`, {
     method: "DELETE",
