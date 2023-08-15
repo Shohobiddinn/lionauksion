@@ -5,7 +5,7 @@
 
     .container {
         .information {
-            margin-left: 300px;
+            margin-left: 600px;
             @include flex(flex-start, flex-start);
             gap: 150px;
 
@@ -13,9 +13,10 @@
                 .info {
                     display: flex;
                     flex-direction: column;
+                    position: relative;
 
                     &_label {
-                        @include fond(400, 13);
+                        @include fond(400, 20);
                         color: $pr_black_color;
                         text-transform: capitalize;
                         margin-bottom: 10px;
@@ -26,8 +27,8 @@
                         color: $pr_black_color;
                         outline: none;
                         background: none;
-                        width: 300px;
-                        height: 43px;
+                        width: 600px;
+                        height: 53px;
                         border-radius: 5px;
                         border: none;
                         background: $pr_white_color;
@@ -41,40 +42,65 @@
                         }
                     }
 
+                    &_icon {
+                        position: absolute;
+                        right: 10px;
+                        bottom: 25px;
+                        cursor: pointer;
+
+                        svg {
+                            width: 20px;
+                            height: 20px;
+
+                        }
+                    }
                 }
             }
-            &_image{
-                input{
+
+            &_image {
+                input {
                     display: none;
                 }
-                label{
+
+                label {
                     cursor: pointer;
-                    img{
+
+                    img {
                         margin-bottom: 40px;
                         width: 180px;
                         height: 210px;
                         object-fit: cover;
                         border-radius: 15px;
-                    
+
                     }
                 }
-                &_btns{
-                    @include flex(cover,space-between);
-                    .btn{
-                        @include fond(400,15);
+
+                &_btns {
+                    @include flex(cover, space-between);
+
+                    .btn {
+                        @include fond(400, 15);
                         color: $pr_black_color;
                         text-transform: capitalize;
                         padding: 5px 10px;
                         border-radius: 8px;
                         background-color: $pr_white_color;
                         cursor: pointer;
-                        &.btn_exit:hover{
+
+                        &.btn_exit_link {
                             background-color: red;
                             color: $pr_white_color;
                         }
-                        &.btn_save:hover{
+
+                        &.btn_exit_link:hover {
+                            filter: invert(0.1);
+                        }
+                        &.btn_save{
                             background-color: $pr_blue_color;
                             color: $pr_white_color;
+                        }
+                        &.btn_save:hover {
+                          filter: invert(0.1);
                         }
                     }
                 }
