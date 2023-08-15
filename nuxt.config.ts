@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   css: ['maz-ui/css/main.css', "~/assets/scss/main.scss",],
   modules: [
     '@nuxtjs/i18n',
+    '@pinia/nuxt'
   ],
   i18n: {
     lazy: true,

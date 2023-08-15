@@ -1,6 +1,7 @@
 <template>
   <div>
     <NuxtLayout/>
+    <!-- <load/>  -->
   </div>
 </template>
 <script setup>
