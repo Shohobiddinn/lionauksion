@@ -24,11 +24,11 @@
                   @click="(contentModal = false), (bgModal = false)"
                 ></div>
                 <div class="info">
-                  <label for="c-1">kategoriya nomini kiriting UZ</label>
+                  <label for="c-1">Prototip kiriting UZ</label>
                   <input type="text" id="c-1" v-model="fatherAddUz" />
                 </div>
                 <div class="info">
-                  <label for="c-2">kategoriya nomini kiriting RU</label>
+                  <label for="c-2">Prototip kiriting RU</label>
                   <input type="text" id="c-2" v-model="fatherAddRu" />
                 </div>
                 <div class="add_btn" @click="categoryFatherAddApi">
@@ -78,11 +78,11 @@
                   @click="(titleModal = false), (bgModal = false)"
                 ></div>
                 <div class="info">
-                  <label for="c-1">kategoriya nomini kiriting UZ</label>
+                  <label for="c-1">hususiyatni kiriting UZ</label>
                   <input type="text" id="c-1" v-model="childAddUz" />
                 </div>
                 <div class="info">
-                  <label for="c-2">kategoriya nomini kiriting RU</label>
+                  <label for="c-2">hususiyatni kiriting RU</label>
                   <input type="text" id="c-2" v-model="childAddRu" />
                 </div>
                 <div class="add_btn" @click="categoryChildAddApi">yuborish</div>
@@ -117,6 +117,7 @@
 <script setup>
 const bgModal = ref(false);
 const baseUrl = useRuntimeConfig().public.baseUrl;
+const { locale } = useI18n();
 const contentModal = ref(false);
 const titleModal = ref(false);
 const categoryFather = ref(null);
@@ -138,7 +139,7 @@ categoryFatherApi();
 const categoryChild = ref(null);
 const categoryId = ref(null);
 const protatype = ref();
-const { locale } = useI18n();
+
 async function categoryChildApi(e, event) {
   protatype.value.forEach((el) => {
     if (el == event.target) {
