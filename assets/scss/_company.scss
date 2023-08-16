@@ -1,6 +1,7 @@
-body{
+body {
     background-color: $pr_bg_color;
 }
+
 .company_page {
     background-color: $pr_bg_color;
     padding-top: 60px;
@@ -11,20 +12,22 @@ body{
 
             &_top {
                 @include flex (center, space-between);
-                margin-top: 25px;
+          
                 margin-bottom: 35px;
 
                 &_add {
+                    margin-left: auto;
+                    margin-right: 20px;
+
                     &_link {
                         @include fond(400, 15);
-                        color: $pr_black_color;
+                        color: $pr_white_color;
                         padding: 5px 10px;
                         border-radius: 5px;
-                        background-color: $pr_white_color;
+                        background-color: $pr_blue_color;
 
                         &:hover {
-                            background-color: $pr_blue_color;
-                            color: $pr_white_color;
+                            filter: invert(0.1);
                         }
                     }
                 }

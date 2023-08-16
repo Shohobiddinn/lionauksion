@@ -6,7 +6,7 @@
       <div class="container">
         <div class="add_info">
           <div class="product_add">
-            <pre>{{ produyctList }}</pre>
+            <!-- <pre>{{ categoryChild }}</pre> -->
             <div class="product_add_father">
               <div class="selected" :class="{ active: selectModal }">
                 <div
@@ -151,23 +151,24 @@
               <div class="product_add_child_contents">
                 <div
                   class="info"
-                  v-for="child in categoryChild"
+                  v-for="child in produyctList?.details"
                   :key="child?.id"
                 >
                   <label class="info_label" :for="`child-${child?.id}`">{{
-                    child?.name
+                    child?.categoryDetailName
                   }}</label>
                   <input
                     ref="input"
+                    :value="child?.value"
                     class="info_input"
                     type="text"
                     :id="`child-${child?.id}`"
                   />
                 </div>
               </div>
-              <div class="submit_icons" v-if="categoryChild">
+              <div class="submit_icons" >
                 <div class="submit_icons_btn exit">Orqaga</div>
-                <div class="submit_icons_btn send" @click="tekshiruv">
+                <div class="submit_icons_btn send" @click="productEditApi">
                   yuborish
                 </div>
               </div>
@@ -182,6 +183,7 @@
     <script setup>
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const route = useRoute();
+const router = useRouter()
 const { locale } = useI18n();
 const { id } = route.params;
 const selectModal = ref(false);
@@ -204,7 +206,7 @@ async function currensyApi() {
 function currensyChildApi(e) {
   currensyModal.value = false;
   currencyId.value = e.id;
-  currensyTitle.value = e.nameUz;
+  currensyTitle.value = e.name;
 }
 currensyApi();
 const categoryFatherInfo = ref(null);
@@ -243,44 +245,6 @@ async function categoryChildApi(e) {
   });
   categoryChild.value = data;
 }
-
-const ndsInput = ref(false);
-const deliveryInput = ref(false);
-const productDate = ref(null);
-const min = ref(null);
-const max = ref(null);
-const price = ref(null);
-const textarea = ref();
-function tekshiruv() {
-  console.log(id);
-}
-async function productAddApi() {
-  const arr = [];
-  input.value.forEach((elem, i) => {
-    arr.push({
-      categoryDetailId: categoryChild.value[i].id,
-      value: elem.value,
-    });
-  });
-  const data = await $fetch(baseUrl + "/product", {
-    method: "POST",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-    body: JSON.stringify({
-      description: textarea.value,
-      price: price.value,
-      hasDelivery: deliveryInput.value,
-      hasNds: ndsInput.value,
-      currencyId: currencyId.value,
-      categoryId: categoryFatherId.value,
-      maxAmount: max.value,
-      minAmount: min.value,
-      supplierId: 6,
-      details: arr,
-    }),
-  });
-}
 const produyctList = ref(null);
 async function productListApi() {
   const data = await $fetch(baseUrl + `/product/${id}`, {
@@ -296,9 +260,70 @@ async function productListApi() {
   productDate.value.value = data?.factoryDate;
   min.value = data?.minAmount;
   max.value = data?.maxAmount;
-
-};
+  textarea.value = data?.description;
+  currensyTitle.value = data?.currencyName + " " + data?.currencySymbol;
+  ndsInput.value = data?.hasNds;
+  deliveryInput.value = data?.hasDelivery
+  categoryFatherId.value = data?.categoryId;
+  currencyId.value = data?.currencyId
+}
 productListApi();
+async function getCategoryApi(){
+  const data = await $fetch(baseUrl + "/category-detail/all", {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("userToken"),
+      "Accept-Language": locale.value,
+    },
+    params: {
+      categoryId: categoryFatherId.value,
+    },
+  });
+  categoryChild.value = data;
+};
+getCategoryApi();
+const ndsInput = ref(false);
+const deliveryInput = ref(false);
+const productDate = ref(null);
+const min = ref(null);
+const max = ref(null);
+const price = ref(null);
+const textarea = ref();
+async function productEditApi() {
+  const arr = [];
+  input.value.forEach((elem, i) => {
+    arr.push({
+      categoryDetailId: categoryChild.value[i].id,
+      value: elem.value,
+    });
+  });
+  const data = await $fetch(baseUrl + "/product", {
+    method: "PUT",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("userToken"),
+    },
+    body: JSON.stringify({
+      id: id,
+      description: textarea.value,
+      price: price.value,
+      hasDelivery: deliveryInput.value,
+      hasNds: ndsInput.value,
+      currencyId: currencyId.value,
+      categoryId: categoryFatherId.value,
+      maxAmount: max.value,
+      minAmount: min.value,
+      factoryDate:productDate.value.value,
+      supplierId: localStorage.getItem("userSupplierId"),
+      details: arr,
+    }),
+  });
+  if(data?.message == "ok"){
+    console.log("hello");
+    router.push("/")
+  }else{
+    console.log("bug");
+  }
+}
 </script>
   
     <style lang="scss" scoped>

@@ -182,6 +182,7 @@
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const selectModal = ref(false);
 const currensyModal = ref(false);
+const router = useRouter();
 const currensyTitle = ref("valyuta turi");
 const currensy = ref(null);
 const currencyId = ref(null);
@@ -273,6 +274,12 @@ async function productAddApi() {
       details: arr,
     }),
   });
+  if(data?.message == "ok"){
+
+    router.push("/  ")
+  }else{
+ 
+  }
 }
 </script>
 

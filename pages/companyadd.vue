@@ -80,7 +80,7 @@
                 <NuxtLink class="btn_exit_link btn" to="/company">
                   oraga
                 </NuxtLink>
-            </div>
+              </div>
               <div class="btn_save btn" @click="companyApi">yuborish</div>
             </div>
           </div>
@@ -121,19 +121,27 @@ async function companyApi() {
         password: password.value,
       }),
     });
-    
-    if (!data.error) {
+
+    // if (!data.error) {
+    //   router.push("/company");
+    //   console.log("hello");
+    // } else {
+    //   // alert("error");
+    //   lo
+    // }
+    if (data?.message == "ok") {
       router.push("/company");
+      console.log("hello");
     } else {
-      alert("error");
+      console.log("bug");
     }
   }
 }
 function inputType() {
-  if(inputTypeInfo.value.type == "password"){
-    inputTypeInfo.value.type = "text"
-  }else{
-    inputTypeInfo.value.type = "password"
+  if (inputTypeInfo.value.type == "password") {
+    inputTypeInfo.value.type = "text";
+  } else {
+    inputTypeInfo.value.type = "password";
   }
 }
 onMounted(() => {
@@ -143,7 +151,6 @@ onMounted(() => {
   };
   var mask = new IMask(phone.value, maskOptions);
 });
-
 </script>
 
 <style lang="scss" scoped>
