@@ -33,9 +33,8 @@
                   class="info_input"
                   type="text"
                   placeholder="telefon raqami"
-                  ref="tel"
+                  ref="phone"
                   id="com_name"
-                  v-model="phone"
                 />
               </div>
               <div class="info">
@@ -118,7 +117,7 @@
         body: JSON.stringify({
           name: companyName.value,
           director: fullName.value,
-          phone: phone.value,
+          phone: phone.value.value,
           userFullName: fullName.value,
           username: username.value,
           password: password.value,
@@ -145,7 +144,7 @@
       mask: "+{998}(00) 000-00-00",
       lazy: false,
     };
-    var mask = new IMask(tel.value, maskOptions);
+    var mask = new IMask(phone.value, maskOptions);
   });
   </script>
   
