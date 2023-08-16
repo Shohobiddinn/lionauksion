@@ -119,7 +119,7 @@
                     :key="c?.id"
                     @click="currensyChildApi(c)"
                   >
-                    {{ c?.nameUz }}
+                    {{ c?.name }}    {{ c?.symbol }}
                   </div>
                 </div>
               </div>
@@ -186,11 +186,8 @@ const currensyTitle = ref("valyuta turi");
 const currensy = ref(null);
 const currencyId = ref(null);
 async function currensyApi() {
-  const data = await $fetch(baseUrl + "/currency-type/all", {
+  const data = await $fetch(baseUrl + "/currency/all", {
     method: "GET",
-    params: {
-      companyId: localStorage.getItem("userId"),
-    },
     headers: {
       Authorization: "Bearer " + localStorage.getItem("userToken"),
     },
@@ -200,8 +197,8 @@ async function currensyApi() {
 function currensyChildApi(e) {
   currensyModal.value = false;
   currencyId.value = e.id;
-  currensyTitle.value = e.nameUz
-}
+  currensyTitle.value = e.name + " " + e.symbol
+ }
 currensyApi();
 const categoryFatherInfo = ref(null);
 async function categoryFatherApi() {

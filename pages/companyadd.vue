@@ -82,7 +82,7 @@
                   oraga
                 </NuxtLink>
             </div>
-              <div class="btn_save btn" @click="companyApi">yuborish</div>
+              <div class="btn_save btn" @click="tekshiruv">yuborish</div>
             </div>
           </div>
         </div>
@@ -147,6 +147,10 @@ onMounted(() => {
   };
   var mask = new IMask(tel.value, maskOptions);
 });
+
+function tekshiruv(){
+  console.log(phone.value.replace(/\D/g, ""));
+}
 </script>
 
 <style lang="scss" scoped>
