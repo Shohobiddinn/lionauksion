@@ -33,9 +33,8 @@
                 class="info_input"
                 type="text"
                 placeholder="telefon raqami"
-                ref="tel"
+                ref="phone"
                 id="com_name"
-                v-model="phone"
               />
             </div>
             <div class="info">
@@ -82,7 +81,7 @@
                   oraga
                 </NuxtLink>
             </div>
-              <div class="btn_save btn" @click="tekshiruv">yuborish</div>
+              <div class="btn_save btn" @click="companyApi">yuborish</div>
             </div>
           </div>
         </div>
@@ -118,7 +117,7 @@ async function companyApi() {
       body: JSON.stringify({
         name: companyName.value,
         director: fullName.value,
-        phone: phone.value,
+        phone: phone.value.value,
         userFullName: fullName.value,
         username: username.value,
         password: password.value,
@@ -143,14 +142,16 @@ function inputType() {
 onMounted(() => {
   var maskOptions = {
     mask: "+{998}(00) 000-00-00",
-    lazy: false,
+    lazy: true,
   };
-  var mask = new IMask(tel.value, maskOptions);
+  var mask = new IMask(phone.value, maskOptions);
 });
 
-function tekshiruv(){
-  console.log(phone.value.replace(/\D/g, ""));
-}
+// function tekshiruv(){
+//   // console.log(tel.value.value.replace(/\D/g, ""));
+
+// console.log(phone.value.value);
+// }
 </script>
 
 <style lang="scss" scoped>
