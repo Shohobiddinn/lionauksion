@@ -9,11 +9,10 @@
             .product_add {
                 @include flex(flex-start, space-between);
                 background-color: $pr_white_color;
-                border: 2px solid $sc_blue_color;
                 border-radius: 20px;
                 padding: 50px;
-                // height: 90vh;
                 gap: 50px;
+                height: 100%;
 
                 &_father {
                     width: 50%;
@@ -112,11 +111,6 @@
                         &_input {
                             width: 15px;
                             height: 15px;
-
-                            &[type='checkbox'] {
-                                background-color: red;
-                                color: red;
-                            }
                         }
 
                         ;
@@ -243,11 +237,13 @@
                     padding: 20px;
                     background-color: $pr_bg_color;
                     border-radius: 20px;
+                    height: 100%;
 
                     &_contents {
-                        height: 700px;
+                        height: 755px;
                         overflow-y: auto;
                         margin-bottom: 50px;
+
                         &::-webkit-scrollbar {
                             display: none;
                         }
@@ -256,6 +252,7 @@
                             @include flex(flex-start, flex-start);
                             flex-direction: column;
                             margin-bottom: 10px;
+
                             &_label {
                                 @include fond(400, 15);
                                 color: $pr_black_color;
@@ -295,10 +292,12 @@
                             border-radius: 5px;
                             cursor: pointer;
                             text-transform: capitalize;
-                            &.exit:hover{
+
+                            &.exit:hover {
                                 background-color: red;
                             }
-                            &.send:hover{
+
+                            &.send:hover {
                                 background-color: $sc_blue_color;
                             }
                         }
