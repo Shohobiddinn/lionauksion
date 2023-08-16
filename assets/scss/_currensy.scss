@@ -255,6 +255,7 @@
                         }
                     }
                 }
+
                 .currensy_edit_modal {
                     position: fixed;
                     top: 50%;
@@ -305,7 +306,8 @@
                         @include flex(flex-start, flex-start);
                         flex-direction: column;
                         gap: 15px;
-                        margin-bottom: 20px;
+                        // margin-bottom: 20px;
+                        margin-bottom: 230px;
 
                         &_label {
                             @include fond(500, 20);
@@ -328,7 +330,6 @@
                     .selected {
                         width: 100%;
                         position: relative;
-                        margin-bottom: 230px;
 
                         &_option {
                             @include flex(center, space-between);

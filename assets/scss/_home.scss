@@ -1,3 +1,73 @@
+.header {
+    .container {
+        .content {
+            padding: 5px 20px;
+            border: 3px solid $pr_black_color;
+            display: inline-block;
+            position: fixed;
+            right: 20px;
+            top: 50px;
+            border-radius: 10px;
+            transform: scale(0);
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            box-shadow: 0 5px 5px $pr_black_color;
+            background-color: $pr_white_color;
+            width: 300px;
+
+            &.active {
+                transform: scale(1);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            &_close {
+                width: 20px;
+                height: 20px;
+                margin-bottom: 10px;
+                position: relative;
+                cursor: pointer;
+                margin-left: auto;
+
+                &:hover {
+
+                    &::after,
+                    &::before {
+                        background-color: red;
+                    }
+                }
+
+                &::after,
+                &::before {
+                    content: "";
+                    position: absolute;
+                    width: 3px;
+                    height: 18px;
+                    background-color: $pr_black_color;
+                    border-radius: 3px
+                }
+
+                &::after {
+                    rotate: 45deg;
+                }
+
+                &::before {
+                    rotate: -45deg;
+                }
+            }
+
+            &_title {
+                @include flex(flex-start, flex-start);
+                flex-direction: column;
+                gap: 10px;
+                @include fond(600, 20);
+                color: green;
+            }
+        }
+    }
+}
+
 nav {
     background-color: $pr_blue_color;
     height: 60px;
@@ -231,8 +301,9 @@ body {
                                 cursor: pointer;
                                 background-color: $pr_blue_color;
                                 color: $pr_white_color;
+
                                 &:hover {
-                                 filter: invert(0.1);
+                                    filter: invert(0.1);
                                 }
                             }
                         }
@@ -351,7 +422,8 @@ body {
                         @include fond(600, 15);
                         color: $pr_black_color;
                         text-transform: capitalize;
-                        width: 100px;   
+                        width: 100px;
+
                         &:nth-child(2) {
                             width: 200px;
                         }
@@ -416,9 +488,11 @@ body {
                             &_title {
                                 @include fond(400, 15);
                                 color: $pr_black_color ;
+
                                 &.icon {
                                     cursor: pointer;
-                                    svg{
+
+                                    svg {
                                         width: 25px;
                                         height: 25px;
                                     }

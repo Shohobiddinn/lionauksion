@@ -42,7 +42,7 @@
               <div class="currensy_title">{{ c?.currencyValueInUzs }}</div>
               <div class="currensy_title">{{ c?.modifiedDate }}</div>
               <div class="currensy_title">
-                <div class="currensy_title_icon" @click="edit(c?.id)">
+                <div class="currensy_title_icon" @click="edit(c)">
                   <svg
                     width="25"
                     height="25"
@@ -141,7 +141,7 @@
                   id="cur-1"
                 />
               </div>
-              <div class="selected">
+             <div class="selected">
                 <div class="selected" :class="{ active: selectModal }">
                   <div
                     class="selected_option"
@@ -174,7 +174,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> 
               <div class="currensy_modal_send" @click="currensyEditSubmit">
                 <div class="currensy_modal_send_btn">yuborish</div>
               </div>
@@ -247,13 +247,15 @@ async function currensySubmit() {
     console.log(data);
   }
 }
+const currensyEditInfo = ref("");
 const editoerId = ref("");
 function edit(c) {
   currensyEditModal.value = true;
   bgmodol.value = true;
-  editoerId.value = c;
+  editoerId.value = c?.id;
+  currensyEditInfo.value = c?.currencyTypeId;
+  console.log(c?.currencyTypeId);
 }
-const currensyEditInfo = ref("");
 async function currensyEditSubmit() {
   const data = await $fetch(baseUrl + "/currency", {
     method: "PUT",
