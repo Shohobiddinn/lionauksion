@@ -97,9 +97,7 @@ const username = ref("");
 const password = ref("");
 const companyName = ref("");
 const phone = ref("");
-const tel = ref();
 const inputTypeInfo = ref(null);
-const atvet = ref(null);
 const router = useRouter();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 async function companyApi() {
@@ -123,8 +121,7 @@ async function companyApi() {
         password: password.value,
       }),
     });
-    console.log(data);
-    //   atvet.value = data;
+    
     if (!data.error) {
       router.push("/company");
     } else {
@@ -147,11 +144,6 @@ onMounted(() => {
   var mask = new IMask(phone.value, maskOptions);
 });
 
-// function tekshiruv(){
-//   // console.log(tel.value.value.replace(/\D/g, ""));
-
-// console.log(phone.value.value);
-// }
 </script>
 
 <style lang="scss" scoped>
