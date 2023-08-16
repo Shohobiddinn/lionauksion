@@ -2,7 +2,7 @@
   <div>
     <Head>
         <Title>LionPrint</Title>
-        <Link rel="icon" href="./public/squarelogo.svg" type="image/x-icon" sizes="16x16" />
+        <Link rel="icon" href="`/public/favicon.ico" type="image/x-icon" sizes="16x16" />
     </Head>
     <NuxtLayout/>
     <load/> 

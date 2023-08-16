@@ -269,9 +269,10 @@ async function productAddApi() {
       hasNds: ndsInput.value,
       currencyId: currencyId.value,
       categoryId: categoryFatherId.value,
+      factoryDate:productDate.value.value,
       maxAmount: max.value,
       minAmount: min.value,
-      supplierId: 6,
+      supplierId: localStorage.getItem("userSupplierId"),
       details: arr,
     }),
   });
