@@ -81,7 +81,7 @@
                     oraga
                   </NuxtLink>
               </div>
-                <div class="btn_save btn" @click="companyApi">yuborish</div>
+                <div class="btn_save btn" @click="suplierApi">yuborish</div>
               </div>
             </div>
           </div>
@@ -102,7 +102,7 @@
   const atvet = ref(null);
   const router = useRouter();
   const baseUrl = useRuntimeConfig().public.baseUrl;
-  async function companyApi() {
+  async function suplierApi() {
     if (
       !companyName.value == "" &&
       !fullName.value == "" &&
@@ -124,11 +124,10 @@
         }),
       });
       console.log(data);
-      //   atvet.value = data;
-      if (!data.error) {
+      if (data.message == "ok") {
         router.push("/supplier");
       } else {
-        alert("error");
+        
       }
     }
   }

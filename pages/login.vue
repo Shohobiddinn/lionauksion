@@ -69,7 +69,6 @@ async function loginApi() {
     localStorage.setItem("role",res?.user?.roles?.[0]?.name)
   }
   login.value = res;
-  console.log(res?.user?.roles?.[0].name);
 }
 function passeye() {
   if (password.value.type == "password") {
@@ -78,9 +77,7 @@ function passeye() {
     password.value.type = "password";
   }
 };
-// async function login() {
-  
-// }
+
 </script>
 
 <style lang="scss" scoped>

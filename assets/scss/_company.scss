@@ -12,7 +12,7 @@ body {
 
             &_top {
                 @include flex (center, space-between);
-          
+
                 margin-bottom: 35px;
 
                 &_add {
@@ -178,6 +178,14 @@ body {
                                 }
                             }
 
+                            &_icon {
+                                svg {
+                                    width: 25px;
+                                    height: 25px;
+                                    cursor: pointer;
+                                }
+                            }
+
                             &.lock {
                                 cursor: pointer;
                             }
@@ -190,9 +198,9 @@ body {
                                 width: 50px;
                             }
 
-                            &:nth-child(5) {
-                                width: 50px;
-                            }
+                            // &:nth-child(5) {
+                            //     width: 50px;
+                            // }
                         }
                     }
                 }

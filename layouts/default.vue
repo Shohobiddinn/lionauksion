@@ -112,49 +112,47 @@
 
 <script setup>
 const role = localStorage.getItem("role");
-const productPage = ref(false);
-const companyPage  = ref(false);
-const currensyPage = ref(false);
-const currensyTypePage = ref(false);
-const supplierPage = ref(false);
-const productAddPage = ref(false);
-onMounted(()=>{
-  if(role == "ROLE_ADMIN"){
-    productPage.value = true;
-    companyPage.value = true;
-    currensyPage.value = true;
-    currensyTypePage.value = true;
-    supplierPage.value = true;
-    productAddPage.value = true;
-  }
-  if(role == "ROLE_SUPPLIER_ADMIN"){
-    productPage.value = true;
-    companyPage.value = false;
-    currensyPage.value = true;
-    currensyTypePage.value = false;
-    supplierPage.value = false;
-    productAddPage.value = false;
-  }
-  if(role == "ROLE_COMPANY_ADMIN"){
-    productPage.value = true;
-    companyPage.value = false;
-    currensyPage.value = true;
-    currensyTypePage.value = false;
-    supplierPage.value = true;
-    productAddPage.value = true;
-  };
-  if(role == "ROLE_COMPANY_MANAGER"){
-    productPage.value = true;
-    companyPage.value = false;
-    currensyPage.value = true;
-    currensyTypePage.value = false;
-    supplierPage.value = true;
-    productAddPage.value = true;
-  };
-})
-function tekshiruv(){
-  console.log(role);
-}
+const productPage = ref(true);
+const companyPage  = ref(true);
+const currensyPage = ref(true);
+const currensyTypePage = ref(true);
+const supplierPage = ref(true);
+const productAddPage = ref(true);
+// onMounted(()=>{
+//   if(role == "ROLE_ADMIN"){
+//     productPage.value = true;
+//     companyPage.value = true;
+//     currensyPage.value = true;
+//     currensyTypePage.value = true;
+//     supplierPage.value = true;
+//     productAddPage.value = true;
+//   }
+//   if(role == "ROLE_SUPPLIER_ADMIN"){
+//     productPage.value = true;
+//     companyPage.value = false;
+//     currensyPage.value = true;
+//     currensyTypePage.value = false;
+//     supplierPage.value = false;
+//     productAddPage.value = false;
+//   }
+//   if(role == "ROLE_COMPANY_ADMIN"){
+//     productPage.value = true;
+//     companyPage.value = false;
+//     currensyPage.value = false;
+//     currensyTypePage.value = false;
+//     supplierPage.value = true;
+//     productAddPage.value = true;
+//   };
+//   if(role == "ROLE_COMPANY_MANAGER"){
+//     productPage.value = true;
+//     companyPage.value = false;
+//     currensyPage.value = true;
+//     currensyTypePage.value = false;
+//     supplierPage.value = true;
+//     productAddPage.value = true;
+//   };
+// })
+
 </script>
 
 <style lang="scss" scoped>
