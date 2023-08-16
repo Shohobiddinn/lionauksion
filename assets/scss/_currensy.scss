@@ -324,13 +324,14 @@
                             padding: 2px 20px;
                             @include fond(500, 16);
                             color: $pr_black_color;
+                   
                         }
                     }
 
                     .selected {
                         width: 100%;
                         position: relative;
-
+                        margin-bottom: 230px;
                         &_option {
                             @include flex(center, space-between);
                             border: 1px solid $pr_blue_color;
@@ -415,7 +416,7 @@
                         border-radius: 10px;
                         padding: 3px 20px;
                         cursor: pointer;
-
+                  
                         &_btn {
                             @include fond(600, 20);
                             color: $pr_white_color;

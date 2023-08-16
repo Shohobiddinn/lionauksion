@@ -64,10 +64,12 @@ async function loginApi() {
     router.push("/");
     localStorage.setItem("userToken",res.accessToken);
     localStorage.setItem("userId",res.user.id);
-    localStorage.setItem("userSupplierId",res?.user.supplierId);
-    localStorage.setItem("userCompanyId".res?.user.companyId);
+    localStorage.setItem("userSupplierId",res?.user?.supplierId);
+    localStorage.setItem("userCompanyId",res?.user?.companyId);
+    localStorage.setItem("role",res?.user?.roles?.[0]?.name)
   }
   login.value = res;
+  console.log(res?.user?.roles?.[0].name);
 }
 function passeye() {
   if (password.value.type == "password") {

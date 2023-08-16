@@ -57,7 +57,7 @@
                 <div class="menu_content_title_link_text">tovar qo'shish</div>
               </NuxtLink>
             </div>
-            <div class="menu_content_title">
+            <!-- <div class="menu_content_title">
               <NuxtLink class="menu_content_title_link" to="/">
                 <div class="menu_content_title_link_icon">
                   <svg
@@ -101,7 +101,7 @@
                 </div>
                 <div class="menu_content_title_link_text">report</div>
               </NuxtLink>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
