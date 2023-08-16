@@ -125,6 +125,7 @@ async function categoryFatherApi() {
     method: "GET",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("userToken"),
+      "Accept-Language": locale.value,
     },
     params: {
       page: 0,
