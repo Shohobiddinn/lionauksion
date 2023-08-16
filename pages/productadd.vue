@@ -119,7 +119,7 @@
                     :key="c?.id"
                     @click="currensyChildApi(c)"
                   >
-                    {{ c?.name }}    {{ c?.symbol }}
+                    {{ c?.name }} {{ c?.symbol }}
                   </div>
                 </div>
               </div>
@@ -186,6 +186,7 @@ const router = useRouter();
 const currensyTitle = ref("valyuta turi");
 const currensy = ref(null);
 const currencyId = ref(null);
+const { locale } = useI18n();
 async function currensyApi() {
   const data = await $fetch(baseUrl + "/currency/all", {
     method: "GET",
@@ -198,8 +199,8 @@ async function currensyApi() {
 function currensyChildApi(e) {
   currensyModal.value = false;
   currencyId.value = e.id;
-  currensyTitle.value = e.name + " " + e.symbol
- }
+  currensyTitle.value = e.name + " " + e.symbol;
+}
 currensyApi();
 const categoryFatherInfo = ref(null);
 async function categoryFatherApi() {
@@ -259,6 +260,7 @@ async function productAddApi() {
     method: "POST",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("userToken"),
+      "Accept-Language": locale.value,
     },
     body: JSON.stringify({
       description: textarea.value,
@@ -267,18 +269,16 @@ async function productAddApi() {
       hasNds: ndsInput.value,
       currencyId: currencyId.value,
       categoryId: categoryFatherId.value,
-      factoryDate:productDate.value.value,
+      factoryDate: productDate.value.value,
       maxAmount: max.value,
       minAmount: min.value,
       supplierId: localStorage.getItem("userSupplierId"),
       details: arr,
     }),
   });
-  if(data?.message == "ok"){
-
-    router.push("/  ")
-  }else{
- 
+  if (data?.message == "ok") {
+    router.push("/  ");
+  } else {
   }
 }
 </script>

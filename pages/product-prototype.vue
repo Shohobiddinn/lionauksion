@@ -12,7 +12,7 @@
               >
                 <div class="protatype_content_add_content_icon"></div>
                 <div class="protatype_content_add_content_title">
-                  tovar kategorya qo'shish
+                  Prototip qo'shish
                 </div>
               </div>
               <div
@@ -25,21 +25,11 @@
                 ></div>
                 <div class="info">
                   <label for="c-1">kategoriya nomini kiriting UZ</label>
-                  <input
-                    type="text"
-                    id="c-1"
-                    placeholder="kategoriya nomini kiriting UZ"
-                    v-model="fatherAddUz"
-                  />
+                  <input type="text" id="c-1" v-model="fatherAddUz" />
                 </div>
                 <div class="info">
                   <label for="c-2">kategoriya nomini kiriting RU</label>
-                  <input
-                    type="text"
-                    id="c-2"
-                    placeholder="kategoriya nomini kiriting RU"
-                    v-model="fatherAddRu"
-                  />
+                  <input type="text" id="c-2" v-model="fatherAddRu" />
                 </div>
                 <div class="add_btn" @click="categoryFatherAddApi">
                   yuborish
@@ -76,7 +66,7 @@
               >
                 <div class="protatype_title_add_content_icon"></div>
                 <div class="protatype_title_add_content_title">
-                  tovar kategorya qo'shish
+                  hususiyat qo'shish
                 </div>
               </div>
               <div
@@ -89,21 +79,11 @@
                 ></div>
                 <div class="info">
                   <label for="c-1">kategoriya nomini kiriting UZ</label>
-                  <input
-                    type="text"
-                    id="c-1"
-                    placeholder="kategoriya nomini kiriting UZ"
-                    v-model="childAddUz"
-                  />
+                  <input type="text" id="c-1" v-model="childAddUz" />
                 </div>
                 <div class="info">
                   <label for="c-2">kategoriya nomini kiriting RU</label>
-                  <input
-                    type="text"
-                    id="c-2"
-                    placeholder="kategoriya nomini kiriting RU"
-                    v-model="childAddRu"
-                  />
+                  <input type="text" id="c-2" v-model="childAddRu" />
                 </div>
                 <div class="add_btn" @click="categoryChildAddApi">yuborish</div>
               </div>
@@ -157,11 +137,11 @@ categoryFatherApi();
 const categoryChild = ref(null);
 const categoryId = ref(null);
 const protatype = ref();
+const { locale } = useI18n();
 async function categoryChildApi(e, event) {
   protatype.value.forEach((el) => {
     if (el == event.target) {
       el.classList.add("active");
-      console.log(el);
     } else {
       el.classList.remove("active");
     }
@@ -170,6 +150,7 @@ async function categoryChildApi(e, event) {
     method: "GET",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("userToken"),
+      "Accept-Language": locale.value,
     },
     params: {
       categoryId: e,
@@ -180,7 +161,6 @@ async function categoryChildApi(e, event) {
   protatype.value.forEach((el) => {
     if (el == event.target) {
       el.classList.add("active");
-      console.log(el);
     } else {
       el.classList.remove("active");
     }
@@ -193,12 +173,19 @@ async function categoryFatherAddApi() {
     method: "POST",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("userToken"),
+      "Accept-Language": locale.value,
     },
     body: JSON.stringify({
       nameUz: fatherAddUz.value,
       nameRu: fatherAddRu.value,
     }),
   });
+  if (data?.message == "ok") {
+    bgModal.value = false;
+    contentModal.value = false;
+    categoryFatherApi();
+  } else {
+  }
 }
 const childAddUz = ref("");
 const childAddRu = ref("");
@@ -207,6 +194,7 @@ async function categoryChildAddApi() {
     method: "POST",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("userToken"),
+      "Accept-Language": locale.value,
     },
     body: JSON.stringify({
       nameUz: childAddUz.value,
@@ -214,8 +202,17 @@ async function categoryChildAddApi() {
       categoryId: categoryId.value,
     }),
   });
-  console.log(data);
+  if (data?.message == "ok") {
+    bgModal.value = false;
+    titleModal.value = false;
+    categoryFatherApi();
+  } else {
+  }
 }
+function tekshiruv(){
+  console.log(locale.value);
+}
+tekshiruv()
 </script>
 
 <style lang="scss" scoped>
