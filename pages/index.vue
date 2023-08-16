@@ -338,6 +338,8 @@ async function productApi() {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("userToken"),
       "Accept-Language": locale.value,
+      companyId: localStorage.getItem("userCompanyId"),
+      supplierId:localStorage.getItem("userSupplierId")
     },
     params: {
       page: page.value,

@@ -8,7 +8,6 @@
               <img src="@/assets/image/logo.png" alt="" />
             </NuxtLink>
           </div>
-          <!-- <button @click="tekshiruv">tekshiruv</button> -->
           <div class="menu_content">
             <div class="menu_content_title" v-if="productPage">
               <NuxtLink class="menu_content_title_link" to="/">
@@ -120,7 +119,6 @@ const currensyTypePage = ref(false);
 const supplierPage = ref(false);
 const productAddPage = ref(false);
 onMounted(()=>{
-  console.log(role);
   if(role == "ROLE_ADMIN"){
     productPage.value = true;
     companyPage.value = true;
