@@ -6,7 +6,7 @@
           <div class="information">
             <div class="information_inputs">
               <div class="info">
-                <label class="info_label" for="com_name">taminotchi nomi</label>
+                <label class="info_label" for="com_name">kompaniya nomi</label>
                 <input
                   class="info_input"
                   type="text"
@@ -16,7 +16,7 @@
               </div>
               <div class="info">
                 <label class="info_label" for="com_leader"
-                  >taminot rahbari F.I.O</label
+                  >kompaniya rahbari F.I.O</label
                 >
                 <input
                   class="info_input"
@@ -28,11 +28,11 @@
               <div class="info">
                 <label class="info_label" for="com_name">telefon raqami</label>
                 <input
-                  class="info_input"
-                  type="text"
-                  ref="phone"
-                  id="com_name"
-                />
+                    class="info_input"
+                    type="text"
+                    ref="phone"
+                    id="com_name"
+                  />
               </div>
               <div class="info">
                 <label class="info_label" for="start_date">login</label>
@@ -74,11 +74,11 @@
               /></label> -->
               <div class="information_image_btns">
                 <div class="btn_exit btn">
-                  <NuxtLink class="btn_exit_link btn" to="/supplier">
+                  <NuxtLink class="btn_exit_link btn" to="/company">
                     oraga
                   </NuxtLink>
-              </div>
-                <div class="btn_save btn" @click="suplierApi">yuborish</div>
+                </div>
+                <div class="btn_save btn" @click="companyApi">yuborish</div>
               </div>
             </div>
           </div>
@@ -94,19 +94,17 @@
   const password = ref("");
   const companyName = ref("");
   const phone = ref("");
-  const tel = ref();
   const inputTypeInfo = ref(null);
-  const atvet = ref(null);
   const router = useRouter();
   const baseUrl = useRuntimeConfig().public.baseUrl;
-  async function suplierApi() {
+  async function companyApi() {
     if (
       !companyName.value == "" &&
       !fullName.value == "" &&
       !password.value == "" &&
       !username.value == ""
     ) {
-      const data = await $fetch(baseUrl + "/supplier", {
+      const data = await $fetch(baseUrl + "/company", {
         method: "POST",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("userToken"),
@@ -120,25 +118,33 @@
           password: password.value,
         }),
       });
-      console.log(data);
-      if (data.message == "ok") {
-        router.push("/supplier");
+  
+      // if (!data.error) {
+      //   router.push("/company");
+      //   console.log("hello");
+      // } else {
+      //   // alert("error");
+      //   lo
+      // }
+      if (data?.message == "ok") {
+        router.push("/company");
+        console.log("hello");
       } else {
-        
+        console.log("bug");
       }
     }
   }
   function inputType() {
-    if(inputTypeInfo.value.type == "password"){
-      inputTypeInfo.value.type = "text"
-    }else{
-      inputTypeInfo.value.type = "password"
+    if (inputTypeInfo.value.type == "password") {
+      inputTypeInfo.value.type = "text";
+    } else {
+      inputTypeInfo.value.type = "password";
     }
   }
   onMounted(() => {
     var maskOptions = {
       mask: "+{998}(00) 000-00-00",
-      lazy: false,
+      lazy: true,
     };
     var mask = new IMask(phone.value, maskOptions);
   });

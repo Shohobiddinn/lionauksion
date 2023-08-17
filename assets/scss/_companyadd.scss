@@ -6,8 +6,13 @@
     .container {
         .information {
             margin-left: 600px;
-            @include flex(flex-start, flex-start);
+            width: 640px;
+            @include flex(space-between, space-between);
+            flex-direction: column;
             gap: 150px;
+            background-color: $pr_white_color;
+            padding: 20px;
+            border-radius: 10px;
 
             &_inputs {
                 .info {
@@ -16,7 +21,7 @@
                     position: relative;
 
                     &_label {
-                        @include fond(400, 20);
+                        @include fond(400, 18);
                         color: $pr_black_color;
                         text-transform: capitalize;
                         margin-bottom: 10px;
@@ -34,6 +39,7 @@
                         background: $pr_white_color;
                         padding: 0 10px;
                         margin-bottom: 10px;
+                        background-color:$pr_bg_color;
 
                         &::placeholder {
                             @include fond(400, 13);
@@ -82,8 +88,8 @@
                         @include fond(400, 15);
                         color: $pr_black_color;
                         text-transform: capitalize;
-                        padding: 5px 10px;
-                        border-radius: 8px;
+                        padding: 5px 20px;
+                        border-radius: 5px;
                         background-color: $pr_white_color;
                         cursor: pointer;
 
@@ -95,12 +101,14 @@
                         &.btn_exit_link:hover {
                             filter: invert(0.1);
                         }
-                        &.btn_save{
+
+                        &.btn_save {
                             background-color: $pr_blue_color;
                             color: $pr_white_color;
                         }
+
                         &.btn_save:hover {
-                          filter: invert(0.1);
+                            filter: invert(0.1);
                         }
                     }
                 }

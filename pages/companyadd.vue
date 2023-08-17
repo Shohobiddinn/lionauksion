@@ -10,7 +10,6 @@
               <input
                 class="info_input"
                 type="text"
-                placeholder="kompaniya nomi"
                 id="com_name"
                 v-model="companyName"
               />
@@ -22,7 +21,6 @@
               <input
                 class="info_input"
                 type="text"
-                placeholder="kompaniya rahbari F.I.O"
                 id="com_leader"
                 v-model="fullName"
               />
@@ -30,12 +28,11 @@
             <div class="info">
               <label class="info_label" for="com_name">telefon raqami</label>
               <input
-                class="info_input"
-                type="text"
-                placeholder="telefon raqami"
-                ref="phone"
-                id="com_name"
-              />
+                  class="info_input"
+                  type="text"
+                  ref="phone"
+                  id="com_name"
+                />
             </div>
             <div class="info">
               <label class="info_label" for="start_date">login</label>
@@ -71,10 +68,10 @@
             </div>
           </div>
           <div class="information_image">
-            <input type="file" id="file_input" @change="imgFunc($event)" />
+            <!-- <input type="file" id="file_input" @change="imgFunc($event)" />
             <label for="file_input"
               ><img id="uploadedImage" src="../assets/image/4211763.png" alt=""
-            /></label>
+            /></label> -->
             <div class="information_image_btns">
               <div class="btn_exit btn">
                 <NuxtLink class="btn_exit_link btn" to="/company">
