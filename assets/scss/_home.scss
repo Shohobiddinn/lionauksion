@@ -56,6 +56,10 @@
                     &.content {
                         @include fond(400, 12);
                         color: $pr_black_color;
+                        overflow: hidden;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 1;
+                        -webkit-box-orient: vertical;
                     }
                 }
             }
@@ -139,6 +143,10 @@
                     &.text {
                         @include fond(400, 12);
                         color: $pr_black_color;
+                        overflow: hidden;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 1;
+                        -webkit-box-orient: vertical;
                     }
                 }
             }

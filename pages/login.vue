@@ -57,7 +57,6 @@ definePageMeta({
 function setFunction() {
   setTimeout(() => {
     store.errorMessage = false;
-    console.log("Delayed for 1 second.");
   }, 3000);
 }
 const router = useRouter();

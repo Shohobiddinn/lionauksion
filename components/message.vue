@@ -19,7 +19,7 @@
         <div class="content_messages">
           <div class="content_messages_title">Success</div>
           <div class="content_messages_title text">
-            <slot> Biron bir hatolik </slot>
+            <slot>Hammasi joyida </slot>
           </div>
         </div>
         <div class="content_border_close"></div>
@@ -33,9 +33,6 @@
 const submit = ref(true);
 import { useStore } from '~~/store/store';
 const store = useStore();
-function tek() {
-  store.message = true;
-}
 </script>
 
 <style lang="scss" scoped>

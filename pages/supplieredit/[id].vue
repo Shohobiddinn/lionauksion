@@ -1,6 +1,15 @@
 <template>
   <div>
-    <!-- <div class="bg"></div> -->
+    <message>
+      <slot>
+        {{ message }}
+      </slot>
+    </message>
+    <errormessage>
+      <slot>
+        {{ errorMessage }}
+      </slot>
+    </errormessage>
     <div class="companyadd_page">
       <div class="container">
         <div class="information">
@@ -83,6 +92,16 @@
 </template>
   
   <script setup>
+import { useStore } from "~/store/store";
+const store = useStore();
+function setFunction() {
+  setTimeout(() => {
+    store.errorMessage = false;
+    store.message = false;
+  }, 3000);
+}
+const errorMessage = ref("");
+const message = ref("");
 import IMask from "imask";
 const fullName = ref("");
 const username = ref("");
@@ -96,36 +115,49 @@ const inputTypeInfo = ref(null);
 const router = useRouter();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 async function suplierPutApi() {
-  if (
-    !companyName.value == "" &&
-    !fullName.value == "" &&
-    !password.value == "" &&
-    !username.value == ""
-  ) {
-    const data = await $fetch(baseUrl + "/supplier", {
-      method: "PUT",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("userToken"),
-        "Accept-Language": locale.value,
-      },
-      body: JSON.stringify({
-        id: id,
-        name: companyName.value,
-        director: fullName.value,
-        phone: phone.value.value,
-        userFullName: fullName.value,
-        username: username.value,
-        password: password.value,
-      }),
-    });
-    if (data.message == "ok") {
-      router.push("/supplier");
-    } else {
+  try {
+    if (
+      !companyName.value == "" &&
+      !fullName.value == "" &&
+      !password.value == "" &&
+      !username.value == ""
+    ) {
+      store.loader = true;
+      const data = await $fetch(baseUrl + "/supplier", {
+        method: "PUT",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("userToken"),
+          "Accept-Language": locale.value,
+        },
+        body: JSON.stringify({
+          id: id,
+          name: companyName.value,
+          director: fullName.value,
+          phone: phone.value.value,
+          userFullName: fullName.value,
+          username: username.value,
+          password: password.value,
+        }),
+      });
+      if (data.message == "ok") {
+        store.loader = false;
+        store.message = true;
+        setFunction();
+        message.value = data.message;
+        router.push("/supplier");
+      } else {
+      }
     }
+  } catch (error) {
+    store.loader = false;
+    store.errorMessage = false;
+    setFunction();
+    errorMessage.value = error.response._data.message;
   }
 }
 const suplierOne = ref(null);
 async function supplierOneApi() {
+  store.loader = true;
   const data = await $fetch(baseUrl + `/supplier/${id}`, {
     method: "GET",
     headers: {
@@ -140,6 +172,7 @@ async function supplierOneApi() {
   fullName.value = data?.userFullName;
   username.value = data?.username;
   password.value = data?.password;
+  store.loader = false;
 }
 supplierOneApi();
 function inputType() {

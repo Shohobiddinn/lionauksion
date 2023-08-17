@@ -1,6 +1,16 @@
 <template>
   <div>
     <bgmodal v-if="bgModal" />
+    <message>
+      <slot>
+        {{ message }}
+      </slot>
+    </message>
+    <errormessage>
+      <slot>
+        {{ errorMessage }}
+      </slot>
+    </errormessage>
     <div class="product_prototype_page">
       <div class="container">
         <div class="protatype">
@@ -24,11 +34,11 @@
                   @click="(contentModal = false), (bgModal = false)"
                 ></div>
                 <div class="info">
-                  <label for="c-1">Prototip kiriting UZ</label>
+                  <label for="c-1">Prototip UZ</label>
                   <input type="text" id="c-1" v-model="fatherAddUz" />
                 </div>
                 <div class="info">
-                  <label for="c-2">Prototip kiriting RU</label>
+                  <label for="c-2">Prototip RU</label>
                   <input type="text" id="c-2" v-model="fatherAddRu" />
                 </div>
                 <div class="add_btn" @click="categoryFatherAddApi">
@@ -94,11 +104,11 @@
                   @click="(titleModal = false), (bgModal = false)"
                 ></div>
                 <div class="info">
-                  <label for="c-1">hususiyatni kiriting UZ</label>
+                  <label for="c-1">hususiyatni UZ</label>
                   <input type="text" id="c-1" v-model="childAddUz" />
                 </div>
                 <div class="info">
-                  <label for="c-2">hususiyatni kiriting RU</label>
+                  <label for="c-2">hususiyatni RU</label>
                   <input type="text" id="c-2" v-model="childAddRu" />
                 </div>
                 <div class="add_btn" @click="categoryChildAddApi">yuborish</div>
@@ -110,7 +120,10 @@
               :key="p"
             >
               <div class="protatype_title_content_name">{{ p?.name }}</div>
-              <div class="protatype_title_content_icon delete" @click="childProtitipDelete(p?.id)">
+              <div
+                class="protatype_title_content_icon delete"
+                @click="childProtitipDelete(p?.id)"
+              >
                 <svg
                   width="25"
                   height="25"
@@ -132,6 +145,19 @@
 </template>
 
 <script setup>
+import { useToast } from "vue-toastification";
+import { useStore } from "~/store/store";
+const toast = useToast();
+
+const store = useStore();
+function setFunction() {
+  setTimeout(() => {
+    store.errorMessage = false;
+    store.message = false;
+  }, 3000);
+}
+const errorMessage = ref("");
+const message = ref("");
 const bgModal = ref(false);
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const { locale } = useI18n();
@@ -139,6 +165,7 @@ const contentModal = ref(false);
 const titleModal = ref(false);
 const categoryFather = ref(null);
 async function categoryFatherApi() {
+  store.loader = true;
   const data = await $fetch(baseUrl + "/category", {
     method: "GET",
     headers: {
@@ -151,6 +178,7 @@ async function categoryFatherApi() {
     },
   });
   categoryFather.value = data;
+  store.loader = false;
 }
 categoryFatherApi();
 const categoryChild = ref(null);
@@ -158,6 +186,7 @@ const categoryId = ref(null);
 const protatype = ref();
 
 async function categoryChildApi(e, event) {
+  store.loader = true;
   protatype.value.forEach((el) => {
     if (el == event.target) {
       el.classList.add("active");
@@ -184,48 +213,99 @@ async function categoryChildApi(e, event) {
       el.classList.remove("active");
     }
   });
+  store.loader = false;
 }
 const fatherAddUz = ref("");
 const fatherAddRu = ref("");
 async function categoryFatherAddApi() {
-  const data = await $fetch(baseUrl + "/category", {
-    method: "POST",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-      "Accept-Language": locale.value,
-    },
-    body: JSON.stringify({
-      nameUz: fatherAddUz.value,
-      nameRu: fatherAddRu.value,
-    }),
-  });
-  if (data?.message == "ok") {
-    bgModal.value = false;
-    contentModal.value = false;
-    categoryFatherApi();
-  } else {
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + "/category", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+      body: JSON.stringify({
+        nameUz: fatherAddUz.value,
+        nameRu: fatherAddRu.value,
+      }),
+    });
+    if (data?.message == "ok") {
+      toast.success("Success", {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
+      categoryFatherApi();
+      bgModal.value = false;
+      contentModal.value = false;
+      store.loader = false;
+      message.value = data?.message;
+      // setFunction();
+    } else {
+    }
+  } catch (error) {
+    store.loader = false;
+    // store.errorMessage = true;
+    toast.error("Error", {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
+    setFunction();
+    // errorMessage.value = error.response._data.message;
   }
 }
 const childAddUz = ref("");
 const childAddRu = ref("");
 async function categoryChildAddApi() {
-  const data = await $fetch(baseUrl + "/category-detail", {
-    method: "POST",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-      "Accept-Language": locale.value,
-    },
-    body: JSON.stringify({
-      nameUz: childAddUz.value,
-      nameRu: childAddRu.value,
-      categoryId: categoryId.value,
-    }),
-  });
-  if (data?.message == "ok") {
-    bgModal.value = false;
-    titleModal.value = false;
-    categoryFatherApi();
-  } else {
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + "/category-detail", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+      body: JSON.stringify({
+        nameUz: childAddUz.value,
+        nameRu: childAddRu.value,
+        categoryId: categoryId.value,
+      }),
+    });
+    if (data?.message == "ok") {
+      bgModal.value = false;
+      titleModal.value = false;
+      store.loader = false;
+      store.message = true;
+      setFunction();
+      categoryFatherApi();
+    } else {
+    }
+  } catch (error) {
+    store.loader = false;
+    store.errorMessage = true;
+    setFunction();
+    errorMessage.value = error.response._data.message;
   }
 }
 // function tekshiruv() {
@@ -233,24 +313,59 @@ async function categoryChildAddApi() {
 // }
 // tekshiruv();
 async function fatherProtitipDelete(p) {
-  const data = await $fetch(baseUrl + `/category/${p}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-  });
-  categoryFatherApi();
+  try {
+    const data = await $fetch(baseUrl + `/category/${p}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+      },
+    });
+    if (data?.message == "ok") {
+      bgModal.value = false;
+      titleModal.value = false;
+      store.loader = false;
+      store.message = true;
+      setFunction();
+      categoryFatherApi();
+    } else {
+    }
+    categoryFatherApi();
+  } catch (error) {
+    store.loader = false;
+    store.errorMessage = true;
+    setFunction();
+    errorMessage.value = error.response._data.message;
+  }
 }
 async function childProtitipDelete(p) {
-  const data = await $fetch(baseUrl + `/category-detail/${p}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-  });
-  console.log(p);
+  try {
+    const data = await $fetch(baseUrl + `/category-detail/${p}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+      },
+    });
+    if (data?.message == "ok") {
+      bgModal.value = false;
+      titleModal.value = false;
+      store.loader = false;
+      store.message = true;
+      setFunction();
+      categoryFatherApi();
+    } else {
+    }
+  } catch (error) {
+    store.loader = false;
+    store.errorMessage = true;
+    setFunction();
+    errorMessage.value = error.response._data.message;
+    console.log(error.response._data.message);
+  }
 }
 categoryFatherApi();
+onMounted(() => {
+  store.message = true;
+});
 </script>
 
 <style lang="scss" scoped>

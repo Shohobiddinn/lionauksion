@@ -1,5 +1,10 @@
 <template>
   <div>
+    <errormessage>
+    
+    </errormessage>
+    <message>
+    </message>
     <div class="company_page">
       <div class="container">
         <div class="company_info">
@@ -121,7 +126,9 @@
             <div class="company_info_bottom_top">
               <div class="company_info_bottom_top_title logotip">logotip</div>
               <div class="company_info_bottom_top_title">taminotchi nomi</div>
-              <div class="company_info_bottom_top_title">taminotchi rahbari</div>
+              <div class="company_info_bottom_top_title">
+                taminotchi rahbari
+              </div>
               <div class="company_info_bottom_top_title">taminotchi raqami</div>
               <div class="company_info_bottom_top_title">
                 taminotchini bloklash
@@ -187,7 +194,10 @@
                       </svg>
                     </NuxtLink>
                   </div>
-                  <div class="company_title_icon" @click="supplierDelete(c?.id)">
+                  <div
+                    class="company_title_icon"
+                    @click="supplierDelete(c?.id)"
+                  >
                     <svg
                       width="25"
                       height="25"
@@ -260,7 +270,11 @@ const filterModal = ref(false);
 const lock = ref(false);
 const suplier = ref(null);
 const page = ref(0);
+
+import { useStore } from "~~/store/store";
+const store = useStore();
 async function suplierApi() {
+  store.loader = true;
   const data = await $fetch(baseUrl + "/supplier", {
     method: "GET",
     params: {
@@ -272,6 +286,7 @@ async function suplierApi() {
     },
   });
   suplier.value = data;
+  store.loader = false;
 }
 suplierApi();
 function pageDown() {
@@ -344,6 +359,7 @@ async function supplierDelete(e) {
 }
 const searchInfo = ref();
 async function search() {
+  store.loader = true;
   const data = await $fetch(baseUrl + "/user", {
     method: "GET",
     headers: {
@@ -363,6 +379,7 @@ async function search() {
     },
   });
   suplier.value = data;
+  store.loader = false;
 }
 </script>
   

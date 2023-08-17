@@ -1,7 +1,15 @@
 <template>
   <div>
-    <!-- <div class="bg"></div> -->
-
+    <errormessage>
+      <slot>
+        {{ errorMessage }}
+      </slot>
+    </errormessage>
+    <message>
+      <slot>
+        {{ message }}
+      </slot>
+    </message>
     <div class="add_page">
       <div class="container">
         <div class="add_info">
@@ -180,14 +188,26 @@
   
   <script setup>
 const baseUrl = useRuntimeConfig().public.baseUrl;
+
+import { useStore } from "~~/store/store";
+const store = useStore();
 const selectModal = ref(false);
 const currensyModal = ref(false);
 const router = useRouter();
 const currensyTitle = ref("valyuta turi");
 const currensy = ref(null);
 const currencyId = ref(null);
+const errorMessage = ref("");
+const message = ref("");
+function setFunction() {
+  setTimeout(() => {
+    store.errorMessage = false;
+    store.message = false;
+  }, 3000);
+}
 const { locale } = useI18n();
 async function currensyApi() {
+  store.loader = true;
   const data = await $fetch(baseUrl + "/currency/all", {
     method: "GET",
     headers: {
@@ -195,6 +215,7 @@ async function currensyApi() {
     },
   });
   currensy.value = data;
+  store.loader = false;
 }
 function currensyChildApi(e) {
   currensyModal.value = false;
@@ -204,6 +225,7 @@ function currensyChildApi(e) {
 currensyApi();
 const categoryFatherInfo = ref(null);
 async function categoryFatherApi() {
+  store.loader = true;
   const data = await $fetch(baseUrl + "/category", {
     method: "GET",
     headers: {
@@ -215,6 +237,7 @@ async function categoryFatherApi() {
     },
   });
   categoryFatherInfo.value = data;
+  store.loader = false;
 }
 const input = ref(null);
 
@@ -223,9 +246,11 @@ const inputFatherTitle = ref("mahsulotlar katalogi");
 const categoryChild = ref(null);
 const categoryFatherId = ref(null);
 async function categoryChildApi(e) {
+  store.value = true;
   selectModal.value = false;
   categoryFatherId.value = e.id;
   inputFatherTitle.value = e.name;
+
   const data = await $fetch(baseUrl + "/category-detail/all", {
     method: "GET",
     headers: {
@@ -236,6 +261,7 @@ async function categoryChildApi(e) {
     },
   });
   categoryChild.value = data;
+  store.loader = false;
 }
 const ndsInput = ref(false);
 const deliveryInput = ref(false);
@@ -245,36 +271,46 @@ const max = ref(null);
 const price = ref(null);
 const textarea = ref();
 async function productAddApi() {
-  const arr = [];
-  input.value.forEach((elem, i) => {
-    arr.push({
-      categoryDetailId: categoryChild.value[i].id,
-      value: elem.value,
+  try {
+    store.loader = true;
+    const arr = [];
+    input.value.forEach((elem, i) => {
+      arr.push({
+        categoryDetailId: categoryChild.value[i].id,
+        value: elem.value,
+      });
     });
-  });
-  const data = await $fetch(baseUrl + "/product", {
-    method: "POST",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-      "Accept-Language": locale.value,
-    },
-    body: JSON.stringify({
-      description: textarea.value,
-      price: price.value,
-      hasDelivery: deliveryInput.value,
-      hasNds: ndsInput.value,
-      currencyId: currencyId.value,
-      categoryId: categoryFatherId.value,
-      factoryDate: productDate.value.value,
-      maxAmount: max.value,
-      minAmount: min.value,
-      supplierId: localStorage.getItem("userSupplierId"),
-      details: arr,
-    }),
-  });
-  if (data?.message == "ok") {
-    router.push("/");
-  } else {
+    const data = await $fetch(baseUrl + "/product", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+      body: JSON.stringify({
+        description: textarea.value,
+        price: price.value,
+        hasDelivery: deliveryInput.value,
+        hasNds: ndsInput.value,
+        currencyId: currencyId.value,
+        categoryId: categoryFatherId.value,
+        factoryDate: productDate.value.value,
+        maxAmount: max.value,
+        minAmount: min.value,
+        supplierId: localStorage.getItem("userSupplierId"),
+        details: arr,
+      }),
+    });
+    if (data?.message == "ok") {
+      router.push("/");
+    } else {
+    }
+    console.log(data);
+  } catch (error) {
+    store.loader = false;
+    store.errorMessage = true;
+    errorMessage.value = error.response._data.message;
+    setFunction();
+    console.log(error.response._data.message);
   }
 }
 </script>
