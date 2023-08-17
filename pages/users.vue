@@ -304,6 +304,7 @@ function pageApi(p) {
   userApi();
 }
 async function userIsBlocked(e) {
+  if(localStorage.getItem("userSupplierId") !== ""){
   const data = await $fetch(baseUrl + `/supplier/block-user/${e.id}`, {
     method: "POST",
     headers: {
@@ -315,8 +316,22 @@ async function userIsBlocked(e) {
   });
 
   userApi();
+}else{
+  const data = await $fetch(baseUrl + `/company/block-user/${e.id}`, {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("userToken"),
+    },
+    params: {
+      isBlock: false,
+    },
+  });
+
+  userApi();
+}
 }
 async function userUnBlocked(e) {
+  if(localStorage.getItem("userSupplierId") !== ""){
   const data = await $fetch(baseUrl + `/supplier/block-user/${e.id}`, {
     method: "POST",
     headers: {
@@ -328,9 +343,22 @@ async function userUnBlocked(e) {
   });
 
   userApi();
+}else{
+  const data = await $fetch(baseUrl + `/company/block-user/${e.id}`, {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("userToken"),
+    },
+    params: {
+      isBlock: true,
+    },
+  });
+
+  userApi();
+}
 }
 async function userDelete(e) {
-  console.log(e);
+  if(localStorage.getItem("userSupplierId") !== ""){
   const data = await $fetch(baseUrl + `/supplier/delete-user/${e}`, {
     method: "POST",
     headers: {
@@ -341,6 +369,18 @@ async function userDelete(e) {
     userApi();
   } else {
   }
+}else{
+  const data = await $fetch(baseUrl + `/company/delete-user/${e}`, {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("userToken"),
+    },
+  });
+  if (data.message == "ok") {
+    userApi();
+  } else {
+  }
+}
 }
 const searchInfo = ref();
 async function search() {
