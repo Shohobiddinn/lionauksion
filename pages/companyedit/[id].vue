@@ -6,7 +6,7 @@
           <div class="information">
             <div class="information_inputs">
               <div class="info">
-                <label class="info_label" for="com_name">kompaniya nomi</label>
+                <label class="info_label" for="com_name">taminotchi nomi</label>
                 <input
                   class="info_input"
                   type="text"
@@ -16,7 +16,7 @@
               </div>
               <div class="info">
                 <label class="info_label" for="com_leader"
-                  >kompaniya rahbari F.I.O</label
+                  >taminot rahbari F.I.O</label
                 >
                 <input
                   class="info_input"
@@ -27,12 +27,7 @@
               </div>
               <div class="info">
                 <label class="info_label" for="com_name">telefon raqami</label>
-                <input
-                    class="info_input"
-                    type="text"
-                    ref="phone"
-                    id="com_name"
-                  />
+                <input class="info_input" type="text" ref="phone" id="com_name" />
               </div>
               <div class="info">
                 <label class="info_label" for="start_date">login</label>
@@ -69,16 +64,16 @@
             </div>
             <div class="information_image">
               <!-- <input type="file" id="file_input" @change="imgFunc($event)" />
-              <label for="file_input"
-                ><img id="uploadedImage" src="../assets/image/4211763.png" alt=""
-              /></label> -->
+                <label for="file_input"
+                  ><img id="uploadedImage" src="../assets/image/4211763.png" alt=""
+                /></label> -->
               <div class="information_image_btns">
                 <div class="btn_exit btn">
                   <NuxtLink class="btn_exit_link btn" to="/company">
                     oraga
                   </NuxtLink>
                 </div>
-                <div class="btn_save btn" @click="companyApi">yuborish</div>
+                <div class="btn_save btn" @click="companyPutApi">yuborish</div>
               </div>
             </div>
           </div>
@@ -86,18 +81,21 @@
       </div>
     </div>
   </template>
-  
-  <script setup>
+    
+    <script setup>
   import IMask from "imask";
   const fullName = ref("");
   const username = ref("");
   const password = ref("");
   const companyName = ref("");
+  const route = useRoute();
+  const { id } = route.params;
+  const { locale } = useI18n();
   const phone = ref("");
   const inputTypeInfo = ref(null);
   const router = useRouter();
   const baseUrl = useRuntimeConfig().public.baseUrl;
-  async function companyApi() {
+  async function companyPutApi() {
     if (
       !companyName.value == "" &&
       !fullName.value == "" &&
@@ -105,11 +103,13 @@
       !username.value == ""
     ) {
       const data = await $fetch(baseUrl + "/company", {
-        method: "POST",
+        method: "PUT",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("userToken"),
+          "Accept-Language": locale.value,
         },
         body: JSON.stringify({
+          id: id,
           name: companyName.value,
           director: fullName.value,
           phone: phone.value.value,
@@ -118,22 +118,30 @@
           password: password.value,
         }),
       });
-  
-      // if (!data.error) {
-      //   router.push("/company");
-      //   console.log("hello");
-      // } else {
-      //   // alert("error");
-      //   lo
-      // }
-      if (data?.message == "ok") {
+      if (data.message == "ok") {
         router.push("/company");
-        console.log("hello");
       } else {
-        console.log("bug");
       }
     }
   }
+  const suplierOne = ref(null);
+  async function companyOneApi() {
+    const data = await $fetch(baseUrl + `/company/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+    });
+    suplierOne.value = data;
+    companyName.value = data?.name;
+    fullName.value = data?.director;
+    phone.value.value = data?.phone;
+    fullName.value = data?.userFullName;
+    username.value = data?.username;
+    password.value = data?.password;
+  }
+  companyOneApi();
   function inputType() {
     if (inputTypeInfo.value.type == "password") {
       inputTypeInfo.value.type = "text";
@@ -144,11 +152,11 @@
   onMounted(() => {
     var maskOptions = {
       mask: "+{998}(00) 000-00-00",
-      lazy: true,
+      lazy: false,
     };
     var mask = new IMask(phone.value, maskOptions);
   });
   </script>
-  
-  <style lang="scss" scoped>
-  </style>
+    
+    <style lang="scss" scoped>
+  </style>  
