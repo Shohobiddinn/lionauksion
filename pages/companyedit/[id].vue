@@ -6,7 +6,7 @@
           <div class="information">
             <div class="information_inputs">
               <div class="info">
-                <label class="info_label" for="com_name">taminotchi nomi</label>
+                <label class="info_label" for="com_name">kampaniya nomi</label>
                 <input
                   class="info_input"
                   type="text"

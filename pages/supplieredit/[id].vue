@@ -16,7 +16,7 @@
             </div>
             <div class="info">
               <label class="info_label" for="com_leader"
-                >taminot rahbari F.I.O</label
+                >taminotchi rahbari F.I.O</label
               >
               <input
                 class="info_input"
