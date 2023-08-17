@@ -130,7 +130,6 @@
               </div>
               <div class="company_info_bottom_top_title">boshqa</div>
             </div>
-            <pre>{{ user }}</pre>
             <div class="company_info_bottom_companys">
               <div class="company" v-for="c in user?.content" :key="c.id">
                 <div class="company_title">
