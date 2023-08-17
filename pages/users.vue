@@ -6,8 +6,12 @@
           <div class="company_info_top">
             <div class="search">
               <div class="form">
-                <input type="text" placeholder="Qidiruv.." />
-                <div class="form_icon">
+                <input
+                  type="text"
+                  placeholder="Qidiruv.."
+                  v-model="searchInfo"
+                />
+                <div class="form_icon" @click="search">
                   <svg
                     width="30"
                     height="31"
@@ -262,21 +266,25 @@ const filterModal = ref(false);
 const lock = ref(false);
 const user = ref(null);
 const page = ref(0);
+const { locale } = useI18n();
 async function userApi() {
   const data = await $fetch(baseUrl + "/user", {
-      method: "GET",
-      params: {
-        page: page.value,
-        size: 10,
-        companyId: localStorage.getItem("userCompanyId") ? localStorage.getItem("userCompanyId") : null,
-        supplierId: localStorage.getItem("userSupplierId") ? localStorage.getItem("userSupplierId") : null ,
-        
-      },
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("userToken"),
-      },
-    });
-    user.value = data;
+    method: "GET",
+    params: {
+      page: page.value,
+      size: 10,
+      companyId: localStorage.getItem("userCompanyId")
+        ? localStorage.getItem("userCompanyId")
+        : null,
+      supplierId: localStorage.getItem("userSupplierId")
+        ? localStorage.getItem("userSupplierId")
+        : null,
+    },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("userToken"),
+    },
+  });
+  user.value = data;
 }
 userApi();
 function pageDown() {
@@ -333,6 +341,28 @@ async function userDelete(e) {
     userApi();
   } else {
   }
+}
+const searchInfo = ref();
+async function search() {
+  const data = await $fetch(baseUrl + "/user", {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("userToken"),
+      "Accept-Language": locale.value,
+    },
+    params: {
+      page: page.value,
+      size: 10,
+      name: searchInfo.value,
+      companyId: localStorage.getItem("userCompanyId")
+        ? localStorage.getItem("userCompanyId")
+        : null,
+      supplierId: localStorage.getItem("userSupplierId")
+        ? localStorage.getItem("userSupplierId")
+        : null,
+    },
+  });
+  user.value = data;
 }
 </script>
   
