@@ -141,7 +141,7 @@
                   id="cur-1"
                 />
               </div>
-             <div class="selected">
+              <div class="selected">
                 <div class="selected" :class="{ active: selectModal }">
                   <div
                     class="selected_option"
@@ -174,7 +174,7 @@
                     </div>
                   </div>
                 </div>
-              </div> 
+              </div>
               <div class="currensy_modal_send" @click="currensyEditSubmit">
                 <div class="currensy_modal_send_btn">yuborish</div>
               </div>
@@ -187,6 +187,8 @@
 </template>
 
 <script setup>
+import { Exception } from "sass";
+
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const { locale } = useI18n();
 const currensy = ref(null);
@@ -201,10 +203,14 @@ async function currensyApi() {
       Authorization: "Bearer " + localStorage.getItem("userToken"),
       "Accept-Language": locale.value,
     },
-    params:{
-      companyId: localStorage.getItem("userCompanyId") ? localStorage.getItem("userCompanyId") : null,
-      supplierId: localStorage.getItem("userSupplierId")? localStorage.getItem("userSupplierId") : null,
-    }
+    params: {
+      companyId: localStorage.getItem("userCompanyId")
+        ? localStorage.getItem("userCompanyId")
+        : null,
+      supplierId: localStorage.getItem("userSupplierId")
+        ? localStorage.getItem("userSupplierId")
+        : null,
+    },
   });
   currensy.value = data;
 }
@@ -261,7 +267,8 @@ function edit(c) {
   console.log(c?.currencyTypeId);
 }
 async function currensyEditSubmit() {
-  const data = await $fetch(baseUrl + "/currency", {
+  try{
+    const data = await $fetch(baseUrl + "/currency", {
     method: "PUT",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("userToken"),
@@ -281,18 +288,33 @@ async function currensyEditSubmit() {
   } else {
     console.log(data);
   }
+  }catch (error){
+    // const response = error.response;
+    console.log(error.response.status);
+    if(error.response.status == 403){
+      console.log("bu sahifa siz uchun bloklangan");
+    }
+  }
+
 }
 async function currensyDelete(e) {
-  const data = await $fetch(baseUrl + `/currency/${e}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-  });
-  if (data.message == "ok") {
-    currensyApi();
-  } else {
-    console.log(data);
+  try {
+    console.log("work");
+    const data = await $fetch(baseUrl + `/currency/${e}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+      },
+    });
+    console.log("finish");
+    if (data.message == "ok") {
+      currensyApi();
+    } else {
+      console.log(data);
+    }
+  } catch (error) { 
+    const response = error.response;
+    console.log(error.response._data.status);
   }
 }
 </script>
