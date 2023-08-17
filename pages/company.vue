@@ -6,8 +6,12 @@
           <div class="company_info_top">
             <div class="search">
               <div class="form">
-                <input type="text" placeholder="Qidiruv.." />
-                <div class="form_icon">
+                <input
+                  type="text"
+                  placeholder="Qidiruv.."
+                  v-model="searchInfo"
+                />
+                <div class="form_icon" @click="search">
                   <svg
                     width="30"
                     height="31"
@@ -337,6 +341,28 @@ async function companyDelete(e) {
     companyApi();
   } else {
   }
+}
+const searchInfo = ref();
+async function search() {
+  const data = await $fetch(baseUrl + "/user", {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("userToken"),
+      "Accept-Language": locale.value,
+    },
+    params: {
+      page: page.value,
+      size: 10,
+      name: searchInfo.value,
+      companyId: localStorage.getItem("userCompanyId")
+        ? localStorage.getItem("userCompanyId")
+        : null,
+      supplierId: localStorage.getItem("userSupplierId")
+        ? localStorage.getItem("userSupplierId")
+        : null,
+    },
+  });
+  company.value = data;
 }
 </script>
   
