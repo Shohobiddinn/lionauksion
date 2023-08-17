@@ -64,9 +64,17 @@ async function loginApi() {
     router.push("/");
     localStorage.setItem("userToken",res.accessToken);
     localStorage.setItem("userId",res.user.id);
-    localStorage.setItem("userSupplierId",res?.user?.supplierId);
-    localStorage.setItem("userCompanyId",res?.user?.companyId);
     localStorage.setItem("role",res?.user?.roles?.[0]?.name)
+    if(res?.user?.supplierId !== null){
+      localStorage.setItem("userSupplierId",res?.user?.supplierId);
+    }else{
+        localStorage.setItem("userSupplierId","");
+    }
+    if(res?.user?.companyId !== null){
+      localStorage.setItem("userCompanyId",res?.user?.companyId);
+    }else{
+        localStorage.setItem("userCompanyId","");
+    }
   }
   login.value = res;
 }

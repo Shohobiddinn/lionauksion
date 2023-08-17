@@ -265,16 +265,19 @@ const user = ref(null);
 const page = ref(0);
 async function userApi() {
   const data = await $fetch(baseUrl + "/user", {
-    method: "GET",
-    params: {
-      page: page.value,
-      size: 10,
-    },
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-  });
-  user.value = data;
+      method: "GET",
+      params: {
+        page: page.value,
+        size: 10,
+        companyId: localStorage.getItem("userCompanyId") ? localStorage.getItem("userCompanyId") : null,
+        supplierId: localStorage.getItem("userSupplierId") ? localStorage.getItem("userSupplierId") : null ,
+        
+      },
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+      },
+    });
+    user.value = data;
 }
 userApi();
 function pageDown() {
@@ -294,8 +297,8 @@ function pageApi(p) {
   userApi();
 }
 async function userIsBlocked(e) {
-  const data = await $fetch(baseUrl + `/company/block-user/${e.id}`, {
-    method: "PUT",
+  const data = await $fetch(baseUrl + `/supplier/block-user/${e.id}`, {
+    method: "POST",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("userToken"),
     },
@@ -307,28 +310,22 @@ async function userIsBlocked(e) {
   userApi();
 }
 async function userUnBlocked(e) {
-  const data = await $fetch(baseUrl + "/user", {
-    method: "PUT",
+  const data = await $fetch(baseUrl + `/supplier/block-user/${e.id}`, {
+    method: "POST",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("userToken"),
     },
-    body: JSON.stringify({
-      id: e.id,
-      name: e.name,
-      director: e.director,
-      phone: e.phone,
-      isBlocked: true,
-      userFullName: e.userFullName,
-      username: e.username,
-      password: e.password,
-    }),
+    params: {
+      isBlock: true,
+    },
   });
+
   userApi();
 }
 async function userDelete(e) {
   console.log(e);
-  const data = await $fetch(baseUrl + `/user/${e}`, {
-    method: "DELETE",
+  const data = await $fetch(baseUrl + `/supplier/delete-user/${e}`, {
+    method: "POST",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("userToken"),
     },
