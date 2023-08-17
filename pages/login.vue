@@ -7,7 +7,7 @@
           <label for="input-1" class="login_modal_inputs_label"
             >foydalanuvchi nomi</label
           >
-          <input class="login_modal_inputs_input" placeholder="login" ref="username" type="text" />
+          <input class="login_modal_inputs_input" placeholder="login" ref="username" @keyup.enter="loginApi" type="text" />
         </div>
         <div class="login_modal_inputs">
           <label for="input-1" class="login_modal_inputs_label">parol</label>
