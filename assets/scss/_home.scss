@@ -1,20 +1,26 @@
 .header {
-    .container {
+
+        .button {
+            position: relative;
+            z-index: 5;
+        }
+
         .content {
-            padding: 5px 20px;
-            border: 3px solid $pr_black_color;
-            display: inline-block;
             position: fixed;
-            right: 20px;
-            top: 50px;
-            border-radius: 10px;
+            top: 200px;
+            right: 50px;
+            z-index: 5;
+            width: 350px;
+            height: 50px;
+            border-radius: 5px;
+            padding-right: 10px;
+            overflow: hidden;
+            background-color: $pr_white_color;
+            @include flex(center, flex-start);
             transform: scale(0);
             opacity: 0;
             visibility: hidden;
             transition: 0.3s;
-            box-shadow: 0 5px 5px $pr_black_color;
-            background-color: $pr_white_color;
-            width: 300px;
 
             &.active {
                 transform: scale(1);
@@ -22,50 +28,139 @@
                 visibility: visible;
             }
 
-            &_close {
-                width: 20px;
-                height: 20px;
-                margin-bottom: 10px;
-                position: relative;
-                cursor: pointer;
-                margin-left: auto;
+            &_left_border {
+                width: 7px;
+                height: 100%;
+                background-color: green;
+            }
 
-                &:hover {
+            &_icon {
+                margin-left: 20px;
 
-                    &::after,
-                    &::before {
-                        background-color: red;
-                    }
-                }
-
-                &::after,
-                &::before {
-                    content: "";
-                    position: absolute;
-                    width: 3px;
-                    height: 18px;
-                    background-color: $pr_black_color;
-                    border-radius: 3px
-                }
-
-                &::after {
-                    rotate: 45deg;
-                }
-
-                &::before {
-                    rotate: -45deg;
+                svg {
+                    width: 20px;
+                    height: 20px;
                 }
             }
 
-            &_title {
+            &_messages {
                 @include flex(flex-start, flex-start);
                 flex-direction: column;
-                gap: 10px;
-                @include fond(600, 20);
-                color: green;
+                gap: 1px;
+                margin-left: 20px;
+
+                &_title {
+                    @include fond(500, 15);
+                    color: $pr_black_color;
+
+                    &.content {
+                        @include fond(400, 12);
+                        color: $pr_black_color;
+                    }
+                }
+            }
+
+            &_border_close {
+                width: 2px;
+                height: 100%;
+                margin-left: 100px;
+                background-color: $pr_black_color;
+            }
+
+            &_close {
+                margin-left: auto;
+                @include fond(400, 16);
+                color: $pr_black_color;
+                text-transform: capitalize;
+                height: 100%;
+                @include flex(center, center);
+                cursor: pointer;
             }
         }
     }
+
+
+.header_error {
+   
+        .button {
+            position: relative;
+            z-index: 5;
+        }
+
+        .content {
+            position: fixed;
+            top: 200px;
+            right: 50px;
+            z-index: 5;
+            width: 350px;
+            height: 50px;
+            border-radius: 5px;
+            padding-right: 10px;
+            overflow: hidden;
+            background-color: $pr_white_color;
+            @include flex(center, flex-start);
+            transform: scale(0);
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+
+            &.active {
+                transform: scale(1);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            &_left_border {
+                width: 7px;
+                height: 100%;
+                background-color: red;
+            }
+
+            &_icon {
+                margin-left: 20px;
+
+                svg {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            &_messages {
+                @include flex(flex-start, flex-start);
+                flex-direction: column;
+                gap: 1px;
+                margin-left: 20px;
+
+                &_title {
+                    @include fond(500, 15);
+                    color: $pr_black_color;
+                    text-transform: capitalize;
+
+                    &.text {
+                        @include fond(400, 12);
+                        color: $pr_black_color;
+                    }
+                }
+            }
+
+            &_border_close {
+                width: 2px;
+                height: 100%;
+                margin-left: 100px;
+                background-color: $pr_black_color;
+            }
+
+            &_close {
+                margin-left: auto;
+                @include fond(400, 16);
+                color: $pr_black_color;
+                text-transform: capitalize;
+                height: 100%;
+                @include flex(center, center);
+                cursor: pointer;
+            }
+        }
+    
 }
 
 nav {
@@ -132,12 +227,14 @@ nav {
                             width: 230px;
 
                         }
-                        &.router-link-active{
-                            background-color: $hover_color; 
+
+                        &.router-link-active {
+                            background-color: $hover_color;
+
                             .menu_content_title_link::before {
                                 display: block;
                             }
-                          
+
                         }
                     }
 

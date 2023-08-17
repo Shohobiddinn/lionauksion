@@ -1,5 +1,8 @@
 <template>
   <div>
+    <errormessage>
+      <slot>{{ errorMessage }} </slot>
+    </errormessage>
     <div class="login">
       <div class="login_modal">
         <img src="../assets/image/logo.png" alt="logo" />
@@ -7,7 +10,13 @@
           <label for="input-1" class="login_modal_inputs_label"
             >foydalanuvchi nomi</label
           >
-          <input class="login_modal_inputs_input" placeholder="login" ref="username" @keyup.enter="loginApi" type="text" />
+          <input
+            class="login_modal_inputs_input"
+            placeholder="login"
+            ref="username"
+            @keyup.enter="loginApi"
+            type="text"
+          />
         </div>
         <div class="login_modal_inputs">
           <label for="input-1" class="login_modal_inputs_label">parol</label>
@@ -40,43 +49,62 @@
 </template>
 
 <script setup>
+import { useStore } from "~~/store/store";
+const store = useStore();
 definePageMeta({
   layout: "view",
 });
+function setFunction() {
+  setTimeout(() => {
+    store.errorMessage = false;
+    console.log("Delayed for 1 second.");
+  }, 3000);
+}
 const router = useRouter();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const login = ref(null);
 const username = ref("");
 const password = ref("");
+const errorMessage = ref("");
 async function loginApi() {
-  const data = await fetch(baseUrl + "/login", {
-    method: "POST",
-    body: new URLSearchParams({
-      username: username.value.value,
-      password: password.value.value,
-    }),
-  });
-  const res = await data.json();
-  console.log(res);
-  if (res.error) {
-    router.push("/login")
-  } else {
-    router.push("/");
-    localStorage.setItem("userToken",res.accessToken);
-    localStorage.setItem("userId",res.user.id);
-    localStorage.setItem("role",res?.user?.roles?.[0]?.name)
-    if(res?.user?.supplierId !== null){
-      localStorage.setItem("userSupplierId",res?.user?.supplierId);
-    }else{
-        localStorage.setItem("userSupplierId","");
+  try {
+    store.loader = true;
+    const data = await fetch(baseUrl + "/login", {
+      method: "POST",
+      body: new URLSearchParams({
+        username: username.value.value,
+        password: password.value.value,
+      }),
+    });
+    const res = await data.json();
+    store.loader = false;
+    console.log(res.message);
+    if (res.error) {
+      router.push("/login");
+      errorMessage.value = res.message;
+      store.errorMessage = true;
+      setFunction();
+    } else {
+      router.push("/");
+      localStorage.setItem("userToken", res.accessToken);
+      localStorage.setItem("userId", res.user.id);
+      localStorage.setItem("role", res?.user?.roles?.[0]?.name);
+      if (res?.user?.supplierId !== null) {
+        localStorage.setItem("userSupplierId", res?.user?.supplierId);
+      } else {
+        localStorage.setItem("userSupplierId", "");
+      }
+      if (res?.user?.companyId !== null) {
+        localStorage.setItem("userCompanyId", res?.user?.companyId);
+      } else {
+        localStorage.setItem("userCompanyId", "");
+      }
     }
-    if(res?.user?.companyId !== null){
-      localStorage.setItem("userCompanyId",res?.user?.companyId);
-    }else{
-        localStorage.setItem("userCompanyId","");
-    }
+    login.value = res;
+  } catch (error) {
+    const response = error.response;
+    console.log(response.data.message);
   }
-  login.value = res;
 }
 function passeye() {
   if (password.value.type == "password") {
@@ -84,8 +112,10 @@ function passeye() {
   } else {
     password.value.type = "password";
   }
-};
-
+}
+// onMounted(() => {
+//   store.message = true;
+// });
 </script>
 
 <style lang="scss" scoped>
