@@ -30,7 +30,7 @@
             </div>
             <div class="company_info_top_add">
               <NuxtLink class="company_info_top_add_link" to="/companyadd">
-                Taminotchi qo'shish
+                kampaniya qo'shish
               </NuxtLink>
             </div>
             <div class="company_filter" :class="{ active: filterModal }">

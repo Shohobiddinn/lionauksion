@@ -30,7 +30,7 @@
             </div>
             <div class="company_info_top_add">
               <NuxtLink class="company_info_top_add_link" to="/usersadd">
-                Taminotchi qo'shish
+                Foydalanuvchi qo'shish
               </NuxtLink>
             </div>
             <div class="company_filter" :class="{ active: filterModal }">
@@ -176,7 +176,7 @@
                 </div>
                 <div class="company_title">
                   <div class="company_title_icon">
-                    <NuxtLink :to="`/useredit/${c?.id}`">
+                    <NuxtLink :to="`/usersedit/${c?.id}`">
                       <svg
                         width="25"
                         height="25"
