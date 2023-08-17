@@ -122,17 +122,7 @@
             <div class="menu_content_title" v-if="userPage">
               <NuxtLink class="menu_content_title_link" to="/users">
                 <div class="menu_content_title_link_icon">
-                  <svg
-                    width="30"
-                    height="30"
-                    fill="white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 640 512"
-                  >
-                    <path
-                      d="M32 96c0-35.3 28.7-64 64-64H320c23.7 0 44.4 12.9 55.4 32h51.8c25.3 0 48.2 14.9 58.5 38l52.8 118.8c.5 1.1 .9 2.1 1.3 3.2H544c35.3 0 64 28.7 64 64v32c17.7 0 32 14.3 32 32s-14.3 32-32 32H576c0 53-43 96-96 96s-96-43-96-96H256c0 53-43 96-96 96s-96-43-96-96H32c-17.7 0-32-14.3-32-32s14.3-32 32-32V288c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32V96zM384 224h85.9l-42.7-96H384v96zM160 432a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm368-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0z"
-                    />
-                  </svg>
+                  <svg width="30" height="30" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z"/></svg>
                 </div>
                 <div class="menu_content_title_link_text">foydalanuvchilar</div>
               </NuxtLink>
@@ -192,47 +182,50 @@
 
 <script setup>
 const role = localStorage.getItem("role");
-const productPage = ref(true);
-const companyPage = ref(true);
-const currensyPage = ref(true);
-const currensyTypePage = ref(true);
-const supplierPage = ref(true);
-const productAddPage = ref(true);
-const userPage = ref(true);
-// onMounted(()=>{
-//   if(role == "ROLE_ADMIN"){
-//     productPage.value = true;
-//     companyPage.value = true;
-//     currensyPage.value = true;
-//     currensyTypePage.value = true;
-//     supplierPage.value = true;
-//     productAddPage.value = true;
-//   }
-//   if(role == "ROLE_SUPPLIER_ADMIN"){
-//     productPage.value = true;
-//     companyPage.value = false;
-//     currensyPage.value = true;
-//     currensyTypePage.value = false;
-//     supplierPage.value = false;
-//     productAddPage.value = false;
-//   }
-//   if(role == "ROLE_COMPANY_ADMIN"){
-//     productPage.value = true;
-//     companyPage.value = false;
-//     currensyPage.value = false;
-//     currensyTypePage.value = false;
-//     supplierPage.value = true;
-//     productAddPage.value = true;
-//   };
-//   if(role == "ROLE_COMPANY_MANAGER"){
-//     productPage.value = true;
-//     companyPage.value = false;
-//     currensyPage.value = true;
-//     currensyTypePage.value = false;
-//     supplierPage.value = true;
-//     productAddPage.value = true;
-//   };
-// })
+const productPage = ref(false);
+const companyPage = ref(false);
+const currensyPage = ref(false);
+const currensyTypePage = ref(false);
+const supplierPage = ref(false);
+const productAddPage = ref(false);
+const userPage = ref(false);
+onMounted(()=>{
+  if(role == "ROLE_ADMIN"){
+    productPage.value = true;
+    companyPage.value = true;
+    currensyPage.value = true;
+    currensyTypePage.value = true;
+    supplierPage.value = true;
+    productAddPage.value = true;
+  }
+  if(role == "ROLE_SUPPLIER_ADMIN"){
+    productPage.value = true;
+    companyPage.value = false;
+    currensyPage.value = true;
+    currensyTypePage.value = false;
+    supplierPage.value = false;
+    productAddPage.value = false;
+    userPage.value = true
+
+  }
+  if(role == "ROLE_COMPANY_ADMIN"){
+    productPage.value = true;
+    companyPage.value = false;
+    currensyPage.value = false;
+    currensyTypePage.value = false;
+    supplierPage.value = true;
+    productAddPage.value = true;
+    userPage.value = true
+  };
+  if(role == "ROLE_COMPANY_MANAGER"){
+    productPage.value = true;
+    companyPage.value = false;
+    currensyPage.value = true;
+    currensyTypePage.value = false;
+    supplierPage.value = true;
+    productAddPage.value = true;
+  };
+})
 </script>
 
 <style lang="scss" scoped>

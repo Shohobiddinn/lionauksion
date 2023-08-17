@@ -132,6 +132,13 @@ nav {
                             width: 230px;
 
                         }
+                        &.router-link-active{
+                            background-color: $hover_color; 
+                            .menu_content_title_link::before {
+                                display: block;
+                            }
+                          
+                        }
                     }
 
                     &::before {
