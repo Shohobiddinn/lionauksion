@@ -29,7 +29,7 @@
               </div>
             </div>
             <div class="company_info_top_add">
-              <NuxtLink class="company_info_top_add_link" to="/useradd">
+              <NuxtLink class="company_info_top_add_link" to="/usersadd">
                 Taminotchi qo'shish
               </NuxtLink>
             </div>

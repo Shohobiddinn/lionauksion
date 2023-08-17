@@ -344,6 +344,8 @@ async function productApi() {
     params: {
       page: page.value,
       size: 10,
+      companyId: localStorage.getItem("userCompanyId") ? localStorage.getItem("userCompanyId") : null,
+      supplierId: localStorage.getItem("userSupplierId")? localStorage.getItem("userSupplierId") : null,
     },
   });
   products.value = data;

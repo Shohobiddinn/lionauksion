@@ -201,6 +201,10 @@ async function currensyApi() {
       Authorization: "Bearer " + localStorage.getItem("userToken"),
       "Accept-Language": locale.value,
     },
+    params:{
+      companyId: localStorage.getItem("userCompanyId") ? localStorage.getItem("userCompanyId") : null,
+      supplierId: localStorage.getItem("userSupplierId")? localStorage.getItem("userSupplierId") : null,
+    }
   });
   currensy.value = data;
 }
