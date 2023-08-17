@@ -11,6 +11,7 @@
             &_content {
                 width: 50%;
                 border-right: 5px solid $pr_blue_color;
+
                 &_add {
                     display: inline-block;
                     border-radius: 10px;
@@ -168,7 +169,7 @@
 
                 &_title {
                     @include flex(center, space-between);
-                    gap: 250px;
+                    // gap: 250px;
                     padding: 10px 20px;
                     cursor: pointer;
                     width: 500px;
@@ -176,6 +177,17 @@
                     margin-bottom: 10px;
                     border-radius: 10px;
                     transition: 0.3s;
+
+
+                    &_icon {
+
+
+                        &.delete {
+                            rotate: 0deg;
+                            margin-left: auto;
+                            margin-right: 20px;
+                        }
+                    }
 
                     &.active {
                         background-color: $sc_blue_color;
@@ -191,6 +203,12 @@
                             svg {
                                 filter: invert(1)
                             }
+
+                            &.delete {
+                                svg {
+                                    filter: invert(0)
+                                }
+                            }
                         }
                     }
 
@@ -204,8 +222,8 @@
                         rotate: 90deg;
 
                         svg {
-                            width: 25px;
-                            height: 25px;
+                            width: 18px;
+                            height: 18px;
                         }
                     }
                 }
@@ -213,7 +231,7 @@
 
             &_title {
                 width: 50%;
-     
+
                 padding-left: 20px;
 
                 &_add {
@@ -386,12 +404,19 @@
                     }
 
                     &_icon {
-                        rotate: 90deg;
+
+                        cursor: pointer;
+
+                        &.delete {
+                            rotate: 0deg;
+
+                        }
 
                         svg {
-                            width: 25px;
-                            height: 25px;
+                            width: 18px;
+                            height: 18px;
                         }
+
                     }
                 }
             }
