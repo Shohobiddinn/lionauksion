@@ -237,7 +237,6 @@ async function categoryChildApi(e) {
   });
   categoryChild.value = data;
 }
-
 const ndsInput = ref(false);
 const deliveryInput = ref(false);
 const productDate = ref(null);
@@ -245,9 +244,6 @@ const min = ref(null);
 const max = ref(null);
 const price = ref(null);
 const textarea = ref();
-function tekshiruv() {
-  console.log(categoryFatherId.value);
-}
 async function productAddApi() {
   const arr = [];
   input.value.forEach((elem, i) => {
@@ -277,7 +273,7 @@ async function productAddApi() {
     }),
   });
   if (data?.message == "ok") {
-    router.push("/  ");
+    router.push("/");
   } else {
   }
 }
