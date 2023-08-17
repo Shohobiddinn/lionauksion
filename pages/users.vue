@@ -1,5 +1,15 @@
 <template>
   <div>
+    <message>
+      <slot>
+        {{ message }}
+      </slot>
+    </message>
+    <errormessage>
+      <slot>
+        {{ errorMessage }}
+      </slot>
+    </errormessage>
     <div class="company_page">
       <div class="container">
         <div class="company_info">
@@ -261,6 +271,16 @@
 </template>
   
   <script setup>
+import { useStore } from "~/store/store";
+const store = useStore();
+function setFunction() {
+  setTimeout(() => {
+    store.errorMessage = false;
+    store.message = false;
+  }, 3000);
+}
+const errorMessage = ref("");
+const message = ref("");
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const filterModal = ref(false);
 const lock = ref(false);
@@ -268,6 +288,7 @@ const user = ref(null);
 const page = ref(0);
 const { locale } = useI18n();
 async function userApi() {
+  store.loader = true;
   const data = await $fetch(baseUrl + "/user", {
     method: "GET",
     params: {
@@ -285,6 +306,7 @@ async function userApi() {
     },
   });
   user.value = data;
+  store.loader = false;
 }
 userApi();
 function pageDown() {
@@ -304,83 +326,87 @@ function pageApi(p) {
   userApi();
 }
 async function userIsBlocked(e) {
-  if(localStorage.getItem("userSupplierId") !== ""){
-  const data = await $fetch(baseUrl + `/supplier/block-user/${e.id}`, {
-    method: "POST",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-    params: {
-      isBlock: false,
-    },
-  });
+  store.loader = true
+  if (localStorage.getItem("userSupplierId") !== "") {
+    const data = await $fetch(baseUrl + `/supplier/block-user/${e.id}`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+      },
+      params: {
+        isBlock: false,
+      },
+    });
 
-  userApi();
-}else{
-  const data = await $fetch(baseUrl + `/company/block-user/${e.id}`, {
-    method: "POST",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-    params: {
-      isBlock: false,
-    },
-  });
+    userApi();
+  } else {
+    const data = await $fetch(baseUrl + `/company/block-user/${e.id}`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+      },
+      params: {
+        isBlock: false,
+      },
+    });
 
-  userApi();
-}
+    userApi();
+  }
+  store.loader = false
 }
 async function userUnBlocked(e) {
-  if(localStorage.getItem("userSupplierId") !== ""){
-  const data = await $fetch(baseUrl + `/supplier/block-user/${e.id}`, {
-    method: "POST",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-    params: {
-      isBlock: true,
-    },
-  });
+  store.loader = true
+  if (localStorage.getItem("userSupplierId") !== "") {
+    const data = await $fetch(baseUrl + `/supplier/block-user/${e.id}`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+      },
+      params: {
+        isBlock: true,
+      },
+    });
 
-  userApi();
-}else{
-  const data = await $fetch(baseUrl + `/company/block-user/${e.id}`, {
-    method: "POST",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-    params: {
-      isBlock: true,
-    },
-  });
+    userApi();
+  } else {
+    const data = await $fetch(baseUrl + `/company/block-user/${e.id}`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+      },
+      params: {
+        isBlock: true,
+      },
+    });
 
-  userApi();
-}
+    userApi();
+  }
+  store.loader = false
 }
 async function userDelete(e) {
-  if(localStorage.getItem("userSupplierId") !== ""){
-  const data = await $fetch(baseUrl + `/supplier/delete-user/${e}`, {
-    method: "POST",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-  });
-  if (data.message == "ok") {
-    userApi();
+  if (localStorage.getItem("userSupplierId") !== "") {
+    const data = await $fetch(baseUrl + `/supplier/delete-user/${e}`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+      },
+    });
+    if (data.message == "ok") {
+      userApi();
+    } else {
+    }
   } else {
+    const data = await $fetch(baseUrl + `/company-/delete-user/${e}`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+      },
+    });
+    if (data.message == "ok") {
+      userApi();
+    } else {
+    }
   }
-}else{
-  const data = await $fetch(baseUrl + `/company-/delete-user/${e}`, {
-    method: "POST",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-  });
-  if (data.message == "ok") {
-    userApi();
-  } else {
-  }
-}
 }
 const searchInfo = ref();
 async function search() {
