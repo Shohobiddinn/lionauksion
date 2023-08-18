@@ -42,7 +42,7 @@
               <div class="currensy_title">{{ c?.currencyValueInUzs }}</div>
               <div class="currensy_title">{{ c?.modifiedDate }}</div>
               <div class="currensy_title">
-                <div class="currensy_title_icon" @click="edit(c)">
+                <div class="currensy_title_icon" @click="edit(c?.id)">
                   <svg
                     width="25"
                     height="25"
@@ -78,48 +78,36 @@
               ></div>
               <div class="currensy_modal_info">
                 <label class="currensy_modal_info_label" for="cur-1">
-                  so'mdagi qiymati
+                  valyuta turi Uz
                 </label>
                 <input
                   class="currensy_modal_info_input"
-                  v-model="currensyInfo"
+                  v-model="currencyTypeUz"
                   type="text"
                   id="cur-1"
                 />
               </div>
-              <div class="selected">
-                <div class="selected" :class="{ active: selectModal }">
-                  <div
-                    class="selected_option"
-                    @click="selectModal = !selectModal"
-                  >
-                    <div class="selected_option_title">
-                      {{ currensyTitle }}
-                    </div>
-                    <div class="selected_option_icon">
-                      <svg
-                        width="30"
-                        height="30"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 448 512"
-                      >
-                        <path
-                          d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="selected_content">
-                    <div
-                      class="selected_content_title"
-                      v-for="c in currensyType"
-                      :key="c?.id"
-                      @click="currensyBtnApi(c)"
-                    >
-                      {{ c?.name }} : {{ c?.symbol }}
-                    </div>
-                  </div>
-                </div>
+              <div class="currensy_modal_info">
+                <label class="currensy_modal_info_label" for="cur-1">
+                  valyuta turi Ru
+                </label>
+                <input
+                  class="currensy_modal_info_input"
+                  v-model="currencyTypeRu"
+                  type="text"
+                  id="cur-1"
+                />
+              </div>
+              <div class="currensy_modal_info">
+                <label class="currensy_modal_info_label" for="cur-1">
+                  valyuta belgisi
+                </label>
+                <input
+                  class="currensy_modal_info_input"
+                  v-model="symbol"
+                  type="text"
+                  id="cur-1"
+                />
               </div>
               <div class="currensy_modal_send" @click="currensySubmit">
                 <div class="currensy_modal_send_btn">yuborish</div>
@@ -132,48 +120,36 @@
               ></div>
               <div class="currensy_modal_info">
                 <label class="currensy_modal_info_label" for="cur-1">
-                  so'mdagi qiymati
+                  valyuta turi Uz
                 </label>
                 <input
                   class="currensy_modal_info_input"
-                  v-model="currensyEditInfo"
+                  v-model="currencyTypeUz"
                   type="text"
                   id="cur-1"
                 />
               </div>
-              <div class="selected">
-                <div class="selected" :class="{ active: selectModal }">
-                  <div
-                    class="selected_option"
-                    @click="selectModal = !selectModal"
-                  >
-                    <div class="selected_option_title">
-                      {{ currensyTitle }}
-                    </div>
-                    <div class="selected_option_icon">
-                      <svg
-                        width="30"
-                        height="30"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 448 512"
-                      >
-                        <path
-                          d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="selected_content">
-                    <div
-                      class="selected_content_title"
-                      v-for="c in currensyType"
-                      :key="c?.id"
-                      @click="currensyBtnApi(c)"
-                    >
-                      {{ c?.name }} : {{ c?.symbol }}
-                    </div>
-                  </div>
-                </div>
+              <div class="currensy_modal_info">
+                <label class="currensy_modal_info_label" for="cur-1">
+                  valyuta turi Ru
+                </label>
+                <input
+                  class="currensy_modal_info_input"
+                  v-model="currencyTypeRu"
+                  type="text"
+                  id="cur-1"
+                />
+              </div>
+              <div class="currensy_modal_info">
+                <label class="currensy_modal_info_label" for="cur-1">
+                  valyuta belgisi
+                </label>
+                <input
+                  class="currensy_modal_info_input"
+                  v-model="symbol"
+                  type="text"
+                  id="cur-1"
+                />
               </div>
               <div class="currensy_modal_send" @click="currensyEditSubmit">
                 <div class="currensy_modal_send_btn">yuborish</div>
@@ -201,7 +177,7 @@ const selectModal = ref(false);
 async function currensyApi() {
   try {
     store.loader = true;
-    const data = await $fetch(baseUrl + "/currency/all", {
+    const data = await $fetch(baseUrl + "/currency-type/all", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("userToken"),
@@ -275,28 +251,23 @@ async function currencyType() {
   }
 }
 currencyType();
-const currensyTitle = ref("valyuta turini tanlang");
 const currencyTypeId = ref("");
-const currensyInfo = ref("");
-
-function currensyBtnApi(c) {
-  selectModal.value = false;
-  currensyTitle.value = c.name + " " + ":" + " " + c.symbol;
-  currencyTypeId.value = c.id;
-}
+const currencyTypeRu = ref("");
+const currencyTypeUz = ref("");
+const symbol = ref("");
 async function currensySubmit() {
   try {
     store.loader = true;
-    const data = await $fetch(baseUrl + "/currency", {
+    const data = await $fetch(baseUrl + "/currency-type", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("userToken"),
         "Accept-Language": locale.value,
       },
       body: JSON.stringify({
-        currencyTypeId: currencyTypeId.value,
-        supplierId: localStorage.getItem("userSupplierId"),
-        currencyValueInUzs: currensyInfo.value,
+        nameUz: currencyTypeUz.value,
+        nameRu: currencyTypeRu.value,
+        symbol: symbol.value,
       }),
     });
     if (data.message == "ok") {
@@ -344,27 +315,62 @@ async function currensySubmit() {
 }
 const currensyEditInfo = ref("");
 const editoerId = ref("");
-function edit(c) {
-  currensyEditModal.value = true;
-  bgmodol.value = true;
-  editoerId.value = c?.id;
-  currensyEditInfo.value = c?.currencyTypeId;
-  console.log(c?.currencyTypeId);
+const currensyId = ref("")
+async function edit(c) {
+  try {
+    const data = await $fetch(baseUrl + `/currency-type/${c}`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+    });
+    currensyEditModal.value = true;
+    bgmodol.value = true;
+    currencyTypeUz.value = data?.nameUz;
+    currencyTypeRu.value = data?.nameRu;
+    symbol.value = data?.symbol;
+    currensyId.value = data?.id
+    if (data) {
+      store.loader = false;
+    }
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
+  }
 }
 async function currensyEditSubmit() {
   try {
     store.loader = true;
-    const data = await $fetch(baseUrl + "/currency", {
+    const data = await $fetch(baseUrl + "/currency-type", {
       method: "PUT",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("userToken"),
         "Accept-Language": locale.value,
       },
       body: JSON.stringify({
-        id: editoerId.value,
-        currencyValueInUzs: currensyEditInfo.value,
-        currencyTypeId: currencyTypeId.value,
-        supplierId: localStorage.getItem("userSupplierId"),
+        id:currensyId.value,
+        nameUz: currencyTypeUz.value,
+        nameRu: currencyTypeRu.value,
+        symbol: symbol.value,
       }),
     });
     if (data.message == "ok") {

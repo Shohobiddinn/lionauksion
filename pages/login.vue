@@ -60,9 +60,12 @@ const username = ref("");
 const password = ref("");
 const errorMessage = ref("");
 async function loginApi() {
-  try {
-    store.loader = true;
+    // store.loader = true;
     const data = await fetch(baseUrl + "/login", {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
       method: "POST",
       body: new URLSearchParams({
         username: username.value.value,
@@ -123,10 +126,7 @@ async function loginApi() {
         });
     }
     login.value = res;
-  } catch (error) {
-    const response = error.response;
-    console.log(response.data.message);
-  }
+ 
 }
 function passeye() {
   if (password.value.type == "password") {
