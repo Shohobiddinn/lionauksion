@@ -1,15 +1,5 @@
 <template>
   <div>
-    <errormessage>
-      <slot>
-        {{ errorMessage }}
-      </slot>
-    </errormessage>
-    <message>
-      <slot>
-        {{ message }}
-      </slot>
-    </message>
     <div class="add_page">
       <div class="container">
         <div class="add_info">
@@ -188,56 +178,100 @@
   
   <script setup>
 const baseUrl = useRuntimeConfig().public.baseUrl;
-
 import { useStore } from "~~/store/store";
 const store = useStore();
+import { useToast } from "vue-toastification";
+const toast = useToast();
 const selectModal = ref(false);
 const currensyModal = ref(false);
 const router = useRouter();
 const currensyTitle = ref("valyuta turi");
 const currensy = ref(null);
 const currencyId = ref(null);
-const errorMessage = ref("");
-const message = ref("");
-function setFunction() {
-  setTimeout(() => {
-    store.errorMessage = false;
-    store.message = false;
-  }, 3000);
-}
 const { locale } = useI18n();
 async function currensyApi() {
-  store.loader = true;
-  const data = await $fetch(baseUrl + "/currency/all", {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-  });
-  currensy.value = data;
-  store.loader = false;
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + "/currency/all", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+    });
+    currensy.value = data;
+    if (data) {
+      store.loader = false;
+    }
+  } catch (error) {
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
+  }
 }
 function currensyChildApi(e) {
-  currensyModal.value = false;
-  currencyId.value = e.id;
-  currensyTitle.value = e.name + " " + e.symbol;
+    currensyModal.value = false;
+    currencyId.value = e.id;
+    currensyTitle.value = e.name + " " + e.symbol;
+  
 }
 currensyApi();
 const categoryFatherInfo = ref(null);
 async function categoryFatherApi() {
-  store.loader = true;
-  const data = await $fetch(baseUrl + "/category", {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-    params: {
-      page: 0,
-      size: 10,
-    },
-  });
-  categoryFatherInfo.value = data;
-  store.loader = false;
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + "/category", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+      params: {
+        page: 0,
+        size: 10,
+      },
+    });
+    categoryFatherInfo.value = data;
+    if (data) {
+      store.loader = false;
+    }
+  } catch (error) {
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
+  }
 }
 const input = ref(null);
 
@@ -246,22 +280,48 @@ const inputFatherTitle = ref("mahsulotlar katalogi");
 const categoryChild = ref(null);
 const categoryFatherId = ref(null);
 async function categoryChildApi(e) {
-  store.value = true;
-  selectModal.value = false;
-  categoryFatherId.value = e.id;
-  inputFatherTitle.value = e.name;
+  try {
+    store.loader = true;
+    selectModal.value = false;
+    categoryFatherId.value = e.id;
+    inputFatherTitle.value = e.name;
 
-  const data = await $fetch(baseUrl + "/category-detail/all", {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-    params: {
-      categoryId: e.id,
-    },
-  });
-  categoryChild.value = data;
-  store.loader = false;
+    const data = await $fetch(baseUrl + "/category-detail/all", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+      params: {
+        categoryId: e.id,
+      },
+    });
+    categoryChild.value = data;
+    if (data) {
+      store.loader = false;
+    }
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
+  }
 }
 const ndsInput = ref(false);
 const deliveryInput = ref(false);
@@ -302,15 +362,43 @@ async function productAddApi() {
     });
     if (data?.message == "ok") {
       router.push("/");
-    } else {
+      store.loader = false;
+      toast.success(data?.message || "Success", {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
     }
-    console.log(data);
   } catch (error) {
     store.loader = false;
-    store.errorMessage = true;
-    errorMessage.value = error.response._data.message;
-    setFunction();
-    console.log(error.response._data.message);
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
   }
 }
 </script>

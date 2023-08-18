@@ -6,29 +6,33 @@
           <div class="info_top">
             <div class="categorys">
               <div class="search">
-              <div class="form">
-                <input type="text" placeholder="Qidiruv.." v-model="searchInfo" />
-                <div class="form_icon" @click="tekshiruv">
-                  <svg
-                    width="30"
-                    height="31"
-                    viewBox="0 0 30 31"
-                    fill="white"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M14.3037 28.6074C6.41923 28.6074 0 22.1882 0 14.3037C0 6.41923 6.41923 0 14.3037 0C22.1882 0 28.6074 6.41923 28.6074 14.3037C28.6074 22.1882 22.1882 28.6074 14.3037 28.6074ZM14.3037 2.09323C7.56353 2.09323 2.09323 7.57748 2.09323 14.3037C2.09323 21.03 7.56353 26.5142 14.3037 26.5142C21.0439 26.5142 26.5142 21.03 26.5142 14.3037C26.5142 7.57748 21.0439 2.09323 14.3037 2.09323Z"
+                <div class="form">
+                  <input
+                    type="text"
+                    placeholder="Qidiruv.."
+                    v-model="searchInfo"
+                  />
+                  <div class="form_icon" @click="search">
+                    <svg
+                      width="30"
+                      height="31"
+                      viewBox="0 0 30 31"
                       fill="white"
-                    />
-                    <path
-                      d="M28.9569 30.0029C28.6918 30.0029 28.4266 29.9052 28.2173 29.6959L25.4263 26.9049C25.0216 26.5002 25.0216 25.8304 25.4263 25.4257C25.831 25.021 26.5008 25.021 26.9055 25.4257L29.6965 28.2167C30.1012 28.6213 30.1012 29.2912 29.6965 29.6959C29.4872 29.9052 29.222 30.0029 28.9569 30.0029Z"
-                      fill="white"
-                    />
-                  </svg>
-                  search..
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M14.3037 28.6074C6.41923 28.6074 0 22.1882 0 14.3037C0 6.41923 6.41923 0 14.3037 0C22.1882 0 28.6074 6.41923 28.6074 14.3037C28.6074 22.1882 22.1882 28.6074 14.3037 28.6074ZM14.3037 2.09323C7.56353 2.09323 2.09323 7.57748 2.09323 14.3037C2.09323 21.03 7.56353 26.5142 14.3037 26.5142C21.0439 26.5142 26.5142 21.03 26.5142 14.3037C26.5142 7.57748 21.0439 2.09323 14.3037 2.09323Z"
+                        fill="white"
+                      />
+                      <path
+                        d="M28.9569 30.0029C28.6918 30.0029 28.4266 29.9052 28.2173 29.6959L25.4263 26.9049C25.0216 26.5002 25.0216 25.8304 25.4263 25.4257C25.831 25.021 26.5008 25.021 26.9055 25.4257L29.6965 28.2167C30.1012 28.6213 30.1012 29.2912 29.6965 29.6959C29.4872 29.9052 29.222 30.0029 28.9569 30.0029Z"
+                        fill="white"
+                      />
+                    </svg>
+                    search..
+                  </div>
                 </div>
               </div>
-            </div>
               <div class="categorys_content">
                 <div class="categorys_content_title">
                   <NuxtLink
@@ -38,7 +42,6 @@
                     Qo'shish
                   </NuxtLink>
                 </div>
-          
               </div>
               <div class="categorys_filter" :class="{ active: filterModal }">
                 <div
@@ -320,6 +323,10 @@
   </div>
 </template>
 <script setup>
+import { useStore } from "~/store/store";
+const store = useStore();
+import { useToast } from "vue-toastification";
+const toast = useToast();
 const { locale } = useI18n();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const filterModal = ref(false);
@@ -333,22 +340,53 @@ function func() {
 }
 const products = ref(null);
 async function productApi() {
-  const data = await $fetch(baseUrl + "/product", {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-      "Accept-Language": locale.value,
-      companyId: localStorage.getItem("userCompanyId"),
-      supplierId:localStorage.getItem("userSupplierId")
-    },
-    params: {
-      page: page.value,
-      size: 10,
-      companyId: localStorage.getItem("userCompanyId") ? localStorage.getItem("userCompanyId") : null,
-      supplierId: localStorage.getItem("userSupplierId")? localStorage.getItem("userSupplierId") : null,
-    },
-  });
-  products.value = data;
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + "/product", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+        companyId: localStorage.getItem("userCompanyId"),
+        supplierId: localStorage.getItem("userSupplierId"),
+      },
+      params: {
+        page: page.value,
+        size: 10,
+        companyId: localStorage.getItem("userCompanyId")
+          ? localStorage.getItem("userCompanyId")
+          : null,
+        supplierId: localStorage.getItem("userSupplierId")
+          ? localStorage.getItem("userSupplierId")
+          : null,
+      },
+    });
+    products.value = data;
+    if (data) {
+      store.loader = false;
+    }
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
+  }
 }
 productApi();
 function pageDown() {
@@ -371,32 +409,97 @@ function pageApi(p) {
   productApi();
 }
 async function productDelete(e) {
-  const data = await $fetch(baseUrl + `/product/${e}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-  });
-  productApi();
-  console.log(data);
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + `/product/${e}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+      },
+    });
+    if (data?.message == "ok") {
+      productApi();
+      store.loader = false;
+      toast.success(data?.message || "Success", {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
+    }
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
+  }
 }
 const searchInfo = ref();
-async function tekshiruv(){
-  const data = await $fetch(baseUrl + "/product", {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-      "Accept-Language": locale.value,
-      
-    },
-    params: {
-      page: page.value,
-      size: 10,
-      name : searchInfo.value
-    },
-  });
-  products.value = data;
-  console.log(searchInfo.value);
+async function search() {
+  try {
+    const data = await $fetch(baseUrl + "/product", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+      params: {
+        page: page.value,
+        size: 10,
+        name: searchInfo.value,
+      },
+    });
+
+    products.value = data;
+    if (data) {
+      store.loader = false;
+    }
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
+  }
 }
 </script>
 

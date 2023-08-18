@@ -1,15 +1,5 @@
 <template>
   <div>
-    <message>
-      <slot>
-        {{ message }}
-      </slot>
-    </message>
-    <errormessage>
-      <slot>
-        {{ errorMessage }}
-      </slot>
-    </errormessage>
     <div class="companyadd_page">
       <div class="container">
         <div class="information">
@@ -94,14 +84,8 @@
   <script setup>
 import { useStore } from "~/store/store";
 const store = useStore();
-function setFunction() {
-  setTimeout(() => {
-    store.errorMessage = false;
-    store.message = false;
-  }, 3000);
-}
-const errorMessage = ref("");
-const message = ref("");
+import { useToast } from "vue-toastification";
+const toast = useToast();
 import IMask from "imask";
 const fullName = ref("");
 const username = ref("");
@@ -141,38 +125,92 @@ async function suplierPutApi() {
       });
       if (data.message == "ok") {
         store.loader = false;
-        store.message = true;
-        setFunction();
-        message.value = data.message;
         router.push("/supplier");
+        toast.success(data?.message || "Success", {
+          position: "top-right",
+          timeout: 2000,
+          closeOnClick: true,
+          pauseOnFocusLoss: true,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 0.6,
+          showCloseButtonOnHover: false,
+          hideProgressBar: true,
+          closeButton: "button",
+          icon: true,
+          rtl: false,
+        });
       } else {
       }
     }
   } catch (error) {
     store.loader = false;
-    store.errorMessage = false;
-    setFunction();
-    errorMessage.value = error.response._data.message;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
   }
 }
 const suplierOne = ref(null);
 async function supplierOneApi() {
-  store.loader = true;
-  const data = await $fetch(baseUrl + `/supplier/${id}`, {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-      "Accept-Language": locale.value,
-    },
-  });
-  suplierOne.value = data;
-  companyName.value = data?.name;
-  fullName.value = data?.director;
-  phone.value.value = data?.phone;
-  fullName.value = data?.userFullName;
-  username.value = data?.username;
-  password.value = data?.password;
-  store.loader = false;
+  try{
+    store.loader = true;
+    const data = await $fetch(baseUrl + `/supplier/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+    });
+    suplierOne.value = data;
+    companyName.value = data?.name;
+    fullName.value = data?.director;
+    phone.value.value = data?.phone;
+    fullName.value = data?.userFullName;
+    username.value = data?.username;
+    password.value = data?.password;
+    if(data){
+      store.loader = false;
+
+    }
+
+  }catch(error){
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
+
+  }
 }
 supplierOneApi();
 function inputType() {
