@@ -198,6 +198,9 @@ async function currensyApi() {
         Authorization: "Bearer " + localStorage.getItem("userToken"),
         "Accept-Language": locale.value,
       },
+      params:{
+        supplierId: localStorage.getItem("userSupplierId")
+      }
     });
     currensy.value = data;
     if (data) {
