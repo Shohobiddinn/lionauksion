@@ -64,7 +64,7 @@
       </div>
     </div>
   </div>
-  <!-- nomi adress tel nomer  rahbar glavniy bug'altr -->
+ 
 </template>
 
 <script setup>

@@ -6,9 +6,6 @@
     </Head>
     <NuxtLayout/>
     <load/> 
-    <!-- <message>
-      <slot>djsjdjnjvnd</slot>
-    </message> -->
   </div>
 </template>
 <script setup>

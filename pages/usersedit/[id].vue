@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <div class="bg"></div> -->
     <div class="companyadd_page">
       <div class="container">
         <div class="information">
