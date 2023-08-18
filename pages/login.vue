@@ -1,8 +1,5 @@
 <template>
   <div>
-    <errormessage>
-      <slot>{{ errorMessage }} </slot>
-    </errormessage>
     <div class="login">
       <div class="login_modal">
         <img src="../assets/image/logo.png" alt="logo" />
@@ -49,16 +46,13 @@
 </template>
 
 <script setup>
-import { useStore } from "~~/store/store";
+import { useStore } from "~/store/store";
+import { useToast } from "vue-toastification";
+const toast = useToast();
 const store = useStore();
 definePageMeta({
   layout: "view",
 });
-function setFunction() {
-  setTimeout(() => {
-    store.errorMessage = false;
-  }, 3000);
-}
 const router = useRouter();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const login = ref(null);
@@ -80,9 +74,24 @@ async function loginApi() {
     console.log(res.message);
     if (res.error) {
       router.push("/login");
-      errorMessage.value = res.message;
-      store.errorMessage = true;
-      setFunction();
+      store.loader = false
+      toast.error(res.message ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
     } else {
       router.push("/");
       localStorage.setItem("userToken", res.accessToken);
@@ -98,6 +107,20 @@ async function loginApi() {
       } else {
         localStorage.setItem("userCompanyId", "");
       }
+      toast.success(data?.message || "Success", {
+          position: "top-right",
+          timeout: 2000,
+          closeOnClick: true,
+          pauseOnFocusLoss: true,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 0.6,
+          showCloseButtonOnHover: false,
+          hideProgressBar: true,
+          closeButton: "button",
+          icon: true,
+          rtl: false,
+        });
     }
     login.value = res;
   } catch (error) {

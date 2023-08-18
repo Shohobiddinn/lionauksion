@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <div class="bg"></div> -->
     <div class="companyadd_page">
       <div class="container">
         <div class="information">
@@ -27,12 +26,7 @@
             </div>
             <div class="info">
               <label class="info_label" for="com_name">telefon raqami</label>
-              <input
-                  class="info_input"
-                  type="text"
-                  ref="phone"
-                  id="com_name"
-                />
+              <input class="info_input" type="text" ref="phone" id="com_name" />
             </div>
             <div class="info">
               <label class="info_label" for="start_date">login</label>
@@ -88,6 +82,10 @@
 </template>
 
 <script setup>
+import { useStore } from "~/store/store";
+import { useToast } from "vue-toastification";
+const toast = useToast();
+const store = useStore();
 import IMask from "imask";
 const fullName = ref("");
 const username = ref("");
@@ -98,16 +96,13 @@ const inputTypeInfo = ref(null);
 const router = useRouter();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 async function companyApi() {
-  if (
-    !companyName.value == "" &&
-    !fullName.value == "" &&
-    !password.value == "" &&
-    !username.value == ""
-  ) {
+  try {
+    store.loader = true;
     const data = await $fetch(baseUrl + "/company", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
       },
       body: JSON.stringify({
         name: companyName.value,
@@ -118,20 +113,45 @@ async function companyApi() {
         password: password.value,
       }),
     });
-
-    // if (!data.error) {
-    //   router.push("/company");
-    //   console.log("hello");
-    // } else {
-    //   // alert("error");
-    //   lo
-    // }
     if (data?.message == "ok") {
       router.push("/company");
-      console.log("hello");
-    } else {
-      console.log("bug");
+      store.loader = false;
+      toast.success(data?.message || "Success", {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
     }
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
   }
 }
 function inputType() {

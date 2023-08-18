@@ -255,23 +255,56 @@
 </template>
   
   <script setup>
+import { useStore } from "~/store/store";
+import { useToast } from "vue-toastification";
+const toast = useToast();
+const store = useStore();
+const { locale } = useI18n();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const filterModal = ref(false);
 const lock = ref(false);
 const company = ref(null);
 const page = ref(0);
 async function companyApi() {
-  const data = await $fetch(baseUrl + "/company", {
-    method: "GET",
-    params: {
-      page: page.value,
-      size: 10,
-    },
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-  });
-  company.value = data;
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + "/company", {
+      method: "GET",
+      params: {
+        page: page.value,
+        size: 10,
+      },
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+    });
+    company.value = data;
+    if (data) {
+      store.loader = false;
+    }
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
+  }
 }
 companyApi();
 function pageDown() {
@@ -291,78 +324,225 @@ function pageApi(p) {
   companyApi();
 }
 async function companyIsBlocked(e) {
-  const data = await $fetch(baseUrl + "/company", {
-    method: "PUT",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-    body: JSON.stringify({
-      id: e.id,
-      name: e.name,
-      director: e.director,
-      phone: e.phone,
-      isBlocked: false,
-      userFullName: e.userFullName,
-      username: e.username,
-      password: e.password,
-    }),
-  });
-
-  companyApi();
+  try {
+    const data = await $fetch(baseUrl + "/company", {
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+      body: JSON.stringify({
+        id: e.id,
+        name: e.name,
+        director: e.director,
+        phone: e.phone,
+        isBlocked: false,
+        userFullName: e.userFullName,
+        username: e.username,
+        password: e.password,
+      }),
+    });
+    if (data) {
+      companyApi();
+      store.loader = false;
+      toast.success(data?.message || "Success", {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
+    }
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
+  }
 }
 async function companyUnBlocked(e) {
-  const data = await $fetch(baseUrl + "/company", {
-    method: "PUT",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-    body: JSON.stringify({
-      id: e.id,
-      name: e.name,
-      director: e.director,
-      phone: e.phone,
-      isBlocked: true,
-      userFullName: e.userFullName,
-      username: e.username,
-      password: e.password,
-    }),
-  });
-  companyApi();
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + "/company", {
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+      body: JSON.stringify({
+        id: e.id,
+        name: e.name,
+        director: e.director,
+        phone: e.phone,
+        isBlocked: true,
+        userFullName: e.userFullName,
+        username: e.username,
+        password: e.password,
+      }),
+    });
+    if (data) {
+      companyApi();
+      store.loader = false;
+      toast.success(data?.message || "Success", {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
+    }
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
+  }
 }
 async function companyDelete(e) {
-  console.log(e);
-  const data = await $fetch(baseUrl + `/company/${e}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-  });
-  if (data.message == "ok") {
-    companyApi();
-  } else {
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + `/company/${e}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+    });
+    if (data.message == "ok") {
+      companyApi();
+      store.loader = false;
+      toast.success(data?.message || "Success", {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
+    }
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
   }
 }
 const searchInfo = ref();
 async function search() {
-  const data = await $fetch(baseUrl + "/user", {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-      "Accept-Language": locale.value,
-    },
-    params: {
-      page: page.value,
-      size: 10,
-      name: searchInfo.value,
-      companyId: localStorage.getItem("userCompanyId")
-        ? localStorage.getItem("userCompanyId")
-        : null,
-      supplierId: localStorage.getItem("userSupplierId")
-        ? localStorage.getItem("userSupplierId")
-        : null,
-    },
-  });
-  company.value = data;
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + "/user", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+      params: {
+        page: page.value,
+        size: 10,
+        name: searchInfo.value,
+        companyId: localStorage.getItem("userCompanyId")
+          ? localStorage.getItem("userCompanyId")
+          : null,
+        supplierId: localStorage.getItem("userSupplierId")
+          ? localStorage.getItem("userSupplierId")
+          : null,
+      },
+    });
+    company.value = data;
+    if (data) {
+      store.loader = false;
+    }
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
+  }
 }
 </script>
   
