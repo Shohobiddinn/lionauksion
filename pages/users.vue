@@ -483,7 +483,7 @@ async function userDelete(e) {
       } else {
       }
     } else {
-      const data = await $fetch(baseUrl + `/company-/delete-user/${e}`, {
+      const data = await $fetch(baseUrl + `/company/delete-user/${e}`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("userToken"),
