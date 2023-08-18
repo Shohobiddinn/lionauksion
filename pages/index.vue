@@ -225,7 +225,7 @@
                   </div>
                 </div>
                 <div class="delivery_content">
-                  <div class="delivery_content_title icon">
+                  <div class="delivery_content_title icon" v-if="productEditIcon">
                     <NuxtLink :to="`/productedit/${p?.id}`">
                       <svg
                         width="30"
@@ -240,7 +240,7 @@
                       </svg>
                     </NuxtLink>
                   </div>
-                  <div class="delivery_content_title icon">
+                  <div class="delivery_content_title icon" v-if="productCartIcon">
                     <svg
                       width="30"
                       height="30"
@@ -256,6 +256,7 @@
                   <div
                     class="delivery_content_title icon"
                     @click="productDelete(p?.id)"
+                    v-if="productDeleteIcon"
                   >
                     <svg
                       width="30"
@@ -507,6 +508,32 @@ async function search() {
     );
   }
 }
+const productDeleteIcon = ref(false);
+const productCartIcon = ref(false);
+const productEditIcon = ref(false);
+const role = localStorage.getItem("role");
+onMounted(() => {
+  if (role == "ROLE_ADMIN") {
+    productDeleteIcon.value = false;
+    productCartIcon.value = false;
+    productEditIcon.value = false;
+  }
+  if (role == "ROLE_SUPPLIER_ADMIN") {
+    productDeleteIcon.value = true;
+    productCartIcon.value = false;
+    productEditIcon.value = true;
+  }
+  if (role == "ROLE_COMPANY_ADMIN") {
+    productDeleteIcon.value = false;
+    productCartIcon.value = true;
+    productEditIcon.value = false;
+  }
+  if (role == "ROLE_COMPANY_MANAGER") {
+    productDeleteIcon.value = false;
+    productCartIcon.value = true;
+    productEditIcon.value = false
+  }
+});
 </script>
 
 <style lang="scss" scoped>
