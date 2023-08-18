@@ -84,6 +84,7 @@
 <script setup>
 import { useStore } from "~/store/store";
 import { useToast } from "vue-toastification";
+const { locale } = useI18n();
 const toast = useToast();
 const store = useStore();
 import IMask from "imask";
@@ -152,6 +153,7 @@ async function companyApi() {
         rtl: false,
       }
     );
+    console.log(error);
   }
 }
 function inputType() {

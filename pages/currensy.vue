@@ -187,8 +187,10 @@
 </template>
 
 <script setup>
-import { Exception } from "sass";
-
+import { useStore } from "~/store/store";
+const store = useStore();
+import { useToast } from "vue-toastification";
+const toast = useToast();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const { locale } = useI18n();
 const currensy = ref(null);
@@ -197,34 +199,88 @@ const currensyModal = ref(false);
 const currensyEditModal = ref(false);
 const selectModal = ref(false);
 async function currensyApi() {
-  const data = await $fetch(baseUrl + "/currency/all", {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-      "Accept-Language": locale.value,
-    },
-    params: {
-      companyId: localStorage.getItem("userCompanyId")
-        ? localStorage.getItem("userCompanyId")
-        : null,
-      supplierId: localStorage.getItem("userSupplierId")
-        ? localStorage.getItem("userSupplierId")
-        : null,
-    },
-  });
-  currensy.value = data;
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + "/currency/all", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+      params: {
+        companyId: localStorage.getItem("userCompanyId")
+          ? localStorage.getItem("userCompanyId")
+          : null,
+        supplierId: localStorage.getItem("userSupplierId")
+          ? localStorage.getItem("userSupplierId")
+          : null,
+      },
+    });
+    currensy.value = data;
+    if (data) {
+      store.loader = false;
+    }
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
+  }
 }
 currensyApi();
 const currensyType = ref(null);
 async function currencyType() {
-  const data = await $fetch(baseUrl + "/currency-type/all", {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-      "Accept-Language": locale.value,
-    },
-  });
-  currensyType.value = data;
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + "/currency-type/all", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+    });
+    currensyType.value = data;
+    if (data) {
+      store.loader = false;
+    }
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
+  }
 }
 currencyType();
 const currensyTitle = ref("valyuta turini tanlang");
@@ -267,39 +323,54 @@ function edit(c) {
   console.log(c?.currencyTypeId);
 }
 async function currensyEditSubmit() {
-  try{
+  try {
+    store.loader = true;
     const data = await $fetch(baseUrl + "/currency", {
-    method: "PUT",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-      "Accept-Language": locale.value,
-    },
-    body: JSON.stringify({
-      id: editoerId.value,
-      currencyValueInUzs: currensyEditInfo.value,
-      currencyTypeId: currencyTypeId.value,
-      supplierId: localStorage.getItem("userSupplierId"),
-    }),
-  });
-  if (data.message == "ok") {
-    currensyEditModal.value = false;
-    bgmodol.value = false;
-    currensyApi();
-  } else {
-    console.log(data);
-  }
-  }catch (error){
-    // const response = error.response;
-    console.log(error.response.status);
-    if(error.response.status == 403){
-      console.log("bu sahifa siz uchun bloklangan");
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+      body: JSON.stringify({
+        id: editoerId.value,
+        currencyValueInUzs: currensyEditInfo.value,
+        currencyTypeId: currencyTypeId.value,
+        supplierId: localStorage.getItem("userSupplierId"),
+      }),
+    });
+    if (data.message == "ok") {
+      currensyEditModal.value = false;
+      bgmodol.value = false;
+      currensyApi();
+      store.loader = false;
+    } else {
+      console.log(data);
     }
+  } catch (error) {
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
   }
-
 }
 async function currensyDelete(e) {
   try {
-    console.log("work");
+    store.loader = true;
     const data = await $fetch(baseUrl + `/currency/${e}`, {
       method: "DELETE",
       headers: {
@@ -308,13 +379,44 @@ async function currensyDelete(e) {
     });
     console.log("finish");
     if (data.message == "ok") {
+      store.loader = false;
       currensyApi();
-    } else {
-      console.log(data);
+      toast.success(data?.message || "Success", {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
     }
-  } catch (error) { 
-    const response = error.response;
-    console.log(error.response._data.status);
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
   }
 }
 </script>

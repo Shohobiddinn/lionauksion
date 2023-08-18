@@ -141,7 +141,7 @@
                   id="cur-1"
                 />
               </div>
-             <div class="selected">
+              <div class="selected">
                 <div class="selected" :class="{ active: selectModal }">
                   <div
                     class="selected_option"
@@ -174,7 +174,7 @@
                     </div>
                   </div>
                 </div>
-              </div> 
+              </div>
               <div class="currensy_modal_send" @click="currensyEditSubmit">
                 <div class="currensy_modal_send_btn">yuborish</div>
               </div>
@@ -187,6 +187,10 @@
 </template>
 
 <script setup>
+import { useStore } from "~/store/store";
+const store = useStore();
+import { useToast } from "vue-toastification";
+const toast = useToast();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const { locale } = useI18n();
 const currensy = ref(null);
