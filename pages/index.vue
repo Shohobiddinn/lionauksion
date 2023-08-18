@@ -471,6 +471,12 @@ async function search() {
         page: page.value,
         size: 10,
         name: searchInfo.value,
+        companyId: localStorage.getItem("userCompanyId")
+          ? localStorage.getItem("userCompanyId")
+          : null,
+        supplierId: localStorage.getItem("userSupplierId")
+          ? localStorage.getItem("userSupplierId")
+          : null,
       },
     });
 
