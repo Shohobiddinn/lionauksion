@@ -173,7 +173,6 @@ const currensy = ref(null);
 const bgmodol = ref(false);
 const currensyModal = ref(false);
 const currensyEditModal = ref(false);
-const selectModal = ref(false);
 async function currensyApi() {
   try {
     store.loader = true;
@@ -251,7 +250,6 @@ async function currencyType() {
   }
 }
 currencyType();
-const currencyTypeId = ref("");
 const currencyTypeRu = ref("");
 const currencyTypeUz = ref("");
 const symbol = ref("");
@@ -313,8 +311,6 @@ async function currensySubmit() {
     );
   }
 }
-const currensyEditInfo = ref("");
-const editoerId = ref("");
 const currensyId = ref("")
 async function edit(c) {
   try {
