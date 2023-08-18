@@ -415,7 +415,7 @@ async function currensyEditSubmit() {
 async function currensyDelete(e) {
   try {
     store.loader = true;
-    const data = await $fetch(baseUrl + `/currency/${e}`, {
+    const data = await $fetch(baseUrl + `/currency-type/${e}`, {
       method: "DELETE",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("userToken"),
