@@ -153,7 +153,6 @@ async function companyApi() {
         rtl: false,
       }
     );
-    console.log(error);
   }
 }
 function inputType() {

@@ -293,24 +293,61 @@ function currensyBtnApi(c) {
   currencyTypeId.value = c.id;
 }
 async function currensySubmit() {
-  const data = await $fetch(baseUrl + "/currency", {
-    method: "POST",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-      "Accept-Language": locale.value,
-    },
-    body: JSON.stringify({
-      currencyTypeId: currencyTypeId.value,
-      supplierId: localStorage.getItem("userSupplierId"),
-      currencyValueInUzs: currensyInfo.value,
-    }),
-  });
-  if (data.message == "ok") {
-    bgmodol.value = false;
-    currensyModal.value = false;
-    currensyApi();
-  } else {
-    console.log(data);
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + "/currency", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+      body: JSON.stringify({
+        currencyTypeId: currencyTypeId.value,
+        supplierId: localStorage.getItem("userSupplierId"),
+        currencyValueInUzs: currensyInfo.value,
+      }),
+    });
+    if (data.message == "ok") {
+      bgmodol.value = false;
+      currensyModal.value = false;
+      store.loader = false;
+      currensyApi();
+      toast.success(data?.message || "Success", {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
+    }
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
   }
 }
 const currensyEditInfo = ref("");
@@ -347,6 +384,7 @@ async function currensyEditSubmit() {
       console.log(data);
     }
   } catch (error) {
+    store.loader = false;
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
@@ -375,6 +413,7 @@ async function currensyDelete(e) {
       method: "DELETE",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
       },
     });
     console.log("finish");
