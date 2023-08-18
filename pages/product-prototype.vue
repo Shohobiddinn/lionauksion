@@ -1,16 +1,7 @@
 <template>
   <div>
     <bgmodal v-if="bgModal" />
-    <message>
-      <slot>
-        {{ message }}
-      </slot>
-    </message>
-    <errormessage>
-      <slot>
-        {{ errorMessage }}
-      </slot>
-    </errormessage>
+
     <div class="product_prototype_page">
       <div class="container">
         <div class="protatype">
