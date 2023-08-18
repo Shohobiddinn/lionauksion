@@ -148,16 +148,7 @@
 import { useToast } from "vue-toastification";
 import { useStore } from "~/store/store";
 const toast = useToast();
-
 const store = useStore();
-function setFunction() {
-  setTimeout(() => {
-    store.errorMessage = false;
-    store.message = false;
-  }, 3000);
-}
-const errorMessage = ref("");
-const message = ref("");
 const bgModal = ref(false);
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const { locale } = useI18n();
@@ -184,7 +175,6 @@ categoryFatherApi();
 const categoryChild = ref(null);
 const categoryId = ref(null);
 const protatype = ref();
-
 async function categoryChildApi(e, event) {
   store.loader = true;
   protatype.value.forEach((el) => {
@@ -232,7 +222,7 @@ async function categoryFatherAddApi() {
       }),
     });
     if (data?.message == "ok") {
-      toast.success("Success", {
+      toast.success(data?.message, {
         position: "top-right",
         timeout: 2000,
         closeOnClick: true,
@@ -246,33 +236,29 @@ async function categoryFatherAddApi() {
         icon: true,
         rtl: false,
       });
+
       categoryFatherApi();
       bgModal.value = false;
       contentModal.value = false;
       store.loader = false;
-      message.value = data?.message;
-      // setFunction();
     } else {
     }
   } catch (error) {
     store.loader = false;
-    // store.errorMessage = true;
-    toast.error("Error", {
-        position: "top-right",
-        timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
-      });
-    setFunction();
-    // errorMessage.value = error.response._data.message;
+    toast.error(error.response._data.message, {
+      position: "top-right",
+      timeout: 2000,
+      closeOnClick: true,
+      pauseOnFocusLoss: true,
+      pauseOnHover: true,
+      draggable: true,
+      draggablePercent: 0.6,
+      showCloseButtonOnHover: false,
+      hideProgressBar: true,
+      closeButton: "button",
+      icon: true,
+      rtl: false,
+    });
   }
 }
 const childAddUz = ref("");
@@ -293,49 +279,104 @@ async function categoryChildAddApi() {
       }),
     });
     if (data?.message == "ok") {
+      toast.success(data?.message, {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
+
       bgModal.value = false;
       titleModal.value = false;
       store.loader = false;
-      store.message = true;
-      setFunction();
-      categoryFatherApi();
+      // categoryFatherApi();
+      // const data = await $fetch(baseUrl + "/category-detail/all", {
+      //   method: "GET",
+      //   headers: {
+      //     Authorization: "Bearer " + localStorage.getItem("userToken"),
+      //     "Accept-Language": locale.value,
+      //   },
+      //   params: {
+      //     categoryId: categoryId.value,
+      //   },
+      // });
+      // categoryChild.value = data;
     } else {
     }
   } catch (error) {
     store.loader = false;
-    store.errorMessage = true;
-    setFunction();
-    errorMessage.value = error.response._data.message;
+    toast.error(error?.response?._data?.message || "Error", {
+      position: "top-right",
+      timeout: 2000,
+      closeOnClick: true,
+      pauseOnFocusLoss: true,
+      pauseOnHover: true,
+      draggable: true,
+      draggablePercent: 0.6,
+      showCloseButtonOnHover: false,
+      hideProgressBar: true,
+      closeButton: "button",
+      icon: true,
+      rtl: false,
+    });
   }
 }
-// function tekshiruv() {
-//   console.log(locale.value);
-// }
-// tekshiruv();
 async function fatherProtitipDelete(p) {
   try {
     const data = await $fetch(baseUrl + `/category/${p}`, {
       method: "DELETE",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
       },
     });
     if (data?.message == "ok") {
       bgModal.value = false;
       titleModal.value = false;
       store.loader = false;
-      store.message = true;
-      setFunction();
       categoryFatherApi();
+      toast.success(data?.message, {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
     } else {
     }
     categoryFatherApi();
   } catch (error) {
     store.loader = false;
-    store.errorMessage = true;
-    setFunction();
-    errorMessage.value = error.response._data.message;
-  }
+    toast.error(error.response._data.message, {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
+    }
 }
 async function childProtitipDelete(p) {
   try {
@@ -343,29 +384,60 @@ async function childProtitipDelete(p) {
       method: "DELETE",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
       },
     });
     if (data?.message == "ok") {
       bgModal.value = false;
       titleModal.value = false;
       store.loader = false;
-      store.message = true;
-      setFunction();
-      categoryFatherApi();
+      // categoryFatherApi();
+      toast.success(data?.message, {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
+      // const data = await $fetch(baseUrl + "/category-detail/all", {
+      //   method: "GET",
+      //   headers: {
+      //     Authorization: "Bearer " + localStorage.getItem("userToken"),
+      //     "Accept-Language": locale.value,
+      //   },
+      //   params: {
+      //     categoryId: categoryId.value,
+      //   },
+      // });
+      // categoryChild.value = data;
     } else {
     }
   } catch (error) {
     store.loader = false;
-    store.errorMessage = true;
-    setFunction();
-    errorMessage.value = error.response._data.message;
-    console.log(error.response._data.message);
+    toast.error(error?.response?._data?.message, {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
   }
 }
 categoryFatherApi();
-onMounted(() => {
-  store.message = true;
-});
 </script>
 
 <style lang="scss" scoped>

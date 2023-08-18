@@ -1,4 +1,6 @@
 {
     "lang":"rus",
-    "header":"galava"
+    "header":"galava",
+    "errorMessage" : "ошибка",
+    "successMessage":"успех"
 }

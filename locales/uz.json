@@ -1,4 +1,6 @@
 {
     "lang":"o'zbek",
-    "header":"bosh"
+    "header":"bosh",
+    "errorMessage" : "Xato",
+    "successMessage":"Muvafaqiyatli"
 }

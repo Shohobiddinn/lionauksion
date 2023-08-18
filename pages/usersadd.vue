@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <div class="bg"></div> -->
     <div class="companyadd_page">
       <div class="container">
         <div class="information">
@@ -67,29 +66,69 @@
 </template>
   
   <script setup>
+import { useToast } from "vue-toastification";
+const toast = useToast();
 const fullName = ref("");
 const username = ref("");
 const password = ref("");
+const { locale } = useI18n();
 const inputTypeInfo = ref(null);
 const router = useRouter();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 async function userApi() {
-  const data = await $fetch(baseUrl + "/company/add-user", {
-    method: "POST",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-    body: JSON.stringify({
-      fullName: fullName.value,
-      username: username.value,
-      password: password.value,
-    }),
-  });
-  if (data?.message == "ok") {
-    router.push("/company");
-    console.log("hello");
-  } else {
-    console.log("bug");
+  try {
+    if(fullName.value !== "" && username.value !== "" &&  password.value !== "" ){
+      const data = await $fetch(baseUrl + "/company/add-user", {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("userToken"),
+          "Accept-Language": locale.value,
+        },
+        body: JSON.stringify({
+          fullName: fullName.value,
+          username: username.value,
+          password: password.value,
+        }),
+      });
+      if (data?.message == "ok") {
+        router.push("/users");
+        console.log("hello");
+        toast.success(data?.message || "Success", {
+          position: "top-right",
+          timeout: 2000,
+          closeOnClick: true,
+          pauseOnFocusLoss: true,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 0.6,
+          showCloseButtonOnHover: false,
+          hideProgressBar: true,
+          closeButton: "button",
+          icon: true,
+          rtl: false,
+        });
+      }
+    }
+  } catch (error) {
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
   }
 }
 function inputType() {

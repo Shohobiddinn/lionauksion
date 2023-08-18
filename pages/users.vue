@@ -1,15 +1,5 @@
 <template>
   <div>
-    <message>
-      <slot>
-        {{ message }}
-      </slot>
-    </message>
-    <errormessage>
-      <slot>
-        {{ errorMessage }}
-      </slot>
-    </errormessage>
     <div class="company_page">
       <div class="container">
         <div class="company_info">
@@ -272,15 +262,9 @@
   
   <script setup>
 import { useStore } from "~/store/store";
+import { useToast } from "vue-toastification";
+const toast = useToast();
 const store = useStore();
-function setFunction() {
-  setTimeout(() => {
-    store.errorMessage = false;
-    store.message = false;
-  }, 3000);
-}
-const errorMessage = ref("");
-const message = ref("");
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const filterModal = ref(false);
 const lock = ref(false);
@@ -326,109 +310,269 @@ function pageApi(p) {
   userApi();
 }
 async function userIsBlocked(e) {
-  store.loader = true
+  store.loader = true;
   if (localStorage.getItem("userSupplierId") !== "") {
     const data = await $fetch(baseUrl + `/supplier/block-user/${e.id}`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
       },
       params: {
         isBlock: false,
       },
     });
-
-    userApi();
+    if (data?.message == "ok") {
+      toast.success(data?.message || "Success", {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
+      userApi();
+    }
   } else {
     const data = await $fetch(baseUrl + `/company/block-user/${e.id}`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
       },
       params: {
         isBlock: false,
       },
     });
-
-    userApi();
+    if (data?.message == "ok") {
+      toast.success(data?.message || "Success", {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
+      userApi();
+    }
   }
-  store.loader = false
+  store.loader = false;
 }
 async function userUnBlocked(e) {
-  store.loader = true
-  if (localStorage.getItem("userSupplierId") !== "") {
-    const data = await $fetch(baseUrl + `/supplier/block-user/${e.id}`, {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("userToken"),
-      },
-      params: {
-        isBlock: true,
-      },
-    });
+  try {
+    store.loader = true;
+    if (localStorage.getItem("userSupplierId") !== "") {
+      const data = await $fetch(baseUrl + `/supplier/block-user/${e.id}`, {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("userToken"),
+          "Accept-Language": locale.value,
+        },
+        params: {
+          isBlock: true,
+        },
+      });
 
-    userApi();
-  } else {
-    const data = await $fetch(baseUrl + `/company/block-user/${e.id}`, {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("userToken"),
-      },
-      params: {
-        isBlock: true,
-      },
-    });
-
-    userApi();
+      if (data?.message == "ok") {
+        toast.success(data?.message || "Success", {
+          position: "top-right",
+          timeout: 2000,
+          closeOnClick: true,
+          pauseOnFocusLoss: true,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 0.6,
+          showCloseButtonOnHover: false,
+          hideProgressBar: true,
+          closeButton: "button",
+          icon: true,
+          rtl: false,
+        });
+        userApi();
+      }
+    } else {
+      const data = await $fetch(baseUrl + `/company/block-user/${e.id}`, {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("userToken"),
+          "Accept-Language": locale.value,
+        },
+        params: {
+          isBlock: true,
+        },
+      });
+      if (data?.message == "ok") {
+        toast.success(data?.message || "Success", {
+          position: "top-right",
+          timeout: 2000,
+          closeOnClick: true,
+          pauseOnFocusLoss: true,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 0.6,
+          showCloseButtonOnHover: false,
+          hideProgressBar: true,
+          closeButton: "button",
+          icon: true,
+          rtl: false,
+        });
+        userApi();
+      }
+    }
+    store.loader = false;
+  } catch (error) {
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
   }
-  store.loader = false
 }
 async function userDelete(e) {
-  if (localStorage.getItem("userSupplierId") !== "") {
-    const data = await $fetch(baseUrl + `/supplier/delete-user/${e}`, {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("userToken"),
-      },
-    });
-    if (data.message == "ok") {
-      userApi();
+  try {
+    if (localStorage.getItem("userSupplierId") !== "") {
+      const data = await $fetch(baseUrl + `/supplier/delete-user/${e}`, {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("userToken"),
+          "Accept-Language": locale.value,
+        },
+      });
+      if (data.message == "ok") {
+        toast.success(data?.message || "Success", {
+          position: "top-right",
+          timeout: 2000,
+          closeOnClick: true,
+          pauseOnFocusLoss: true,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 0.6,
+          showCloseButtonOnHover: false,
+          hideProgressBar: true,
+          closeButton: "button",
+          icon: true,
+          rtl: false,
+        });
+        userApi();
+      } else {
+      }
     } else {
+      const data = await $fetch(baseUrl + `/company-/delete-user/${e}`, {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("userToken"),
+          "Accept-Language": locale.value,
+        },
+      });
+      if (data.message == "ok") {
+        toast.success(data?.message || "Success", {
+          position: "top-right",
+          timeout: 2000,
+          closeOnClick: true,
+          pauseOnFocusLoss: true,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 0.6,
+          showCloseButtonOnHover: false,
+          hideProgressBar: true,
+          closeButton: "button",
+          icon: true,
+          rtl: false,
+        });
+        userApi();
+      } else {
+      }
     }
-  } else {
-    const data = await $fetch(baseUrl + `/company-/delete-user/${e}`, {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("userToken"),
-      },
-    });
-    if (data.message == "ok") {
-      userApi();
-    } else {
-    }
+  } catch (error) {
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
   }
 }
 const searchInfo = ref();
 async function search() {
-  const data = await $fetch(baseUrl + "/user", {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-      "Accept-Language": locale.value,
-    },
-    params: {
-      page: page.value,
-      size: 10,
-      name: searchInfo.value,
-      companyId: localStorage.getItem("userCompanyId")
-        ? localStorage.getItem("userCompanyId")
-        : null,
-      supplierId: localStorage.getItem("userSupplierId")
-        ? localStorage.getItem("userSupplierId")
-        : null,
-    },
-  });
-  user.value = data;
+  try {
+    const data = await $fetch(baseUrl + "/user", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+      params: {
+        page: page.value,
+        size: 10,
+        fullName: searchInfo.value,
+        companyId: localStorage.getItem("userCompanyId")
+          ? localStorage.getItem("userCompanyId")
+          : null,
+        supplierId: localStorage.getItem("userSupplierId")
+          ? localStorage.getItem("userSupplierId")
+          : null,
+      },
+    });
+    user.value = data;
+    if (data) {
+      toast.success(data?.message || "Success", {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
+    }
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
 }
 </script>
   

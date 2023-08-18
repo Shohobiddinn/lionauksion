@@ -1,15 +1,5 @@
 <template>
   <div>
-    <errormessage>
-      <slot>
-        {{ errorMessage }}
-      </slot>
-    </errormessage>
-    <message>
-      <slot>
-        {{ message }}
-      </slot>
-    </message>
     <div class="companyadd_page">
       <div class="container">
         <div class="information">
@@ -94,15 +84,10 @@
   <script setup>
 import { useStore } from "~/store/store";
 const store = useStore();
-const errorMessage = ref("");
-const message = ref("");
-function setFunction() {
-  setTimeout(() => {
-    store.errorMessage = false;
-    store.message = false;
-  }, 3000);
-}
+import { useToast } from "vue-toastification";
+const toast = useToast();
 import IMask from "imask";
+const { locale } = useI18n();
 const fullName = ref("");
 const username = ref("");
 const password = ref("");
@@ -126,6 +111,7 @@ async function suplierApi() {
         method: "POST",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("userToken"),
+          "Accept-Language": locale.value,
         },
         body: JSON.stringify({
           name: companyName.value,
@@ -140,17 +126,43 @@ async function suplierApi() {
       if (data.message == "ok") {
         router.push("/supplier");
         store.loader = false;
-        store.message = true;
-        message.value = data.message
-        setFunction();
-      } else {
+        toast.success(data?.message || "Success", {
+          position: "top-right",
+          timeout: 2000,
+          closeOnClick: true,
+          pauseOnFocusLoss: true,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 0.6,
+          showCloseButtonOnHover: false,
+          hideProgressBar: true,
+          closeButton: "button",
+          icon: true,
+          rtl: false,
+        });
       }
     }
   } catch (error) {
     store.loader = false;
-    store.errorMessage = true;
-    errorMessage.value = error.response._data.message;
-    setFunction();
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      }
+    );
   }
 }
 function inputType() {
