@@ -212,8 +212,8 @@ onMounted(()=>{
     companyPage.value = true;
     currensyPage.value = true;
     currensyTypePage.value = true;
-    supplierPage.value = true;
-    productAddPage.value = true;
+    supplierPage.value = false;
+    productAddPage.value = false;
   }
   if(role == "ROLE_SUPPLIER_ADMIN"){
     productPage.value = true;

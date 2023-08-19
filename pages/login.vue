@@ -60,7 +60,7 @@ const username = ref("");
 const password = ref("");
 const errorMessage = ref("");
 async function loginApi() {
-    // store.loader = true;
+    store.loader = true;
     const data = await fetch(baseUrl + "/login", {
       headers: {
         Accept: 'application/json',
@@ -134,9 +134,6 @@ function passeye() {
     password.value.type = "password";
   }
 }
-// onMounted(() => {
-//   store.message = true;
-// });
 </script>
 
 <style lang="scss" scoped>
