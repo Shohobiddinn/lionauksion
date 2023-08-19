@@ -37,6 +37,34 @@
                   </div>
                 </div>
               </div>
+           
+              <div class="info">
+                <input
+                  class="info_input"
+                  v-model="ndsInput"
+                  type="checkbox"
+                  id="nds"
+                />
+                <label class="info_label" for="nds">QQS</label>
+              </div>
+              <div class="info">
+                <input
+                  class="info_input"
+                  v-model="deliveryInput"
+                  type="checkbox"
+                  id="delivery"
+                />
+                <label class="info_label" for="delivery">yetkazib berish</label>
+              </div>
+              <div class="info">
+                <input
+                  class="info_input"
+                  v-model="lastPrice"
+                  type="checkbox"
+                  id="lact_price"
+                />
+                <label class="info_label" for="lact_price">ohirgi narx</label>
+              </div>
               <div class="selected" :class="{ active: currensyModal }">
                 <div
                   class="selected_option"
@@ -68,33 +96,6 @@
                     {{ c?.name }} {{ c?.symbol }}
                   </div>
                 </div>
-              </div>
-              <div class="info">
-                <input
-                  class="info_input"
-                  v-model="ndsInput"
-                  type="checkbox"
-                  id="nds"
-                />
-                <label class="info_label" for="nds">QQS</label>
-              </div>
-              <div class="info">
-                <input
-                  class="info_input"
-                  v-model="deliveryInput"
-                  type="checkbox"
-                  id="delivery"
-                />
-                <label class="info_label" for="delivery">yetkazib berish</label>
-              </div>
-              <div class="info">
-                <input
-                  class="info_input"
-                  v-model="lastPrice"
-                  type="checkbox"
-                  id="lact_price"
-                />
-                <label class="info_label" for="lact_price">ohirgi narx</label>
               </div>
               <div class="infos">
                 <label class="infos_date_label" for="delivery"
