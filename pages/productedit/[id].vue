@@ -55,6 +55,27 @@
                 />
                 <label class="info_label" for="delivery">yetkazib berish</label>
               </div>
+              <div class="info">
+                <input
+                  class="info_input"
+                  v-model="lastPrice"
+                  type="checkbox"
+                  id="delivery"
+                />
+                <label class="info_label" for="delivery">yetkazib berish</label>
+              </div>
+              <div class="infos">
+                <label class="infos_date_label" for="delivery-1"
+                  >Amal qilish muddati</label
+                >
+                <input
+                  class="infos_date_input"
+                  type="date"
+                  value="2022-01-01"
+                  id="delivery-1"
+                  ref="productEndDate"
+                />
+              </div>
               <div class="infos">
                 <label class="infos_date_label" for="delivery"
                   >ishlab chiqarilgan sana</label
@@ -164,15 +185,14 @@
                 </div>
               </div>
               <div class="submit_icons">
-                <div class="submit_icons_btn exit"> 
+                <div class="submit_icons_btn exit">
                   <NuxtLink to="/" class="submit_icons_btn_link">
                     Orqaga
                   </NuxtLink>
-             
                 </div>
                 <div class="submit_icons_btn send" @click="productEditApi">
                   <NuxtLink to="/" class="submit_icons_btn_link">
-                 yuborish
+                    yuborish
                   </NuxtLink>
                 </div>
               </div>
@@ -361,6 +381,8 @@ async function productListApi() {
     deliveryInput.value = data?.hasDelivery;
     categoryFatherId.value = data?.categoryId;
     currencyId.value = data?.currencyId;
+    lastPrice.value = data?.isLowestPrice;
+    productEndDate.value = data?.expDate;
     if (data) {
       store.loader = false;
     }
@@ -432,10 +454,12 @@ getCategoryApi();
 const ndsInput = ref(false);
 const deliveryInput = ref(false);
 const productDate = ref(null);
+const productEndDate = ref(null);
 const min = ref(null);
 const max = ref(null);
 const price = ref(null);
 const textarea = ref();
+const lastPrice = ref(false);
 async function productEditApi() {
   try {
     store.loader = true;
@@ -463,6 +487,8 @@ async function productEditApi() {
         maxAmount: max.value,
         minAmount: min.value,
         factoryDate: productDate.value.value,
+        expDate: productEndDate.value.value,
+        isLowestPrice: lastPrice.value,
         supplierId: localStorage.getItem("userSupplierId"),
         details: arr,
       }),

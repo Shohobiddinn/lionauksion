@@ -55,6 +55,15 @@
                 />
                 <label class="info_label" for="delivery">yetkazib berish</label>
               </div>
+              <div class="info">
+                <input
+                  class="info_input"
+                  v-model="lastPrice"
+                  type="checkbox"
+                  id="lact_price"
+                />
+                <label class="info_label" for="lact_price">ohirgi narx</label>
+              </div>
               <div class="infos">
                 <label class="infos_date_label" for="delivery"
                   >ishlab chiqarilgan sana</label
@@ -62,9 +71,21 @@
                 <input
                   class="infos_date_input"
                   type="date"
-                  value="2017-10-10"
+                  value="2022-01-01"
                   id="delivery"
                   ref="productDate"
+                />
+              </div>
+              <div class="infos">
+                <label class="infos_date_label" for="delivery-1"
+                  >Amal qilish muddati</label
+                >
+                <input
+                  class="infos_date_input"
+                  type="date"
+                  value="2022-01-01"
+                  id="delivery-1"
+                  ref="productEndDate"
                 />
               </div>
               <div class="inputs">
@@ -163,15 +184,14 @@
                 </div>
               </div>
               <div class="submit_icons" v-if="categoryChild">
-                <div class="submit_icons_btn exit"> 
+                <div class="submit_icons_btn exit">
                   <NuxtLink to="/" class="submit_icons_btn_link">
                     Orqaga
                   </NuxtLink>
-             
                 </div>
                 <div class="submit_icons_btn send" @click="productAddApi">
                   <NuxtLink to="/" class="submit_icons_btn_link">
-                 yuborish
+                    yuborish
                   </NuxtLink>
                 </div>
               </div>
@@ -205,9 +225,9 @@ async function currensyApi() {
         Authorization: "Bearer " + localStorage.getItem("userToken"),
         "Accept-Language": locale.value,
       },
-      params:{
-        supplierId: localStorage.getItem("userSupplierId")
-      }
+      params: {
+        supplierId: localStorage.getItem("userSupplierId"),
+      },
     });
     currensy.value = data;
     if (data) {
@@ -236,10 +256,9 @@ async function currensyApi() {
   }
 }
 function currensyChildApi(e) {
-    currensyModal.value = false;
-    currencyId.value = e.id;
-    currensyTitle.value = e.name + " " + e.symbol;
-  
+  currensyModal.value = false;
+  currencyId.value = e.id;
+  currensyTitle.value = e.name + " " + e.symbol;
 }
 currensyApi();
 const categoryFatherInfo = ref(null);
@@ -336,10 +355,12 @@ async function categoryChildApi(e) {
 const ndsInput = ref(false);
 const deliveryInput = ref(false);
 const productDate = ref(null);
+const productEndDate = ref(null);
 const min = ref(null);
 const max = ref(null);
 const price = ref(null);
 const textarea = ref();
+const lastPrice = ref(false);
 async function productAddApi() {
   try {
     store.loader = true;
@@ -364,6 +385,8 @@ async function productAddApi() {
         currencyId: currencyId.value,
         categoryId: categoryFatherId.value,
         factoryDate: productDate.value.value,
+        expDate:productEndDate.value.value,
+        isLowestPrice:lastPrice.value,
         maxAmount: max.value,
         minAmount: min.value,
         supplierId: localStorage.getItem("userSupplierId"),
