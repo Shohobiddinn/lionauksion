@@ -325,13 +325,18 @@ body {
                     position: sticky;
                     top: 60px;
                     background-color: $pr_white_color;
+                    gap: 10px;
 
                     &_title {
                         @include fond(700, 12);
                         color: $pr_black_color;
                         text-transform: capitalize;
-                        width: 100px;
+                        // width: 100px;
                         overflow-x: auto;
+
+                        &.edit {
+                            margin-left: auto;
+                        }
 
                         &::-webkit-scrollbar {
                             display: none;
@@ -357,11 +362,27 @@ body {
                             width: 100px;
                         }
 
+                        &:nth-child(6) {
+                            width: 70px
+                        }
+
                         &:nth-child(7) {
                             width: 70px
                         }
 
                         &:nth-child(8) {
+                            width: 70px
+                        }
+
+                        &:nth-child(9) {
+                            width: 70px
+                        }
+
+                        &:nth-child(10) {
+                            width: 70px
+                        }
+
+                        &:nth-child(11) {
                             width: 70px
                         }
 
@@ -387,10 +408,10 @@ body {
 
                     .delivery {
                         @include flex(center, flex-start);
-                        padding: 5px 20px;
+                        padding: 5px 10px 5px 10px;
                         margin-bottom: 10px;
                         background-color: $pr_white_color;
-
+                        gap: 10px;
 
                         &_content {
                             @include fond(500, 14);
@@ -399,7 +420,10 @@ body {
                             @include flex(flex-start, flex-start);
                             flex-direction: column;
                             overflow-x: auto;
-                            width: 100px;
+
+                            &.edit {
+                                margin-left: auto;
+                            }
 
                             &_title {
                                 @include fond(400, 15);
@@ -419,6 +443,7 @@ body {
                                 }
                             }
 
+
                             &:nth-child(1) {
                                 width: 200px;
                             }
@@ -436,7 +461,11 @@ body {
                             }
 
                             &:nth-child(5) {
-                                width: 100px
+                                width: 100px;
+                            }
+
+                            &:nth-child(6) {
+                                width: 70px
                             }
 
                             &:nth-child(7) {
@@ -444,6 +473,18 @@ body {
                             }
 
                             &:nth-child(8) {
+                                width: 70px
+                            }
+
+                            &:nth-child(9) {
+                                width: 70px
+                            }
+
+                            &:nth-child(10) {
+                                width: 70px
+                            }
+
+                            &:nth-child(11) {
                                 width: 70px
                             }
 
@@ -463,17 +504,25 @@ body {
                     // bottom: 50px;
                     // left: 50%;
                     // transform: translateX(-25%);
-                    background-color: $pr_white_color;
+                    // background-color: $pr_white_color;
                     gap: 10px;
 
                     &_icon {
                         cursor: pointer;
+
                     }
 
                     &_count {
                         @include fond(500, 15);
                         color: $pr_black_color;
                         cursor: pointer;
+
+                        &:hover {
+
+                            padding: 3px;
+                            background-color: $pr_white_color;
+                            border-radius: 3px;
+                        }
                     }
                 }
             }

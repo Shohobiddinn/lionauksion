@@ -138,8 +138,8 @@
               <div class="info_bottom_page_title delivery">yetkazib berish</div>
               <div class="info_bottom_page_title nds">qqs</div>
               <div class="info_bottom_page_title ">ohitgi narx</div>
-              <div class="info_bottom_page_title edit">boshqa</div> 
               <div class="info_bottom_page_title desc">qo'shimcha</div>
+              <div class="info_bottom_page_title edit">boshqa</div> 
             </div>
             <div class="info_bottom_deliverys">
               <div class="delivery" v-for="p in products?.content" :key="p?.id">
@@ -260,6 +260,9 @@
                   </div>
                 </div>
                 <div class="delivery_content">
+                {{ p?.description }}
+                </div>
+                <div class="delivery_content edit">
                   <div
                     class="delivery_content_title icon"
                     v-if="productEditIcon"
@@ -312,9 +315,7 @@
                     </svg>
                   </div>
                 </div>
-                <div class="delivery_content">
-                {{ p?.description }}
-                </div>
+             
          
               </div>
             </div>
