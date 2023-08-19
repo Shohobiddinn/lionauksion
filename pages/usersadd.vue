@@ -92,7 +92,6 @@ async function userApi() {
       });
       if (data?.message == "ok") {
         router.push("/users");
-        console.log("hello");
         toast.success(data?.message || "Success", {
           position: "top-right",
           timeout: 2000,

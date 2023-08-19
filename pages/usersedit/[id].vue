@@ -89,10 +89,7 @@ async function userApi() {
   });
   if (data?.message == "ok") {
     router.push("/company");
-    console.log("hello");
-  } else {
-    console.log("bug");
-  }
+  } 
 }
 function inputType() {
   if (inputTypeInfo.value.type == "password") {

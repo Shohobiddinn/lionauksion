@@ -569,9 +569,7 @@ async function search() {
         rtl: false,
       });
     }
-    console.log(data);
   } catch (error) {
-    console.log(error);
   }
 }
 </script>

@@ -285,7 +285,6 @@ async function companyApi() {
     }
   } catch (error) {
     store.loader = false;
-    console.log(error.response.status);
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||

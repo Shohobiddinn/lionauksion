@@ -357,7 +357,6 @@ function edit(c) {
   bgmodol.value = true;
   editoerId.value = c?.id;
   currensyEditInfo.value = c?.currencyTypeId;
-  console.log(c?.currencyTypeId);
 }
 async function currensyEditSubmit() {
   try {
@@ -380,8 +379,6 @@ async function currensyEditSubmit() {
       bgmodol.value = false;
       currensyApi();
       store.loader = false;
-    } else {
-      console.log(data);
     }
   } catch (error) {
     store.loader = false;
@@ -416,7 +413,6 @@ async function currensyDelete(e) {
         "Accept-Language": locale.value,
       },
     });
-    console.log("finish");
     if (data.message == "ok") {
       store.loader = false;
       currensyApi();

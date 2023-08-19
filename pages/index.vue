@@ -406,9 +406,7 @@ function pageUpDown() {
   if (products.value.totalPages - 1 > page.value) {
     page.value++;
     productApi();
-    console.log("hello");
   } else {
-    console.log("bug");
   }
 }
 function pageApi(p) {
