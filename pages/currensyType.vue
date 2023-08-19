@@ -196,16 +196,6 @@ async function currensyApi() {
       {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       }
     );
   }
@@ -235,16 +225,6 @@ async function currencyType() {
       {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       }
     );
   }
@@ -276,16 +256,6 @@ async function currensySubmit() {
       toast.success(data?.message || "Success", {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       });
     }
   } catch (error) {
@@ -297,16 +267,6 @@ async function currensySubmit() {
       {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       }
     );
   }
@@ -339,16 +299,6 @@ async function edit(c) {
       {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       }
     );
   }
@@ -377,16 +327,6 @@ async function currensyEditSubmit() {
       toast.success(data?.message || "Success", {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       });
     }
   } catch (error) {
@@ -398,16 +338,6 @@ async function currensyEditSubmit() {
       {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       }
     );
   }
@@ -428,16 +358,6 @@ async function currensyDelete(e) {
       toast.success(data?.message || "Success", {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       });
     }
   } catch (error) {
@@ -449,16 +369,6 @@ async function currensyDelete(e) {
       {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       }
     );
   }

@@ -286,16 +286,6 @@ async function categoryFatherAddApi() {
       toast.success(data?.message, {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       });
 
       categoryFatherApi();
@@ -309,16 +299,6 @@ async function categoryFatherAddApi() {
     toast.error(error.response._data.message, {
       position: "top-right",
       timeout: 2000,
-      closeOnClick: true,
-      pauseOnFocusLoss: true,
-      pauseOnHover: true,
-      draggable: true,
-      draggablePercent: 0.6,
-      showCloseButtonOnHover: false,
-      hideProgressBar: true,
-      closeButton: "button",
-      icon: true,
-      rtl: false,
     });
   }
 }
@@ -343,33 +323,11 @@ async function categoryChildAddApi() {
       toast.success(data?.message, {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       });
 
       bgModal.value = false;
       titleModal.value = false;
       store.loader = false;
-      // categoryFatherApi();
-      // const data = await $fetch(baseUrl + "/category-detail/all", {
-      //   method: "GET",
-      //   headers: {
-      //     Authorization: "Bearer " + localStorage.getItem("userToken"),
-      //     "Accept-Language": locale.value,
-      //   },
-      //   params: {
-      //     categoryId: categoryId.value,
-      //   },
-      // });
-      // categoryChild.value = data;
     } else {
     }
   } catch (error) {
@@ -377,16 +335,6 @@ async function categoryChildAddApi() {
     toast.error(error?.response?._data?.message || "Error", {
       position: "top-right",
       timeout: 2000,
-      closeOnClick: true,
-      pauseOnFocusLoss: true,
-      pauseOnHover: true,
-      draggable: true,
-      draggablePercent: 0.6,
-      showCloseButtonOnHover: false,
-      hideProgressBar: true,
-      closeButton: "button",
-      icon: true,
-      rtl: false,
     });
   }
 }
@@ -407,16 +355,6 @@ async function fatherProtitipDelete(p) {
       toast.success(data?.message, {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       });
     } else {
     }
@@ -426,16 +364,6 @@ async function fatherProtitipDelete(p) {
     toast.error(error.response._data.message, {
       position: "top-right",
       timeout: 2000,
-      closeOnClick: true,
-      pauseOnFocusLoss: true,
-      pauseOnHover: true,
-      draggable: true,
-      draggablePercent: 0.6,
-      showCloseButtonOnHover: false,
-      hideProgressBar: true,
-      closeButton: "button",
-      icon: true,
-      rtl: false,
     });
   }
 }
@@ -456,16 +384,6 @@ async function childProtitipDelete(p) {
       toast.success(data?.message, {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       });
     } else {
     }
@@ -474,16 +392,6 @@ async function childProtitipDelete(p) {
     toast.error(error?.response?._data?.message, {
       position: "top-right",
       timeout: 2000,
-      closeOnClick: true,
-      pauseOnFocusLoss: true,
-      pauseOnHover: true,
-      draggable: true,
-      draggablePercent: 0.6,
-      showCloseButtonOnHover: false,
-      hideProgressBar: true,
-      closeButton: "button",
-      icon: true,
-      rtl: false,
     });
   }
 }
@@ -513,16 +421,6 @@ async function protatypeFatherEdit(e) {
     toast.error(error?.response?._data?.message, {
       position: "top-right",
       timeout: 2000,
-      closeOnClick: true,
-      pauseOnFocusLoss: true,
-      pauseOnHover: true,
-      draggable: true,
-      draggablePercent: 0.6,
-      showCloseButtonOnHover: false,
-      hideProgressBar: true,
-      closeButton: "button",
-      icon: true,
-      rtl: false,
     });
   }
 }
@@ -547,16 +445,6 @@ async function categoryFatherEditApi() {
       toast.success(data?.message, {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       });
 
       categoryFatherApi();
@@ -570,16 +458,6 @@ async function categoryFatherEditApi() {
     toast.error(error.response._data.message, {
       position: "top-right",
       timeout: 2000,
-      closeOnClick: true,
-      pauseOnFocusLoss: true,
-      pauseOnHover: true,
-      draggable: true,
-      draggablePercent: 0.6,
-      showCloseButtonOnHover: false,
-      hideProgressBar: true,
-      closeButton: "button",
-      icon: true,
-      rtl: false,
     });
   }
 }
@@ -609,16 +487,6 @@ async function protatypeChildEdit(e) {
     toast.error(error?.response?._data?.message, {
       position: "top-right",
       timeout: 2000,
-      closeOnClick: true,
-      pauseOnFocusLoss: true,
-      pauseOnHover: true,
-      draggable: true,
-      draggablePercent: 0.6,
-      showCloseButtonOnHover: false,
-      hideProgressBar: true,
-      closeButton: "button",
-      icon: true,
-      rtl: false,
     });
   }
 }
@@ -644,16 +512,6 @@ async function categoryChildEditApi() {
       toast.success(data?.message, {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       });
       categoryFatherApi();
       bgModal.value = false;
@@ -666,16 +524,6 @@ async function categoryChildEditApi() {
     toast.error(error.response._data.message, {
       position: "top-right",
       timeout: 2000,
-      closeOnClick: true,
-      pauseOnFocusLoss: true,
-      pauseOnHover: true,
-      draggable: true,
-      draggablePercent: 0.6,
-      showCloseButtonOnHover: false,
-      hideProgressBar: true,
-      closeButton: "button",
-      icon: true,
-      rtl: false,
     });
   }
 }

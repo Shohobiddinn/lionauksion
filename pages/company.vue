@@ -293,16 +293,6 @@ async function companyApi() {
       {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       }
     );
   }
@@ -349,16 +339,6 @@ async function companyIsBlocked(e) {
       toast.success(data?.message || "Success", {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       });
     }
   } catch (error) {
@@ -370,16 +350,6 @@ async function companyIsBlocked(e) {
       {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       }
     );
   }
@@ -410,16 +380,6 @@ async function companyUnBlocked(e) {
       toast.success(data?.message || "Success", {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       });
     }
   } catch (error) {
@@ -431,16 +391,6 @@ async function companyUnBlocked(e) {
       {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       }
     );
   }
@@ -461,16 +411,6 @@ async function companyDelete(e) {
       toast.success(data?.message || "Success", {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       });
     }
   } catch (error) {
@@ -482,16 +422,6 @@ async function companyDelete(e) {
       {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       }
     );
   }
@@ -531,16 +461,6 @@ async function search() {
       {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       }
     );
   }

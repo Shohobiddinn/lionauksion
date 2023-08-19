@@ -96,16 +96,6 @@ async function loginApi() {
       toast.success(data?.message || "Success", {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       });
     })
     .catch((error) => {
@@ -114,16 +104,6 @@ async function loginApi() {
       toast.error("Login yoki parol noto'g'ri", {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       });
     });
 }

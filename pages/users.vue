@@ -327,16 +327,6 @@ async function userIsBlocked(e) {
       toast.success(data?.message || "Success", {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       });
       userApi();
     }
@@ -355,16 +345,6 @@ async function userIsBlocked(e) {
       toast.success(data?.message || "Success", {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       });
       userApi();
     }
@@ -390,16 +370,6 @@ async function userUnBlocked(e) {
         toast.success(data?.message || "Success", {
           position: "top-right",
           timeout: 2000,
-          closeOnClick: true,
-          pauseOnFocusLoss: true,
-          pauseOnHover: true,
-          draggable: true,
-          draggablePercent: 0.6,
-          showCloseButtonOnHover: false,
-          hideProgressBar: true,
-          closeButton: "button",
-          icon: true,
-          rtl: false,
         });
         userApi();
       }
@@ -418,16 +388,6 @@ async function userUnBlocked(e) {
         toast.success(data?.message || "Success", {
           position: "top-right",
           timeout: 2000,
-          closeOnClick: true,
-          pauseOnFocusLoss: true,
-          pauseOnHover: true,
-          draggable: true,
-          draggablePercent: 0.6,
-          showCloseButtonOnHover: false,
-          hideProgressBar: true,
-          closeButton: "button",
-          icon: true,
-          rtl: false,
         });
         userApi();
       }
@@ -441,16 +401,6 @@ async function userUnBlocked(e) {
       {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       }
     );
   }
@@ -469,16 +419,6 @@ async function userDelete(e) {
         toast.success(data?.message || "Success", {
           position: "top-right",
           timeout: 2000,
-          closeOnClick: true,
-          pauseOnFocusLoss: true,
-          pauseOnHover: true,
-          draggable: true,
-          draggablePercent: 0.6,
-          showCloseButtonOnHover: false,
-          hideProgressBar: true,
-          closeButton: "button",
-          icon: true,
-          rtl: false,
         });
         userApi();
       } else {
@@ -495,16 +435,6 @@ async function userDelete(e) {
         toast.success(data?.message || "Success", {
           position: "top-right",
           timeout: 2000,
-          closeOnClick: true,
-          pauseOnFocusLoss: true,
-          pauseOnHover: true,
-          draggable: true,
-          draggablePercent: 0.6,
-          showCloseButtonOnHover: false,
-          hideProgressBar: true,
-          closeButton: "button",
-          icon: true,
-          rtl: false,
         });
         userApi();
       } else {
@@ -518,16 +448,6 @@ async function userDelete(e) {
       {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       }
     );
   }
@@ -558,16 +478,6 @@ async function search() {
       toast.success(data?.message || "Success", {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       });
     }
   } catch (error) {

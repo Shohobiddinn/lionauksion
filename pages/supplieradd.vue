@@ -129,16 +129,6 @@ async function suplierApi() {
         toast.success(data?.message || "Success", {
           position: "top-right",
           timeout: 2000,
-          closeOnClick: true,
-          pauseOnFocusLoss: true,
-          pauseOnHover: true,
-          draggable: true,
-          draggablePercent: 0.6,
-          showCloseButtonOnHover: false,
-          hideProgressBar: true,
-          closeButton: "button",
-          icon: true,
-          rtl: false,
         });
       }
     }
@@ -151,16 +141,6 @@ async function suplierApi() {
       {
         position: "top-right",
         timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
       }
     );
   }
