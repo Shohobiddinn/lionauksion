@@ -319,26 +319,30 @@ body {
                 border-radius: 15px;
 
                 &_page {
-                    padding: 20px;
-                    @include flex(center, space-between);
+                    padding: 10px 0px 10px 10px;
+                    @include flex(center, flex-start);
                     border-bottom: 2px solid #BDBBBB;
                     position: sticky;
                     top: 60px;
                     background-color: $pr_white_color;
 
                     &_title {
-                        @include fond(600, 15);
+                        @include fond(700, 12);
                         color: $pr_black_color;
                         text-transform: capitalize;
                         width: 100px;
                         overflow-x: auto;
-                        border-right: 2px solid $pr_black_color;    
+
+                        &::-webkit-scrollbar {
+                            display: none;
+                        }
+
                         &:nth-child(1) {
                             width: 200px;
                         }
 
                         &:nth-child(2) {
-                            width: 200px;
+                            width: 150px;
                         }
 
                         &:nth-child(3) {
@@ -347,6 +351,18 @@ body {
 
                         &:nth-child(4) {
                             width: 100px;
+                        }
+
+                        &:nth-child(5) {
+                            width: 100px;
+                        }
+
+                        &:nth-child(7) {
+                            width: 70px
+                        }
+
+                        &:nth-child(8) {
+                            width: 70px
                         }
 
                         &.nds {
@@ -370,32 +386,35 @@ body {
                     }
 
                     .delivery {
-                        @include flex(center, space-between);
+                        @include flex(center, flex-start);
                         padding: 5px 20px;
                         margin-bottom: 10px;
                         background-color: $pr_white_color;
-                     
+
 
                         &_content {
-                            @include fond(400, 17);
+                            @include fond(500, 14);
                             color: $pr_black_color ;
                             text-transform: capitalize;
                             @include flex(flex-start, flex-start);
                             flex-direction: column;
-                            overflow-y: auto;
                             overflow-x: auto;
                             width: 100px;
-                            border-right: 2px solid $pr_black_color;
+
                             &_title {
                                 @include fond(400, 15);
                                 color: $pr_black_color ;
+
+                                span {
+                                    color: $pr_blue_color;
+                                }
 
                                 &.icon {
                                     cursor: pointer;
 
                                     svg {
-                                        width: 25px;
-                                        height: 25px;
+                                        width: 18px;
+                                        height: 18px;
                                     }
                                 }
                             }
@@ -405,7 +424,7 @@ body {
                             }
 
                             &:nth-child(2) {
-                                width: 200px;
+                                width: 150px;
                             }
 
                             &:nth-child(3) {
@@ -414,6 +433,18 @@ body {
 
                             &:nth-child(4) {
                                 width: 100px;
+                            }
+
+                            &:nth-child(5) {
+                                width: 100px
+                            }
+
+                            &:nth-child(7) {
+                                width: 70px
+                            }
+
+                            &:nth-child(8) {
+                                width: 70px
                             }
 
                             &::-webkit-scrollbar {

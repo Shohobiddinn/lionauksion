@@ -131,14 +131,15 @@
               <div class="info_bottom_page_title phone">mahsuloti</div>
               <div class="info_bottom_page_title product">mahsulot turlari</div>
               <div class="info_bottom_page_title logo">
-                ishlab chiqarilgan sana
+                ishlab chiqarilgan
               </div>
-              <div class="info_bottom_page_title status">min yetkazish</div>
-              <div class="info_bottom_page_title status">max yetkazish</div>
-              <div class="info_bottom_page_title delivery">yetkazib berish</div>
+              <div class="info_bottom_page_title status">yetkazish</div>
               <div class="info_bottom_page_title price">narxi</div>
+              <div class="info_bottom_page_title delivery">yetkazib berish</div>
               <div class="info_bottom_page_title nds">qqs</div>
-              <div class="info_bottom_page_title edit">boshqa</div>
+              <div class="info_bottom_page_title ">ohitgi narx</div>
+              <div class="info_bottom_page_title edit">boshqa</div> 
+              <div class="info_bottom_page_title desc">qo'shimcha</div>
             </div>
             <div class="info_bottom_deliverys">
               <div class="delivery" v-for="p in products?.content" :key="p?.id">
@@ -157,16 +158,22 @@
                     v-for="d in p?.details"
                     :key="d?.id"
                   >
-                    {{ d?.categoryDetailName }} {{ d?.value }}
+                    {{ d?.categoryDetailName }} : <span>{{ d?.value }}</span>
                   </div>
                 </div>
                 <div class="delivery_content">
                   {{ p?.factoryDate }}
                 </div>
-                <div class="delivery_content">{{ p?.minAmount }}</div>
-                <div class="delivery_content">{{ p?.maxAmount }}</div>
                 <div class="delivery_content">
-                  <div class="delivery_content_title" v-if="p?.hasDelivery">
+                  <div class="delivery_content_title">
+                    min : <span>{{ p?.minAmount }}</span> <br> max : <span>{{ p?.maxAmount }}</span>
+                  </div>
+                 </div>
+                <div class="delivery_content">
+                  {{ p?.price }} {{ p?.currencySymbol }}
+                </div>
+                <div class="delivery_content">
+                  <div class="delivery_content_title icon" v-if="p?.hasDelivery">
                     <svg
                       width="30"
                       height="30"
@@ -180,7 +187,7 @@
                     </svg>
                   </div>
                   <div
-                    class="delivery_content_title"
+                    class="delivery_content_title icon"
                     v-else-if="!p?.hasDelivery"
                   >
                     <svg
@@ -197,10 +204,7 @@
                   </div>
                 </div>
                 <div class="delivery_content">
-                  {{ p?.price }} {{ p?.currencySymbol }}
-                </div>
-                <div class="delivery_content">
-                  <div class="delivery_content_title" v-if="p?.hasNds">
+                  <div class="delivery_content_title icon" v-if="p?.hasNds">
                     <svg
                       width="30"
                       height="30"
@@ -213,7 +217,35 @@
                       />
                     </svg>
                   </div>
-                  <div class="delivery_content_title" v-else-if="!p?.hasNds">
+                  <div class="delivery_content_title icon" v-else-if="!p?.hasNds">
+                    <svg
+                      width="30"
+                      height="30"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                      fill="red"
+                    >
+                      <path
+                        d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div class="delivery_content">
+                  <div class="delivery_content_title icon" v-if="p?.isLowestPrice">
+                    <svg
+                      width="30"
+                      height="30"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                      fill="green"
+                    >
+                      <path
+                        d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="delivery_content_title icon" v-else-if="!p?.isLowestPrice">
                     <svg
                       width="30"
                       height="30"
@@ -280,6 +312,10 @@
                     </svg>
                   </div>
                 </div>
+                <div class="delivery_content">
+                {{ p?.description }}
+                </div>
+         
               </div>
             </div>
             <div class="pagination">
