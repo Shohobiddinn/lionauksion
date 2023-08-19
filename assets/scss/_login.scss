@@ -6,17 +6,13 @@
     height: 100vh;
 
     &_modal {
-        // position: fixed;
-        // top: 50%;
-        // left: 50%;
-        // transform: translate(-50%, -50%);
         border: 2px solid rgb(26, 196, 212);
         background-color: rgb(25, 25, 121);
         border-radius: 10px;
         @include flex(center, center);
         flex-direction: column;
         padding: 30px 20px;
-
+box-shadow: 0px 0px 5px 1px #c5bbbb;
         img {
             width: 205px;
             height: 56px;
