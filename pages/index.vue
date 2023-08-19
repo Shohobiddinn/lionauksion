@@ -11,6 +11,7 @@
                     type="text"
                     placeholder="Qidiruv.."
                     v-model="searchInfo"
+                    @input="search"
                   />
                   <div class="form_icon" @click="search">
                     <svg
@@ -321,7 +322,7 @@
          
               </div>
             </div>
-            <div class="pagination">
+            <div class="pagination" v-if=" products?.content.length">
               <div class="pagination_icon" @click="pageDown">
                 <svg
                   width="24"
