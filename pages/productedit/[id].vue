@@ -202,9 +202,9 @@
                   </NuxtLink>
                 </div>
                 <div class="submit_icons_btn send" @click="productEditApi">
-                  <NuxtLink to="/" class="submit_icons_btn_link">
+                  <div to="/" class="submit_icons_btn_link">
                     yuborish
-                  </NuxtLink>
+                  </div>
                 </div>
               </div>
             </div>

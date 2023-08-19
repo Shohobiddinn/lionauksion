@@ -37,7 +37,7 @@
                   </div>
                 </div>
               </div>
-           
+
               <div class="info">
                 <input
                   class="info_input"
@@ -143,7 +143,7 @@
                   v-model="max"
                 />
               </div>
-              <div class="inputs">
+               <div class="inputs">
                 <label for="amount-3" class="inputs_label"
                   >ishlab chiqarilgan davlat</label
                 >
@@ -202,9 +202,9 @@
                   </NuxtLink>
                 </div>
                 <div class="submit_icons_btn send" @click="productAddApi">
-                  <NuxtLink to="/" class="submit_icons_btn_link">
+                  <div class="submit_icons_btn_link">
                     yuborish
-                  </NuxtLink>
+                  </div>
                 </div>
               </div>
             </div>
@@ -246,6 +246,7 @@ async function currensyApi() {
       store.loader = false;
     }
   } catch (error) {
+    store.loader = false;
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
@@ -293,6 +294,7 @@ async function categoryFatherApi() {
       store.loader = false;
     }
   } catch (error) {
+    store.loader = false
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
@@ -366,7 +368,7 @@ async function categoryChildApi(e) {
 }
 const ndsInput = ref(false);
 const deliveryInput = ref(false);
-const productDate = ref(null);
+const productDate = ref("");
 const productEndDate = ref(null);
 const min = ref(null);
 const max = ref(null);
@@ -377,6 +379,7 @@ const country = ref(null);
 async function productAddApi() {
   try {
     store.loader = true;
+    console.log(productDate.value.value);
     const arr = [];
     input.value.forEach((elem, i) => {
       arr.push({
@@ -448,6 +451,7 @@ async function productAddApi() {
     );
   }
 }
+
 </script>
 
   <style lang="scss" scoped>
