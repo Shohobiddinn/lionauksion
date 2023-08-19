@@ -73,20 +73,6 @@ async function loginApi() {
     .then((response) => {
       if (response.status === 403) {
         store.loader = false;
-        toast.error("Login noto'g'ri", {
-          position: "top-right",
-          timeout: 2000,
-          closeOnClick: true,
-          pauseOnFocusLoss: true,
-          pauseOnHover: true,
-          draggable: true,
-          draggablePercent: 0.6,
-          showCloseButtonOnHover: false,
-          hideProgressBar: true,
-          closeButton: "button",
-          icon: true,
-          rtl: false,
-        });
       } else {
         store.loader = false;
       }
@@ -123,6 +109,7 @@ async function loginApi() {
       });
     })
     .catch((error) => {
+      store.loader = false;
       toast.error("Login noto'g'ri", {
         position: "top-right",
         timeout: 2000,
