@@ -109,6 +109,7 @@ async function loginApi() {
       });
     })
     .catch((error) => {
+      console.log(error);
       store.loader = false;
       toast.error("Login noto'g'ri", {
         position: "top-right",
