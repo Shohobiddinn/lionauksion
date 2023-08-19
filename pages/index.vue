@@ -125,23 +125,23 @@
             </div>
           </div>
           <div class="info_bottom">
+            <!-- <pre>{{ products?.content }}</pre> -->
             <div class="info_bottom_page">
-              <div class="info_bottom_page_title logo">logotip</div>
               <div class="info_bottom_page_title com">kompaniya malumoti</div>
               <div class="info_bottom_page_title phone">mahsuloti</div>
               <div class="info_bottom_page_title product">mahsulot turlari</div>
+              <div class="info_bottom_page_title logo">
+                ishlab chiqarilgan sana
+              </div>
               <div class="info_bottom_page_title status">min yetkazish</div>
               <div class="info_bottom_page_title status">max yetkazish</div>
               <div class="info_bottom_page_title delivery">yetkazib berish</div>
               <div class="info_bottom_page_title price">narxi</div>
               <div class="info_bottom_page_title nds">qqs</div>
-              <div class="info_bottom_page_title edit">tahrirlash</div>
+              <div class="info_bottom_page_title edit">boshqa</div>
             </div>
             <div class="info_bottom_deliverys">
               <div class="delivery" v-for="p in products?.content" :key="p?.id">
-                <div class="delivery_content logo">
-                  <img src="../assets/image/squarelogo.svg" alt="" />
-                </div>
                 <div class="delivery_content">
                   <div class="delivery_content_title name">
                     {{ p?.supplierName }}
@@ -159,6 +159,9 @@
                   >
                     {{ d?.categoryDetailName }} {{ d?.value }}
                   </div>
+                </div>
+                <div class="delivery_content">
+                  {{ p?.factoryDate }}
                 </div>
                 <div class="delivery_content">{{ p?.minAmount }}</div>
                 <div class="delivery_content">{{ p?.maxAmount }}</div>
