@@ -55,30 +55,27 @@ definePageMeta({
 });
 const router = useRouter();
 const baseUrl = useRuntimeConfig().public.baseUrl;
-const login = ref(null);
 const username = ref("");
 const password = ref("");
-const errorMessage = ref("");
 async function loginApi() {
-    store.loader = true;
-    const data = await fetch(baseUrl + "/login", {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      method: "POST",
-      body: new URLSearchParams({
-        username: username.value.value,
-        password: password.value.value,
-      }),
-    });
-    const res = await data.json();
-    store.loader = false;
-    if (res.error) {
-      router.push("/login");
-      store.loader = false
-      toast.error(res.message ||
-        "Error",
+  store.loader = true;
+  const response = fetch(baseUrl + "/login", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams({
+      username: username.value.value,
+      password: password.value.value,
+    }),
+  })
+    .then((response) => {
+      if (response.status === 403) {
+        store.loader = false;
+        console.log(response);
+        toast.error(
+        "Login noto'g'ri",
       {
         position: "top-right",
         timeout: 2000,
@@ -94,18 +91,25 @@ async function loginApi() {
         rtl: false,
       }
     );
-    } else {
+      } else {
+        store.loader = false;
+        console.log("");
+      }
+     return response.json();
+    })
+    .then((data) => {
+      console.log(data);
       router.push("/");
-      localStorage.setItem("userToken", res.accessToken);
-      localStorage.setItem("userId", res.user.id);
-      localStorage.setItem("role", res?.user?.roles?.[0]?.name);
-      if (res?.user?.supplierId !== null) {
-        localStorage.setItem("userSupplierId", res?.user?.supplierId);
+      localStorage.setItem("userToken", data.accessToken);
+      localStorage.setItem("userId", data.user.id);
+      localStorage.setItem("role", data?.user?.roles?.[0]?.name);
+      if (data?.user?.supplierId !== null) {
+        localStorage.setItem("userSupplierId", data?.user?.supplierId);
       } else {
         localStorage.setItem("userSupplierId", "");
       }
-      if (res?.user?.companyId !== null) {
-        localStorage.setItem("userCompanyId", res?.user?.companyId);
+      if (data?.user?.companyId !== null) {
+        localStorage.setItem("userCompanyId", data?.user?.companyId);
       } else {
         localStorage.setItem("userCompanyId", "");
       }
@@ -123,9 +127,11 @@ async function loginApi() {
           icon: true,
           rtl: false,
         });
-    }
-    login.value = res;
- 
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+
 }
 function passeye() {
   if (password.value.type == "password") {
