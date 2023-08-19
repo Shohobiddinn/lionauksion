@@ -164,9 +164,16 @@
                 </div>
               </div>
               <div class="submit_icons">
-                <div class="submit_icons_btn exit">Orqaga</div>
+                <div class="submit_icons_btn exit"> 
+                  <NuxtLink to="/" class="submit_icons_btn_link">
+                    Orqaga
+                  </NuxtLink>
+             
+                </div>
                 <div class="submit_icons_btn send" @click="productEditApi">
-                  yuborish
+                  <NuxtLink to="/" class="submit_icons_btn_link">
+                 yuborish
+                  </NuxtLink>
                 </div>
               </div>
             </div>

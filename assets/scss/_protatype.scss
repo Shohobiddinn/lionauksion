@@ -187,6 +187,12 @@
                             margin-left: auto;
                             margin-right: 20px;
                         }
+
+                        &.edit {
+                            rotate: 0deg;
+                            margin-left: 300px;
+                            // margin-right: 20px;
+                        }
                     }
 
                     &.active {
@@ -386,6 +392,7 @@
 
                         ;
                     }
+
                 }
 
                 &_content {
@@ -406,6 +413,11 @@
                     &_icon {
 
                         cursor: pointer;
+
+                        &.edit {
+                            margin-left: auto;
+                            margin-right: 20px;
+                        }
 
                         &.delete {
                             rotate: 0deg;
