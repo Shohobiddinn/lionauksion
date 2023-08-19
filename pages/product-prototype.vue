@@ -596,7 +596,6 @@ async function protatypeChildEdit(e) {
       },
     });
     childProtatypeId.value = e;
-    console.log(data);
     if (data) {
       titleEditModal.value = true;
       bgModal.value = true;
