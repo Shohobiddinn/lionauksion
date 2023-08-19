@@ -125,11 +125,11 @@
             </div>
           </div>
           <div class="info_bottom">
-            <!-- <pre>{{ products?.content }}</pre> -->
             <div class="info_bottom_page">
               <div class="info_bottom_page_title com">kompaniya malumoti</div>
               <div class="info_bottom_page_title phone">mahsuloti</div>
               <div class="info_bottom_page_title product">mahsulot turlari</div>
+              <div class="info_bottom_page_title product">I mamlakat</div>
               <div class="info_bottom_page_title logo">
                 ishlab chiqarilgan
               </div>
@@ -160,6 +160,9 @@
                   >
                     {{ d?.categoryDetailName }} : <span>{{ d?.value }}</span>
                   </div>
+                </div>
+                <div class="delivery_content">
+              {{ p?.country }}
                 </div>
                 <div class="delivery_content">
                   {{ p?.factoryDate }}
