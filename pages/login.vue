@@ -74,7 +74,6 @@ async function loginApi() {
     });
     const res = await data.json();
     store.loader = false;
-    console.log(res.message);
     if (res.error) {
       router.push("/login");
       store.loader = false
