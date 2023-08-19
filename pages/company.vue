@@ -205,7 +205,7 @@
               </div>
             </div>
           </div>
-          <div class="pagination">
+          <div class="pagination" v-if="company?.content">
             <div class="pagination_icon" @click="pageDown">
               <svg
                 width="24"
