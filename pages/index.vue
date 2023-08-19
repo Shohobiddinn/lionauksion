@@ -72,7 +72,6 @@
                   <div class="categorys_filter_content_title">
                     <input
                       id="filter-1"
-                      value="Hello Shahobiddin baby"
                       name="filter"
                       type="checkbox"
                     />
