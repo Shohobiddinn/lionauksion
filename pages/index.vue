@@ -264,7 +264,7 @@
                 </div>
                 <div class="delivery_content edit">
                   <div
-                    class="delivery_content_title icon"
+                    class="delivery_content_title icon edit"
                     v-if="productEditIcon"
                   >
                     <NuxtLink :to="`/productedit/${p?.id}`">
@@ -282,7 +282,7 @@
                     </NuxtLink>
                   </div>
                   <div
-                    class="delivery_content_title icon"
+                    class="delivery_content_title icon edit"
                     v-if="productCartIcon"
                   >
                     <svg
@@ -298,7 +298,7 @@
                     </svg>
                   </div>
                   <div
-                    class="delivery_content_title icon"
+                    class="delivery_content_title icon edit"
                     @click="productDelete(p?.id)"
                     v-if="productDeleteIcon"
                   >
