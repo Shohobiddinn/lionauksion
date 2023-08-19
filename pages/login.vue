@@ -73,32 +73,26 @@ async function loginApi() {
     .then((response) => {
       if (response.status === 403) {
         store.loader = false;
-        console.log(response);
-        toast.error(
-        "Login noto'g'ri",
-      {
-        position: "top-right",
-        timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: "button",
-        icon: true,
-        rtl: false,
-      }
-    );
+        toast.error("Login noto'g'ri", {
+          position: "top-right",
+          timeout: 2000,
+          closeOnClick: true,
+          pauseOnFocusLoss: true,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 0.6,
+          showCloseButtonOnHover: false,
+          hideProgressBar: true,
+          closeButton: "button",
+          icon: true,
+          rtl: false,
+        });
       } else {
         store.loader = false;
-        console.log("");
       }
-     return response.json();
+      return response.json();
     })
     .then((data) => {
-      console.log(data);
       router.push("/");
       localStorage.setItem("userToken", data.accessToken);
       localStorage.setItem("userId", data.user.id);
@@ -114,24 +108,36 @@ async function loginApi() {
         localStorage.setItem("userCompanyId", "");
       }
       toast.success(data?.message || "Success", {
-          position: "top-right",
-          timeout: 2000,
-          closeOnClick: true,
-          pauseOnFocusLoss: true,
-          pauseOnHover: true,
-          draggable: true,
-          draggablePercent: 0.6,
-          showCloseButtonOnHover: false,
-          hideProgressBar: true,
-          closeButton: "button",
-          icon: true,
-          rtl: false,
-        });
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
     })
     .catch((error) => {
-      console.error("Error:", error);
+      toast.error("Login noto'g'ri", {
+        position: "top-right",
+        timeout: 2000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+      });
     });
-
 }
 function passeye() {
   if (password.value.type == "password") {
