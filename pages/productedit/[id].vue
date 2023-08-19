@@ -142,7 +142,17 @@
                   v-model="max"
                 />
               </div>
-          
+              <div class="inputs">
+                <label for="amount-3" class="inputs_label"
+                  >ishlab chiqarilgan davlat</label
+                >
+                <input
+                  type="text"
+                  id="amount-3"
+                  class="inputs_input"
+                  v-model="country"
+                />
+              </div>
               <div class="price">
                 <label for="amount-2" class="price_label">mahsulot narxi</label>
                 <input
@@ -384,6 +394,7 @@ async function productListApi() {
     currencyId.value = data?.currencyId;
     lastPrice.value = data?.isLowestPrice;
     productEndDate.value = data?.expDate;
+    country.value = data?.country
     if (data) {
       store.loader = false;
     }
@@ -461,6 +472,7 @@ const max = ref(null);
 const price = ref(null);
 const textarea = ref();
 const lastPrice = ref(false);
+const country = ref(null);
 async function productEditApi() {
   try {
     store.loader = true;
@@ -490,6 +502,7 @@ async function productEditApi() {
         factoryDate: productDate.value.value,
         expDate: productEndDate.value.value,
         isLowestPrice: lastPrice.value,
+        country:country.value,
         supplierId: localStorage.getItem("userSupplierId"),
         details: arr,
       }),
