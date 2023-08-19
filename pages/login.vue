@@ -111,7 +111,7 @@ async function loginApi() {
     .catch((error) => {
       console.log(error);
       store.loader = false;
-      toast.error("Login noto'g'ri", {
+      toast.error("Login yoki parol noto'g'ri", {
         position: "top-right",
         timeout: 2000,
         closeOnClick: true,
