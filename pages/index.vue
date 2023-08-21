@@ -9,7 +9,7 @@
                 <div class="form">
                   <input
                     type="text"
-                    placeholder="Qidiruv.."
+                    :placeholder="$t('search')"
                     v-model="searchInfo"
                     @input="search"
                   />
@@ -30,7 +30,7 @@
                         fill="white"
                       />
                     </svg>
-                    search..
+                    {{ $t("search") }}
                   </div>
                 </div>
               </div>
@@ -40,7 +40,7 @@
                     class="categorys_content_title_link"
                     to="/productadd"
                   >
-             {{ $t("Addproduct") }}
+                    {{ $t("Addproduct") }}
                   </NuxtLink>
                 </div>
               </div>
@@ -67,15 +67,13 @@
                       />
                     </svg>
                   </div>
-                  <div class="categorys_filter_option_title">{{ $t("Filter") }}</div>
+                  <div class="categorys_filter_option_title">
+                    {{ $t("Filter") }}
+                  </div>
                 </div>
                 <div class="categorys_filter_content">
                   <div class="categorys_filter_content_title">
-                    <input
-                      id="filter-1"
-                      name="filter"
-                      type="checkbox"
-                    />
+                    <input id="filter-1" name="filter" type="checkbox" />
 
                     <label
                       for="filter-1"
@@ -126,20 +124,24 @@
           </div>
           <div class="info_bottom">
             <div class="info_bottom_page">
-              <div class="info_bottom_page_title com">{{ $t("CompProduct") }}</div>
-              <div class="info_bottom_page_title phone">{{ $t("Product") }}</div>
-              <div class="info_bottom_page_title product">{{ $t("TypeProduct") }}</div>
-              <div class="info_bottom_page_title product">I mamlakat</div>
-              <div class="info_bottom_page_title logo">
-                ishlab chiqarilgan
+              <div class="info_bottom_page_title com">
+                {{ $t("CompProduct") }}
               </div>
-              <div class="info_bottom_page_title status">yetkazish</div>
-              <div class="info_bottom_page_title price">narxi</div>
-              <div class="info_bottom_page_title delivery">yetkazib berish</div>
-              <div class="info_bottom_page_title nds">qqs</div>
-              <div class="info_bottom_page_title ">ohitgi narx</div>
-              <div class="info_bottom_page_title desc">qo'shimcha</div>
-              <div class="info_bottom_page_title edit">boshqa</div> 
+              <div class="info_bottom_page_title phone">
+                {{ $t("Product") }}
+              </div>
+              <div class="info_bottom_page_title product">
+                {{ $t("TypeProduct") }}
+              </div>
+              <div class="info_bottom_page_title logo">{{ $t("date") }}</div>
+              <div class="info_bottom_page_title product">{{ $t("dateEnd") }}</div>
+              <div class="info_bottom_page_title status">{{ $t("MDelivery") }}</div>
+              <div class="info_bottom_page_title price">{{ $t("Cost") }}</div>
+              <div class="info_bottom_page_title delivery">{{ $t("Delivery") }}</div>
+              <div class="info_bottom_page_title nds">{{ $t("QQS") }}</div>
+              <div class="info_bottom_page_title">{{ $t("lastPrice") }}</div>
+              <div class="info_bottom_page_title desc">{{ $t("addition") }}</div>
+              <div class="info_bottom_page_title edit">{{ $t("another") }}</div>
             </div>
             <div class="info_bottom_deliverys">
               <div class="delivery" v-for="p in products?.content" :key="p?.id">
@@ -162,21 +164,26 @@
                   </div>
                 </div>
                 <div class="delivery_content">
-              {{ p?.country }}
+                  {{ p?.factoryDate }} <br>
+                  {{ p?.country }}
                 </div>
                 <div class="delivery_content">
-                  {{ p?.factoryDate }}
+                  {{ p?.expDate }}
                 </div>
                 <div class="delivery_content">
                   <div class="delivery_content_title">
-                    min : <span>{{ p?.minAmount }}</span> <br> max : <span>{{ p?.maxAmount }}</span>
+                    min : <span>{{ p?.minAmount }}</span> <br />
+                    max : <span>{{ p?.maxAmount }}</span>
                   </div>
-                 </div>
+                </div>
                 <div class="delivery_content">
                   {{ p?.price }} {{ p?.currencySymbol }}
                 </div>
                 <div class="delivery_content">
-                  <div class="delivery_content_title icon" v-if="p?.hasDelivery">
+                  <div
+                    class="delivery_content_title icon"
+                    v-if="p?.hasDelivery"
+                  >
                     <svg
                       width="30"
                       height="30"
@@ -220,7 +227,10 @@
                       />
                     </svg>
                   </div>
-                  <div class="delivery_content_title icon" v-else-if="!p?.hasNds">
+                  <div
+                    class="delivery_content_title icon"
+                    v-else-if="!p?.hasNds"
+                  >
                     <svg
                       width="30"
                       height="30"
@@ -235,7 +245,10 @@
                   </div>
                 </div>
                 <div class="delivery_content">
-                  <div class="delivery_content_title icon" v-if="p?.isLowestPrice">
+                  <div
+                    class="delivery_content_title icon"
+                    v-if="p?.isLowestPrice"
+                  >
                     <svg
                       width="30"
                       height="30"
@@ -248,7 +261,10 @@
                       />
                     </svg>
                   </div>
-                  <div class="delivery_content_title icon" v-else-if="!p?.isLowestPrice">
+                  <div
+                    class="delivery_content_title icon"
+                    v-else-if="!p?.isLowestPrice"
+                  >
                     <svg
                       width="30"
                       height="30"
@@ -263,7 +279,7 @@
                   </div>
                 </div>
                 <div class="delivery_content">
-                {{ p?.description }}
+                  {{ p?.description }}
                 </div>
                 <div class="delivery_content edit">
                   <div
@@ -318,11 +334,9 @@
                     </svg>
                   </div>
                 </div>
-             
-         
               </div>
             </div>
-            <div class="pagination" v-if=" products?.content.length">
+            <div class="pagination" v-if="products?.content.length">
               <div class="pagination_icon" @click="pageDown">
                 <svg
                   width="24"

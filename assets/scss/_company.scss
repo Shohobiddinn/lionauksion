@@ -25,6 +25,7 @@ body {
                         padding: 5px 10px;
                         border-radius: 5px;
                         background-color: $pr_blue_color;
+                        text-transform: capitalize;
 
                         &:hover {
                             filter: invert(0.1);

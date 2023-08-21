@@ -4,13 +4,13 @@
       <div class="container">
         <div class="menu">
           <div class="menu_logo">
-            <NuxtLink to="/">
+            <NuxtLink :to="localePath('/')">
               <img src="@/assets/image/logo.png" alt="" />
             </NuxtLink>
           </div>
           <div class="menu_content">
             <div class="menu_content_title" v-if="productPage">
-              <NuxtLink class="menu_content_title_link" to="/">
+              <NuxtLink class="menu_content_title_link" :to="localePath('/')">
                 <div class="menu_content_title_link_icon">
                   <svg
                     width="30"
@@ -28,7 +28,7 @@
               </NuxtLink>
             </div>
             <div class="menu_content_title" v-if="companyPage">
-              <NuxtLink class="menu_content_title_link" to="/company">
+              <NuxtLink class="menu_content_title_link" :to="localePath('/company')">
                 <div class="menu_content_title_link_icon">
                   <svg
                     width="30"
@@ -46,7 +46,7 @@
               </NuxtLink>
             </div>
             <div class="menu_content_title" v-if="currensyPage">
-              <NuxtLink class="menu_content_title_link" to="/currensy">
+              <NuxtLink class="menu_content_title_link" :to="localePath('/currensy')">
                 <div class="menu_content_title_link_icon">
                   <svg
                     width="30"
@@ -64,7 +64,7 @@
               </NuxtLink>
             </div>
             <div class="menu_content_title" v-if="currensyTypePage">
-              <NuxtLink class="menu_content_title_link" to="/currensyType">
+              <NuxtLink class="menu_content_title_link" :to="localePath('/currensyType')">
                 <div class="menu_content_title_link_icon">
                   <svg
                     width="30"
@@ -82,7 +82,7 @@
               </NuxtLink>
             </div>
             <div class="menu_content_title" v-if="supplierPage">
-              <NuxtLink class="menu_content_title_link" to="/supplier">
+              <NuxtLink class="menu_content_title_link" :to="localePath('/supplier')">
                 <div class="menu_content_title_link_icon">
                   <svg
                     width="30"
@@ -100,7 +100,7 @@
               </NuxtLink>
             </div>
             <div class="menu_content_title" v-if="productAddPage">
-              <NuxtLink class="menu_content_title_link" to="/product-prototype">
+              <NuxtLink class="menu_content_title_link" :to="localePath('/product-prototype')">
                 <div class="menu_content_title_link_icon">
                   <svg
                     width="30"
@@ -120,7 +120,7 @@
               </NuxtLink>
             </div>
             <div class="menu_content_title" v-if="userPage">
-              <NuxtLink class="menu_content_title_link" to="/users">
+              <NuxtLink class="menu_content_title_link" :to="localePath('/users')">
                 <div class="menu_content_title_link_icon">
                   <svg
                     width="30"
@@ -197,6 +197,7 @@
 <script setup>
 const { locale, locales } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
+const localePath = useLocalePath()
 const role = localStorage.getItem("role");
 const router = useRouter();
 const productPage = ref(false);

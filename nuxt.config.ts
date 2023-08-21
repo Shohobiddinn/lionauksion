@@ -23,10 +23,12 @@ export default defineNuxtConfig({
     locales: [
       {
         code: "uz",
+        name:"uzb",
         file: "uz.json"
       },
       {
         code: "ru",
+        name:"рус",
         file: "ru.json"
       },
     ]

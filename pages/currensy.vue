@@ -9,7 +9,7 @@
               class="currensy_content"
               @click="(currensyModal = true), (bgmodol = true)"
             >
-              <div class="currensy_content_title">Qo'shish</div>
+              <div class="currensy_content_title">{{ $t("curAdd") }}</div>
               <div class="currensy_content_icon">
                 <svg
                   width="25"
@@ -28,12 +28,12 @@
           <div class="currensy_info_bottom">
             <div class="currensy_info_bottom_page">
               <div class="page">
-                <div class="page_title">Nomi</div>
-                <div class="page_title">turi</div>
-                <div class="page_title">qiymati</div>
-                <div class="page_title">yangilangan sana</div>
-                <div class="page_title">tahrirlash</div>
-                <div class="page_title">O'chirish</div>
+                <div class="page_title">{{ $t("NameCurrency") }}</div>
+                <div class="page_title">{{ $t("TypeCurrency") }}</div>
+                <div class="page_title">{{ $t("ValueCurrency") }}</div>
+                <div class="page_title">{{ $t("DateCurrency") }}</div>
+                <div class="page_title">{{ $t("editCurrensy") }}</div>
+                <div class="page_title">{{ $t("Delete") }}</div>
               </div>
             </div>
             <div class="currensy" v-for="c in currensy" :key="c?.id">
@@ -193,6 +193,7 @@ import { useToast } from "vue-toastification";
 const toast = useToast();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const { locale } = useI18n();
+const localePath = useLocalePath();
 const currensy = ref(null);
 const bgmodol = ref(false);
 const currensyModal = ref(false);
