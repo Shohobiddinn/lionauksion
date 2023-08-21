@@ -185,7 +185,7 @@
                 />
               </svg>
             </div>
-            <div class="log_out_title">chiqish</div>
+            <div class="log_out_title">{{ $t("exit") }}</div>
           </div>
         </div>
       </div>

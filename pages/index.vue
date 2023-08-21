@@ -40,7 +40,7 @@
                     class="categorys_content_title_link"
                     to="/productadd"
                   >
-                    Qo'shish
+             {{ $t("Addproduct") }}
                   </NuxtLink>
                 </div>
               </div>
@@ -67,7 +67,7 @@
                       />
                     </svg>
                   </div>
-                  <div class="categorys_filter_option_title">filter</div>
+                  <div class="categorys_filter_option_title">{{ $t("Filter") }}</div>
                 </div>
                 <div class="categorys_filter_content">
                   <div class="categorys_filter_content_title">
@@ -126,9 +126,9 @@
           </div>
           <div class="info_bottom">
             <div class="info_bottom_page">
-              <div class="info_bottom_page_title com">kompaniya malumoti</div>
-              <div class="info_bottom_page_title phone">mahsuloti</div>
-              <div class="info_bottom_page_title product">mahsulot turlari</div>
+              <div class="info_bottom_page_title com">{{ $t("CompProduct") }}</div>
+              <div class="info_bottom_page_title phone">{{ $t("Product") }}</div>
+              <div class="info_bottom_page_title product">{{ $t("TypeProduct") }}</div>
               <div class="info_bottom_page_title product">I mamlakat</div>
               <div class="info_bottom_page_title logo">
                 ishlab chiqarilgan
