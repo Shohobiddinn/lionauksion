@@ -156,7 +156,9 @@
                   <label for="c-2">hususiyatni RU</label>
                   <input type="text" id="c-2" v-model="childAddRu" />
                 </div>
-                <div class="add_btn" @click="categoryChildEditApi">yuborish</div>
+                <div class="add_btn" @click="categoryChildEditApi">
+                  yuborish
+                </div>
               </div>
             </div>
             <div
@@ -237,34 +239,41 @@ const categoryChild = ref(null);
 const categoryId = ref(null);
 const protatype = ref();
 async function categoryChildApi(e, event) {
-  store.loader = true;
-  protatype.value.forEach((el) => {
-    if (el == event.target) {
-      el.classList.add("active");
-    } else {
-      el.classList.remove("active");
+  try {
+    store.loader = true;
+    protatype.value.forEach((el) => {
+      if (el == event.target) {
+        el.classList.add("active");
+      } else {
+        el.classList.remove("active");
+      }
+    });
+    protatype.value.forEach((el) => {
+      if (el == event.target) {
+        el.classList.add("active");
+      } else {
+        el.classList.remove("active");
+      }
+    });
+    const data = await $fetch(baseUrl + "/category-detail/all", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+      params: {
+        categoryId: e,
+      },
+    });
+    categoryChild.value = data;
+    categoryId.value = e;
+
+    if (data) {
+      store.loader = false;
     }
-  });
-  const data = await $fetch(baseUrl + "/category-detail/all", {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-      "Accept-Language": locale.value,
-    },
-    params: {
-      categoryId: e,
-    },
-  });
-  categoryChild.value = data;
-  categoryId.value = e;
-  protatype.value.forEach((el) => {
-    if (el == event.target) {
-      el.classList.add("active");
-    } else {
-      el.classList.remove("active");
-    }
-  });
-  store.loader = false;
+  } catch (error) {
+    console.log(error);
+  }
 }
 const fatherAddUz = ref("");
 const fatherAddRu = ref("");
@@ -328,6 +337,29 @@ async function categoryChildAddApi() {
       bgModal.value = false;
       titleModal.value = false;
       store.loader = false;
+      try {
+        store.loader = true;
+        const data = await $fetch(baseUrl + "/category-detail/all", {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("userToken"),
+            "Accept-Language": locale.value,
+          },
+          params: {
+            categoryId: categoryId.value,
+          },
+        });
+        categoryChild.value = data;
+        if (data) {
+          store.loader = false;
+        }
+      } catch (error) {
+        store.loader = true;
+        toast.error(error.response._data.message, {
+          position: "top-right",
+          timeout: 2000,
+        });
+      }
     } else {
     }
   } catch (error) {
@@ -385,6 +417,29 @@ async function childProtitipDelete(p) {
         position: "top-right",
         timeout: 2000,
       });
+      try {
+        store.loader = true;
+        const data = await $fetch(baseUrl + "/category-detail/all", {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("userToken"),
+            "Accept-Language": locale.value,
+          },
+          params: {
+            categoryId: categoryId.value,
+          },
+        });
+        categoryChild.value = data;
+        if (data) {
+          store.loader = false;
+        }
+      } catch (error) {
+        store.loader = true;
+        toast.error(error.response._data.message, {
+          position: "top-right",
+          timeout: 2000,
+        });
+      }
     } else {
     }
   } catch (error) {
@@ -479,7 +534,7 @@ async function protatypeChildEdit(e) {
       bgModal.value = true;
       childAddUz.value = data?.nameUz;
       childAddRu.value = data?.nameRu;
-      categoryId.value = data?.categoryId
+      categoryId.value = data?.categoryId;
       store.loader = false;
     }
   } catch (error) {
@@ -501,7 +556,7 @@ async function categoryChildEditApi() {
       },
       body: JSON.stringify({
         id: childProtatypeId.value,
-        categoryId:categoryId.value,
+        categoryId: categoryId.value,
         nameUz: childAddUz.value,
         nameRu: childAddRu.value,
       }),
