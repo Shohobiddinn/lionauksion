@@ -213,6 +213,8 @@ function logout() {
   localStorage.removeItem("role");
   localStorage.removeItem("userSupplierId");
   localStorage.removeItem("userCompanyId");
+  localStorage.removeItem("userRefreshToken");
+  localStorage.removeItem("userId");
   router.push("/login");
 }
 function delLang(e) {

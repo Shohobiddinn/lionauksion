@@ -414,6 +414,59 @@ async function search() {
     }
   } catch (error) {}
 }
+
+async function refresh() {
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + "/refresh-token", {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userRefreshToken"),
+        "Accept-Language": locale.value,
+      },
+    });
+    if (data) {
+      store.loader = false;
+      localStorage.setItem("userToken", data?.accessToken);
+      localStorage.setItem("userId", data?.user?.id);
+      localStorage.setItem("role", data?.user?.roles?.[0]?.name);
+      localStorage.setItem("userRefreshToken", data?.refreshToken);
+      if (data?.user?.supplierId !== null) {
+        localStorage.setItem("userSupplierId", data?.user?.supplierId);
+      } else {
+        localStorage.setItem("userSupplierId", "");
+      }
+      if (data?.user?.companyId !== null) {
+        localStorage.setItem("userCompanyId", data?.user?.companyId);
+      } else {
+        localStorage.setItem("userCompanyId", "");
+      }
+    }
+  } catch (error) {
+    if (error?.response?._data?.status == 401) {
+      localStorage.removeItem("userToken");
+      localStorage.removeItem("role");
+      localStorage.removeItem("userSupplierId");
+      localStorage.removeItem("userCompanyId");
+      localStorage.removeItem("userRefreshToken");
+      localStorage.removeItem("userId");
+
+      router.push("/login");
+    }else{
+      store.loader = false;
+      toast.error(
+        error?.response?._data?.message ||
+          error?.response?._data?.error ||
+          "Error",
+        {
+          position: "top-right",
+          timeout: 2000,
+        }
+      );
+
+    }
+  }
+}
+refresh();
 </script>
   
   <style lang="scss" scoped>

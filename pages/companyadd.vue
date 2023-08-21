@@ -5,7 +5,9 @@
         <div class="information">
           <div class="information_inputs">
             <div class="info">
-              <label class="info_label" for="com_name">{{ $t("CompanyNomi") }}</label>
+              <label class="info_label" for="com_name">{{
+                $t("CompanyNomi")
+              }}</label>
               <input
                 class="info_input"
                 type="text"
@@ -14,9 +16,9 @@
               />
             </div>
             <div class="info">
-              <label class="info_label" for="com_leader"
-                >{{ $t("CompanyRahbariIsmi") }}</label
-              >
+              <label class="info_label" for="com_leader">{{
+                $t("CompanyRahbariIsmi")
+              }}</label>
               <input
                 class="info_input"
                 type="text"
@@ -26,11 +28,14 @@
             </div>
             <div class="info">
               <label class="info_label" for="com_name">
-                {{ $t("PhoneNumber") }}</label>
+                {{ $t("PhoneNumber") }}</label
+              >
               <input class="info_input" type="text" ref="phone" id="com_name" />
             </div>
             <div class="info">
-              <label class="info_label" for="start_date">{{ $t("Login") }}</label>
+              <label class="info_label" for="start_date">{{
+                $t("Login")
+              }}</label>
               <input
                 class="info_input"
                 type="text"
@@ -40,7 +45,9 @@
               />
             </div>
             <div class="info">
-              <label class="info_label" for="start_date">{{ $t("Password") }}</label>
+              <label class="info_label" for="start_date">{{
+                $t("Password")
+              }}</label>
               <input
                 class="info_input"
                 type="password"
@@ -69,11 +76,16 @@
             /></label> -->
             <div class="information_image_btns">
               <div class="btn_exit btn">
-                <NuxtLink class="btn_exit_link btn" :to="localePath('/company')">
-               {{ $t("Back") }}
+                <NuxtLink
+                  class="btn_exit_link btn"
+                  :to="localePath('/company')"
+                >
+                  {{ $t("Back") }}
                 </NuxtLink>
               </div>
-              <div class="btn_save btn" @click="companyApi">{{ $t("Send") }}</div>
+              <div class="btn_save btn" @click="companyApi">
+                {{ $t("Send") }}
+              </div>
             </div>
           </div>
         </div>
@@ -151,6 +163,57 @@ onMounted(() => {
   };
   var mask = new IMask(phone.value, maskOptions);
 });
+async function refresh() {
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + "/refresh-token", {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userRefreshToken"),
+        "Accept-Language": locale.value,
+      },
+    });
+    if (data) {
+      store.loader = false;
+      localStorage.setItem("userToken", data?.accessToken);
+      localStorage.setItem("userId", data?.user?.id);
+      localStorage.setItem("role", data?.user?.roles?.[0]?.name);
+      localStorage.setItem("userRefreshToken", data?.refreshToken);
+      if (data?.user?.supplierId !== null) {
+        localStorage.setItem("userSupplierId", data?.user?.supplierId);
+      } else {
+        localStorage.setItem("userSupplierId", "");
+      }
+      if (data?.user?.companyId !== null) {
+        localStorage.setItem("userCompanyId", data?.user?.companyId);
+      } else {
+        localStorage.setItem("userCompanyId", "");
+      }
+    }
+  } catch (error) {
+    if (error?.response?._data?.status == 401) {
+      localStorage.removeItem("userToken");
+      localStorage.removeItem("role");
+      localStorage.removeItem("userSupplierId");
+      localStorage.removeItem("userCompanyId");
+      localStorage.removeItem("userRefreshToken");
+      localStorage.removeItem("userId");
+
+      router.push("/login");
+    } else {
+      store.loader = false;
+      toast.error(
+        error?.response?._data?.message ||
+          error?.response?._data?.error ||
+          "Error",
+        {
+          position: "top-right",
+          timeout: 2000,
+        }
+      );
+    }
+  }
+}
+refresh();
 </script>
 
 <style lang="scss" scoped>

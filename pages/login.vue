@@ -80,9 +80,10 @@ async function loginApi() {
     })
     .then((data) => {
       router.push("/");
-      localStorage.setItem("userToken", data.accessToken);
-      localStorage.setItem("userId", data.user.id);
+      localStorage.setItem("userToken", data?.accessToken);
+      localStorage.setItem("userId", data?.user?.id);
       localStorage.setItem("role", data?.user?.roles?.[0]?.name);
+      localStorage.setItem("userRefreshToken",data?.refreshToken)
       if (data?.user?.supplierId !== null) {
         localStorage.setItem("userSupplierId", data?.user?.supplierId);
       } else {
