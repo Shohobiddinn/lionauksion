@@ -38,7 +38,7 @@
                 <div class="categorys_content_title" v-show="productAddIcon">
                   <NuxtLink
                     class="categorys_content_title_link"
-                    to="/productadd"
+                    :to="localePath('/productadd')"
                   >
                     {{ $t("Addproduct") }}
                   </NuxtLink>
@@ -134,13 +134,21 @@
                 {{ $t("TypeProduct") }}
               </div>
               <div class="info_bottom_page_title logo">{{ $t("date") }}</div>
-              <div class="info_bottom_page_title product">{{ $t("dateEnd") }}</div>
-              <div class="info_bottom_page_title status">{{ $t("MDelivery") }}</div>
+              <div class="info_bottom_page_title product">
+                {{ $t("dateEnd") }}
+              </div>
+              <div class="info_bottom_page_title status">
+                {{ $t("MDelivery") }}
+              </div>
               <div class="info_bottom_page_title price">{{ $t("Cost") }}</div>
-              <div class="info_bottom_page_title delivery">{{ $t("Delivery") }}</div>
+              <div class="info_bottom_page_title delivery">
+                {{ $t("Delivery") }}
+              </div>
               <div class="info_bottom_page_title nds">{{ $t("QQS") }}</div>
               <div class="info_bottom_page_title">{{ $t("lastPrice") }}</div>
-              <div class="info_bottom_page_title desc">{{ $t("addition") }}</div>
+              <div class="info_bottom_page_title desc">
+                {{ $t("addition") }}
+              </div>
               <div class="info_bottom_page_title edit">{{ $t("another") }}</div>
             </div>
             <div class="info_bottom_deliverys">
@@ -164,7 +172,7 @@
                   </div>
                 </div>
                 <div class="delivery_content">
-                  {{ p?.factoryDate }} <br>
+                  {{ p?.factoryDate }} <br />
                   {{ p?.country }}
                 </div>
                 <div class="delivery_content">
@@ -286,7 +294,7 @@
                     class="delivery_content_title icon edit"
                     v-if="productEditIcon"
                   >
-                    <NuxtLink :to="`/productedit/${p?.id}`">
+                    <NuxtLink :to="localePath(`/productedit/${p?.id}`)">
                       <svg
                         width="30"
                         height="30"
@@ -392,6 +400,7 @@ const store = useStore();
 import { useToast } from "vue-toastification";
 const toast = useToast();
 const { locale } = useI18n();
+const localePath = useLocalePath();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const filterModal = ref(false);
 const page = ref(0);
