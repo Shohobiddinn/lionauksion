@@ -29,111 +29,40 @@
                       fill="white"
                     />
                   </svg>
-               {{ $t("search") }}
+                  {{ $t("search") }}
                 </div>
               </div>
             </div>
             <div class="company_info_top_add">
-              <NuxtLink class="company_info_top_add_link" :to="localePath('/usersadd')">
-           {{ $t("userAdd") }}
+              <NuxtLink
+                class="company_info_top_add_link"
+                :to="localePath('/usersadd')"
+              >
+                {{ $t("userAdd") }}
               </NuxtLink>
             </div>
-            <div class="company_filter" :class="{ active: filterModal }">
-              <div
-                class="company_filter_option"
-                @click="filterModal = !filterModal"
-              >
-                <div class="company_filter_option_icon">
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M10.9299 2.1001L5.9999 10.0001M5.3999 2.1001H18.5999C19.6999 2.1001 20.5999 3.0001 20.5999 4.1001V6.3001C20.5999 7.1001 20.0999 8.1001 19.5999 8.6001L15.2999 12.4001C14.6999 12.9001 14.2999 13.9001 14.2999 14.7001V19.0001C14.2999 19.6001 13.8999 20.4001 13.3999 20.7001L11.9999 21.6001C10.6999 22.4001 8.8999 21.5001 8.8999 19.9001V14.6001C8.8999 13.9001 8.4999 13.0001 8.0999 12.5001L4.2999 8.5001C3.7999 8.0001 3.3999 7.1001 3.3999 6.5001V4.2001C3.3999 3.0001 4.2999 2.1001 5.3999 2.1001Z"
-                      stroke="black"
-                      stroke-width="1.5"
-                      stroke-miterlimit="10"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-                <div class="company_filter_option_title">{{ $t("Filter") }}</div>
-              </div>
-              <div class="company_filter_content">
-                <div class="company_filter_content_title">
-                  <input
-                    id="filter-1"
-                    value="Hello Shahobiddin baby"
-                    name="filter"
-                    type="checkbox"
-                  />
-
-                  <label
-                    for="filter-1"
-                    class="company_filter_content_title_text nds"
-                  >
-                    QQS
-                  </label>
-                </div>
-                <div class="company_filter_content_title">
-                  <input id="filter-2" name="filter" type="checkbox" />
-
-                  <label
-                    for="filter-2"
-                    class="company_filter_content_title_text"
-                  >
-                    yetkazib berish
-                  </label>
-                </div>
-                <div class="company_filter_content_title">
-                  <input id="filter-3" name="filter" type="checkbox" />
-
-                  <label
-                    for="filter-3"
-                    class="company_filter_content_title_text"
-                  >
-                    faol
-                  </label>
-                </div>
-                <div class="company_filter_content_title">
-                  <input id="filter-4" name="filter" type="checkbox" />
-
-                  <label
-                    for="filter-4"
-                    class="company_filter_content_title_text"
-                  >
-                    faol emas
-                  </label>
-                </div>
-                <div
-                  class="company_filter_content_btn"
-                  @click="(filterModal = false), func()"
-                >
-                  yuborish
-                </div>
-              </div>
-            </div>
+           
           </div>
           <div class="company_info_bottom">
             <div class="company_info_bottom_top">
-              <div class="company_info_bottom_top_title logotip">{{ $t("Logotip") }}</div>
-              <div class="company_info_bottom_top_title">
-{{ $t("userName") }}
+              <div class="company_info_bottom_top_title logotip">
+                {{ $t("Logotip") }}
               </div>
               <div class="company_info_bottom_top_title">
-             {{ $t("userDirector") }}
+                {{ $t("userName") }}
               </div>
               <div class="company_info_bottom_top_title">
-              {{ $t("PhoneNumber") }}
+                {{ $t("userDirector") }}
               </div>
               <div class="company_info_bottom_top_title">
-             {{ $t("userBlocked") }}
+                {{ $t("PhoneNumber") }}
               </div>
-              <div class="company_info_bottom_top_title">{{ $t("another") }}</div>
+              <div class="company_info_bottom_top_title">
+                {{ $t("userBlocked") }}
+              </div>
+              <div class="company_info_bottom_top_title">
+                {{ $t("another") }}
+              </div>
             </div>
             <div class="company_info_bottom_companys">
               <div class="company" v-for="c in user?.content" :key="c.id">
@@ -456,6 +385,7 @@ async function userDelete(e) {
 const searchInfo = ref();
 async function search() {
   try {
+    store.loader = true;
     const data = await $fetch(baseUrl + "/user", {
       method: "GET",
       headers: {
@@ -476,13 +406,13 @@ async function search() {
     });
     user.value = data;
     if (data) {
+      store.loader = false;
       toast.success(data?.message || "Success", {
         position: "top-right",
         timeout: 2000,
       });
     }
-  } catch (error) {
-  }
+  } catch (error) {}
 }
 </script>
   

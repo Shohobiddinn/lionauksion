@@ -73,48 +73,54 @@
                 </div>
                 <div class="categorys_filter_content">
                   <div class="categorys_filter_content_title">
-                    <input id="filter-1" name="filter" type="checkbox" />
+                    <input
+                      id="filter-1"
+                      name="filter"
+                      type="checkbox"
+                      v-model="nds"
+                    />
 
                     <label
                       for="filter-1"
                       class="categorys_filter_content_title_text nds"
                     >
-                      QQS
+                      {{ $t("QQS") }}
                     </label>
                   </div>
                   <div class="categorys_filter_content_title">
-                    <input id="filter-2" name="filter" type="checkbox" />
+                    <input
+                      id="filter-2"
+                      name="filter"
+                      type="checkbox"
+                      v-model="delivery"
+                    />
 
                     <label
                       for="filter-2"
                       class="categorys_filter_content_title_text"
                     >
-                      yetkazib berish
+                      {{ $t("Delivery") }}
                     </label>
                   </div>
                   <div class="categorys_filter_content_title">
-                    <input id="filter-3" name="filter" type="checkbox" />
+                    <input
+                      id="filter-3"
+                      name="filter"
+                      type="checkbox"
+                      v-model="lastPrice"
+                    />
 
                     <label
                       for="filter-3"
                       class="categorys_filter_content_title_text"
                     >
-                      faol
+                      {{ $t("lastPrice") }}
                     </label>
                   </div>
-                  <div class="categorys_filter_content_title">
-                    <input id="filter-4" name="filter" type="checkbox" />
 
-                    <label
-                      for="filter-4"
-                      class="categorys_filter_content_title_text"
-                    >
-                      faol emas
-                    </label>
-                  </div>
                   <div
                     class="categorys_filter_content_btn"
-                    @click="(filterModal = false), func()"
+                    @click="(filterModal = false), search()"
                   >
                     yuborish
                   </div>
@@ -529,9 +535,22 @@ async function productDelete(e) {
     );
   }
 }
+const nds = ref(null);
+const delivery = ref(null);
+const lastPrice = ref(null);
 const searchInfo = ref();
 async function search() {
   try {
+    store.loader = true;
+    if (nds.value == false) {
+      nds.value = null;
+    }
+    if (delivery.value == false) {
+      delivery.value = null;
+    }
+    if (lastPrice.value == false) {
+      lastPrice.value = null;
+    }
     const data = await $fetch(baseUrl + "/product", {
       method: "GET",
       headers: {
@@ -548,6 +567,9 @@ async function search() {
         supplierId: localStorage.getItem("userSupplierId")
           ? localStorage.getItem("userSupplierId")
           : null,
+        hasNds: nds.value,
+        hasDelivery: delivery.value,
+        isLowestPrice: lastPrice.value,
       },
     });
 
@@ -567,6 +589,9 @@ async function search() {
       }
     );
   }
+}
+function tekshiruv() {
+  console.log(nds.value, delivery.value, lastPrice.value);
 }
 const productDeleteIcon = ref(false);
 const productCartIcon = ref(false);
