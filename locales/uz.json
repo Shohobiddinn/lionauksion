@@ -46,6 +46,8 @@
     "editCurrensy":"Taxrirlash",
     "Delete":"O'chirish",
     "addCurrensyType":"valyuta turini qo'shish",
+    "country": "ishlab chiqarilgan davlat",
+    "productPrice":"Mahsulot narxi",
     "addProductCategory":"Tovar Kategoriya Qo'shish",
     "addCategoryNameUz":"Kategoriya Nomini Kiriting UZ",
     "addCategoryNameRu":"Kategoriya Nomini Kiriting UZ",

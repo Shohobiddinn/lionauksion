@@ -46,6 +46,8 @@
     "ValueCurrency": "Значение",
     "DateCurrency": "Дата обновления",
     "Delete": "Удалить",
+    "country":"Страна выпуска",
+    "productPrice":"цена продукта",
     "addProductCategory": "Добавить категорию продукта",
     "addCategoryNameUz": "Введите название категории (uz)",
     "addCategoryNameRu": "Введите название категории (ru)",

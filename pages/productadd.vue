@@ -11,7 +11,7 @@
                   @click="selectModal = !selectModal"
                 >
                   <div class="selected_option_title">
-                    {{ inputFatherTitle }}
+                    {{ inputFatherTitle ? inputFatherTitle : $t('ProductCatology')   }}
                   </div>
                   <div class="selected_option_icon">
                     <svg
@@ -45,7 +45,7 @@
                   type="checkbox"
                   id="nds"
                 />
-                <label class="info_label" for="nds">QQS</label>
+                <label class="info_label" for="nds">{{ $t("QQS") }}</label>
               </div>
               <div class="info">
                 <input
@@ -54,7 +54,7 @@
                   type="checkbox"
                   id="delivery"
                 />
-                <label class="info_label" for="delivery">yetkazib berish</label>
+                <label class="info_label" for="delivery">{{ $t("Delivery") }}</label>
               </div>
               <div class="info">
                 <input
@@ -63,7 +63,7 @@
                   type="checkbox"
                   id="lact_price"
                 />
-                <label class="info_label" for="lact_price">ohirgi narx</label>
+                <label class="info_label" for="lact_price">{{ $t("lastPrice") }}</label>
               </div>
               <div class="selected" :class="{ active: currensyModal }">
                 <div
@@ -71,7 +71,7 @@
                   @click="currensyModal = !currensyModal"
                 >
                   <div class="selected_option_title">
-                    {{ currensyTitle }}
+                    {{ currensyTitle ? currensyTitle : $t("ValyutaTuri") }}
                   </div>
                   <div class="selected_option_icon">
                     <svg
@@ -99,7 +99,7 @@
               </div>
               <div class="infos">
                 <label class="infos_date_label" for="delivery"
-                  >ishlab chiqarilgan sana</label
+                  >{{ $t("DateofMade") }}</label
                 >
                 <input
                   class="infos_date_input"
@@ -111,7 +111,7 @@
               </div>
               <div class="infos">
                 <label class="infos_date_label" for="delivery-1"
-                  >Amal qilish muddati</label
+                  >{{ $t("dateEnd") }}</label
                 >
                 <input
                   class="infos_date_input"
@@ -123,7 +123,7 @@
               </div>
               <div class="inputs">
                 <label for="amount-1" class="inputs_label"
-                  >min yetkazib berish miqdori</label
+                  >{{ $t("MinDeliveryAmount") }}</label
                 >
                 <input
                   type="text"
@@ -134,7 +134,7 @@
               </div>
               <div class="inputs">
                 <label for="amount-2" class="inputs_label"
-                  >max yetkazib berish miqdori</label
+                  >{{ $t("MaxDeliveryAmount") }}</label
                 >
                 <input
                   type="text"
@@ -145,7 +145,7 @@
               </div>
                <div class="inputs">
                 <label for="amount-3" class="inputs_label"
-                  >ishlab chiqarilgan davlat</label
+                  >{{ $t("country") }}</label
                 >
                 <input
                   type="text"
@@ -155,7 +155,7 @@
                 />
               </div>
               <div class="price">
-                <label for="amount-2" class="price_label">mahsulot narxi</label>
+                <label for="amount-2" class="price_label">{{ $t("productPrice") }}</label>
                 <input
                   type="text"
                   id="amount-2"
@@ -165,7 +165,7 @@
               </div>
               <div class="textarea">
                 <label class="textarea_label" for="text"
-                  >Qo'shimcha ma'lumot</label
+                  >{{ $t("AdditionalInfo") }}</label
                 >
                 <textarea
                   class="textarea_title"
@@ -197,13 +197,13 @@
               </div>
               <div class="submit_icons" v-if="categoryChild">
                 <div class="submit_icons_btn exit">
-                  <NuxtLink to="/" class="submit_icons_btn_link">
-                    Orqaga
+                  <NuxtLink :to="localePath('/')" class="submit_icons_btn_link">
+             {{ $t("Back") }}
                   </NuxtLink>
                 </div>
                 <div class="submit_icons_btn send" @click="productAddApi">
                   <div class="submit_icons_btn_link">
-                    yuborish
+               {{ $t("Send") }}
                   </div>
                 </div>
               </div>
@@ -224,10 +224,11 @@ const toast = useToast();
 const selectModal = ref(false);
 const currensyModal = ref(false);
 const router = useRouter();
-const currensyTitle = ref("valyuta turi");
+const currensyTitle = ref("");
 const currensy = ref(null);
 const currencyId = ref(null);
 const { locale } = useI18n();
+const localePath = useLocalePath();
 async function currensyApi() {
   try {
     store.loader = true;
@@ -319,7 +320,7 @@ async function categoryFatherApi() {
 const input = ref(null);
 
 categoryFatherApi();
-const inputFatherTitle = ref("mahsulotlar katalogi");
+const inputFatherTitle = ref("");
 const categoryChild = ref(null);
 const categoryFatherId = ref(null);
 async function categoryChildApi(e) {
