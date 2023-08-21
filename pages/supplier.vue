@@ -201,6 +201,7 @@ const { locale } = useI18n();
 const localePath = useLocalePath();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const filterModal = ref(false);
+const router = useRouter();
 const lock = ref(false);
 const suplier = ref(null);
 const page = ref(0);

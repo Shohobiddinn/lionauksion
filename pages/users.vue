@@ -197,6 +197,7 @@ const toast = useToast();
 const store = useStore();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const filterModal = ref(false);
+const router = useRouter();
 const lock = ref(false);
 const user = ref(null);
 const page = ref(0);

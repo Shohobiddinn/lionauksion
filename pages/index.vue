@@ -402,6 +402,7 @@
 </template>
 <script setup>
 import { useStore } from "~/store/store";
+const router = useRouter();
 const store = useStore();
 import { useToast } from "vue-toastification";
 const toast = useToast();
@@ -640,6 +641,7 @@ async function refresh() {
       }
     }
   } catch (error) {
+    console.log(error.response._data);
     if (error?.response?._data?.status == 401) {
       localStorage.removeItem("userToken");
       localStorage.removeItem("role");
@@ -649,7 +651,7 @@ async function refresh() {
       localStorage.removeItem("userId");
 
       router.push("/login");
-    }else{
+    } else {
       store.loader = false;
       toast.error(
         error?.response?._data?.message ||
@@ -660,7 +662,6 @@ async function refresh() {
           timeout: 2000,
         }
       );
-
     }
   }
 }

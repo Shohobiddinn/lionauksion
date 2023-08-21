@@ -215,7 +215,7 @@ const store = useStore();
 const bgModal = ref(false);
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const { locale } = useI18n();
-
+const router = useRouter();
 const contentModal = ref(false);
 const titleModal = ref(false);
 const categoryFather = ref(null);

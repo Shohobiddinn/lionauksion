@@ -192,6 +192,7 @@
   <script setup>
 import { useStore } from "~/store/store";
 import { useToast } from "vue-toastification";
+const router = useRouter();
 const toast = useToast();
 const store = useStore();
 const { locale } = useI18n();

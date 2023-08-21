@@ -168,6 +168,7 @@ const store = useStore();
 import { useToast } from "vue-toastification";
 const toast = useToast();
 const baseUrl = useRuntimeConfig().public.baseUrl;
+const router = useRouter();
 const { locale } = useI18n();
 const currensy = ref(null);
 const bgmodol = ref(false);
