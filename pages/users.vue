@@ -109,8 +109,8 @@
                   </svg>
                 </div>
                 <div class="company_title">
-                  <!-- <div class="company_title_icon">
-                    <NuxtLink :to="`/usersedit/${c?.id}`">
+                  <div class="company_title_icon">
+                    <NuxtLink :to="localePath(`/usersedit/${c?.id}`)">
                       <svg
                         width="25"
                         height="25"
@@ -122,7 +122,7 @@
                         />
                       </svg>
                     </NuxtLink>
-                  </div> -->
+                  </div>
                   <div class="company_title_icon" @click="userDelete(c?.id)">
                     <svg
                       width="25"

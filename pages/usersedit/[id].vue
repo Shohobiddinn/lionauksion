@@ -5,9 +5,9 @@
         <div class="information">
           <div class="information_inputs">
             <div class="info">
-              <label class="info_label" for="com_leader"
-                >foydalanuvchi rahbari F.I.O</label
-              >
+              <label class="info_label" for="com_leader">{{
+                $t("userFio")
+              }}</label>
               <input
                 class="info_input"
                 type="text"
@@ -17,21 +17,25 @@
             </div>
 
             <div class="info">
-              <label class="info_label" for="start_date">login</label>
+              <label class="info_label" for="start_date">{{
+                $t("Login")
+              }}</label>
               <input
                 class="info_input"
                 type="text"
-                placeholder="login"
+                :placeholder="$t('Login')"
                 id="start_date"
                 v-model="username"
               />
             </div>
             <div class="info">
-              <label class="info_label" for="start_date">password</label>
+              <label class="info_label" for="start_date">{{
+                $t("Password")
+              }}</label>
               <input
                 class="info_input"
                 type="password"
-                placeholder="password"
+                :placeholder="$t('Password')"
                 v-model="password"
                 ref="inputTypeInfo"
               />
@@ -52,11 +56,11 @@
           <div class="information_image">
             <div class="information_image_btns">
               <div class="btn_exit btn">
-                <NuxtLink class="btn_exit_link btn" to="/users">
-                  oraga
+                <NuxtLink class="btn_exit_link btn" :to="localePath('/users')">
+                  {{ $t("Back") }}
                 </NuxtLink>
               </div>
-              <div class="btn_save btn" @click="userApi">yuborish</div>
+              <div class="btn_save btn" @click="userPutApi">{{ $t("Send") }}</div>
             </div>
           </div>
         </div>
@@ -66,31 +70,79 @@
 </template>
   
   <script setup>
+import { useStore } from "~/store/store";
+const store = useStore();
+import { useToast } from "vue-toastification";
+const toast = useToast();
 const fullName = ref("");
 const username = ref("");
 const password = ref("");
+const { locale } = useI18n();
+const localePath = useLocalePath();
 const inputTypeInfo = ref(null);
 const router = useRouter();
 const route = useRoute();
 const { id } = route.params;
 const baseUrl = useRuntimeConfig().public.baseUrl;
-async function userApi() {
-  const data = await $fetch(baseUrl + "/company/add-user", {
-    method: "POST",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-    body: JSON.stringify({
-      id:id,
-      fullName: fullName.value,
-      username: username.value,
-      password: password.value,
-    }),
-  });
-  if (data?.message == "ok") {
-    router.push("/company");
-  } 
+async function userPutApi() {
+  try {
+    if (
+      fullName.value !== "" &&
+      username.value !== "" &&
+      password.value !== ""
+    ) {
+        const data = await $fetch(baseUrl + "/user", {
+          method: "PUT",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("userToken"),
+            "Accept-Language": locale.value,
+          },
+          body: JSON.stringify({
+            fullName: fullName.value,
+            username: username.value,
+            password: password.value,
+          }),
+        });
+        if (data?.message == "ok") {
+          router.push(localePath("/users"));
+          toast.success(data?.message || "Success", {
+            position: "top-right",
+            timeout: 2000,
+          });
+        }
+      
+    }
+  } catch (error) {
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+      }
+    );
+  }
 }
+async function userOneApi() {
+  try {
+    const data = await $fetch(baseUrl + `/user/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+    });
+    console.log(data);
+    if (data) {
+      store.loader = false;
+      fullName.value = data?.fullName;
+      username.value = data?.username;
+      password.value = data?.password;
+    }
+  } catch (error) {}
+}
+userOneApi();
 function inputType() {
   if (inputTypeInfo.value.type == "password") {
     inputTypeInfo.value.type = "text";
@@ -98,20 +150,57 @@ function inputType() {
     inputTypeInfo.value.type = "password";
   }
 }
-const user = ref(null);
-async function userOneApi() {
-  const data = await $fetch(baseUrl + `/user/${id}`, {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("userToken"),
-    },
-  });
-  user.value = data;
-  fullName.value = data?.fullName;
-  username.value = data?.username;
-  password.value = data?.password;
+async function refresh() {
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + "/refresh-token", {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userRefreshToken"),
+        "Accept-Language": locale.value,
+      },
+    });
+    if (data) {
+      store.loader = false;
+      localStorage.setItem("userToken", data?.accessToken);
+      localStorage.setItem("userId", data?.user?.id);
+      localStorage.setItem("role", data?.user?.roles?.[0]?.name);
+      localStorage.setItem("userRefreshToken", data?.refreshToken);
+      if (data?.user?.supplierId !== null) {
+        localStorage.setItem("userSupplierId", data?.user?.supplierId);
+      } else {
+        localStorage.setItem("userSupplierId", "");
+      }
+      if (data?.user?.companyId !== null) {
+        localStorage.setItem("userCompanyId", data?.user?.companyId);
+      } else {
+        localStorage.setItem("userCompanyId", "");
+      }
+    }
+  } catch (error) {
+    if (error?.response?._data?.status == 401) {
+      localStorage.removeItem("userToken");
+      localStorage.removeItem("role");
+      localStorage.removeItem("userSupplierId");
+      localStorage.removeItem("userCompanyId");
+      localStorage.removeItem("userRefreshToken");
+      localStorage.removeItem("userId");
+
+      router.push("/login");
+    } else {
+      store.loader = false;
+      toast.error(
+        error?.response?._data?.message ||
+          error?.response?._data?.error ||
+          "Error",
+        {
+          position: "top-right",
+          timeout: 2000,
+        }
+      );
+    }
+  }
 }
-userOneApi();
+refresh();
 </script>
   
   <style lang="scss" scoped>

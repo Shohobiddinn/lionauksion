@@ -6,7 +6,7 @@
           <div class="information_inputs">
             <div class="info">
               <label class="info_label" for="com_leader">{{
-                $t("userDirector")
+                $t("userFio")
               }}</label>
               <input
                 class="info_input"
@@ -72,6 +72,8 @@
   <script setup>
 import { useToast } from "vue-toastification";
 const toast = useToast();
+import { useStore } from "~/store/store";
+const store = useStore();
 const fullName = ref("");
 const username = ref("");
 const password = ref("");
@@ -87,34 +89,47 @@ async function userApi() {
       username.value !== "" &&
       password.value !== ""
     ) {
-      const data = await $fetch(baseUrl + "/company/add-user", {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("userToken"),
-          "Accept-Language": locale.value,
-        },
-        body: JSON.stringify({
-          fullName: fullName.value,
-          username: username.value,
-          password: password.value,
-        }),
-      });
-      if (data?.message == "ok") {
-        router.push(localePath('/users'));
-        toast.success(data?.message || "Success", {
-          position: "top-right",
-          timeout: 2000,
-          closeOnClick: true,
-          pauseOnFocusLoss: true,
-          pauseOnHover: true,
-          draggable: true,
-          draggablePercent: 0.6,
-          showCloseButtonOnHover: false,
-          hideProgressBar: true,
-          closeButton: "button",
-          icon: true,
-          rtl: false,
+      if(localStorage.getItem("userSupplierId") !== ""){
+        const data = await $fetch(baseUrl + "/supplier/add-user", {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("userToken"),
+            "Accept-Language": locale.value,
+          },
+          body: JSON.stringify({
+            fullName: fullName.value,
+            username: username.value,
+            password: password.value,
+          }),
         });
+        if (data?.message == "ok") {
+          router.push(localePath("/users"));
+          toast.success(data?.message || "Success", {
+            position: "top-right",
+            timeout: 2000,
+          });
+        }
+      }else{
+        const data = await $fetch(baseUrl + "/company/add-user", {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("userToken"),
+            "Accept-Language": locale.value,
+          },
+          body: JSON.stringify({
+            fullName: fullName.value,
+            username: username.value,
+            password: password.value,
+          }),
+        });
+        if (data?.message == "ok") {
+          router.push(localePath("/users"));
+          toast.success(data?.message || "Success", {
+            position: "top-right",
+            timeout: 2000,
+          });
+        }
+
       }
     }
   } catch (error) {
@@ -172,7 +187,7 @@ async function refresh() {
       localStorage.removeItem("userId");
 
       router.push("/login");
-    }else{
+    } else {
       store.loader = false;
       toast.error(
         error?.response?._data?.message ||
@@ -183,7 +198,6 @@ async function refresh() {
           timeout: 2000,
         }
       );
-
     }
   }
 }
