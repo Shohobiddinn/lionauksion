@@ -24,7 +24,7 @@
                     />
                   </svg>
                 </div>
-                <div class="menu_content_title_link_text">mahsulotlar</div>
+                <div class="menu_content_title_link_text">{{ $t("products") }}</div>
               </NuxtLink>
             </div>
             <div class="menu_content_title" v-if="companyPage">
@@ -42,7 +42,7 @@
                     />
                   </svg>
                 </div>
-                <div class="menu_content_title_link_text">kompaniyalar</div>
+                <div class="menu_content_title_link_text">{{ $t("Companies") }}</div>
               </NuxtLink>
             </div>
             <div class="menu_content_title" v-if="currensyPage">
@@ -60,7 +60,7 @@
                     />
                   </svg>
                 </div>
-                <div class="menu_content_title_link_text">valyutalar</div>
+                <div class="menu_content_title_link_text">{{ $t("Currencies") }}</div>
               </NuxtLink>
             </div>
             <div class="menu_content_title" v-if="currensyTypePage">
@@ -78,7 +78,7 @@
                     />
                   </svg>
                 </div>
-                <div class="menu_content_title_link_text">valyuta turlari</div>
+                <div class="menu_content_title_link_text">{{ $t("TypeOfCurrency") }}</div>
               </NuxtLink>
             </div>
             <div class="menu_content_title" v-if="supplierPage">
@@ -96,7 +96,7 @@
                     />
                   </svg>
                 </div>
-                <div class="menu_content_title_link_text">Taminotchilar</div>
+                <div class="menu_content_title_link_text">{{ $t("Suppliers") }}</div>
               </NuxtLink>
             </div>
             <div class="menu_content_title" v-if="productAddPage">
@@ -115,7 +115,7 @@
                   </svg>
                 </div>
                 <div class="menu_content_title_link_text">
-                  tovar prototiplari
+               {{ $t("productProtatip") }}
                 </div>
               </NuxtLink>
             </div>
@@ -134,7 +134,7 @@
                     />
                   </svg>
                 </div>
-                <div class="menu_content_title_link_text">foydalanuvchilar</div>
+                <div class="menu_content_title_link_text">{{ $t("users") }}</div>
               </NuxtLink>
             </div>
           </div>
