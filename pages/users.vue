@@ -8,7 +8,7 @@
               <div class="form">
                 <input
                   type="text"
-                  placeholder="Qidiruv.."
+                  :placeholder="$t('search')"
                   v-model="searchInfo"
                   @input="search"
                 />
@@ -29,13 +29,13 @@
                       fill="white"
                     />
                   </svg>
-                  search..
+               {{ $t("search") }}
                 </div>
               </div>
             </div>
             <div class="company_info_top_add">
-              <NuxtLink class="company_info_top_add_link" to="/usersadd">
-                Foydalanuvchi qo'shish
+              <NuxtLink class="company_info_top_add_link" :to="localePath('/usersadd')">
+           {{ $t("userAdd") }}
               </NuxtLink>
             </div>
             <div class="company_filter" :class="{ active: filterModal }">
@@ -61,7 +61,7 @@
                     />
                   </svg>
                 </div>
-                <div class="company_filter_option_title">filter</div>
+                <div class="company_filter_option_title">{{ $t("Filter") }}</div>
               </div>
               <div class="company_filter_content">
                 <div class="company_filter_content_title">
@@ -120,20 +120,20 @@
           </div>
           <div class="company_info_bottom">
             <div class="company_info_bottom_top">
-              <div class="company_info_bottom_top_title logotip">logotip</div>
+              <div class="company_info_bottom_top_title logotip">{{ $t("Logotip") }}</div>
               <div class="company_info_bottom_top_title">
-                foydalanuvchi nomi
+{{ $t("userName") }}
               </div>
               <div class="company_info_bottom_top_title">
-                foydalanuvchi rahbari
+             {{ $t("userDirector") }}
               </div>
               <div class="company_info_bottom_top_title">
-                foydalanuvchi raqami
+              {{ $t("PhoneNumber") }}
               </div>
               <div class="company_info_bottom_top_title">
-                foydalanuvchini bloklash
+             {{ $t("userBlocked") }}
               </div>
-              <div class="company_info_bottom_top_title">boshqa</div>
+              <div class="company_info_bottom_top_title">{{ $t("another") }}</div>
             </div>
             <div class="company_info_bottom_companys">
               <div class="company" v-for="c in user?.content" :key="c.id">
@@ -272,6 +272,7 @@ const lock = ref(false);
 const user = ref(null);
 const page = ref(0);
 const { locale } = useI18n();
+const localePath = useLocalePath("");
 async function userApi() {
   store.loader = true;
   const data = await $fetch(baseUrl + "/user", {

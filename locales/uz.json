@@ -77,7 +77,11 @@
     "protatypeTitle2":"Prototip RU",
     "particularityAdd":"Hususiyat qo'shish",
     "particularityTitle1":"Hususiyat UZ",
-    "particularityTitle2":"Hususiyat RU"
+    "particularityTitle2":"Hususiyat RU",
+    "userAdd":"foydalanuvchi qo'shish",
+    "userName": "foyadlanuvchi Nomi",
+    "userDirector":"foydalanuvchi rahbari",
+    "userBlocked":"foydalanuvchini bloklash"
 
 
 }

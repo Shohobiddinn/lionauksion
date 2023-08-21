@@ -6,7 +6,7 @@
           <div class="information_inputs">
             <div class="info">
               <label class="info_label" for="com_leader"
-                >foydalanuvchi rahbari F.I.O</label
+                >{{ $t("userDirector") }}</label
               >
               <input
                 class="info_input"
@@ -17,21 +17,25 @@
             </div>
 
             <div class="info">
-              <label class="info_label" for="start_date">login</label>
+              <label class="info_label" for="start_date">{{
+                $t("Login")
+              }}</label>
               <input
                 class="info_input"
                 type="text"
-                placeholder="login"
+                :placeholder="$t('Login')"
                 id="start_date"
                 v-model="username"
               />
             </div>
             <div class="info">
-              <label class="info_label" for="start_date">password</label>
+              <label class="info_label" for="start_date">{{
+                $t("Password")
+              }}</label>
               <input
                 class="info_input"
                 type="password"
-                placeholder="password"
+                :placeholder="$t('Password')"
                 v-model="password"
                 ref="inputTypeInfo"
               />
@@ -53,10 +57,10 @@
             <div class="information_image_btns">
               <div class="btn_exit btn">
                 <NuxtLink class="btn_exit_link btn" to="/users">
-                  oraga
+                  {{ $t("Back") }}
                 </NuxtLink>
               </div>
-              <div class="btn_save btn" @click="userApi">yuborish</div>
+              <div class="btn_save btn" @click="userApi">{{ $t("Send") }}</div>
             </div>
           </div>
         </div>
@@ -77,7 +81,11 @@ const router = useRouter();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 async function userApi() {
   try {
-    if(fullName.value !== "" && username.value !== "" &&  password.value !== "" ){
+    if (
+      fullName.value !== "" &&
+      username.value !== "" &&
+      password.value !== ""
+    ) {
       const data = await $fetch(baseUrl + "/company/add-user", {
         method: "POST",
         headers: {
