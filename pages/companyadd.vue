@@ -27,6 +27,17 @@
               />
             </div>
             <div class="info">
+              <label class="info_label" for="com_leader">{{
+                $t("userFio")
+              }}</label>
+              <input
+                class="info_input"
+                type="text"
+                id="com_leader"
+                v-model="userFullName"
+              />
+            </div>
+            <div class="info">
               <label class="info_label" for="com_name">
                 {{ $t("PhoneNumber") }}</label
               >
@@ -103,6 +114,7 @@ const toast = useToast();
 const store = useStore();
 import IMask from "imask";
 const fullName = ref("");
+const userFullName = ref("");
 const username = ref("");
 const password = ref("");
 const companyName = ref("");
@@ -123,7 +135,7 @@ async function companyApi() {
         name: companyName.value,
         director: fullName.value,
         phone: phone.value.value,
-        userFullName: fullName.value,
+        userFullName: userFullName.value,
         username: username.value,
         password: password.value,
       }),

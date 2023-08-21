@@ -5,7 +5,9 @@
         <div class="information">
           <div class="information_inputs">
             <div class="info">
-              <label class="info_label" for="com_name">{{ $t("CompanyNomi") }}</label>
+              <label class="info_label" for="com_name">{{
+                $t("CompanyNomi")
+              }}</label>
               <input
                 class="info_input"
                 type="text"
@@ -14,9 +16,9 @@
               />
             </div>
             <div class="info">
-              <label class="info_label" for="com_leader"
-                >{{ $t("CompanyRahbariIsmi") }}</label
-              >
+              <label class="info_label" for="com_leader">{{
+                $t("CompanyRahbariIsmi")
+              }}</label>
               <input
                 class="info_input"
                 type="text"
@@ -25,11 +27,26 @@
               />
             </div>
             <div class="info">
-              <label class="info_label" for="com_name">{{ $t("PhoneNumber") }}</label>
+              <label class="info_label" for="com_leader">{{
+                $t("userFio")
+              }}</label>
+              <input
+                class="info_input"
+                type="text"
+                id="com_leader"
+                v-model="userFullName"
+              />
+            </div>
+            <div class="info">
+              <label class="info_label" for="com_name">{{
+                $t("PhoneNumber")
+              }}</label>
               <input class="info_input" type="text" ref="phone" id="com_name" />
             </div>
             <div class="info">
-              <label class="info_label" for="start_date">{{ $t("Login") }}</label>
+              <label class="info_label" for="start_date">{{
+                $t("Login")
+              }}</label>
               <input
                 class="info_input"
                 type="text"
@@ -39,7 +56,9 @@
               />
             </div>
             <div class="info">
-              <label class="info_label" for="start_date">{{ $t("Password") }}</label>
+              <label class="info_label" for="start_date">{{
+                $t("Password")
+              }}</label>
               <input
                 class="info_input"
                 type="password"
@@ -68,11 +87,16 @@
                 /></label> -->
             <div class="information_image_btns">
               <div class="btn_exit btn">
-                <NuxtLink class="btn_exit_link btn" :to="localePath('/company')">
+                <NuxtLink
+                  class="btn_exit_link btn"
+                  :to="localePath('/company')"
+                >
                   {{ $t("Back") }}
                 </NuxtLink>
               </div>
-              <div class="btn_save btn" @click="companyPutApi">{{ $t("Send") }}</div>
+              <div class="btn_save btn" @click="companyPutApi">
+                {{ $t("Send") }}
+              </div>
             </div>
           </div>
         </div>
@@ -88,13 +112,14 @@ const toast = useToast();
 import { useStore } from "~/store/store";
 const store = useStore();
 const fullName = ref("");
+const userFullName = ref("");
 const username = ref("");
 const password = ref("");
 const companyName = ref("");
 const route = useRoute();
 const { id } = route.params;
 const { locale } = useI18n();
-const localePath = useLocalePath()
+const localePath = useLocalePath();
 const phone = ref("");
 const inputTypeInfo = ref(null);
 const router = useRouter();
@@ -125,7 +150,7 @@ async function companyPutApi() {
         }),
       });
       if (data.message == "ok") {
-        router.push(localePath('/company'));
+        router.push(localePath("/company"));
         store.loader = false;
         toast.success(data?.message || "Success", {
           position: "top-right",
@@ -164,6 +189,7 @@ async function companyOneApi() {
     fullName.value = data?.userFullName;
     username.value = data?.username;
     password.value = data?.password;
+    userFullName.value = data?.userFullName;
     if (data) {
       store.loader = false;
     }
@@ -231,7 +257,7 @@ async function refresh() {
       localStorage.removeItem("userId");
 
       router.push("/login");
-    }else{
+    } else {
       store.loader = false;
       toast.error(
         error?.response?._data?.message ||
@@ -242,7 +268,6 @@ async function refresh() {
           timeout: 2000,
         }
       );
-
     }
   }
 }

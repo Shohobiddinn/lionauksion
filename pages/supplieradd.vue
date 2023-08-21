@@ -27,6 +27,17 @@
               />
             </div>
             <div class="info">
+              <label class="info_label" for="com_leader">{{
+                $t("userFio")
+              }}</label>
+              <input
+                class="info_input"
+                type="text"
+                id="com_leader"
+                v-model="userFullName"
+              />
+            </div>
+            <div class="info">
               <label class="info_label" for="com_name">{{
                 $t("PhoneNumber")
               }}</label>
@@ -76,7 +87,10 @@
               /></label> -->
             <div class="information_image_btns">
               <div class="btn_exit btn">
-                <NuxtLink class="btn_exit_link btn" :to="localePath('/supplier')">
+                <NuxtLink
+                  class="btn_exit_link btn"
+                  :to="localePath('/supplier')"
+                >
                   {{ $t("Back") }}
                 </NuxtLink>
               </div>
@@ -98,8 +112,9 @@ import { useToast } from "vue-toastification";
 const toast = useToast();
 import IMask from "imask";
 const { locale } = useI18n();
-const localePath = useLocalePath()
+const localePath = useLocalePath();
 const fullName = ref("");
+const userFullName = ref("");
 const username = ref("");
 const password = ref("");
 const companyName = ref("");
@@ -114,7 +129,8 @@ async function suplierApi() {
       !companyName.value == "" &&
       !fullName.value == "" &&
       !password.value == "" &&
-      !username.value == ""
+      !username.value == ""&&
+      !userFullName.value == ""
     ) {
       store.loader = true;
       const data = await $fetch(baseUrl + "/supplier", {
@@ -127,14 +143,14 @@ async function suplierApi() {
           name: companyName.value,
           director: fullName.value,
           phone: phone.value.value,
-          userFullName: fullName.value,
+          userFullName: userFullName.value,
           username: username.value,
           password: password.value,
         }),
       });
 
       if (data.message == "ok") {
-        router.push(localePath('/supplier'));
+        router.push(localePath("/supplier"));
         store.loader = false;
         toast.success(data?.message || "Success", {
           position: "top-right",
@@ -198,7 +214,7 @@ async function refresh() {
       localStorage.removeItem("userId");
 
       router.push("/login");
-    }else{
+    } else {
       store.loader = false;
       toast.error(
         error?.response?._data?.message ||
@@ -209,7 +225,6 @@ async function refresh() {
           timeout: 2000,
         }
       );
-
     }
   }
 }

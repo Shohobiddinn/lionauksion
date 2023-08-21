@@ -209,11 +209,7 @@ body {
 
             .pagination {
                 @include flex(center, center);
-                // position: fixed;
-                // bottom: 50px;
-                // left: 50%;
-                // transform: translateX(-25%);
-                background-color: $pr_white_color;
+          
                 gap: 10px;
 
                 &_icon {

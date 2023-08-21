@@ -81,7 +81,8 @@
     "userAdd":"foydalanuvchi qo'shish",
     "userName": "foyadlanuvchi Nomi",
     "userDirector":"foydalanuvchi rahbari",
-    "userBlocked":"foydalanuvchini bloklash"
+    "userBlocked":"foydalanuvchini bloklash",
+    "userFio":"foydalanuvchi F.I.O"
 
 
 }

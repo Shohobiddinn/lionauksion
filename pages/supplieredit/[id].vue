@@ -5,7 +5,9 @@
         <div class="information">
           <div class="information_inputs">
             <div class="info">
-              <label class="info_label" for="com_name">{{ $t("suplierName") }}</label>
+              <label class="info_label" for="com_name">{{
+                $t("suplierName")
+              }}</label>
               <input
                 class="info_input"
                 type="text"
@@ -14,9 +16,9 @@
               />
             </div>
             <div class="info">
-              <label class="info_label" for="com_leader"
-                >{{ $t("suplierDirector") }}</label
-              >
+              <label class="info_label" for="com_leader">{{
+                $t("suplierDirector")
+              }}</label>
               <input
                 class="info_input"
                 type="text"
@@ -25,11 +27,26 @@
               />
             </div>
             <div class="info">
-              <label class="info_label" for="com_name">{{ $t("PhoneNumber") }}</label>
+              <label class="info_label" for="com_leader">{{
+                $t("userFio")
+              }}</label>
+              <input
+                class="info_input"
+                type="text"
+                id="com_leader"
+                v-model="userFullName"
+              />
+            </div>
+            <div class="info">
+              <label class="info_label" for="com_name">{{
+                $t("PhoneNumber")
+              }}</label>
               <input class="info_input" type="text" ref="phone" id="com_name" />
             </div>
             <div class="info">
-              <label class="info_label" for="start_date">{{ $t("Login") }}</label>
+              <label class="info_label" for="start_date">{{
+                $t("Login")
+              }}</label>
               <input
                 class="info_input"
                 type="text"
@@ -39,7 +56,9 @@
               />
             </div>
             <div class="info">
-              <label class="info_label" for="start_date">{{ $t("Password") }}</label>
+              <label class="info_label" for="start_date">{{
+                $t("Password")
+              }}</label>
               <input
                 class="info_input"
                 type="password"
@@ -75,7 +94,9 @@
                   {{ $t("Back") }}
                 </NuxtLink>
               </div>
-              <div class="btn_save btn" @click="suplierPutApi">{{ $t("Send") }}</div>
+              <div class="btn_save btn" @click="suplierPutApi">
+                {{ $t("Send") }}
+              </div>
             </div>
           </div>
         </div>
@@ -92,6 +113,7 @@ const toast = useToast();
 import IMask from "imask";
 const fullName = ref("");
 const username = ref("");
+const userFullName = ref("");
 const password = ref("");
 const companyName = ref("");
 const route = useRoute();
@@ -122,14 +144,14 @@ async function suplierPutApi() {
           name: companyName.value,
           director: fullName.value,
           phone: phone.value.value,
-          userFullName: fullName.value,
+          userFullName: userFullName.value,
           username: username.value,
           password: password.value,
         }),
       });
       if (data.message == "ok") {
         store.loader = false;
-        router.push(localePath('/supplier'));
+        router.push(localePath("/supplier"));
         toast.success(data?.message || "Success", {
           position: "top-right",
           timeout: 2000,
@@ -168,6 +190,7 @@ async function supplierOneApi() {
     fullName.value = data?.userFullName;
     username.value = data?.username;
     password.value = data?.password;
+    userFullName.value = data?.userFullName;
     if (data) {
       store.loader = false;
     }
@@ -235,7 +258,7 @@ async function refresh() {
       localStorage.removeItem("userId");
 
       router.push("/login");
-    }else{
+    } else {
       store.loader = false;
       toast.error(
         error?.response?._data?.message ||
@@ -246,7 +269,6 @@ async function refresh() {
           timeout: 2000,
         }
       );
-
     }
   }
 }
