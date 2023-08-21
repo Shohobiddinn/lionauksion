@@ -193,7 +193,6 @@ import { useToast } from "vue-toastification";
 const toast = useToast();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const { locale } = useI18n();
-const localePath = useLocalePath();
 const currensy = ref(null);
 const bgmodol = ref(false);
 const currensyModal = ref(false);
