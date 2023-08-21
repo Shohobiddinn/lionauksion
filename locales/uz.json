@@ -67,5 +67,11 @@
     "SelectValue":"Valyuta Turini Tanlang",
     "currensyType1":"valyuta turi UZ",
     "currensyType2":"valyuta turi RU",
-    "currensySymbol":"valyuta belgisi"
+    "currensySymbol":"valyuta belgisi",
+    "suplierName":"ta'minotchi nomi",
+    "suplierDirector":"ta'minotchi rahbari F.I.O",
+    "suplierBlocked":"ta'minotchini bloklash",
+    "suplierAdd":"ta'minotchi qo'shish"
+
+
 }

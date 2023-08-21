@@ -5,7 +5,7 @@
         <div class="information">
           <div class="information_inputs">
             <div class="info">
-              <label class="info_label" for="com_name">taminotchi nomi</label>
+              <label class="info_label" for="com_name">{{ $t("suplierName") }}</label>
               <input
                 class="info_input"
                 type="text"
@@ -15,7 +15,7 @@
             </div>
             <div class="info">
               <label class="info_label" for="com_leader"
-                >taminotchi rahbari F.I.O</label
+                >{{ $t("suplierDirector") }}</label
               >
               <input
                 class="info_input"
@@ -25,25 +25,25 @@
               />
             </div>
             <div class="info">
-              <label class="info_label" for="com_name">telefon raqami</label>
+              <label class="info_label" for="com_name">{{ $t("PhoneNumber") }}</label>
               <input class="info_input" type="text" ref="phone" id="com_name" />
             </div>
             <div class="info">
-              <label class="info_label" for="start_date">login</label>
+              <label class="info_label" for="start_date">{{ $t("Login") }}</label>
               <input
                 class="info_input"
                 type="text"
-                placeholder="login"
+                :placeholder="$t('Login')"
                 id="start_date"
                 v-model="username"
               />
             </div>
             <div class="info">
-              <label class="info_label" for="start_date">password</label>
+              <label class="info_label" for="start_date">{{ $t("Password") }}</label>
               <input
                 class="info_input"
                 type="password"
-                placeholder="password"
+                :placeholder="$t('Password')"
                 v-model="password"
                 ref="inputTypeInfo"
               />
@@ -68,11 +68,14 @@
               /></label> -->
             <div class="information_image_btns">
               <div class="btn_exit btn">
-                <NuxtLink class="btn_exit_link btn" to="/supplier">
-                  oraga
+                <NuxtLink
+                  class="btn_exit_link btn"
+                  :to="localePath('/supplier')"
+                >
+                  {{ $t("Back") }}
                 </NuxtLink>
               </div>
-              <div class="btn_save btn" @click="suplierPutApi">yuborish</div>
+              <div class="btn_save btn" @click="suplierPutApi">{{ $t("Send") }}</div>
             </div>
           </div>
         </div>
@@ -94,6 +97,7 @@ const companyName = ref("");
 const route = useRoute();
 const { id } = route.params;
 const { locale } = useI18n();
+const localePath = useLocalePath();
 const phone = ref("");
 const inputTypeInfo = ref(null);
 const router = useRouter();
@@ -125,7 +129,7 @@ async function suplierPutApi() {
       });
       if (data.message == "ok") {
         store.loader = false;
-        router.push("/supplier");
+        router.push(localePath('/supplier'));
         toast.success(data?.message || "Success", {
           position: "top-right",
           timeout: 2000,
@@ -148,7 +152,7 @@ async function suplierPutApi() {
 }
 const suplierOne = ref(null);
 async function supplierOneApi() {
-  try{
+  try {
     store.loader = true;
     const data = await $fetch(baseUrl + `/supplier/${id}`, {
       method: "GET",
@@ -164,12 +168,10 @@ async function supplierOneApi() {
     fullName.value = data?.userFullName;
     username.value = data?.username;
     password.value = data?.password;
-    if(data){
+    if (data) {
       store.loader = false;
-
     }
-
-  }catch(error){
+  } catch (error) {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
@@ -179,7 +181,6 @@ async function supplierOneApi() {
         timeout: 2000,
       }
     );
-
   }
 }
 supplierOneApi();

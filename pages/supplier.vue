@@ -8,7 +8,7 @@
               <div class="form">
                 <input
                   type="text"
-                  placeholder="Qidiruv.."
+                  :placeholder="$t('search')"
                   v-model="searchInfo"
                   @input="search"
                 />
@@ -29,13 +29,13 @@
                       fill="white"
                     />
                   </svg>
-                  search..
+                  {{ $t("search") }}
                 </div>
               </div>
             </div>
             <div class="company_info_top_add">
-              <NuxtLink class="company_info_top_add_link" to="/supplieradd">
-                Taminotchi qo'shish
+              <NuxtLink class="company_info_top_add_link" :to="localePath('/supplieradd')">
+                {{ $t("suplierAdd") }}
               </NuxtLink>
             </div>
             <div class="company_filter" :class="{ active: filterModal }">
@@ -61,7 +61,9 @@
                     />
                   </svg>
                 </div>
-                <div class="company_filter_option_title">filter</div>
+                <div class="company_filter_option_title">
+                  {{ $t("Filter") }}
+                </div>
               </div>
               <div class="company_filter_content">
                 <div class="company_filter_content_title">
@@ -120,16 +122,24 @@
           </div>
           <div class="company_info_bottom">
             <div class="company_info_bottom_top">
-              <div class="company_info_bottom_top_title logotip">logotip</div>
-              <div class="company_info_bottom_top_title">taminotchi nomi</div>
-              <div class="company_info_bottom_top_title">
-                taminotchi rahbari
+              <div class="company_info_bottom_top_title logotip">
+                {{ $t("Logotip") }}
               </div>
-              <div class="company_info_bottom_top_title">taminotchi raqami</div>
               <div class="company_info_bottom_top_title">
-                taminotchini bloklash
+                {{ $t("suplierName") }}
               </div>
-              <div class="company_info_bottom_top_title">boshqa</div>
+              <div class="company_info_bottom_top_title">
+                {{ $t("suplierDirector") }}
+              </div>
+              <div class="company_info_bottom_top_title">
+                {{ $t("PhoneNumber") }}
+              </div>
+              <div class="company_info_bottom_top_title">
+                {{ $t("suplierBlocked") }}
+              </div>
+              <div class="company_info_bottom_top_title">
+                {{ $t("another") }}
+              </div>
             </div>
             <div class="company_info_bottom_companys">
               <div class="company" v-for="c in suplier?.content" :key="c.id">
@@ -177,7 +187,7 @@
                 </div>
                 <div class="company_title">
                   <div class="company_title_icon">
-                    <NuxtLink :to="`/supplieredit/${c?.id}`">
+                    <NuxtLink :to="localePath(`/supplieredit/${c?.id}`)">
                       <svg
                         width="25"
                         height="25"
@@ -266,6 +276,7 @@ import { useToast } from "vue-toastification";
 const toast = useToast();
 const store = useStore();
 const { locale } = useI18n();
+const localePath = useLocalePath();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const filterModal = ref(false);
 const lock = ref(false);
@@ -425,7 +436,7 @@ async function supplierDelete(e) {
 }
 const searchInfo = ref();
 async function search() {
-  try{
+  try {
     store.loader = true;
     const data = await $fetch(baseUrl + "/supplier", {
       method: "GET",
@@ -437,17 +448,15 @@ async function search() {
         page: page.value,
         size: 10,
         name: searchInfo.value,
-        companyId: localStorage.getItem("userCompanyId")
+        companyId: localStorage.getItem("userCompanyId"),
       },
     });
     suplier.value = data;
-    if(data){
+    if (data) {
       store.loader = false;
-
     }
-
-  }catch(error){
-    store.loader = false
+  } catch (error) {
+    store.loader = false;
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
@@ -457,7 +466,6 @@ async function search() {
         timeout: 2000,
       }
     );
-
   }
 }
 </script>

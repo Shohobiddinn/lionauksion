@@ -5,7 +5,9 @@
         <div class="information">
           <div class="information_inputs">
             <div class="info">
-              <label class="info_label" for="com_name">taminotchi nomi</label>
+              <label class="info_label" for="com_name">{{
+                $t("suplierName")
+              }}</label>
               <input
                 class="info_input"
                 type="text"
@@ -14,9 +16,9 @@
               />
             </div>
             <div class="info">
-              <label class="info_label" for="com_leader"
-                >taminot rahbari F.I.O</label
-              >
+              <label class="info_label" for="com_leader">{{
+                $t("suplierDirector")
+              }}</label>
               <input
                 class="info_input"
                 type="text"
@@ -25,25 +27,31 @@
               />
             </div>
             <div class="info">
-              <label class="info_label" for="com_name">telefon raqami</label>
+              <label class="info_label" for="com_name">{{
+                $t("PhoneNumber")
+              }}</label>
               <input class="info_input" type="text" ref="phone" id="com_name" />
             </div>
             <div class="info">
-              <label class="info_label" for="start_date">login</label>
+              <label class="info_label" for="start_date">{{
+                $t("Login")
+              }}</label>
               <input
                 class="info_input"
                 type="text"
-                placeholder="login"
+                :placeholder="$t('Login')"
                 id="start_date"
                 v-model="username"
               />
             </div>
             <div class="info">
-              <label class="info_label" for="start_date">password</label>
+              <label class="info_label" for="start_date">{{
+                $t("Password")
+              }}</label>
               <input
                 class="info_input"
                 type="password"
-                placeholder="password"
+                :placeholder="$t('Password')"
                 v-model="password"
                 ref="inputTypeInfo"
               />
@@ -68,11 +76,13 @@
               /></label> -->
             <div class="information_image_btns">
               <div class="btn_exit btn">
-                <NuxtLink class="btn_exit_link btn" to="/supplier">
-                  oraga
+                <NuxtLink class="btn_exit_link btn" :to="localePath('/supplier')">
+                  {{ $t("Back") }}
                 </NuxtLink>
               </div>
-              <div class="btn_save btn" @click="suplierApi">yuborish</div>
+              <div class="btn_save btn" @click="suplierApi">
+                {{ $t("Send") }}
+              </div>
             </div>
           </div>
         </div>
@@ -88,12 +98,12 @@ import { useToast } from "vue-toastification";
 const toast = useToast();
 import IMask from "imask";
 const { locale } = useI18n();
+const localePath = useLocalePath()
 const fullName = ref("");
 const username = ref("");
 const password = ref("");
 const companyName = ref("");
 const phone = ref("");
-const tel = ref();
 const inputTypeInfo = ref(null);
 const atvet = ref(null);
 const router = useRouter();
@@ -124,7 +134,7 @@ async function suplierApi() {
       });
 
       if (data.message == "ok") {
-        router.push("/supplier");
+        router.push(localePath('/supplier'));
         store.loader = false;
         toast.success(data?.message || "Success", {
           position: "top-right",

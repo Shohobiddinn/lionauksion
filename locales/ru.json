@@ -67,5 +67,9 @@
     "SelectValue": "Выберите тип валюты",
     "currensyType1":"тип валюты УЗ",
     "currensyType2":"тип валюты РУ",
-    "currensySymbol":"символ валюты"
+    "currensySymbol":"символ валюты",
+    "suplierName":"название страховщика",
+    "suplierDirector":"руководитель поставщика Ф.И.О.",
+    "suplierBlocked":"блокировка водителя",
+    "suplierAdd":"Добавить поставщика"
 }
