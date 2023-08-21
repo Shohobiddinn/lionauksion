@@ -273,7 +273,6 @@ async function categoryChildApi(e, event) {
       store.loader = false;
     }
   } catch (error) {
-    console.log(error);
   }
 }
 const fatherAddUz = ref("");

@@ -370,7 +370,6 @@ const country = ref(null);
 async function productAddApi() {
   try {
     store.loader = true;
-    console.log(productDate.value.value);
     const arr = [];
     input.value.forEach((elem, i) => {
       arr.push({

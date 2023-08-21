@@ -143,7 +143,6 @@ async function userOneApi() {
         "Accept-Language": locale.value,
       },
     });
-    console.log(data);
     if (data) {
       store.loader = false;
       fullName.value = data?.fullName;
