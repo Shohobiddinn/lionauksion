@@ -215,7 +215,7 @@ function logout() {
   localStorage.removeItem("userCompanyId");
   localStorage.removeItem("userRefreshToken");
   localStorage.removeItem("userId");
-  router.push("/login");
+  router.push(localePath('/login'));
 }
 function delLang(e) {
   document.querySelectorAll(".language_content_title").forEach((item) => {

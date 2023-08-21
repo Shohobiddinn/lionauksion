@@ -5,23 +5,23 @@
         <img src="../assets/image/logo.png" alt="logo" />
         <div class="login_modal_inputs">
           <label for="input-1" class="login_modal_inputs_label"
-            >foydalanuvchi nomi</label
+            >{{ $t("userName") }}</label
           >
           <input
             class="login_modal_inputs_input"
-            placeholder="login"
+            :placeholder="$t('Login')"
             ref="username"
             @keyup.enter="loginApi"
             type="text"
           />
         </div>
         <div class="login_modal_inputs">
-          <label for="input-1" class="login_modal_inputs_label">parol</label>
+          <label for="input-1" class="login_modal_inputs_label">{{ $t("Password") }}</label>
           <input
             class="login_modal_inputs_input"
             ref="password"
             type="password"
-            placeholder="password"
+            :placeholder="$t('Password')"
             @keyup.enter="loginApi"
           />
           <div class="login_modal_inputs_icon" @click="passeye">
@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="login_modal_send" @click="loginApi">
-          <div class="login_modal_send_btn">yuborish</div>
+          <div class="login_modal_send_btn">{{ $t("Send") }}</div>
         </div>
       </div>
     </div>
@@ -48,6 +48,7 @@
 <script setup>
 import { useStore } from "~/store/store";
 import { useToast } from "vue-toastification";
+const localePath = useLocalePath();
 const toast = useToast();
 const store = useStore();
 definePageMeta({
@@ -79,11 +80,11 @@ async function loginApi() {
       return response.json();
     })
     .then((data) => {
-      router.push("/");
+      router.push(localePath('/'));
       localStorage.setItem("userToken", data?.accessToken);
       localStorage.setItem("userId", data?.user?.id);
       localStorage.setItem("role", data?.user?.roles?.[0]?.name);
-      localStorage.setItem("userRefreshToken",data?.refreshToken)
+      localStorage.setItem("userRefreshToken", data?.refreshToken);
       if (data?.user?.supplierId !== null) {
         localStorage.setItem("userSupplierId", data?.user?.supplierId);
       } else {
@@ -100,7 +101,6 @@ async function loginApi() {
       });
     })
     .catch((error) => {
-      console.log(error);
       store.loader = false;
       toast.error("Login yoki parol noto'g'ri", {
         position: "top-right",

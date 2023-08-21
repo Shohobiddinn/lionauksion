@@ -1,17 +1,22 @@
 <template>
   <div>
     <Head>
-        <Title>LionPrint</Title>
-        <Link rel="icon" href="`/public/favicon.ico" type="image/x-icon" sizes="16x16" />
+      <Title>LionPrint</Title>
+      <Link
+        rel="icon"
+        href="`/public/favicon.ico"
+        type="image/x-icon"
+        sizes="16x16"
+      />
     </Head>
-    <NuxtLayout/>
-    <load/> 
+    <NuxtLayout />
+    <load />
   </div>
 </template>
 <script setup>
+const localePath = useLocalePath();
 const router = useRouter();
-if(!localStorage.getItem("userToken")){
-  router.push("/login")
-};
-
+if (!localStorage.getItem("userToken")) {
+  router.push(localePath("/login"));
+}
 </script>

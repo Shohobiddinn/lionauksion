@@ -298,7 +298,7 @@ body {
 
                         &_option {
                             @include flex(center, flex-start);
-                            background-color: $pr_white_color;
+                            background-color: $pr_blue_color;
                             border-radius: 5px;
                             padding: 8px 27px;
                             gap: 10px;
@@ -313,7 +313,7 @@ body {
 
                             &_title {
                                 @include fond(400, 15);
-                                color: $pr_black_color;
+                                color: $pr_white_color;
                                 text-transform: capitalize;
                             }
 
@@ -327,7 +327,7 @@ body {
 
                                 .categorys_filter_option_icon {
                                     svg {
-                                        filter: invert(1);
+                                        filter: invert(0.1);
                                     }
                                 }
                             }
