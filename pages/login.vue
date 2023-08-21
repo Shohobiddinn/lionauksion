@@ -44,7 +44,6 @@
     </div>
   </div>
 </template>
-
 <script setup>
 import { useStore } from "~/store/store";
 import { useToast } from "vue-toastification";
