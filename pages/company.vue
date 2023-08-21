@@ -34,7 +34,10 @@
               </div>
             </div>
             <div class="company_info_top_add">
-              <NuxtLink class="company_info_top_add_link" :to="localePath('/companyadd')">
+              <NuxtLink
+                class="company_info_top_add_link"
+                :to="localePath('/companyadd')"
+              >
                 {{ $t("AddCompany") }}
               </NuxtLink>
             </div>

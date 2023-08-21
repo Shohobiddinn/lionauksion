@@ -9,7 +9,7 @@
               class="currensy_content"
               @click="(currensyModal = true), (bgmodol = true)"
             >
-              <div class="currensy_content_title">{{ $t("добавить тип валюты") }}</div>
+              <div class="currensy_content_title">{{ $t("addCurrensyType") }}</div>
               <div class="currensy_content_icon">
                 <svg
                   width="25"
@@ -78,7 +78,7 @@
               ></div>
               <div class="currensy_modal_info">
                 <label class="currensy_modal_info_label" for="cur-1">
-                  valyuta turi Uz
+                {{  $t("currensyType1") }}
                 </label>
                 <input
                   class="currensy_modal_info_input"
@@ -89,7 +89,7 @@
               </div>
               <div class="currensy_modal_info">
                 <label class="currensy_modal_info_label" for="cur-1">
-                  valyuta turi Ru
+              {{ $t("currensyType2")}}
                 </label>
                 <input
                   class="currensy_modal_info_input"
@@ -100,7 +100,7 @@
               </div>
               <div class="currensy_modal_info">
                 <label class="currensy_modal_info_label" for="cur-1">
-                  valyuta belgisi
+             {{ $t("currensySymbol") }}
                 </label>
                 <input
                   class="currensy_modal_info_input"
@@ -110,7 +110,7 @@
                 />
               </div>
               <div class="currensy_modal_send" @click="currensySubmit">
-                <div class="currensy_modal_send_btn">yuborish</div>
+                <div class="currensy_modal_send_btn">{{ $t("Send") }}</div>
               </div>
             </div>
             <div class="currensy_edit_modal" v-if="currensyEditModal">
@@ -120,7 +120,7 @@
               ></div>
               <div class="currensy_modal_info">
                 <label class="currensy_modal_info_label" for="cur-1">
-                  valyuta turi Uz
+             {{ $t("currensyType1") }}
                 </label>
                 <input
                   class="currensy_modal_info_input"
@@ -131,7 +131,7 @@
               </div>
               <div class="currensy_modal_info">
                 <label class="currensy_modal_info_label" for="cur-1">
-                  valyuta turi Ru
+              {{ $t("currensyType2") }}
                 </label>
                 <input
                   class="currensy_modal_info_input"
@@ -142,7 +142,7 @@
               </div>
               <div class="currensy_modal_info">
                 <label class="currensy_modal_info_label" for="cur-1">
-                  valyuta belgisi
+          {{ $t("currensySymbol") }}
                 </label>
                 <input
                   class="currensy_modal_info_input"
@@ -152,7 +152,7 @@
                 />
               </div>
               <div class="currensy_modal_send" @click="currensyEditSubmit">
-                <div class="currensy_modal_send_btn">yuborish</div>
+                <div class="currensy_modal_send_btn">{{ $t("Send") }}</div>
               </div>
             </div>
           </div>

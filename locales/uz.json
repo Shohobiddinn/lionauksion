@@ -61,8 +61,11 @@
     "CompanyRahbariIsmi":"Kompaniya Rahbari F.I.O",
     "PhoneNumber":"Telefon Raqami",
     "Login":"Login",
-    "Password":"Password",
+    "Password":"Parol",
     "Back":"Orqaga",
     "ValueInSum":"So'mdagi Qiymati",
-    "SelectValue":"Valyuta Turini Tanlang"
+    "SelectValue":"Valyuta Turini Tanlang",
+    "currensyType1":"valyuta turi UZ",
+    "currensyType2":"valyuta turi RU",
+    "currensySymbol":"valyuta belgisi"
 }

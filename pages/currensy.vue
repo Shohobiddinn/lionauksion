@@ -78,7 +78,7 @@
               ></div>
               <div class="currensy_modal_info">
                 <label class="currensy_modal_info_label" for="cur-1">
-                  so'mdagi qiymati
+                  {{ $t("ValueInSum") }}
                 </label>
                 <input
                   class="currensy_modal_info_input"
@@ -94,7 +94,7 @@
                     @click="selectModal = !selectModal"
                   >
                     <div class="selected_option_title">
-                      {{ currensyTitle }}
+                      {{ currensyTitle ? currensyTitle : $t("SelectValue") }}
                     </div>
                     <div class="selected_option_icon">
                       <svg
@@ -122,7 +122,7 @@
                 </div>
               </div>
               <div class="currensy_modal_send" @click="currensySubmit">
-                <div class="currensy_modal_send_btn">yuborish</div>
+                <div class="currensy_modal_send_btn">{{ $t("Send") }}</div>
               </div>
             </div>
             <div class="currensy_edit_modal" v-if="currensyEditModal">
@@ -132,7 +132,7 @@
               ></div>
               <div class="currensy_modal_info">
                 <label class="currensy_modal_info_label" for="cur-1">
-                  so'mdagi qiymati
+              {{ $t("ValueInSum") }}
                 </label>
                 <input
                   class="currensy_modal_info_input"
@@ -148,7 +148,7 @@
                     @click="selectModal = !selectModal"
                   >
                     <div class="selected_option_title">
-                      {{ currensyTitle }}
+                      {{ currensyTitle ? currensyTitle : $t("SelectValue") }}
                     </div>
                     <div class="selected_option_icon">
                       <svg
@@ -176,7 +176,7 @@
                 </div>
               </div>
               <div class="currensy_modal_send" @click="currensyEditSubmit">
-                <div class="currensy_modal_send_btn">yuborish</div>
+                <div class="currensy_modal_send_btn">{{ $t("Send") }}</div>
               </div>
             </div>
           </div>
@@ -263,7 +263,7 @@ async function currencyType() {
   }
 }
 currencyType();
-const currensyTitle = ref("valyuta turini tanlang");
+const currensyTitle = ref("");
 const currencyTypeId = ref("");
 const currensyInfo = ref("");
 

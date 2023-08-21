@@ -5,7 +5,7 @@
         <div class="information">
           <div class="information_inputs">
             <div class="info">
-              <label class="info_label" for="com_name">kampaniya nomi</label>
+              <label class="info_label" for="com_name">{{ $t("CompanyNomi") }}</label>
               <input
                 class="info_input"
                 type="text"
@@ -15,7 +15,7 @@
             </div>
             <div class="info">
               <label class="info_label" for="com_leader"
-                >taminot rahbari F.I.O</label
+                >{{ $t("CompanyRahbariIsmi") }}</label
               >
               <input
                 class="info_input"
@@ -25,25 +25,25 @@
               />
             </div>
             <div class="info">
-              <label class="info_label" for="com_name">telefon raqami</label>
+              <label class="info_label" for="com_name">{{ $t("PhoneNumber") }}</label>
               <input class="info_input" type="text" ref="phone" id="com_name" />
             </div>
             <div class="info">
-              <label class="info_label" for="start_date">login</label>
+              <label class="info_label" for="start_date">{{ $t("Login") }}</label>
               <input
                 class="info_input"
                 type="text"
-                placeholder="login"
+                :placeholder="$t('Login')"
                 id="start_date"
                 v-model="username"
               />
             </div>
             <div class="info">
-              <label class="info_label" for="start_date">password</label>
+              <label class="info_label" for="start_date">{{ $t("Password") }}</label>
               <input
                 class="info_input"
                 type="password"
-                placeholder="password"
+                :placeholder="$t('Password')"
                 v-model="password"
                 ref="inputTypeInfo"
               />
@@ -68,11 +68,11 @@
                 /></label> -->
             <div class="information_image_btns">
               <div class="btn_exit btn">
-                <NuxtLink class="btn_exit_link btn" to="/company">
-                  oraga
+                <NuxtLink class="btn_exit_link btn" :to="localePath('/company')">
+                  {{ $t("Back") }}
                 </NuxtLink>
               </div>
-              <div class="btn_save btn" @click="companyPutApi">yuborish</div>
+              <div class="btn_save btn" @click="companyPutApi">{{ $t("Send") }}</div>
             </div>
           </div>
         </div>
@@ -94,6 +94,7 @@ const companyName = ref("");
 const route = useRoute();
 const { id } = route.params;
 const { locale } = useI18n();
+const localePath = useLocalePath()
 const phone = ref("");
 const inputTypeInfo = ref(null);
 const router = useRouter();
@@ -124,7 +125,7 @@ async function companyPutApi() {
         }),
       });
       if (data.message == "ok") {
-        router.push("/company");
+        router.push(localePath('/company'));
         store.loader = false;
         toast.success(data?.message || "Success", {
           position: "top-right",

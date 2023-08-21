@@ -64,5 +64,8 @@
     "Password": "Пароль",
     "Back": "Назад",
     "ValueInSum": "Значение в сумах",
-    "SelectValue": "Выберите тип валюты"
+    "SelectValue": "Выберите тип валюты",
+    "currensyType1":"тип валюты УЗ",
+    "currensyType2":"тип валюты РУ",
+    "currensySymbol":"символ валюты"
 }
