@@ -71,5 +71,11 @@
     "suplierName":"название страховщика",
     "suplierDirector":"руководитель поставщика Ф.И.О.",
     "suplierBlocked":"блокировка водителя",
-    "suplierAdd":"Добавить поставщика"
+    "suplierAdd":"Добавить поставщика",
+    "protatypeAdd":"добавить прототип",
+    "protatypeTitle1": "Опытный образец УЗ",
+    "protatypeTitle2":"Опытный образец РУ",
+    "particularityAdd":"Добавить функцию",
+    "particularityTitle1":"особенность УЗ",
+    "particularityTitle2":"особенность РУ"
 }

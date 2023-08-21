@@ -71,7 +71,13 @@
     "suplierName":"ta'minotchi nomi",
     "suplierDirector":"ta'minotchi rahbari F.I.O",
     "suplierBlocked":"ta'minotchini bloklash",
-    "suplierAdd":"ta'minotchi qo'shish"
+    "suplierAdd":"ta'minotchi qo'shish",
+    "protatypeAdd":"prototip qo'shish",
+    "protatypeTitle1": "Prototip UZ",
+    "protatypeTitle2":"Prototip RU",
+    "particularityAdd":"Hususiyat qo'shish",
+    "particularityTitle1":"Hususiyat UZ",
+    "particularityTitle2":"Hususiyat RU"
 
 
 }

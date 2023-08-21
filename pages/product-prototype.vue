@@ -13,7 +13,7 @@
               >
                 <div class="protatype_content_add_content_icon"></div>
                 <div class="protatype_content_add_content_title">
-                  Prototip qo'shish
+                  {{ $t("protatypeAdd") }}
                 </div>
               </div>
               <div
@@ -25,15 +25,15 @@
                   @click="(contentModal = false), (bgModal = false)"
                 ></div>
                 <div class="info">
-                  <label for="c-1">Prototip UZ</label>
+                  <label for="c-1">{{ $t("protatypeTitle1") }}</label>
                   <input type="text" id="c-1" v-model="fatherAddUz" />
                 </div>
                 <div class="info">
-                  <label for="c-2">Prototip RU</label>
+                  <label for="c-2">{{ $t("protatypeTitle2") }}</label>
                   <input type="text" id="c-2" v-model="fatherAddRu" />
                 </div>
                 <div class="add_btn" @click="categoryFatherAddApi">
-                  yuborish
+       {{ $t("Send") }}
                 </div>
               </div>
               <div
@@ -45,15 +45,15 @@
                   @click="(contentModalEdit = false), (bgModal = false)"
                 ></div>
                 <div class="info">
-                  <label for="c-1">Prototip UZ</label>
+                  <label for="c-1">{{ $t("protatypeTitle1") }}</label>
                   <input type="text" id="c-1" v-model="fatherAddUz" />
                 </div>
                 <div class="info">
-                  <label for="c-2">Prototip RU</label>
+                  <label for="c-2">{{ $t("protatypeTitle2") }}</label>
                   <input type="text" id="c-2" v-model="fatherAddRu" />
                 </div>
                 <div class="add_btn" @click="categoryFatherEditApi">
-                  yuborish
+             {{ $t("Send") }}
                 </div>
               </div>
             </div>
@@ -119,7 +119,7 @@
               >
                 <div class="protatype_title_add_content_icon"></div>
                 <div class="protatype_title_add_content_title">
-                  hususiyat qo'shish
+               {{ $t("particularityAdd") }}
                 </div>
               </div>
               <div
@@ -131,14 +131,14 @@
                   @click="(titleModal = false), (bgModal = false)"
                 ></div>
                 <div class="info">
-                  <label for="c-1">hususiyatni UZ</label>
+                  <label for="c-1">{{ $t("particularityTitle1") }}</label>
                   <input type="text" id="c-1" v-model="childAddUz" />
                 </div>
                 <div class="info">
-                  <label for="c-2">hususiyatni RU</label>
+                  <label for="c-2">{{ $t("particularityTitle2") }}</label>
                   <input type="text" id="c-2" v-model="childAddRu" />
                 </div>
-                <div class="add_btn" @click="categoryChildAddApi">yuborish</div>
+                <div class="add_btn" @click="categoryChildAddApi">{{ $t("Send") }}</div>
               </div>
               <div
                 class="protatype_title_add_modal edit"
@@ -149,15 +149,15 @@
                   @click="(titleEditModal = false), (bgModal = false)"
                 ></div>
                 <div class="info">
-                  <label for="c-1">hususiyatni UZ</label>
+                  <label for="c-1">{{ $t("particularityTitle1") }}</label>
                   <input type="text" id="c-1" v-model="childAddUz" />
                 </div>
                 <div class="info">
-                  <label for="c-2">hususiyatni RU</label>
+                  <label for="c-2">{{ $t("particularityTitle3") }}</label>
                   <input type="text" id="c-2" v-model="childAddRu" />
                 </div>
                 <div class="add_btn" @click="categoryChildEditApi">
-                  yuborish
+                  {{ $t("Send") }}
                 </div>
               </div>
             </div>
@@ -215,6 +215,7 @@ const store = useStore();
 const bgModal = ref(false);
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const { locale } = useI18n();
+
 const contentModal = ref(false);
 const titleModal = ref(false);
 const categoryFather = ref(null);
