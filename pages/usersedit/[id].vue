@@ -111,6 +111,16 @@ async function userPutApi() {
           });
         }
       
+    }else{
+      toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Bo'shliqni",
+      {
+        position: "top-right",
+        timeout: 2000,
+      }
+    );
     }
   } catch (error) {
     toast.error(
