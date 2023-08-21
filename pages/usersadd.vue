@@ -5,9 +5,9 @@
         <div class="information">
           <div class="information_inputs">
             <div class="info">
-              <label class="info_label" for="com_leader"
-                >{{ $t("userDirector") }}</label
-              >
+              <label class="info_label" for="com_leader">{{
+                $t("userDirector")
+              }}</label>
               <input
                 class="info_input"
                 type="text"
@@ -56,7 +56,7 @@
           <div class="information_image">
             <div class="information_image_btns">
               <div class="btn_exit btn">
-                <NuxtLink class="btn_exit_link btn" to="/users">
+                <NuxtLink class="btn_exit_link btn" :to="localePath('/users')">
                   {{ $t("Back") }}
                 </NuxtLink>
               </div>
@@ -76,6 +76,7 @@ const fullName = ref("");
 const username = ref("");
 const password = ref("");
 const { locale } = useI18n();
+const localePath = useLocalePath();
 const inputTypeInfo = ref(null);
 const router = useRouter();
 const baseUrl = useRuntimeConfig().public.baseUrl;
@@ -99,7 +100,7 @@ async function userApi() {
         }),
       });
       if (data?.message == "ok") {
-        router.push("/users");
+        router.push(localePath('/users'));
         toast.success(data?.message || "Success", {
           position: "top-right",
           timeout: 2000,
