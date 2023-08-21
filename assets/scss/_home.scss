@@ -6,7 +6,7 @@ nav {
     z-index: 2;
 
     .container {
-        @include flex(center, flex-start);
+        @include flex (center, space-between);
         gap: 50px;
         padding: 0;
 
@@ -94,18 +94,91 @@ nav {
 
         }
 
-        .log_out {
-            margin-left: auto;
+        .content {
             @include flex(center, center);
-            gap: 20px;
-            cursor: pointer;
-            margin-top: 20px;
+            gap: 30px;
 
-            &_title {
-                @include fond(700, 18);
-                color: $pr_white_color;
-                text-transform: capitalize;
+            .language {
+                @include flex(flex-start, flex-start);
+                flex-direction: column;
+                position: relative;
+                transform: translateY(10px);
+
+                &_option {
+                    @include flex(center, flex-start);
+                    gap: 20px;
+                    background-color: $pr_white_color;
+                    border-radius: 5px;
+                    padding: 0 10px;
+                    cursor: pointer;
+
+                    &_title {
+                        @include fond(600, 15);
+                        color: $pr_black_color;
+                        text-transform: uppercase;
+
+                    }
+
+                    &_icon {
+                        svg {
+                            width: 20px;
+                            height: 20px;
+                            rotate: 180deg;
+                        }
+                    }
+                }
+
+                &_content {
+                    position: absolute;
+                    background-color: $pr_white_color;
+                    border-radius: 5px;
+                    width: 100%;
+                    top: calc(100% + 5px);
+                    @include flex(flex-start, flex-start);
+                    flex-direction: column;
+                    transition: 0.3s;
+                    transform: scale(0);
+                    opacity: 0;
+                    visibility: hidden;
+
+                    &_title {
+                        @include fond(600, 15);
+                        color: $pr_black_color;
+                        padding: 0 10px;
+                        text-transform: uppercase;
+                        margin-bottom: 5px;
+                    }
+                }
+
+                &.active {
+                    .language_option {
+                        &_icon {
+                            svg {
+                                rotate: 0deg;
+                            }
+                        }
+                    }
+
+                    .language_content {
+                        transform: scale(1);
+                        visibility: visible;
+                        opacity: 1;
+                    }
+                }
             }
+
+            .log_out {
+                @include flex(center, center);
+                gap: 10px;
+                cursor: pointer;
+                margin-top: 20px;
+                &_title {
+                    @include fond(700, 18);
+                    color: $pr_white_color;
+                    text-transform: capitalize;
+                }
+            }
+
         }
 
     }
@@ -385,6 +458,7 @@ body {
                         &:nth-child(11) {
                             width: calc(100% - 1280px);
                         }
+
                         &:nth-child(12) {
                             width: 70px
                         }
@@ -443,7 +517,8 @@ body {
                                         width: 18px;
                                         height: 18px;
                                     }
-                                    &.edit{
+
+                                    &.edit {
                                         margin-left: auto;
                                     }
                                 }
@@ -493,6 +568,7 @@ body {
                             &:nth-child(11) {
                                 width: calc(100% - 1280px);
                             }
+
                             &:nth-child(12) {
                                 width: 70px
                             }

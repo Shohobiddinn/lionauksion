@@ -122,65 +122,70 @@
             <div class="menu_content_title" v-if="userPage">
               <NuxtLink class="menu_content_title_link" to="/users">
                 <div class="menu_content_title_link_icon">
-                  <svg width="30" height="30" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z"/></svg>
+                  <svg
+                    width="30"
+                    height="30"
+                    fill="white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 640 512"
+                  >
+                    <path
+                      d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z"
+                    />
+                  </svg>
                 </div>
                 <div class="menu_content_title_link_text">foydalanuvchilar</div>
               </NuxtLink>
             </div>
-            <!-- <div class="menu_content_title">
-              <NuxtLink class="menu_content_title_link" to="/">
-                <div class="menu_content_title_link_icon">
-                  <svg
-                    width="30"
-                    height="30"
-                    viewBox="0 0 30 30"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M27.5 8.125H20M7.5 8.125H2.5M27.5 21.875H22.5M10 21.875H2.5M12.5 12.5C13.0745 12.5 13.6434 12.3868 14.1742 12.167C14.705 11.9471 15.1873 11.6248 15.5936 11.2186C15.9998 10.8123 16.3221 10.33 16.542 9.79924C16.7618 9.26844 16.875 8.69953 16.875 8.125C16.875 7.55047 16.7618 6.98156 16.542 6.45076C16.3221 5.91996 15.9998 5.43766 15.5936 5.03141C15.1873 4.62515 14.705 4.30289 14.1742 4.08303C13.6434 3.86316 13.0745 3.75 12.5 3.75C11.3397 3.75 10.2269 4.21094 9.40641 5.03141C8.58594 5.85188 8.125 6.96468 8.125 8.125C8.125 9.28532 8.58594 10.3981 9.40641 11.2186C10.2269 12.0391 11.3397 12.5 12.5 12.5ZM17.5 26.25C18.6603 26.25 19.7731 25.7891 20.5936 24.9686C21.4141 24.1481 21.875 23.0353 21.875 21.875C21.875 20.7147 21.4141 19.6019 20.5936 18.7814C19.7731 17.9609 18.6603 17.5 17.5 17.5C16.3397 17.5 15.2269 17.9609 14.4064 18.7814C13.5859 19.6019 13.125 20.7147 13.125 21.875C13.125 23.0353 13.5859 24.1481 14.4064 24.9686C15.2269 25.7891 16.3397 26.25 17.5 26.25Z"
-                      stroke="white"
-                      stroke-width="1.5"
-                      stroke-miterlimit="10"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-                <div class="menu_content_title_link_text">Control panel</div>
-              </NuxtLink>
-            </div>
-            <div class="menu_content_title">
-              <NuxtLink class="menu_content_title_link" to="/">
-                <div class="menu_content_title_link_icon">
-                  <svg
-                    width="30"
-                    height="30"
-                    viewBox="0 0 30 30"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M10 8.75H20M11.25 13.75H18.75M8.4125 24.625C9.4375 23.525 11 23.6125 11.9 24.8125L13.1625 26.5C14.175 27.8375 15.8125 27.8375 16.825 26.5L18.0875 24.8125C18.9875 23.6125 20.55 23.525 21.575 24.625C23.8 27 25.6125 26.2125 25.6125 22.8875V8.8C25.625 3.7625 24.45 2.5 19.725 2.5H10.275C5.55 2.5 4.375 3.7625 4.375 8.8V22.875C4.375 26.2125 6.2 26.9875 8.4125 24.625Z"
-                      stroke="white"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-                <div class="menu_content_title_link_text">report</div>
-              </NuxtLink>
-            </div> -->
           </div>
         </div>
-        <div class="log_out" @click="logout">
-          <div class="log_out_icon">
-            <svg width="25" height="25" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/></svg>
-
+        <div class="div"></div>
+        <div class="content">
+          <div class="language" :class="{ active: langModal }">
+            <div class="language_option" @click="langModal = !langModal">
+              <div class="language_option_title">
+                {{ locale }}
+              </div>
+              <div class="language_option_icon">
+                <svg
+                  width="30"
+                  height="30"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 448 512"
+                >
+                  <path
+                    d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="language_content">
+              <NuxtLink
+                class="language_content_title"
+                v-for="l in locales"
+                :key="l?.id"
+                :to="switchLocalePath(l?.code)"
+                @click="delLang($event), (langModal = false)"
+              >
+                {{ l?.code }}
+              </NuxtLink>
+            </div>
           </div>
-          <div class="log_out_title">
-            chiqish
+          <div class="log_out" @click="logout">
+            <div class="log_out_icon">
+              <svg
+                width="25"
+                height="25"
+                fill="white"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"
+                />
+              </svg>
+            </div>
+            <div class="log_out_title">chiqish</div>
           </div>
         </div>
       </div>
@@ -190,8 +195,10 @@
 </template>
 
 <script setup>
+const { locale, locales } = useI18n();
+const switchLocalePath = useSwitchLocalePath();
 const role = localStorage.getItem("role");
-const router = useRouter()
+const router = useRouter();
 const productPage = ref(false);
 const companyPage = ref(false);
 const currensyPage = ref(false);
@@ -199,15 +206,25 @@ const currensyTypePage = ref(false);
 const supplierPage = ref(false);
 const productAddPage = ref(false);
 const userPage = ref(false);
-function logout(){
+const langModal = ref(false);
+function logout() {
   localStorage.removeItem("userToken");
   localStorage.removeItem("role");
   localStorage.removeItem("userSupplierId");
   localStorage.removeItem("userCompanyId");
-  router.push("/login")
+  router.push("/login");
 }
-onMounted(()=>{
-  if(role == "ROLE_ADMIN"){
+function delLang(e) {
+  document.querySelectorAll(".language_content_title").forEach((item) => {
+    if (e.target == item) {
+      e.target.style.display = "none";
+    } else {
+      item.style.display = "block";
+    }
+  });
+}
+onMounted(() => {
+  if (role == "ROLE_ADMIN") {
     productPage.value = true;
     companyPage.value = true;
     currensyPage.value = true;
@@ -215,34 +232,40 @@ onMounted(()=>{
     supplierPage.value = false;
     productAddPage.value = false;
   }
-  if(role == "ROLE_SUPPLIER_ADMIN"){
+  if (role == "ROLE_SUPPLIER_ADMIN") {
     productPage.value = true;
     companyPage.value = false;
     currensyPage.value = true;
     currensyTypePage.value = false;
     supplierPage.value = false;
     productAddPage.value = false;
-    userPage.value = true
-
+    userPage.value = true;
   }
-  if(role == "ROLE_COMPANY_ADMIN"){
+  if (role == "ROLE_COMPANY_ADMIN") {
     productPage.value = true;
     companyPage.value = false;
     currensyPage.value = false;
     currensyTypePage.value = false;
     supplierPage.value = true;
     productAddPage.value = true;
-    userPage.value = true
-  };
-  if(role == "ROLE_COMPANY_MANAGER"){
+    userPage.value = true;
+  }
+  if (role == "ROLE_COMPANY_MANAGER") {
     productPage.value = true;
     companyPage.value = false;
     currensyPage.value = true;
     currensyTypePage.value = false;
     supplierPage.value = true;
     productAddPage.value = true;
-  };
-})
+  }
+  document.querySelectorAll(".language_content_title").forEach((item) => {
+    if (locale.value === item.textContent) {
+      item.style.display = "none";
+    } else {
+      item.style.display = "block";
+    }
+  });
+});
 </script>
 
 <style lang="scss" scoped>
