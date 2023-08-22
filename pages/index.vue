@@ -604,13 +604,13 @@ onMounted(() => {
   }
   if (role == "ROLE_COMPANY_ADMIN") {
     productDeleteIcon.value = false;
-    productCartIcon.value = true;
+    productCartIcon.value = false;
     productEditIcon.value = false;
     productAddIcon.value = false;
   }
   if (role == "ROLE_COMPANY_MANAGER") {
     productDeleteIcon.value = false;
-    productCartIcon.value = true;
+    productCartIcon.value = false;
     productEditIcon.value = false;
     productAddIcon.value = false;
   }
