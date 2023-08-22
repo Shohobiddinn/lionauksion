@@ -81,7 +81,7 @@ async function loginApi() {
       return response.json();
     })
     .then((data) => {
-      if (data) {
+      if (!data.error) {
         localStorage.setItem("userToken", data?.accessToken);
         localStorage.setItem("userId", data?.user?.id);
         localStorage.setItem("role", data?.user?.roles?.[0]?.name);
@@ -102,6 +102,12 @@ async function loginApi() {
           timeout: 2000,
         });
         router.push(localePath("/"));
+        console.log(data);
+      }else{
+        toast.error(data?.message, {
+        position: "top-right",
+        timeout: 2000,
+      });
       }
     })
     .catch((error) => {
