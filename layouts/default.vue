@@ -1,5 +1,6 @@
 <template>
   <div>
+    <bgmodal v-if="bgmodol" />
     <nav>
       <div class="container">
         <div class="menu">
@@ -24,11 +25,16 @@
                     />
                   </svg>
                 </div>
-                <div class="menu_content_title_link_text">{{ $t("products") }}</div>
+                <div class="menu_content_title_link_text">
+                  {{ $t("products") }}
+                </div>
               </NuxtLink>
             </div>
             <div class="menu_content_title" v-if="companyPage">
-              <NuxtLink class="menu_content_title_link" :to="localePath('/company')">
+              <NuxtLink
+                class="menu_content_title_link"
+                :to="localePath('/company')"
+              >
                 <div class="menu_content_title_link_icon">
                   <svg
                     width="30"
@@ -42,11 +48,16 @@
                     />
                   </svg>
                 </div>
-                <div class="menu_content_title_link_text">{{ $t("Companies") }}</div>
+                <div class="menu_content_title_link_text">
+                  {{ $t("Companies") }}
+                </div>
               </NuxtLink>
             </div>
             <div class="menu_content_title" v-if="currensyPage">
-              <NuxtLink class="menu_content_title_link" :to="localePath('/currensy')">
+              <NuxtLink
+                class="menu_content_title_link"
+                :to="localePath('/currensy')"
+              >
                 <div class="menu_content_title_link_icon">
                   <svg
                     width="30"
@@ -60,11 +71,16 @@
                     />
                   </svg>
                 </div>
-                <div class="menu_content_title_link_text">{{ $t("Currencies") }}</div>
+                <div class="menu_content_title_link_text">
+                  {{ $t("Currencies") }}
+                </div>
               </NuxtLink>
             </div>
             <div class="menu_content_title" v-if="currensyTypePage">
-              <NuxtLink class="menu_content_title_link" :to="localePath('/currensyType')">
+              <NuxtLink
+                class="menu_content_title_link"
+                :to="localePath('/currensyType')"
+              >
                 <div class="menu_content_title_link_icon">
                   <svg
                     width="30"
@@ -78,29 +94,16 @@
                     />
                   </svg>
                 </div>
-                <div class="menu_content_title_link_text">{{ $t("TypeOfCurrency") }}</div>
+                <div class="menu_content_title_link_text">
+                  {{ $t("TypeOfCurrency") }}
+                </div>
               </NuxtLink>
             </div>
             <div class="menu_content_title" v-if="supplierPage">
-              <NuxtLink class="menu_content_title_link" :to="localePath('/supplier')">
-                <div class="menu_content_title_link_icon">
-                  <svg
-                    width="30"
-                    height="30"
-                    fill="white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 640 512"
-                  >
-                    <path
-                      d="M32 96c0-35.3 28.7-64 64-64H320c23.7 0 44.4 12.9 55.4 32h51.8c25.3 0 48.2 14.9 58.5 38l52.8 118.8c.5 1.1 .9 2.1 1.3 3.2H544c35.3 0 64 28.7 64 64v32c17.7 0 32 14.3 32 32s-14.3 32-32 32H576c0 53-43 96-96 96s-96-43-96-96H256c0 53-43 96-96 96s-96-43-96-96H32c-17.7 0-32-14.3-32-32s14.3-32 32-32V288c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32V96zM384 224h85.9l-42.7-96H384v96zM160 432a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm368-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0z"
-                    />
-                  </svg>
-                </div>
-                <div class="menu_content_title_link_text">{{ $t("Suppliers") }}</div>
-              </NuxtLink>
-            </div>
-            <div class="menu_content_title" v-if="productAddPage">
-              <NuxtLink class="menu_content_title_link" :to="localePath('/product-prototype')">
+              <NuxtLink
+                class="menu_content_title_link"
+                :to="localePath('/supplier')"
+              >
                 <div class="menu_content_title_link_icon">
                   <svg
                     width="30"
@@ -115,12 +118,38 @@
                   </svg>
                 </div>
                 <div class="menu_content_title_link_text">
-               {{ $t("productProtatip") }}
+                  {{ $t("Suppliers") }}
+                </div>
+              </NuxtLink>
+            </div>
+            <div class="menu_content_title" v-if="productAddPage">
+              <NuxtLink
+                class="menu_content_title_link"
+                :to="localePath('/product-prototype')"
+              >
+                <div class="menu_content_title_link_icon">
+                  <svg
+                    width="30"
+                    height="30"
+                    fill="white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 640 512"
+                  >
+                    <path
+                      d="M32 96c0-35.3 28.7-64 64-64H320c23.7 0 44.4 12.9 55.4 32h51.8c25.3 0 48.2 14.9 58.5 38l52.8 118.8c.5 1.1 .9 2.1 1.3 3.2H544c35.3 0 64 28.7 64 64v32c17.7 0 32 14.3 32 32s-14.3 32-32 32H576c0 53-43 96-96 96s-96-43-96-96H256c0 53-43 96-96 96s-96-43-96-96H32c-17.7 0-32-14.3-32-32s14.3-32 32-32V288c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32V96zM384 224h85.9l-42.7-96H384v96zM160 432a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm368-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0z"
+                    />
+                  </svg>
+                </div>
+                <div class="menu_content_title_link_text">
+                  {{ $t("productProtatip") }}
                 </div>
               </NuxtLink>
             </div>
             <div class="menu_content_title" v-if="userPage">
-              <NuxtLink class="menu_content_title_link" :to="localePath('/users')">
+              <NuxtLink
+                class="menu_content_title_link"
+                :to="localePath('/users')"
+              >
                 <div class="menu_content_title_link_icon">
                   <svg
                     width="30"
@@ -134,7 +163,9 @@
                     />
                   </svg>
                 </div>
-                <div class="menu_content_title_link_text">{{ $t("users") }}</div>
+                <div class="menu_content_title_link_text">
+                  {{ $t("users") }}
+                </div>
               </NuxtLink>
             </div>
           </div>
@@ -171,6 +202,65 @@
               </NuxtLink>
             </div>
           </div>
+          <div class="profil" :class="{ active: profilModal }">
+            <div class="profil_option" @click="profilModal = !profilModal">
+              <div class="profil_option_icon">
+                <svg
+                  width="25"
+                  height="25"
+                  fill="white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                >
+                  <path
+                    d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="profil_content">
+              <div class="profil_content_title">{{ profilName }}</div>
+              <div class="profil_content_title btn" @click="pasEditModal()">
+                parolni o'zgartirish
+              </div>
+            </div>
+          </div>
+          <div class="currensy_modal" v-if="passwordModal">
+            <div
+              class="currensy_modal_close_btn"
+              @click="(bgmodol = false), (passwordModal = false)"
+            ></div>
+            <div class="currensy_modal_info">
+              <label class="currensy_modal_info_label" for="cur-1">
+                {{ $t("oldPassword") }}
+              </label>
+              <input
+                class="currensy_modal_info_input"
+                v-model="oldPassword"
+                type="text"
+                id="cur-1"
+                @keyup.enter="editPassword"
+              />
+            </div>
+            <div class="currensy_modal_info">
+              <label for=""></label>
+            </div>
+            <div class="currensy_modal_info">
+              <label class="currensy_modal_info_label" for="cur-1">
+                {{ $t("newPassword") }}
+              </label>
+              <input
+                class="currensy_modal_info_input"
+                v-model="newPassword"
+                type="text"
+                id="cur-1"
+                @keyup.enter="editPassword"
+              />
+            </div>
+            <div class="currensy_modal_send" @click="editPassword">
+              <div class="currensy_modal_send_btn">{{ $t("Send") }}</div>
+            </div>
+          </div>
           <div class="log_out" @click="logout">
             <div class="log_out_icon">
               <svg
@@ -195,10 +285,15 @@
 </template>
 
 <script setup>
+import { useStore } from "~/store/store";
+import { useToast } from "vue-toastification";
+const toast = useToast();
+const store = useStore();
 const { locale, locales } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
-const localePath = useLocalePath()
+const localePath = useLocalePath();
 const role = localStorage.getItem("role");
+const baseUrl = useRuntimeConfig().public.baseUrl;
 const router = useRouter();
 const productPage = ref(false);
 const companyPage = ref(false);
@@ -208,6 +303,17 @@ const supplierPage = ref(false);
 const productAddPage = ref(false);
 const userPage = ref(false);
 const langModal = ref(false);
+const passwordModal = ref(false);
+const bgmodol = ref(false);
+const profilModal = ref(false);
+const oldPassword = ref(null);
+const newPassword = ref(null);
+const profilName = ref(localStorage.getItem("fullName"))
+function pasEditModal() {
+  bgmodol.value = true;
+  profilModal.value = false;
+  passwordModal.value = true;
+}
 function logout() {
   localStorage.removeItem("userToken");
   localStorage.removeItem("role");
@@ -215,7 +321,7 @@ function logout() {
   localStorage.removeItem("userCompanyId");
   localStorage.removeItem("userRefreshToken");
   localStorage.removeItem("userId");
-  router.push(localePath('/login'));
+  router.push(localePath("/login"));
 }
 function delLang(e) {
   document.querySelectorAll(".language_content_title").forEach((item) => {
@@ -225,6 +331,43 @@ function delLang(e) {
       item.style.display = "block";
     }
   });
+}
+async function editPassword() {
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + "/change-password", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userRefreshToken"),
+        "Accept-Language": locale.value,
+      },
+      params: {
+        oldPassword: oldPassword.value,
+        newPassword: newPassword.value,
+      },
+    });
+    if (data) {
+      store.loader = false;
+      router.push("/login");
+      bgmodol.value = false;
+      passwordModal.value = false;
+      toast.success(data?.message || "Success", {
+        position: "top-right",
+        timeout: 2000,
+      });
+    }
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+      }
+    );
+  }
 }
 onMounted(() => {
   if (role == "ROLE_ADMIN") {

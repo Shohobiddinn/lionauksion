@@ -415,7 +415,6 @@ async function search() {
     }
   } catch (error) {}
 }
-
 async function refresh() {
   try {
     store.loader = true;
@@ -431,6 +430,7 @@ async function refresh() {
       localStorage.setItem("userId", data?.user?.id);
       localStorage.setItem("role", data?.user?.roles?.[0]?.name);
       localStorage.setItem("userRefreshToken", data?.refreshToken);
+      localStorage.setItem("fullName", data?.user?.fullName);
       if (data?.user?.supplierId !== null) {
         localStorage.setItem("userSupplierId", data?.user?.supplierId);
       } else {
@@ -451,16 +451,18 @@ async function refresh() {
       localStorage.removeItem("userCompanyId");
       localStorage.removeItem("userRefreshToken");
       localStorage.removeItem("userId");
-
+      localStorage.removeItem("fullName");
       router.push("/login");
-    }else if(error.response.status == 403){
+    } else if (error.response.status == 403) {
       localStorage.removeItem("userToken");
       localStorage.removeItem("role");
       localStorage.removeItem("userSupplierId");
       localStorage.removeItem("userCompanyId");
       localStorage.removeItem("userRefreshToken");
       localStorage.removeItem("userId");
-    }else {
+      localStorage.removeItem("fullName");
+
+    } else {
       store.loader = false;
       toast.error(
         error?.response?._data?.message ||

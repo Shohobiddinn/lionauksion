@@ -4,9 +4,9 @@
       <div class="login_modal">
         <img src="../assets/image/logo.png" alt="logo" />
         <div class="login_modal_inputs">
-          <label for="input-1" class="login_modal_inputs_label"
-            >{{ $t("userName") }}</label
-          >
+          <label for="input-1" class="login_modal_inputs_label">{{
+            $t("userName")
+          }}</label>
           <input
             class="login_modal_inputs_input"
             :placeholder="$t('Login')"
@@ -16,7 +16,9 @@
           />
         </div>
         <div class="login_modal_inputs">
-          <label for="input-1" class="login_modal_inputs_label">{{ $t("Password") }}</label>
+          <label for="input-1" class="login_modal_inputs_label">{{
+            $t("Password")
+          }}</label>
           <input
             class="login_modal_inputs_input"
             ref="password"
@@ -79,25 +81,28 @@ async function loginApi() {
       return response.json();
     })
     .then((data) => {
-      router.push(localePath('/'));
-      localStorage.setItem("userToken", data?.accessToken);
-      localStorage.setItem("userId", data?.user?.id);
-      localStorage.setItem("role", data?.user?.roles?.[0]?.name);
-      localStorage.setItem("userRefreshToken", data?.refreshToken);
-      if (data?.user?.supplierId !== null) {
-        localStorage.setItem("userSupplierId", data?.user?.supplierId);
-      } else {
-        localStorage.setItem("userSupplierId", "");
+      if (data) {
+        localStorage.setItem("userToken", data?.accessToken);
+        localStorage.setItem("userId", data?.user?.id);
+        localStorage.setItem("role", data?.user?.roles?.[0]?.name);
+        localStorage.setItem("userRefreshToken", data?.refreshToken);
+        localStorage.setItem("fullName", data?.user?.fullName);
+        if (data?.user?.supplierId !== null) {
+          localStorage.setItem("userSupplierId", data?.user?.supplierId);
+        } else {
+          localStorage.setItem("userSupplierId", "");
+        }
+        if (data?.user?.companyId !== null) {
+          localStorage.setItem("userCompanyId", data?.user?.companyId);
+        } else {
+          localStorage.setItem("userCompanyId", "");
+        }
+        toast.success(data?.message || "Success", {
+          position: "top-right",
+          timeout: 2000,
+        });
+        router.push(localePath("/"));
       }
-      if (data?.user?.companyId !== null) {
-        localStorage.setItem("userCompanyId", data?.user?.companyId);
-      } else {
-        localStorage.setItem("userCompanyId", "");
-      }
-      toast.success(data?.message || "Success", {
-        position: "top-right",
-        timeout: 2000,
-      });
     })
     .catch((error) => {
       store.loader = false;
