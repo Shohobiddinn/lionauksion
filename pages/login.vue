@@ -104,7 +104,7 @@ async function loginApi() {
         router.push(localePath("/"));
         console.log(data);
       }else{
-        toast.error(data?.message, {
+        toast.error(data.message, {
         position: "top-right",
         timeout: 2000,
       });
