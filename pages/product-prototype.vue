@@ -360,8 +360,7 @@ async function categoryChildAddApi() {
           timeout: 2000,
         });
       }
-    } else {
-    }
+    } 
   } catch (error) {
     store.loader = false;
     toast.error(error?.response?._data?.message || "Error", {
@@ -470,6 +469,7 @@ async function protatypeFatherEdit(e) {
       fatherAddUz.value = data?.nameUz;
       fatherAddRu.value = data?.nameRu;
       store.loader = false;
+      categoryFatherApi();
     }
   } catch (error) {
     store.loader = false;
@@ -501,7 +501,6 @@ async function categoryFatherEditApi() {
         position: "top-right",
         timeout: 2000,
       });
-
       categoryFatherApi();
       bgModal.value = false;
       contentModal.value = false;
@@ -536,6 +535,29 @@ async function protatypeChildEdit(e) {
       childAddRu.value = data?.nameRu;
       categoryId.value = data?.categoryId;
       store.loader = false;
+      try {
+        store.loader = true;
+        const data = await $fetch(baseUrl + "/category-detail/all", {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("userToken"),
+            "Accept-Language": locale.value,
+          },
+          params: {
+            categoryId: categoryId.value,
+          },
+        });
+        categoryChild.value = data;
+        if (data) {
+          store.loader = false;
+        }
+      } catch (error) {
+        store.loader = true;
+        toast.error(error.response._data.message, {
+          position: "top-right",
+          timeout: 2000,
+        });
+      }
     }
   } catch (error) {
     store.loader = false;
@@ -568,10 +590,32 @@ async function categoryChildEditApi() {
         position: "top-right",
         timeout: 2000,
       });
-      categoryFatherApi();
       bgModal.value = false;
       contentModal.value = false;
       store.loader = false;
+      try {
+        store.loader = true;
+        const data = await $fetch(baseUrl + "/category-detail/all", {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("userToken"),
+            "Accept-Language": locale.value,
+          },
+          params: {
+            categoryId: categoryId.value,
+          },
+        });
+        categoryChild.value = data;
+        if (data) {
+          store.loader = false;
+        }
+      } catch (error) {
+        store.loader = true;
+        toast.error(error.response._data.message, {
+          position: "top-right",
+          timeout: 2000,
+        });
+      }
     } else {
     }
   } catch (error) {
