@@ -38,9 +38,13 @@
                                 background-color: $pr_white_color;
                             }
 
+                            ;
+
                             &::after {
                                 rotate: -90deg;
                             }
+
+                            ;
                         }
 
                         &_title {
@@ -52,7 +56,6 @@
                         &:hover {
                             background-color: $sc_blue_color;
                         }
-
                     }
 
                     &_modal {
@@ -178,21 +181,26 @@
                     border-radius: 10px;
                     transition: 0.3s;
 
+                    &_icons {
+                        @include flex(center, flex-start);
+                        gap: 20px;
 
-                    &_icon {
+                        &_icon {
 
+                            svg {
+                                width: 18px;
+                                height: 18px;
+                            }
 
-                        &.delete {
-                            rotate: 0deg;
-                            margin-left: auto;
-                            margin-right: 20px;
+                            &.line {
+                                rotate: 90deg;
+                                svg{
+                                    width: 25px;
+                                    height: 25px;
+                                }
+                            }
                         }
 
-                        &.edit {
-                            rotate: 0deg;
-                            margin-left: 300px;
-                            // margin-right: 20px;
-                        }
                     }
 
                     &.active {
@@ -205,15 +213,18 @@
                             text-transform: capitalize;
                         }
 
-                        .protatype_content_title_icon {
-                            svg {
-                                filter: invert(1)
-                            }
-
-                            &.delete {
+                        .protatype_content_title_icons {
+                            &_icon{
                                 svg {
-                                    filter: invert(0)
+                                    filter: invert(1)
                                 }
+    
+                                &.delete {
+                                    svg {
+                                        filter: invert(0)
+                                    }
+                                }
+
                             }
                         }
                     }

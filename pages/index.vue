@@ -1,5 +1,8 @@
 <template>
   <div>
+<Head>
+  <Title>{{ $t("products") }}</Title>
+</Head>
     <div class="informotion">
       <div class="container">
         <div class="info">

@@ -1,4 +1,7 @@
 <template>
+  <Head>
+  <Title>{{ $t("Login") }}</Title>
+</Head>
   <div>
     <div class="login">
       <div class="login_modal">

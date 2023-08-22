@@ -1,13 +1,13 @@
 <template>
   <div>
     <Head>
-      <Title>LionPrint</Title>
+      <!-- <Title>LionPrint</Title>
       <Link
         rel="icon"
         href="./public/logo.png"
         type="image/x-icon"
         sizes="16x16"
-      />
+      /> -->
     </Head>
     <NuxtLayout />
     <load />

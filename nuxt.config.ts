@@ -8,6 +8,9 @@ export default defineNuxtConfig({
   ],
   app: {
     head: {
+      title: "Lion Print",
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1',
       link: [
         {
           rel: "stylesheet",
@@ -23,12 +26,12 @@ export default defineNuxtConfig({
     locales: [
       {
         code: "uz",
-        name:"uzb",
+        name: "uzb",
         file: "uz.json"
       },
       {
         code: "ru",
-        name:"рус",
+        name: "рус",
         file: "ru.json"
       },
     ]
