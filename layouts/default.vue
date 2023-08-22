@@ -256,7 +256,7 @@ onMounted(() => {
   if (role == "ROLE_COMPANY_MANAGER") {
     productPage.value = true;
     companyPage.value = false;
-    currensyPage.value = true;
+    currensyPage.value = false;
     currensyTypePage.value = false;
     supplierPage.value = true;
     productAddPage.value = true;
