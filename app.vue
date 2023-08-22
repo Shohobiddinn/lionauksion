@@ -4,7 +4,7 @@
       <Title>LionPrint</Title>
       <Link
         rel="icon"
-        href="`/public/favicon.ico"
+        href="./public/logo.png"
         type="image/x-icon"
         sizes="16x16"
       />

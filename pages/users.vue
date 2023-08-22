@@ -443,6 +443,7 @@ async function refresh() {
       }
     }
   } catch (error) {
+    console.log(error.response.status);
     if (error?.response?._data?.status == 401) {
       localStorage.removeItem("userToken");
       localStorage.removeItem("role");
@@ -452,7 +453,14 @@ async function refresh() {
       localStorage.removeItem("userId");
 
       router.push("/login");
-    }else{
+    }else if(error.response.status == 403){
+      localStorage.removeItem("userToken");
+      localStorage.removeItem("role");
+      localStorage.removeItem("userSupplierId");
+      localStorage.removeItem("userCompanyId");
+      localStorage.removeItem("userRefreshToken");
+      localStorage.removeItem("userId");
+    }else {
       store.loader = false;
       toast.error(
         error?.response?._data?.message ||
@@ -463,7 +471,6 @@ async function refresh() {
           timeout: 2000,
         }
       );
-
     }
   }
 }
