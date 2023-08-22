@@ -1,5 +1,8 @@
 <template>
   <div>
+    <Head>
+      <Title>{{ $t("TypeOfCurrency") }}</Title>
+    </Head>
     <bgmodal v-if="bgmodol" />
     <div class="currensy_page">
       <div class="container">

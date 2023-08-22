@@ -1,5 +1,8 @@
 <template>
   <div>
+    <Head>
+      <Title>{{ $t("suplierAdd") }}</Title>
+    </Head>
     <div class="companyadd_page">
       <div class="container">
         <div class="information">

@@ -1,4 +1,7 @@
 <template>
+  <Head>
+  <Title>{{ $t("users") }}</Title>
+</Head>
   <div>
     <div class="company_page">
       <div class="container">

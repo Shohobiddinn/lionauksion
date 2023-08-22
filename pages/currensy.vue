@@ -1,5 +1,8 @@
 <template>
   <div>
+    <Head>
+      <Title>{{ $t("Currencies") }}</Title>
+    </Head>
     <bgmodal v-if="bgmodol" />
     <div class="currensy_page">
       <div class="container">
@@ -132,7 +135,7 @@
               ></div>
               <div class="currensy_modal_info">
                 <label class="currensy_modal_info_label" for="cur-1">
-              {{ $t("ValueInSum") }}
+                  {{ $t("ValueInSum") }}
                 </label>
                 <input
                   class="currensy_modal_info_input"
@@ -431,7 +434,6 @@ async function refresh() {
       localStorage.removeItem("userRefreshToken");
       localStorage.removeItem("userId");
       localStorage.removeItem("fullName");
-
     } else {
       store.loader = false;
       toast.error(
