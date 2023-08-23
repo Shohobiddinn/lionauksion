@@ -225,6 +225,67 @@ const router = useRouter();
 const contentModal = ref(false);
 const titleModal = ref(false);
 const categoryFather = ref(null);
+async function refresh() {
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + "/refresh-token", {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userRefreshToken"),
+        "Accept-Language": locale.value,
+      },
+    });
+    if (data) {
+      store.loader = false;
+      localStorage.setItem("userToken", data?.accessToken);
+      localStorage.setItem("userId", data?.user?.id);
+      localStorage.setItem("role", data?.user?.roles?.[0]?.name);
+      localStorage.setItem("userRefreshToken", data?.refreshToken);
+      localStorage.setItem("fullName", data?.user?.fullName);
+      if (data?.user?.supplierId !== null) {
+        localStorage.setItem("userSupplierId", data?.user?.supplierId);
+      } else {
+        localStorage.setItem("userSupplierId", "");
+      }
+      if (data?.user?.companyId !== null) {
+        localStorage.setItem("userCompanyId", data?.user?.companyId);
+      } else {
+        localStorage.setItem("userCompanyId", "");
+      }
+    }
+  } catch (error) {
+    console.log(error.response.status);
+    if (error?.response?._data?.status == 401) {
+      localStorage.removeItem("userToken");
+      localStorage.removeItem("role");
+      localStorage.removeItem("userSupplierId");
+      localStorage.removeItem("userCompanyId");
+      localStorage.removeItem("userRefreshToken");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("fullName");
+      router.push("/login");
+    } else if (error.response.status == 403) {
+      localStorage.removeItem("userToken");
+      localStorage.removeItem("role");
+      localStorage.removeItem("userSupplierId");
+      localStorage.removeItem("userCompanyId");
+      localStorage.removeItem("userRefreshToken");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("fullName");
+    } else {
+      store.loader = false;
+      toast.error(
+        error?.response?._data?.message ||
+          error?.response?._data?.error ||
+          "Error",
+        {
+          position: "top-right",
+          timeout: 2000,
+        }
+      );
+    }
+  }
+}
+refresh();
 async function categoryFatherApi() {
   store.loader = true;
   const data = await $fetch(baseUrl + "/category", {
@@ -334,6 +395,7 @@ async function categoryChildAddApi() {
       }),
     });
     if (data?.message == "ok") {
+      refresh();
       toast.success(data?.message, {
         position: "top-right",
         timeout: 2000,
@@ -388,6 +450,7 @@ async function fatherProtitipDelete(p) {
       titleModal.value = false;
       store.loader = false;
       categoryFatherApi();
+      refresh();
       toast.success(data?.message, {
         position: "top-right",
         timeout: 2000,
@@ -436,6 +499,7 @@ async function childProtitipDelete(p) {
         categoryChild.value = data;
         if (data) {
           store.loader = false;
+          refresh();
         }
       } catch (error) {
         store.loader = true;
@@ -475,6 +539,7 @@ async function protatypeFatherEdit(e) {
       fatherAddRu.value = data?.nameRu;
       store.loader = false;
       categoryFatherApi();
+      refresh();
     }
   } catch (error) {
     store.loader = false;
@@ -510,6 +575,7 @@ async function categoryFatherEditApi() {
       bgModal.value = false;
       contentModal.value = false;
       store.loader = false;
+      refresh();
     } else {
     }
   } catch (error) {
@@ -555,6 +621,7 @@ async function protatypeChildEdit(e) {
         categoryChild.value = data;
         if (data) {
           store.loader = false;
+          refresh();
         }
       } catch (error) {
         store.loader = true;
@@ -591,6 +658,7 @@ async function categoryChildEditApi() {
     if (data?.message == "ok") {
       titleEditModal.value = false;
       bgModal.value = false;
+      refresh();
       toast.success(data?.message, {
         position: "top-right",
         timeout: 2000,
@@ -613,6 +681,7 @@ async function categoryChildEditApi() {
         categoryChild.value = data;
         if (data) {
           store.loader = false;
+          refresh();
         }
       } catch (error) {
         store.loader = true;
@@ -631,67 +700,7 @@ async function categoryChildEditApi() {
     });
   }
 }
-async function refresh() {
-  try {
-    store.loader = true;
-    const data = await $fetch(baseUrl + "/refresh-token", {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("userRefreshToken"),
-        "Accept-Language": locale.value,
-      },
-    });
-    if (data) {
-      store.loader = false;
-      localStorage.setItem("userToken", data?.accessToken);
-      localStorage.setItem("userId", data?.user?.id);
-      localStorage.setItem("role", data?.user?.roles?.[0]?.name);
-      localStorage.setItem("userRefreshToken", data?.refreshToken);
-      localStorage.setItem("fullName", data?.user?.fullName);
-      if (data?.user?.supplierId !== null) {
-        localStorage.setItem("userSupplierId", data?.user?.supplierId);
-      } else {
-        localStorage.setItem("userSupplierId", "");
-      }
-      if (data?.user?.companyId !== null) {
-        localStorage.setItem("userCompanyId", data?.user?.companyId);
-      } else {
-        localStorage.setItem("userCompanyId", "");
-      }
-    }
-  } catch (error) {
-    console.log(error.response.status);
-    if (error?.response?._data?.status == 401) {
-      localStorage.removeItem("userToken");
-      localStorage.removeItem("role");
-      localStorage.removeItem("userSupplierId");
-      localStorage.removeItem("userCompanyId");
-      localStorage.removeItem("userRefreshToken");
-      localStorage.removeItem("userId");
-      localStorage.removeItem("fullName");
-      router.push("/login");
-    } else if (error.response.status == 403) {
-      localStorage.removeItem("userToken");
-      localStorage.removeItem("role");
-      localStorage.removeItem("userSupplierId");
-      localStorage.removeItem("userCompanyId");
-      localStorage.removeItem("userRefreshToken");
-      localStorage.removeItem("userId");
-      localStorage.removeItem("fullName");
-    } else {
-      store.loader = false;
-      toast.error(
-        error?.response?._data?.message ||
-          error?.response?._data?.error ||
-          "Error",
-        {
-          position: "top-right",
-          timeout: 2000,
-        }
-      );
-    }
-  }
-}
-refresh();
+
 </script>
 
 <style lang="scss" scoped>

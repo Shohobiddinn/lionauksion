@@ -124,103 +124,6 @@ const phone = ref("");
 const inputTypeInfo = ref(null);
 const router = useRouter();
 const baseUrl = useRuntimeConfig().public.baseUrl;
-async function companyPutApi() {
-  try {
-    if (
-      !companyName.value == "" &&
-      !fullName.value == "" &&
-      !password.value == "" &&
-      !username.value == ""
-    ) {
-      store.loader = true;
-      const data = await $fetch(baseUrl + "/company", {
-        method: "PUT",
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("userToken"),
-          "Accept-Language": locale.value,
-        },
-        body: JSON.stringify({
-          id: id,
-          name: companyName.value,
-          director: fullName.value,
-          phone: phone.value.value,
-          userFullName: fullName.value,
-          username: username.value,
-          password: password.value,
-        }),
-      });
-      if (data.message == "ok") {
-        router.push(localePath("/company"));
-        store.loader = false;
-        toast.success(data?.message || "Success", {
-          position: "top-right",
-          timeout: 2000,
-        });
-      }
-    }
-  } catch (error) {
-    store.loader = false;
-    toast.error(
-      error?.response?._data?.message ||
-        error?.response?._data?.error ||
-        "Error",
-      {
-        position: "top-right",
-        timeout: 2000,
-      }
-    );
-  }
-}
-const suplierOne = ref(null);
-async function companyOneApi() {
-  try {
-    store.loader = true;
-    const data = await $fetch(baseUrl + `/company/${id}`, {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("userToken"),
-        "Accept-Language": locale.value,
-      },
-    });
-    suplierOne.value = data;
-    companyName.value = data?.name;
-    fullName.value = data?.director;
-    phone.value.value = data?.phone;
-    fullName.value = data?.userFullName;
-    username.value = data?.username;
-    password.value = data?.password;
-    userFullName.value = data?.userFullName;
-    if (data) {
-      store.loader = false;
-    }
-  } catch (error) {
-    store.loader = false;
-    toast.error(
-      error?.response?._data?.message ||
-        error?.response?._data?.error ||
-        "Error",
-      {
-        position: "top-right",
-        timeout: 2000,
-      }
-    );
-  }
-}
-companyOneApi();
-function inputType() {
-  if (inputTypeInfo.value.type == "password") {
-    inputTypeInfo.value.type = "text";
-  } else {
-    inputTypeInfo.value.type = "password";
-  }
-}
-onMounted(() => {
-  var maskOptions = {
-    mask: "+{998}(00) 000-00-00",
-    lazy: false,
-  };
-  var mask = new IMask(phone.value, maskOptions);
-});
 async function refresh() {
   try {
     store.loader = true;
@@ -283,6 +186,106 @@ async function refresh() {
   }
 }
 refresh();
+async function companyPutApi() {
+  try {
+    if (
+      !companyName.value == "" &&
+      !fullName.value == "" &&
+      !password.value == "" &&
+      !username.value == ""
+    ) {
+      store.loader = true;
+      const data = await $fetch(baseUrl + "/company", {
+        method: "PUT",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("userToken"),
+          "Accept-Language": locale.value,
+        },
+        body: JSON.stringify({
+          id: id,
+          name: companyName.value,
+          director: fullName.value,
+          phone: phone.value.value,
+          userFullName: fullName.value,
+          username: username.value,
+          password: password.value,
+        }),
+      });
+      if (data.message == "ok") {
+        router.push(localePath("/company"));
+        store.loader = false;
+        toast.success(data?.message || "Success", {
+          position: "top-right",
+          timeout: 2000,
+        });
+        refresh();
+      }
+    }
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+      }
+    );
+  }
+}
+const suplierOne = ref(null);
+async function companyOneApi() {
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + `/company/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+    });
+    suplierOne.value = data;
+    companyName.value = data?.name;
+    fullName.value = data?.director;
+    phone.value.value = data?.phone;
+    fullName.value = data?.userFullName;
+    username.value = data?.username;
+    password.value = data?.password;
+    userFullName.value = data?.userFullName;
+    if (data) {
+      store.loader = false;
+    }
+  } catch (error) {
+    store.loader = false;
+    refresh();
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+      }
+    );
+  }
+}
+companyOneApi();
+function inputType() {
+  if (inputTypeInfo.value.type == "password") {
+    inputTypeInfo.value.type = "text";
+  } else {
+    inputTypeInfo.value.type = "password";
+  }
+}
+onMounted(() => {
+  var maskOptions = {
+    mask: "+{998}(00) 000-00-00",
+    lazy: false,
+  };
+  var mask = new IMask(phone.value, maskOptions);
+});
+
 </script>
     
     <style lang="scss" scoped>

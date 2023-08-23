@@ -1,7 +1,6 @@
 <template>
   <div>
     <Head>
-
       <Link rel="icon" href="./public/logo.png" type="image/x-icon" sizes="160x160" />
     </Head>
     <NuxtLayout />
