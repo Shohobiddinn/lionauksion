@@ -1,8 +1,9 @@
 <template>
   <div>
-<Head>
-  <Title>{{ $t("products") }}</Title>
-</Head>
+    <bgmodal v-if="bgModal" />
+    <Head>
+      <Title>{{ $t("products") }}</Title>
+    </Head>
     <div class="informotion">
       <div class="container">
         <div class="info">
@@ -321,6 +322,7 @@
                   <div
                     class="delivery_content_title icon edit"
                     v-if="productCartIcon"
+                    @click="cartApi(p)"
                   >
                     <svg
                       width="30"
@@ -350,6 +352,55 @@
                         d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"
                       />
                     </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="modal" v-if="cartModal">
+                <div class="cart_modal">
+                  <div
+                    class="cart_modal_close_btn"
+                    @click="(bgModal = false), (cartModal = false)"
+                  ></div>
+                  <div class="cart_modal_content">
+                    <div class="cart_modal_content_title">
+                      {{ $t("CompProduct") }}
+                    </div>
+                    <div class="cart_modal_content_title">
+                      {{ companyName }}
+                    </div>
+                  </div>
+                  <div class="cart_modal_content">
+                    <div class="cart_modal_content_title">
+                      {{ $t("Product") }}
+                    </div>
+                    <div class="cart_modal_content_title">
+                      {{ productName }}
+                    </div>
+                  </div>
+                  <div class="cart_modal_content">
+                    <div class="cart_modal_content_title">
+                      {{ $t("Cost") }}
+                    </div>
+                    <div class="cart_modal_content_title">
+                      {{ productPrice }} {{ productSymbol }}
+                    </div>
+                  </div>
+                  <div class="cart_modal_info">
+                    <label class="cart_modal_info_label" for="count_1">{{
+                      $t("countCart")
+                    }}</label>
+                    <input
+                      class="cart_modal_info_input"
+                      type="number"
+                      id="count_1"
+                      @input="count"
+                      v-model="cartInputInfo"
+                    />
+                  </div>
+                  <div class="cart_modal_btns" @click="cartAddApi">
+                    <div class="cart_modal_btns_btn">
+                      {{ $t("Send") }}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -415,14 +466,9 @@ const localePath = useLocalePath();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const filterModal = ref(false);
 const page = ref(0);
-function func() {
-  document.getElementsByName("filter").forEach((el) => {
-    if (el.checked) {
-      console.log(el.value);
-    }
-  });
-}
 const products = ref(null);
+const bgModal = ref(false);
+const cartModal = ref(false);
 async function productApi() {
   try {
     store.loader = true;
@@ -589,9 +635,7 @@ const productDeleteIcon = ref(false);
 const productCartIcon = ref(false);
 const productEditIcon = ref(false);
 const productAddIcon = ref(false);
-
 const role = localStorage.getItem("role");
-
 onMounted(() => {
   if (role == "ROLE_ADMIN") {
     productDeleteIcon.value = false;
@@ -607,7 +651,7 @@ onMounted(() => {
   }
   if (role == "ROLE_COMPANY_ADMIN") {
     productDeleteIcon.value = false;
-    productCartIcon.value = false;
+    productCartIcon.value = true;
     productEditIcon.value = false;
     productAddIcon.value = false;
   }
@@ -664,7 +708,6 @@ async function refresh() {
       localStorage.removeItem("userRefreshToken");
       localStorage.removeItem("userId");
       localStorage.removeItem("fullName");
-
     } else {
       store.loader = false;
       toast.error(
@@ -680,6 +723,125 @@ async function refresh() {
   }
 }
 refresh();
+const companyName = ref("");
+const productName = ref("");
+const productPrice = ref("");
+const productSymbol = ref("");
+const productId = ref(null);
+const productSupplierId = ref(null);
+async function cartApi(p) {
+  try {
+    bgModal.value = true;
+    cartModal.value = true;
+    store.loader = true;
+    const data = await $fetch(baseUrl + `/product/${p.id}`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userRefreshToken"),
+        "Accept-Language": locale.value,
+      },
+    });
+    if (data) {
+      store.loader = false;
+      companyName.value = data?.supplierName;
+      productName.value = data?.categoryName;
+      productPrice.value = data?.price;
+      productSymbol.value = data?.currencySymbol;
+      productId.value = data?.id;
+      productSupplierId.value = data?.supplierId;
+    }
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+      }
+    );
+  }
+}
+const cartInputInfo = ref(1);
+async function count() {
+  // console.log(cartInputInfo.value );
+  // if (cartInputInfo.value > 0) {
+  //   productPrice.value = productPrice.value * cartInputInfo.value;
+  // }else if(cartInputInfo.value = " "){
+  //   productPrice.value = productPrice.value * 0;
+  // } else {
+  //   productPrice.value = productPrice.value * 1;
+  // }
+  // try {
+  //   bgModal.value = true;
+  //   cartModal.value = true;
+  //   store.loader = true;
+  //   const data = await $fetch(baseUrl + `/product/${p.id}`, {
+  //     method: "GET",
+  //     headers: {
+  //       Authorization: "Bearer " + localStorage.getItem("userRefreshToken"),
+  //       "Accept-Language": locale.value,
+  //     },
+  //   });
+  //   if (data) {
+  //     store.loader = false;
+  //     companyName.value = data?.supplierName;
+  //     productName.value = data?.categoryName;
+  //     productPrice.value = data?.price;
+  //     productSymbol.value = data?.currencySymbol;
+  //   }
+  // } catch (error) {
+  //   store.loader = false;
+  //   toast.error(
+  //     error?.response?._data?.message ||
+  //       error?.response?._data?.error ||
+  //       "Error",
+  //     {
+  //       position: "top-right",
+  //       timeout: 2000,
+  //     }
+  //   );
+  // }
+}
+async function cartAddApi() {
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + "/order", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userRefreshToken"),
+        "Accept-Language": locale.value,
+      },
+      body: JSON.stringify({
+        amount: cartInputInfo.value,
+        productId: productId.value,
+        supplierId: productSupplierId.value,
+        companyId: localStorage.getItem("userCompanyId"),
+      }),
+    });
+    if (data) {
+      store.loader = false;
+      toast.success(data?.message || "Success", {
+        position: "top-right",
+        timeout: 2000,
+      });
+      cartModal.value = false;
+      bgModal.value = false;
+    }
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+      }
+    );
+  }
+}
 </script>
 
 <style lang="scss" scoped>
