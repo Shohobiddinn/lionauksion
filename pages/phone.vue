@@ -40,7 +40,6 @@ console.log(moz);
 }
 </script> -->
 <script setup>
-import {useLogin} from "~~/function/post"
 const { password, username, loginApi, data} = useLogin();
 </script>
 
