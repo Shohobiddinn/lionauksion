@@ -58,6 +58,9 @@ const store = useStore();
 definePageMeta({
   layout: "view",
 });
+function tekshiruv(){
+  alert("hello")
+}
 const router = useRouter();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const username = ref("");
