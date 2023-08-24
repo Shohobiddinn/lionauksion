@@ -405,7 +405,7 @@ async function refresh() {
       }
     }
   } catch (error) {
-    console.log(error.response.status);
+    
     if (error?.response?._data?.status == 401) {
       localStorage.removeItem("userToken");
       localStorage.removeItem("role");
