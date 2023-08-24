@@ -85,5 +85,6 @@
     "userFio": "foydalanuvchi F.I.O",
     "newPassword": "yangi parol",
     "oldPassword": "amaldagi parol",
-    "countCart":"Miqdori"
+    "countCart":"Miqdori",
+    "passwordEditor":"Paro'lni O'zgartirish"
 }

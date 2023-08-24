@@ -221,7 +221,7 @@
             <div class="profil_content">
               <div class="profil_content_title">{{ profilName }}</div>
               <div class="profil_content_title btn" @click="pasEditModal()">
-                parolni o'zgartirish
+                {{ $t("passwordEditor") }}
               </div>
             </div>
           </div>
@@ -308,7 +308,7 @@ const bgmodol = ref(false);
 const profilModal = ref(false);
 const oldPassword = ref(null);
 const newPassword = ref(null);
-const profilName = ref(localStorage.getItem("fullName"))
+const profilName = ref(localStorage.getItem("fullName"));
 function pasEditModal() {
   bgmodol.value = true;
   profilModal.value = false;

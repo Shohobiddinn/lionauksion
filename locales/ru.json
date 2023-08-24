@@ -85,5 +85,6 @@
     "userFio": "пользователь Ф.И.О.",
     "newPassword": "Новый пароль",
     "oldPassword": "Текущий пароль",
-    "countCart": "Количество"
+    "countCart": "Количество",
+    "passwordEditor":"Изменить пароль"
 }

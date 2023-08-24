@@ -137,7 +137,7 @@ nav {
                     transform: scale(0);
                     opacity: 0;
                     visibility: hidden;
-
+                    box-shadow: 2px 2px 5px 5px #00000050;
                     &_title {
                         @include fond(600, 15);
                         color: $pr_black_color;
@@ -194,6 +194,7 @@ nav {
                     transition: 0.3s;
                     opacity: 0;
                     visibility: hidden;
+                    box-shadow: 2px 2px 5px 5px #00000050;
 
                     &_title {
                         @include fond(600, 16);

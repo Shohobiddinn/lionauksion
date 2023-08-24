@@ -127,7 +127,7 @@
                     class="categorys_filter_content_btn"
                     @click="(filterModal = false), search()"
                   >
-                    yuborish
+                    {{ $t("Send") }}
                   </div>
                 </div>
               </div>
