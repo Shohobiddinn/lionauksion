@@ -335,6 +335,7 @@ function logout() {
   localStorage.removeItem("userCompanyId");
   localStorage.removeItem("userRefreshToken");
   localStorage.removeItem("userId");
+  localStorage.removeItem("fullName");
   router.push(localePath("/login"));
 }
 function delLang(e) {
