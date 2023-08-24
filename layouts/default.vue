@@ -1,6 +1,10 @@
 <template>
   <div>
     <bgmodal v-if="bgmodol" />
+    <whiteModal
+      @click="(traModal = false), (langModal = false), (profilModal = false)"
+      v-if="traModal"
+    />
     <nav>
       <div class="container">
         <div class="menu">
@@ -173,7 +177,10 @@
         <div class="div"></div>
         <div class="content">
           <div class="language" :class="{ active: langModal }">
-            <div class="language_option" @click="langModal = !langModal">
+            <div
+              class="language_option"
+              @click="(langModal = !langModal), (traModal = !traModal)"
+            >
               <div class="language_option_title">
                 {{ locale }}
               </div>
@@ -196,14 +203,19 @@
                 v-for="l in locales"
                 :key="l?.id"
                 :to="switchLocalePath(l?.code)"
-                @click="delLang($event), (langModal = false)"
+                @click="
+                  delLang($event), (langModal = false), (traModal = false)
+                "
               >
                 {{ l?.code }}
               </NuxtLink>
             </div>
           </div>
           <div class="profil" :class="{ active: profilModal }">
-            <div class="profil_option" @click="profilModal = !profilModal">
+            <div
+              class="profil_option"
+              @click="(profilModal = !profilModal), (traModal = !traModal)"
+            >
               <div class="profil_option_icon">
                 <svg
                   width="25"
@@ -308,10 +320,12 @@ const bgmodol = ref(false);
 const profilModal = ref(false);
 const oldPassword = ref(null);
 const newPassword = ref(null);
+const traModal = ref(false);
 const profilName = ref(localStorage.getItem("fullName"));
 function pasEditModal() {
   bgmodol.value = true;
   profilModal.value = false;
+  traModal.value = false;
   passwordModal.value = true;
 }
 function logout() {

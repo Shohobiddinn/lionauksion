@@ -6,7 +6,7 @@ nav {
     z-index: 2;
 
     .container {
-        @include flex (center, space-between);
+        @include flex (center, space-between); 
         gap: 50px;
         padding: 0;
 
@@ -14,7 +14,7 @@ nav {
             width: 300px;
             position: fixed;
             top: 0;
-            z-index: 3;
+            z-index: 1;
             padding: 10px 0;
 
             &_logo {

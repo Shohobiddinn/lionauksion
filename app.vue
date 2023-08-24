@@ -5,6 +5,7 @@
     </Head>
     <NuxtLayout />
     <load />
+
   </div>
 </template>
 <script setup>
