@@ -266,55 +266,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="modal" v-if="cartModal">
-                  <div class="cart_modal">
-                    <div
-                      class="cart_modal_close_btn"
-                      @click="(bgModal = false), (cartModal = false)"
-                    ></div>
-                    <div class="cart_modal_content">
-                      <div class="cart_modal_content_title">
-                        {{ $t("CompProduct") }}
-                      </div>
-                      <div class="cart_modal_content_title">
-                        {{ companyName }}
-                      </div>
-                    </div>
-                    <div class="cart_modal_content">
-                      <div class="cart_modal_content_title">
-                        {{ $t("Product") }}
-                      </div>
-                      <div class="cart_modal_content_title">
-                        {{ productName }}
-                      </div>
-                    </div>
-                    <div class="cart_modal_content">
-                      <div class="cart_modal_content_title">
-                        {{ $t("Cost") }}
-                      </div>
-                      <div class="cart_modal_content_title">
-                        {{ productPrice }} {{ orderymbol }}
-                      </div>
-                    </div>
-                    <div class="cart_modal_info">
-                      <label class="cart_modal_info_label" for="count_1">{{
-                        $t("countCart")
-                      }}</label>
-                      <input
-                        class="cart_modal_info_input"
-                        type="number"
-                        id="count_1"
-                        @input="count"
-                        v-model="cartInputInfo"
-                      />
-                    </div>
-                    <div class="cart_modal_btns" @click="cartAddApi">
-                      <div class="cart_modal_btns_btn">
-                        {{ $t("Send") }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          
               </div>
               <div class="pagination" v-if="order?.content.length">
                 <div class="pagination_icon" @click="pageDown">
@@ -375,12 +327,11 @@
   const { locale } = useI18n();
   const localePath = useLocalePath();
   const baseUrl = useRuntimeConfig().public.baseUrl;
-  const filterModal = ref(false);
   const page = ref(0);
   const order = ref(null);
   const bgModal = ref(false);
   const cartModal = ref(false);
-  async function productApi() {
+  async function orderApi() {
     try {
       store.loader = true;
       const data = await $fetch(baseUrl + "/order", {
@@ -419,23 +370,23 @@
       );
     }
   }
-  productApi();
+  orderApi();
   function pageDown() {
     if (page.value !== 0) {
       page.value--;
-      productApi();
+      orderApi();
     }
   }
   function pageUpDown() {
     if (order.value.totalPages - 1 > page.value) {
       page.value++;
-      productApi();
+      orderApi();
     } else {
     }
   }
   function pageApi(p) {
     page.value = p - 1;
-    productApi();
+    orderApi();
   }
   async function productDelete(e) {
     try {
@@ -447,7 +398,7 @@
         },
       });
       if (data?.message == "ok") {
-        productApi();
+        orderApi();
         store.loader = false;
         toast.success(data?.message || "Success", {
           position: "top-right",
