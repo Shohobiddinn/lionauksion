@@ -251,7 +251,7 @@
                   </div>
                   <div
                     class="delivery_content_title icon edit"
-                    v-if="p?.status == 1"
+                    v-if="p?.status == 1 && iconRole"
                   >
                     <svg
                       width="25"
@@ -267,7 +267,7 @@
                   </div>
                   <div
                     class="delivery_content_title icon edit"
-                    v-if="p?.status == 1 || p?.status == -1"
+                    v-if="p?.status == 1 && iconRole || p?.status == -1 && iconRole"
                   >
                     <svg
                       width="25"
@@ -394,8 +394,8 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 const page = ref(0);
 const order = ref(null);
 const bgModal = ref(false);
-const cartModal = ref(false);
-const deleteMessage = ref(true) 
+const deleteMessage = ref(true);
+const iconRole = ref(false);
 async function orderApi() {
   try {
     store.loader = true;
@@ -498,11 +498,13 @@ onMounted(() => {
   if (role == "ROLE_ADMIN") {
   }
   if (role == "ROLE_SUPPLIER_ADMIN") {
+    iconRole.value = true;
   }
   if (role == "ROLE_COMPANY_ADMIN") {
-    
+    deleteMessage.value = true;
   }
   if (role == "ROLE_COMPANY_MANAGER") {
+    deleteMessage.value = true;
   }
 });
 async function refresh() {
