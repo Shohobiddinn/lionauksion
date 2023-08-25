@@ -214,7 +214,7 @@
                   </div>
                 </div>
                 <div class="delivery_content">
-                  <div class="delivery_content_title">o'chirish</div>
+                  <div class="delivery_content_title">kutilmoqda</div>
                   <div class="delivery_content_title">qabul qilindi</div>
                   <div class="delivery_content_title">qabul qilinmadi</div>
 
@@ -228,7 +228,7 @@
                     <svg
                       width="25"
                       height="25"
-                      fill="orange"
+                      fill="#000000"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 640 512"
                     >
@@ -275,6 +275,13 @@
                         d="M384 32c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96C0 60.7 28.7 32 64 32H384zM160 144c-13.3 0-24 10.7-24 24s10.7 24 24 24h94.1L119 327c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l135-135V328c0 13.3 10.7 24 24 24s24-10.7 24-24V168c0-13.3-10.7-24-24-24H160z"
                       />
                     </svg>
+                  </div>
+                  <div class="delivery_content_title icon edit">
+                    <svg
+                      width="25"
+                      height="25"
+                      fill="#00FF00"
+                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M192 0c-41.8 0-77.4 26.7-90.5 64H64C28.7 64 0 92.7 0 128V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64H282.5C269.4 26.7 233.8 0 192 0zm0 64a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM305 273L177 401c-9.4 9.4-24.6 9.4-33.9 0L79 337c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L271 239c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
                   </div>
                   <div class="delivery_content_title icon edit">
                     <svg
