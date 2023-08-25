@@ -214,7 +214,6 @@
                   <div class="delivery_content edit">
                     <div
                       class="delivery_content_title icon edit"
-                      v-if="productEditIcon"
                     >
                       <NuxtLink :to="localePath(`/productedit/${p?.id}`)">
                         <svg
@@ -232,8 +231,6 @@
                     </div>
                     <div
                       class="delivery_content_title icon edit"
-                      v-if="productCartIcon"
-                      @click="cartApi(p)"
                     >
                       <svg
                         width="30"
@@ -249,8 +246,6 @@
                     </div>
                     <div
                       class="delivery_content_title icon edit"
-                      @click="productDelete(p?.id)"
-                      v-if="productDeleteIcon"
                     >
                       <svg
                         width="30"
@@ -388,72 +383,10 @@
     page.value = p - 1;
     orderApi();
   }
-  async function productDelete(e) {
-    try {
-      store.loader = true;
-      const data = await $fetch(baseUrl + `/product/${e}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("userToken"),
-        },
-      });
-      if (data?.message == "ok") {
-        orderApi();
-        store.loader = false;
-        toast.success(data?.message || "Success", {
-          position: "top-right",
-          timeout: 2000,
-          closeOnClick: true,
-          pauseOnFocusLoss: true,
-          pauseOnHover: true,
-          draggable: true,
-          draggablePercent: 0.6,
-          showCloseButtonOnHover: false,
-          hideProgressBar: true,
-          closeButton: "button",
-          icon: true,
-          rtl: false,
-        });
-      }
-    } catch (error) {
-      store.loader = false;
-      toast.error(
-        error?.response?._data?.message ||
-          error?.response?._data?.error ||
-          "Error",
-        {
-          position: "top-right",
-          timeout: 2000,
-          closeOnClick: true,
-          pauseOnFocusLoss: true,
-          pauseOnHover: true,
-          draggable: true,
-          draggablePercent: 0.6,
-          showCloseButtonOnHover: false,
-          hideProgressBar: true,
-          closeButton: "button",
-          icon: true,
-          rtl: false,
-        }
-      );
-    }
-  }
-  const nds = ref(null);
-  const delivery = ref(null);
-  const lastPrice = ref(null);
   const searchInfo = ref();
   async function search() {
     try {
       store.loader = true;
-      if (nds.value == false) {
-        nds.value = null;
-      }
-      if (delivery.value == false) {
-        delivery.value = null;
-      }
-      if (lastPrice.value == false) {
-        lastPrice.value = null;
-      }
       const data = await $fetch(baseUrl + "/product", {
         method: "GET",
         headers: {
@@ -470,9 +403,6 @@
           supplierId: localStorage.getItem("userSupplierId")
             ? localStorage.getItem("userSupplierId")
             : null,
-          hasNds: nds.value,
-          hasDelivery: delivery.value,
-          isLowestPrice: lastPrice.value,
         },
       });
   
@@ -493,35 +423,15 @@
       );
     }
   }
-  const productDeleteIcon = ref(false);
-  const productCartIcon = ref(false);
-  const productEditIcon = ref(false);
-  const productAddIcon = ref(false);
   const role = localStorage.getItem("role");
   onMounted(() => {
     if (role == "ROLE_ADMIN") {
-      productDeleteIcon.value = false;
-      productCartIcon.value = false;
-      productEditIcon.value = false;
-      productAddIcon.value = false;
     }
     if (role == "ROLE_SUPPLIER_ADMIN") {
-      productDeleteIcon.value = true;
-      productCartIcon.value = false;
-      productEditIcon.value = true;
-      productAddIcon.value = true;
     }
     if (role == "ROLE_COMPANY_ADMIN") {
-      productDeleteIcon.value = false;
-      productCartIcon.value = true;
-      productEditIcon.value = false;
-      productAddIcon.value = false;
     }
     if (role == "ROLE_COMPANY_MANAGER") {
-      productDeleteIcon.value = false;
-      productCartIcon.value = false;
-      productEditIcon.value = false;
-      productAddIcon.value = false;
     }
   });
   async function refresh() {
@@ -585,125 +495,6 @@
     }
   }
   refresh();
-  const companyName = ref("");
-  const productName = ref("");
-  const productPrice = ref("");
-  const orderymbol = ref("");
-  const productId = ref(null);
-  const orderupplierId = ref(null);
-  async function cartApi(p) {
-    try {
-      bgModal.value = true;
-      cartModal.value = true;
-      store.loader = true;
-      const data = await $fetch(baseUrl + `/product/${p.id}`, {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("userRefreshToken"),
-          "Accept-Language": locale.value,
-        },
-      });
-      if (data) {
-        store.loader = false;
-        companyName.value = data?.supplierName;
-        productName.value = data?.categoryName;
-        productPrice.value = data?.price;
-        orderymbol.value = data?.currencySymbol;
-        productId.value = data?.id;
-        orderupplierId.value = data?.supplierId;
-      }
-    } catch (error) {
-      store.loader = false;
-      toast.error(
-        error?.response?._data?.message ||
-          error?.response?._data?.error ||
-          "Error",
-        {
-          position: "top-right",
-          timeout: 2000,
-        }
-      );
-    }
-  }
-  const cartInputInfo = ref(1);
-  async function count() {
-    // console.log(cartInputInfo.value );
-    // if (cartInputInfo.value > 0) {
-    //   productPrice.value = productPrice.value * cartInputInfo.value;
-    // }else if(cartInputInfo.value = " "){
-    //   productPrice.value = productPrice.value * 0;
-    // } else {
-    //   productPrice.value = productPrice.value * 1;
-    // }
-    // try {
-    //   bgModal.value = true;
-    //   cartModal.value = true;
-    //   store.loader = true;
-    //   const data = await $fetch(baseUrl + `/product/${p.id}`, {
-    //     method: "GET",
-    //     headers: {
-    //       Authorization: "Bearer " + localStorage.getItem("userRefreshToken"),
-    //       "Accept-Language": locale.value,
-    //     },
-    //   });
-    //   if (data) {
-    //     store.loader = false;
-    //     companyName.value = data?.supplierName;
-    //     productName.value = data?.categoryName;
-    //     productPrice.value = data?.price;
-    //     orderymbol.value = data?.currencySymbol;
-    //   }
-    // } catch (error) {
-    //   store.loader = false;
-    //   toast.error(
-    //     error?.response?._data?.message ||
-    //       error?.response?._data?.error ||
-    //       "Error",
-    //     {
-    //       position: "top-right",
-    //       timeout: 2000,
-    //     }
-    //   );
-    // }
-  }
-  async function cartAddApi() {
-    try {
-      store.loader = true;
-      const data = await $fetch(baseUrl + "/order", {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("userRefreshToken"),
-          "Accept-Language": locale.value,
-        },
-        body: JSON.stringify({
-          amount: cartInputInfo.value,
-          productId: productId.value,
-          supplierId: orderupplierId.value,
-          companyId: localStorage.getItem("userCompanyId"),
-        }),
-      });
-      if (data) {
-        store.loader = false;
-        toast.success(data?.message || "Success", {
-          position: "top-right",
-          timeout: 2000,
-        });
-        cartModal.value = false;
-        bgModal.value = false;
-      }
-    } catch (error) {
-      store.loader = false;
-      toast.error(
-        error?.response?._data?.message ||
-          error?.response?._data?.error ||
-          "Error",
-        {
-          position: "top-right",
-          timeout: 2000,
-        }
-      );
-    }
-  }
   </script>
   
   <style lang="scss" scoped>
