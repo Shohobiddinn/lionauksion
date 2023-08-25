@@ -172,7 +172,7 @@
                 </div>
               </NuxtLink>
             </div>
-            <div class="menu_content_title" v-if="userPage">
+            <div class="menu_content_title" v-if="orderPage">
               <NuxtLink
                 class="menu_content_title_link"
                 :to="localePath('/order')"
@@ -180,7 +180,15 @@
                 <div class="menu_content_title_link_icon">
                   <svg
                     width="30"
-                    height="30" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M36.8 192H603.2c20.3 0 36.8-16.5 36.8-36.8c0-7.3-2.2-14.4-6.2-20.4L558.2 21.4C549.3 8 534.4 0 518.3 0H121.7c-16 0-31 8-39.9 21.4L6.2 134.7c-4 6.1-6.2 13.2-6.2 20.4C0 175.5 16.5 192 36.8 192zM64 224V384v80c0 26.5 21.5 48 48 48H336c26.5 0 48-21.5 48-48V384 224H320V384H128V224H64zm448 0V480c0 17.7 14.3 32 32 32s32-14.3 32-32V224H512z"/></svg>
+                    height="30"
+                    fill="white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 640 512"
+                  >
+                    <path
+                      d="M36.8 192H603.2c20.3 0 36.8-16.5 36.8-36.8c0-7.3-2.2-14.4-6.2-20.4L558.2 21.4C549.3 8 534.4 0 518.3 0H121.7c-16 0-31 8-39.9 21.4L6.2 134.7c-4 6.1-6.2 13.2-6.2 20.4C0 175.5 16.5 192 36.8 192zM64 224V384v80c0 26.5 21.5 48 48 48H336c26.5 0 48-21.5 48-48V384 224H320V384H128V224H64zm448 0V480c0 17.7 14.3 32 32 32s32-14.3 32-32V224H512z"
+                    />
+                  </svg>
                 </div>
                 <div class="menu_content_title_link_text">
                   {{ $t("order") }}
@@ -324,6 +332,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 const router = useRouter();
 const productPage = ref(false);
 const companyPage = ref(false);
+const orderPage = ref(false);
 const currensyPage = ref(false);
 const currensyTypePage = ref(false);
 const supplierPage = ref(false);
@@ -407,6 +416,7 @@ onMounted(() => {
     currensyTypePage.value = true;
     supplierPage.value = false;
     productAddPage.value = false;
+    orderPage.value = false;
   }
   if (role == "ROLE_SUPPLIER_ADMIN") {
     productPage.value = true;
@@ -416,6 +426,7 @@ onMounted(() => {
     supplierPage.value = false;
     productAddPage.value = false;
     userPage.value = true;
+    orderPage.value = true;
   }
   if (role == "ROLE_COMPANY_ADMIN") {
     productPage.value = true;
@@ -425,6 +436,7 @@ onMounted(() => {
     supplierPage.value = true;
     productAddPage.value = true;
     userPage.value = true;
+    orderPage.value = true;
   }
   if (role == "ROLE_COMPANY_MANAGER") {
     productPage.value = true;
@@ -433,6 +445,7 @@ onMounted(() => {
     currensyTypePage.value = false;
     supplierPage.value = true;
     productAddPage.value = true;
+    orderPage.value = true;
   }
   document.querySelectorAll(".language_content_title").forEach((item) => {
     if (locale.value === item.textContent) {
