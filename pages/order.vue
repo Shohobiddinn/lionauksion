@@ -214,14 +214,14 @@
                   </div>
                 </div>
                 <div class="delivery_content">
-                  <div class="delivery_content_title">kutilmoqda</div>
-                  <div class="delivery_content_title">qabul qilindi</div>
-                  <div class="delivery_content_title">qabul qilinmadi</div>
+                  <div class="delivery_content_title" v-if="p?.status == 1">kutilmoqda</div>
+                  <div class="delivery_content_title" v-if="p?.status == 2">qabul qilindi</div>
+                  <div class="delivery_content_title" v-if="p?.status == -1">qabul qilinmadi</div>
 
-                  <div class="delivery_content_title">yo'lda</div>
+                  <div class="delivery_content_title" v-if="p?.status == 3">yo'lda</div>
 
 
-                  <div class="delivery_content_title">yetkazildi</div>
+                  <div class="delivery_content_title" v-if="p?.status == 4">yetkazildi</div>
                 </div>
                 <div class="delivery_content edit">
                   <div class="delivery_content_title icon edit">
