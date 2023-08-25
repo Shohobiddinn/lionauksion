@@ -605,7 +605,7 @@ body {
                         }
 
                         &:nth-child(12) {
-                            width: 70px
+                            width: 100px
                         }
 
                         &.nds {
@@ -666,6 +666,9 @@ body {
                                     &.edit {
                                         margin-left: auto;
                                     }
+                                }
+                                &.status{
+
                                 }
                             }
 
