@@ -267,7 +267,7 @@
                   </div>
                   <div
                     class="delivery_content_title icon edit"
-                    v-if="p?.status == 1 && iconRole || p?.status == -1 && iconRole"
+                    v-if="p?.status == 1 && iconRole"
                   >
                     <svg
                       width="25"
