@@ -218,7 +218,7 @@
                 </div>
                 <div class="delivery_content edit">
                   <div class="delivery_content_title icon edit">
-                    Lorem ipsum dolor sit amet.
+                  
                   </div>
 
                   <div class="delivery_content_title icon edit">
