@@ -6,7 +6,7 @@ nav {
     z-index: 2;
 
     .container {
-        @include flex (center, space-between); 
+        @include flex (center, space-between);
         gap: 50px;
         padding: 0;
 
@@ -138,6 +138,7 @@ nav {
                     opacity: 0;
                     visibility: hidden;
                     box-shadow: 2px 2px 5px 5px #00000050;
+
                     &_title {
                         @include fond(600, 15);
                         color: $pr_black_color;
@@ -667,9 +668,6 @@ body {
                                         margin-left: auto;
                                     }
                                 }
-                                &.status{
-
-                                }
                             }
 
 
@@ -718,7 +716,7 @@ body {
                             }
 
                             &:nth-child(12) {
-                                width: 100px
+                                width: 120px
                             }
 
                             &::-webkit-scrollbar {
