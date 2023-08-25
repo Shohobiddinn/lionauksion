@@ -400,7 +400,7 @@ const searchInfo = ref();
 async function search() {
   try {
     store.loader = true;
-    const data = await $fetch(baseUrl + "/product", {
+    const data = await $fetch(baseUrl + "/order", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("userToken"),
