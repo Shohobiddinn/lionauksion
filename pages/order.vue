@@ -75,7 +75,7 @@
               <div class="info_bottom_page_title nds">{{ $t("QQS") }}</div>
               <div class="info_bottom_page_title">{{ $t("lastPrice") }}</div>
               <div class="info_bottom_page_title desc">
-                {{ $t("addition") }}
+                {{ $t("Holat") }}
               </div>
               <div class="info_bottom_page_title edit">{{ $t("another") }}</div>
             </div>
