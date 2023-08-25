@@ -217,11 +217,11 @@
                   {{ p?.productDto?.description }}
                 </div>
                 <div class="delivery_content edit">
-                  <div class="delivery_content_title icon edit">o'chirish</div>
-                  <div class="delivery_content_title icon edit">yo'lda</div>
-                  <div class="delivery_content_title icon edit">yetib keldi</div>
-                  <div class="delivery_content_title icon edit">qabul qilish</div>
-                  <div class="delivery_content_title icon edit">qaytarish</div>
+                  <div class="delivery_content_title status">o'chirish</div>
+                  <div class="delivery_content_title status">yo'lda</div>
+                  <div class="delivery_content_title status">yetib keldi</div>
+                  <div class="delivery_content_title status">qabul qilish</div>
+                  <div class="delivery_content_title status">qaytarish</div>
 
                 </div>
               </div>
