@@ -2,7 +2,7 @@
     <div>
       <bgmodal v-if="bgModal" />
       <Head>
-        <Title>{{ $t("products") }}</Title>
+        <Title>{{ $t("order") }}</Title>
       </Head>
       <div class="informotion">
         <div class="container">
@@ -80,7 +80,7 @@
                 <div class="info_bottom_page_title edit">{{ $t("another") }}</div>
               </div>
               <div class="info_bottom_deliverys">
-                <div class="delivery" v-for="p in products?.content" :key="p?.id">
+                <div class="delivery" v-for="p in order?.content" :key="p?.id">
                   <div class="delivery_content">
                     <div class="delivery_content_title name">
                       {{ p?.supplierName }}
@@ -293,7 +293,7 @@
                         {{ $t("Cost") }}
                       </div>
                       <div class="cart_modal_content_title">
-                        {{ productPrice }} {{ productSymbol }}
+                        {{ productPrice }} {{ orderymbol }}
                       </div>
                     </div>
                     <div class="cart_modal_info">
@@ -316,7 +316,7 @@
                   </div>
                 </div>
               </div>
-              <div class="pagination" v-if="products?.content.length">
+              <div class="pagination" v-if="order?.content.length">
                 <div class="pagination_icon" @click="pageDown">
                   <svg
                     width="24"
@@ -336,7 +336,7 @@
                 </div>
                 <div
                   class="pagination_count"
-                  v-for="p in products?.totalPages"
+                  v-for="p in order?.totalPages"
                   :key="p"
                   @click="pageApi(p)"
                 >
@@ -377,7 +377,7 @@
   const baseUrl = useRuntimeConfig().public.baseUrl;
   const filterModal = ref(false);
   const page = ref(0);
-  const products = ref(null);
+  const order = ref(null);
   const bgModal = ref(false);
   const cartModal = ref(false);
   async function productApi() {
@@ -402,7 +402,7 @@
             : null,
         },
       });
-      products.value = data;
+      order.value = data;
       if (data) {
         store.loader = false;
       }
@@ -427,7 +427,7 @@
     }
   }
   function pageUpDown() {
-    if (products.value.totalPages - 1 > page.value) {
+    if (order.value.totalPages - 1 > page.value) {
       page.value++;
       productApi();
     } else {
@@ -525,7 +525,7 @@
         },
       });
   
-      products.value = data;
+      order.value = data;
       if (data) {
         store.loader = false;
       }
@@ -637,9 +637,9 @@
   const companyName = ref("");
   const productName = ref("");
   const productPrice = ref("");
-  const productSymbol = ref("");
+  const orderymbol = ref("");
   const productId = ref(null);
-  const productSupplierId = ref(null);
+  const orderupplierId = ref(null);
   async function cartApi(p) {
     try {
       bgModal.value = true;
@@ -657,9 +657,9 @@
         companyName.value = data?.supplierName;
         productName.value = data?.categoryName;
         productPrice.value = data?.price;
-        productSymbol.value = data?.currencySymbol;
+        orderymbol.value = data?.currencySymbol;
         productId.value = data?.id;
-        productSupplierId.value = data?.supplierId;
+        orderupplierId.value = data?.supplierId;
       }
     } catch (error) {
       store.loader = false;
@@ -700,7 +700,7 @@
     //     companyName.value = data?.supplierName;
     //     productName.value = data?.categoryName;
     //     productPrice.value = data?.price;
-    //     productSymbol.value = data?.currencySymbol;
+    //     orderymbol.value = data?.currencySymbol;
     //   }
     // } catch (error) {
     //   store.loader = false;
@@ -727,7 +727,7 @@
         body: JSON.stringify({
           amount: cartInputInfo.value,
           productId: productId.value,
-          supplierId: productSupplierId.value,
+          supplierId: orderupplierId.value,
           companyId: localStorage.getItem("userCompanyId"),
         }),
       });
