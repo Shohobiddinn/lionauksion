@@ -195,8 +195,8 @@
   <script setup>
 import { useStore } from "~/store/store";
 import { useToast } from "vue-toastification";
-const router = useRouter();
 const toast = useToast();
+const router = useRouter();
 const store = useStore();
 const { locale } = useI18n();
 const localePath = useLocalePath();
@@ -225,15 +225,15 @@ async function companyApi() {
     }
   } catch (error) {
     store.loader = false;
-    toast.error(
-      error?.response?._data?.message ||
-        error?.response?._data?.error ||
-        "Error",
-      {
-        position: "top-right",
-        timeout: 2000,
-      }
-    );
+      toast.error(
+        error?.response?._data?.message ||
+          error?.response?._data?.error ||
+          "Error",
+        {
+          position: "top-right",
+          timeout: 2000,
+        }
+      );
   }
 }
 companyApi();

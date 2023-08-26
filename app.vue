@@ -10,10 +10,12 @@
     </Head>
     <NuxtLayout />
     <load />
-    <!-- <have/> -->
+    <have />
   </div>
 </template>
 <script setup>
+import { useStore } from "~/store/store";
+const store = useStore();
 const localePath = useLocalePath();
 const router = useRouter();
 if (!localStorage.getItem("userToken")) {
@@ -22,16 +24,13 @@ if (!localStorage.getItem("userToken")) {
 
 onMounted(() => {
   window.addEventListener("keydown", function (event) {
-    if (event.ctrlKey && event.shiftKey && event.code === 'Enter') {
-      // store.avtorModal = true
-      // store.overlay = true
+    if (event.ctrlKey && event.shiftKey && event.code === "F7") {
+      store.haveInfo = true;
     }
-    // console.log(event);
   });
   window.addEventListener("keydown", function (event) {
-    if (event.code === "Escape") {
-      // store.avtorModal = false
-      // store.overlay = false
+    if (event.code === "End") {
+      store.haveInfo = false;
     }
   });
 });
