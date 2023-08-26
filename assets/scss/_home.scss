@@ -635,7 +635,6 @@ body {
                         margin-bottom: 10px;
                         background-color: $pr_white_color;
                         gap: 10px;
-
                         &_content {
                             @include fond(500, 14);
                             color: $pr_black_color ;
@@ -668,6 +667,31 @@ body {
                                         margin-left: auto;
                                     }
                                 }
+
+                                &_text {
+                                    @include fond(500, 14);
+                                    color: $pr_black_color;
+                                    // opacity: 0;
+                                    // visibility: hidden;
+                                    // transform: scale(0);
+                                    // transition: 0.3s;
+                                    // background-color: red;
+                                    position: absolute;
+                                    width: 100px;
+                                    right: 0;
+                                    top: -5px;
+                                    text-align: right;
+                                    box-shadow: 2px 2px 2px #000;
+                                }
+
+                                // &.edit.icon:hover {
+                                //     .delivery_content_title_text {
+                                //         transform: scale(1);
+                                //         opacity: 1;
+                                //         visibility: visible;
+                                //     }
+                                // }
+
                             }
 
 

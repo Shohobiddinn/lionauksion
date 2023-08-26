@@ -252,6 +252,7 @@
                   <div
                     class="delivery_content_title icon edit"
                     v-if="p?.status == 1 && iconRole"
+                    @click="orderStatus(p?.id, 2)"
                   >
                     <svg
                       width="25"
@@ -268,6 +269,7 @@
                   <div
                     class="delivery_content_title icon edit"
                     v-if="p?.status == 1 && iconRole"
+                    @click="orderStatus(p?.id, -1)"
                   >
                     <svg
                       width="25"
@@ -283,7 +285,8 @@
                   </div>
                   <div
                     class="delivery_content_title icon edit"
-                    v-if="p?.status == 2"
+                    v-if="p?.status == 2 && iconRole"
+                    @click="orderStatus(p?.id, 3)"
                   >
                     <svg
                       width="25"
@@ -299,7 +302,8 @@
                   </div>
                   <div
                     class="delivery_content_title icon edit"
-                    v-if="p?.status == 4"
+                    v-if="p?.status == 3 && deleteMessage"
+                    @click="orderStatus(p?.id, 4)"
                   >
                     <svg
                       width="25"
@@ -316,6 +320,7 @@
                   <div
                     class="delivery_content_title icon edit"
                     v-if="p?.status == 1 && deleteMessage"
+                    @click="orderStatus(p?.id, -1)"
                   >
                     <svg
                       width="30"
@@ -499,12 +504,15 @@ onMounted(() => {
   }
   if (role == "ROLE_SUPPLIER_ADMIN") {
     iconRole.value = true;
+    deleteMessage.value = false;
   }
   if (role == "ROLE_COMPANY_ADMIN") {
     deleteMessage.value = true;
+    iconRole.value = false;
   }
   if (role == "ROLE_COMPANY_MANAGER") {
     deleteMessage.value = true;
+    iconRole.value = false;
   }
 });
 async function refresh() {
@@ -567,6 +575,39 @@ async function refresh() {
   }
 }
 refresh();
+async function orderStatus(id, status) {
+  try{
+    const data = await $fetch(baseUrl + `/order/${id}`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+      params: {
+        status: status,
+      },
+    });
+    if (data) {
+      store.loader = false;
+      toast.success(data?.message || "Success", {
+        position: "top-right",
+        timeout: 2000,
+      });
+      orderApi()
+    }
+
+  }catch(error){
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+      }
+    );
+  }
+}
 </script>
   
   <style lang="scss" scoped>
