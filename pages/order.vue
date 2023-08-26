@@ -75,9 +75,9 @@
               <div class="info_bottom_page_title nds">{{ $t("QQS") }}</div>
               <div class="info_bottom_page_title">{{ $t("lastPrice") }}</div>
               <div class="info_bottom_page_title desc">
-                {{ $t("Holat") }}
+                {{ $t("status") }}
               </div>
-              <div class="info_bottom_page_title edit">{{ $t("another") }}</div>
+              <div class="info_bottom_page_title edit">{{ $t("management") }}</div>
             </div>
             <div class="info_bottom_deliverys">
               <div class="delivery" v-for="p in order?.content" :key="p?.id">
@@ -215,21 +215,21 @@
                 </div>
                 <div class="delivery_content">
                   <div class="delivery_content_title" v-if="p?.status == 1">
-                    kutilmoqda
+               {{ $t("expected") }}
                   </div>
                   <div class="delivery_content_title" v-if="p?.status == 2">
-                    qabul qilindi
+                 {{ $t("accepted") }}
                   </div>
                   <div class="delivery_content_title" v-if="p?.status == -1">
-                    qabul qilinmadi
+                    {{ $t("notAccepted") }}
                   </div>
 
                   <div class="delivery_content_title" v-if="p?.status == 3">
-                    yo'lda
+                        {{ $t("onWay") }}
                   </div>
 
                   <div class="delivery_content_title" v-if="p?.status == 4">
-                    yetkazildi
+                  {{ $t("delivered") }}
                   </div>
                 </div>
                 <div class="delivery_content edit">

@@ -87,5 +87,12 @@
     "newPassword": "Новый пароль",
     "oldPassword": "Текущий пароль",
     "countCart": "Количество",
-    "passwordEditor":"Изменить пароль"
+    "passwordEditor":"Изменить пароль",
+    "status":"состояние",
+    "management":"управление",
+    "accepted":"принял",
+    "notAccepted":"не принимаются",
+    "onWay":"в пути",
+    "delivered":"доставленный",
+    "expected":"ожидается"
 }

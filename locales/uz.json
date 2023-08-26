@@ -87,5 +87,12 @@
     "newPassword": "yangi parol",
     "oldPassword": "amaldagi parol",
     "countCart":"Miqdori",
-    "passwordEditor":"Paro'lni O'zgartirish"
+    "passwordEditor":"Paro'lni O'zgartirish",
+    "status":"holat",
+    "management":"boshqaruv",
+    "accepted":"qabul qilindi",
+    "notAccepted":"qabul qilinmadi",
+    "onWay":"yo'lda",
+    "delivered":"yetkazildi",
+    "expected":"kutilmoqda"
 }
