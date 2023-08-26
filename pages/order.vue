@@ -236,6 +236,7 @@
                   <div
                     class="delivery_content_title icon edit"
                     v-if="p?.status == 3"
+                    @click="warn()"
                   >
                     <svg
                       width="25"
@@ -607,6 +608,12 @@ async function orderStatus(id, status) {
       }
     );
   }
+}
+function warn(){
+  toast.warning("Yo'lda", {
+        position: "top-right",
+        timeout: 2000,
+      });
 }
 </script>
   
