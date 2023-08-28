@@ -396,7 +396,7 @@
                       v-model="cartInputInfo"
                     />
                   </div>
-                  <div class="cart_modal_btns" @click="cartAddApi">
+                  <div class="cart_modal_btns" @click="cartEditApi">
                     <div class="cart_modal_btns_btn">
                       {{ $t("Send") }}
                     </div>
@@ -686,19 +686,19 @@ const productSymbol = ref("");
 const productPrice = ref("");
 const productName = ref("");
 const companyName = ref("");
+const editProductId = ref("");
+const productSupplierId = ref("");
 const productId = ref("");
-const productSupplierId = ref("")
 async function orderOneApi(id) {
   try {
     cartModal.value = true;
     bgModal.value = true;
-    bgModal.value = true;
-    cartModal.value = true;
+
     store.loader = true;
     const data = await $fetch(baseUrl + `/order/${id}`, {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("userRefreshToken"),
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
         "Accept-Language": locale.value,
       },
     });
@@ -708,9 +708,49 @@ async function orderOneApi(id) {
       productName.value = data?.productDto?.categoryName;
       productPrice.value = data?.productDto?.price;
       productSymbol.value = data?.productDto?.currencySymbol;
-      productId.value = data?.id;
+      editProductId.value = data?.id;
+      productId.value = data?.productId;
       productSupplierId.value = data?.supplierId;
-      cartInputInfo.value = data?.amount
+      cartInputInfo.value = data?.amount;
+    }
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Error",
+      {
+        position: "top-right",
+        timeout: 2000,
+      }
+    );
+  }
+}
+async function cartEditApi() {
+  try {
+    store.loader = true;
+    const data = await $fetch(baseUrl + "/order", {
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+      body: JSON.stringify({
+        id: editProductId.value,
+        amount: cartInputInfo.value,
+        productId: productId.value,
+        supplierId:productSupplierId.value ,
+        companyId: localStorage.getItem("userCompanyId"),
+      }),
+    });
+    if (data) {
+      bgModal.value = true;
+      cartModal.value = true;
+      store.loader = false;
+      toast.success(data.message, {
+        position: "top-right",
+        timeout: 2000,
+      });
     }
   } catch (error) {
     store.loader = false;
