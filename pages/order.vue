@@ -741,11 +741,12 @@ async function cartEditApi() {
         productId: productId.value,
         supplierId:productSupplierId.value ,
         companyId: localStorage.getItem("userCompanyId"),
+        status:1
       }),
     });
     if (data) {
-      bgModal.value = true;
-      cartModal.value = true;
+      bgModal.value = false;
+      cartModal.value = false;
       store.loader = false;
       toast.success(data.message, {
         position: "top-right",
