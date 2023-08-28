@@ -82,7 +82,6 @@
               </div>
             </div>
             <div class="info_bottom_deliverys">
-                <!-- <pre>{{ order }}</pre> -->
               <div class="delivery" v-for="p in order" :key="p?.id">
                 <div class="delivery_content">
                   <div class="delivery_content_title name">
@@ -478,7 +477,7 @@ async function cartEditApi(e) {
     supplierName: e.supplierName,
     companyId: localStorage.getItem("userCompanyId"),
     companyName: localStorage.getItem("userCompanyName"),
-    product: e,
+    product: e.product,
   };
   let product = productAll.filter((i) => i.productId === item.productId);
   if (product.length > 0) {
