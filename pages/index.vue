@@ -321,7 +321,7 @@
                   <div
                     class="delivery_content_title icon edit"
                     v-if="productCartIcon"
-                    @click="cartApi(p)"
+                    @click="tekshiruv(p)"
                   >
                     <svg
                       width="30"
@@ -840,6 +840,13 @@ async function cartAddApi() {
       }
     );
   }
+}
+
+function tekshiruv(e){
+  let productAll = JSON.parse(localStorage.getItem("product") ? localStorage.getItem("product") : "[]");
+  
+  productAll.push(e);
+  localStorage.setItem("product",JSON.stringify(productAll));
 }
 </script>
 
