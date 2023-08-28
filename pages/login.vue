@@ -100,6 +100,8 @@ async function loginApi() {
         }
         if (data?.user?.companyId !== null) {
           localStorage.setItem("userCompanyId", data?.user?.companyId);
+        localStorage.setItem("userCompanyName",data?.user?.companyName)
+
         } else {
           localStorage.setItem("userCompanyId", "");
         }
