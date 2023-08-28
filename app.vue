@@ -34,4 +34,12 @@ onMounted(() => {
     }
   });
 });
+const { locale, messages } = useI18n();
+const loc = ref("uz");
+onMounted(() => {
+  loc.value = locale.value
+});
+function tekshiruv() {
+  console.log(messages.value.uz.header.body.items);
+}
 </script>
