@@ -111,6 +111,7 @@ import { useToast } from "vue-toastification";
 const toast = useToast();
 import { useStore } from "~/store/store";
 const store = useStore();
+const i18n = useI18n();
 const fullName = ref("");
 const userFullName = ref("");
 const username = ref("");

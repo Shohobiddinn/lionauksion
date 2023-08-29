@@ -216,7 +216,7 @@
   </div>
 </template>
     
-    <script setup>
+<script setup>
 import { useToast } from "vue-toastification";
 const toast = useToast();
 import { useStore } from "~/store/store";
@@ -328,6 +328,7 @@ function currensyChildApi(e) {
   currensyModal.value = false;
   currencyId.value = e.id;
   currensyTitle.value = e.name;
+
 }
 currensyApi();
 const categoryFatherInfo = ref(null);
@@ -492,9 +493,10 @@ async function productEditApi() {
     const arr = [];
     input.value.forEach((elem, i) => {
       arr.push({
-        categoryDetailId: categoryChild.value[i].id,
+        categoryDetailId: produyctList.value.details[i].categoryDetailId,
         value: elem.value,
       });
+      console.log();
     });
     const data = await $fetch(baseUrl + "/product", {
       method: "PUT",
