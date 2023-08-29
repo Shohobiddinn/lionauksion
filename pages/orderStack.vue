@@ -76,7 +76,7 @@
                   </div>
                 
                   <div class="company_title">
-                    <div class="company_title_icon">   <svg
+                    <div class="company_title_icon" @click="orderStackDelete(c?.id)">   <svg
                     width="10"
                     height="10"
                     fill="red"
@@ -205,80 +205,9 @@
     page.value = p - 1;
     orderStack();
   }
-  async function orderInfoStackIsBlocked(e) {
+  async function orderStackDelete(e) {
     try {
-      store.loader = true;
-      const data = await $fetch(baseUrl + "/supplier", {
-        method: "PUT",
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("userToken"),
-          "Accept-Language": locale.value,
-        },
-        body: JSON.stringify({
-          id: e.id,
-          name: e.name,
-          director: e.director,
-          phone: e.phone,
-          isBlocked: false,
-          userFullName: e.userFullName,
-          username: e.username,
-          password: e.password,
-        }),
-      });
-      if (data.message == "ok") {
-        store.loader = false;
-        toast.success(data?.message || "Success", {
-          position: "top-right",
-          timeout: 2000,
-        });
-        orderStack();
-      }
-    } catch (error) {
-      store.loader = false;
-      toast.error(
-        error?.response?._data?.message ||
-          error?.response?._data?.error ||
-          "Error",
-        {
-          position: "top-right",
-          timeout: 2000,
-        }
-      );
-    }
-  }
-  async function orderInfoStackUnBlocked(e) {
-    try {
-      store.loader = true;
-      const data = await $fetch(baseUrl + "/supplier", {
-        method: "PUT",
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("userToken"),
-          "Accept-Language": locale.value,
-        },
-        body: JSON.stringify({
-          id: e.id,
-          name: e.name,
-          director: e.director,
-          phone: e.phone,
-          isBlocked: true,
-          userFullName: e.userFullName,
-          username: e.username,
-          password: e.password,
-        }),
-      });
-      if (data?.message == "ok") {
-        store.loader = false;
-        orderStack();
-        toast.success(data?.message || "Success", {
-          position: "top-right",
-          timeout: 2000,
-        });
-      }
-    } catch (error) {}
-  }
-  async function supplierDelete(e) {
-    try {
-      const data = await $fetch(baseUrl + `/supplier/${e}`, {
+      const data = await $fetch(baseUrl + `/order-stack/${e}`, {
         method: "DELETE",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("userToken"),
