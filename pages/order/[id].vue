@@ -481,18 +481,10 @@ async function orderApi() {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("userToken"),
         "Accept-Language": locale.value,
-        companyId: localStorage.getItem("userCompanyId"),
-        supplierId: localStorage.getItem("userSupplierId"),
       },
       params: {
         page: page.value,
         size: 10,
-        companyId: localStorage.getItem("userCompanyId")
-          ? localStorage.getItem("userCompanyId")
-          : null,
-        supplierId: localStorage.getItem("userSupplierId")
-          ? localStorage.getItem("userSupplierId")
-          : null,
       },
     });
     order.value = data;
