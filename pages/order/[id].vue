@@ -473,7 +473,6 @@ const bgModal = ref(false);
 const deleteMessage = ref(true);
 const iconRole = ref(false);
 async function orderApi() {
-  console.log(id);
   try {
     store.loader = true;
     const data = await $fetch(baseUrl + `/order-stack/${id}`, {

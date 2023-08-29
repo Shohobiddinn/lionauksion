@@ -740,7 +740,6 @@ async function cartApi(p) {
   productId.value = p?.id;
   productSupplierId.value = p?.supplierId;
   cartInfo.value = p;
-  console.log(cartInfo.value);
 }
 const cartInputInfo = ref(1);
 async function count() {
