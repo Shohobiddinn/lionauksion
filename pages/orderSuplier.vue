@@ -85,7 +85,7 @@
                 <div class="delivery" v-for="p in order?.content" :key="p?.id">
                   <div class="delivery_content">
                     <div class="delivery_content_title name">
-                      {{ p?.supplierName }}
+                      {{ p?.companyName }}
                     </div>
                     <div class="delivery_content_title phone">
                       {{ p?.supplierPhone }}
