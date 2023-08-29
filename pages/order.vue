@@ -748,6 +748,7 @@ async function cartEditApi() {
       bgModal.value = false;
       cartModal.value = false;
       store.loader = false;
+      orderApi();
       toast.success(data.message, {
         position: "top-right",
         timeout: 2000,
