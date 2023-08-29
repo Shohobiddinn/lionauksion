@@ -270,6 +270,7 @@ const store = useStore();
 import { useToast } from "vue-toastification";
 const toast = useToast();
 const { locale } = useI18n();
+const i18n = useI18n();
 const localePath = useLocalePath();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const cartModal = ref(false);
@@ -418,7 +419,7 @@ async function orderAddApi() {
     });
     if(data){
       store.loader = false;
-      toast.success(data?.message || "Success", {
+      toast.success(i18n.t("susses"), {
             position: "top-right",
             timeout: 2000,
           });
@@ -428,7 +429,7 @@ async function orderAddApi() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Bo'shliqni",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
