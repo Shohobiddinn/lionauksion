@@ -459,6 +459,7 @@ import { useStore } from "~/store/store";
 const router = useRouter();
 const store = useStore();
 import { useToast } from "vue-toastification";
+const i18n = useI18n();
 const toast = useToast();
 const { locale } = useI18n();
 const localePath = useLocalePath();
@@ -499,7 +500,7 @@ async function productApi() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -537,7 +538,7 @@ async function productDelete(e) {
     if (data?.message == "ok") {
       productApi();
       store.loader = false;
-      toast.success(data?.message || "Success", {
+      toast.success(data?.message || i18n.t("susses"), {
         position: "top-right",
         timeout: 2000,
         closeOnClick: true,
@@ -557,7 +558,7 @@ async function productDelete(e) {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -622,7 +623,7 @@ async function search() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -711,7 +712,7 @@ async function refresh() {
       toast.error(
         error?.response?._data?.message ||
           error?.response?._data?.error ||
-          "Error",
+          i18n.t("error"),
         {
           position: "top-right",
           timeout: 2000,
@@ -774,7 +775,7 @@ async function count() {
   //   toast.error(
   //     error?.response?._data?.message ||
   //       error?.response?._data?.error ||
-  //       "Error",
+  //       i18n.t("error"),
   //     {
   //       position: "top-right",
   //       timeout: 2000,

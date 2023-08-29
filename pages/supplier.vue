@@ -204,6 +204,7 @@ const { locale } = useI18n();
 const localePath = useLocalePath();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const filterModal = ref(false);
+const i18n = useI18n();
 const router = useRouter();
 const lock = ref(false);
 const suplier = ref(null);
@@ -233,7 +234,7 @@ async function suplierApi() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -280,7 +281,7 @@ async function suplierIsBlocked(e) {
     });
     if (data.message == "ok") {
       store.loader = false;
-      toast.success(data?.message || "Success", {
+      toast.success(data?.message || i18n.t("susses"), {
         position: "top-right",
         timeout: 2000,
       });
@@ -291,7 +292,7 @@ async function suplierIsBlocked(e) {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -322,7 +323,7 @@ async function suplierUnBlocked(e) {
     if (data?.message == "ok") {
       store.loader = false;
       suplierApi();
-      toast.success(data?.message || "Success", {
+      toast.success(data?.message || i18n.t("susses"), {
         position: "top-right",
         timeout: 2000,
       });
@@ -340,7 +341,7 @@ async function supplierDelete(e) {
     });
     if (data.message == "ok") {
       store.loader = false;
-      toast.success(data?.message || "Success", {
+      toast.success(data?.message || i18n.t("susses"), {
         position: "top-right",
         timeout: 2000,
       });
@@ -352,7 +353,7 @@ async function supplierDelete(e) {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -386,7 +387,7 @@ async function search() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -446,7 +447,7 @@ async function refresh() {
       toast.error(
         error?.response?._data?.message ||
           error?.response?._data?.error ||
-          "Error",
+          i18n.t("error"),
         {
           position: "top-right",
           timeout: 2000,

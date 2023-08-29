@@ -219,6 +219,7 @@ import { useStore } from "~/store/store";
 const toast = useToast();
 const store = useStore();
 const bgModal = ref(false);
+const i18n = useI18n();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const { locale } = useI18n();
 const router = useRouter();
@@ -276,7 +277,7 @@ async function refresh() {
       toast.error(
         error?.response?._data?.message ||
           error?.response?._data?.error ||
-          "Error",
+          i18n.t("error"),
         {
           position: "top-right",
           timeout: 2000,
@@ -430,7 +431,7 @@ async function categoryChildAddApi() {
     }
   } catch (error) {
     store.loader = false;
-    toast.error(error?.response?._data?.message || "Error", {
+    toast.error(error?.response?._data?.message || i18n.t("error"), {
       position: "top-right",
       timeout: 2000,
     });

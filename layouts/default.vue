@@ -375,6 +375,7 @@ const switchLocalePath = useSwitchLocalePath();
 const localePath = useLocalePath();
 const role = localStorage.getItem("role");
 const baseUrl = useRuntimeConfig().public.baseUrl;
+const i18n = useI18n();
 const router = useRouter();
 const productPage = ref(false);
 const companyPage = ref(false);
@@ -438,7 +439,7 @@ async function editPassword() {
       router.push("/login");
       bgmodol.value = false;
       passwordModal.value = false;
-      toast.success(data?.message || "Success", {
+      toast.success(data?.message || i18n.t("susses"), {
         position: "top-right",
         timeout: 2000,
       });
@@ -448,7 +449,7 @@ async function editPassword() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,

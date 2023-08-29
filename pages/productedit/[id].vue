@@ -226,6 +226,7 @@ const route = useRoute();
 const router = useRouter();
 const { locale } = useI18n();
 const localePath = useLocalePath();
+const i18n = useI18n();
 const { id } = route.params;
 const selectModal = ref(false);
 const currensyModal = ref(false);
@@ -283,7 +284,7 @@ async function refresh() {
       toast.error(
         error?.response?._data?.message ||
           error?.response?._data?.error ||
-          "Error",
+          i18n.t("error"),
         {
           position: "top-right",
           timeout: 2000,
@@ -316,7 +317,7 @@ async function currensyApi() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -355,7 +356,7 @@ async function categoryFatherApi() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -394,7 +395,7 @@ async function categoryChildApi(e) {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -437,7 +438,7 @@ async function productListApi() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -468,7 +469,7 @@ async function getCategoryApi() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -524,7 +525,7 @@ async function productEditApi() {
     });
     if (data?.message == "ok") {
       router.push("/");
-      toast.success(data?.message || "Success", {
+      toast.success(data?.message || i18n.t("susses"), {
         position: "top-right",
         timeout: 2000,
       });
@@ -534,7 +535,7 @@ async function productEditApi() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,

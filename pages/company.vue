@@ -204,6 +204,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 const filterModal = ref(false);
 const lock = ref(false);
 const company = ref(null);
+const i18n = useI18n();
 const page = ref(0);
 async function companyApi() {
   try {
@@ -228,7 +229,7 @@ async function companyApi() {
       toast.error(
         error?.response?._data?.message ||
           error?.response?._data?.error ||
-          "Error",
+          i18n.t("error"),
         {
           position: "top-right",
           timeout: 2000,
@@ -275,7 +276,7 @@ async function companyIsBlocked(e) {
     if (data) {
       companyApi();
       store.loader = false;
-      toast.success(data?.message || "Success", {
+      toast.success(data?.message || i18n.t("susses"), {
         position: "top-right",
         timeout: 2000,
       });
@@ -285,7 +286,7 @@ async function companyIsBlocked(e) {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -316,7 +317,7 @@ async function companyUnBlocked(e) {
     if (data) {
       companyApi();
       store.loader = false;
-      toast.success(data?.message || "Success", {
+      toast.success(data?.message || i18n.t("susses"), {
         position: "top-right",
         timeout: 2000,
       });
@@ -326,7 +327,7 @@ async function companyUnBlocked(e) {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -347,7 +348,7 @@ async function companyDelete(e) {
     if (data.message == "ok") {
       companyApi();
       store.loader = false;
-      toast.success(data?.message || "Success", {
+      toast.success(data?.message || i18n.t("susses"), {
         position: "top-right",
         timeout: 2000,
       });
@@ -357,7 +358,7 @@ async function companyDelete(e) {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -396,7 +397,7 @@ async function search() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -455,7 +456,7 @@ async function refresh() {
       toast.error(
         error?.response?._data?.message ||
           error?.response?._data?.error ||
-          "Error",
+          i18n.t("error"),
         {
           position: "top-right",
           timeout: 2000,

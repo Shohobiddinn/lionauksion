@@ -119,6 +119,7 @@ const companyName = ref("");
 const route = useRoute();
 const { id } = route.params;
 const { locale } = useI18n();
+const i18n = useI18n();
 const localePath = useLocalePath();
 const phone = ref("");
 const inputTypeInfo = ref(null);
@@ -152,7 +153,7 @@ async function suplierPutApi() {
       if (data.message == "ok") {
         store.loader = false;
         router.push(localePath("/supplier"));
-        toast.success(data?.message || "Success", {
+        toast.success(data?.message || i18n.t("susses"), {
           position: "top-right",
           timeout: 2000,
         });
@@ -164,7 +165,7 @@ async function suplierPutApi() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -198,7 +199,7 @@ async function supplierOneApi() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -273,7 +274,7 @@ async function refresh() {
       toast.error(
         error?.response?._data?.message ||
           error?.response?._data?.error ||
-          "Error",
+          i18n.t("error"),
         {
           position: "top-right",
           timeout: 2000,

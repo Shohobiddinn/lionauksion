@@ -202,6 +202,7 @@ const baseUrl = useRuntimeConfig().public.baseUrl;
 const filterModal = ref(false);
 const router = useRouter();
 const lock = ref(false);
+const i18n = useI18n();
 const user = ref(null);
 const page = ref(0);
 const { locale } = useI18n();
@@ -258,7 +259,7 @@ async function userIsBlocked(e) {
       },
     });
     if (data?.message == "ok") {
-      toast.success(data?.message || "Success", {
+      toast.success(data?.message || i18n.t("susses"), {
         position: "top-right",
         timeout: 2000,
       });
@@ -276,7 +277,7 @@ async function userIsBlocked(e) {
       },
     });
     if (data?.message == "ok") {
-      toast.success(data?.message || "Success", {
+      toast.success(data?.message || i18n.t("susses"), {
         position: "top-right",
         timeout: 2000,
       });
@@ -301,7 +302,7 @@ async function userUnBlocked(e) {
       });
 
       if (data?.message == "ok") {
-        toast.success(data?.message || "Success", {
+        toast.success(data?.message || i18n.t("susses"), {
           position: "top-right",
           timeout: 2000,
         });
@@ -319,7 +320,7 @@ async function userUnBlocked(e) {
         },
       });
       if (data?.message == "ok") {
-        toast.success(data?.message || "Success", {
+        toast.success(data?.message || i18n.t("susses"), {
           position: "top-right",
           timeout: 2000,
         });
@@ -331,7 +332,7 @@ async function userUnBlocked(e) {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -350,7 +351,7 @@ async function userDelete(e) {
         },
       });
       if (data.message == "ok") {
-        toast.success(data?.message || "Success", {
+        toast.success(data?.message || i18n.t("susses"), {
           position: "top-right",
           timeout: 2000,
         });
@@ -366,7 +367,7 @@ async function userDelete(e) {
         },
       });
       if (data.message == "ok") {
-        toast.success(data?.message || "Success", {
+        toast.success(data?.message || i18n.t("susses"), {
           position: "top-right",
           timeout: 2000,
         });
@@ -378,7 +379,7 @@ async function userDelete(e) {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -411,7 +412,7 @@ async function search() {
     user.value = data;
     if (data) {
       store.loader = false;
-      toast.success(data?.message || "Success", {
+      toast.success(data?.message || i18n.t("susses"), {
         position: "top-right",
         timeout: 2000,
       });
@@ -470,7 +471,7 @@ async function refresh() {
       toast.error(
         error?.response?._data?.message ||
           error?.response?._data?.error ||
-          "Error",
+          i18n.t("error"),
         {
           position: "top-right",
           timeout: 2000,

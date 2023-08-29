@@ -77,6 +77,7 @@ import { useToast } from "vue-toastification";
 const toast = useToast();
 import { useStore } from "~/store/store";
 const store = useStore();
+const i18n = useI18n();
 const fullName = ref("");
 const username = ref("");
 const password = ref("");
@@ -107,7 +108,7 @@ async function userApi() {
         });
         if (data?.message == "ok") {
           router.push(localePath("/users"));
-          toast.success(data?.message || "Success", {
+          toast.success(data?.message || i18n.t("error"), {
             position: "top-right",
             timeout: 2000,
           });
@@ -127,7 +128,7 @@ async function userApi() {
         });
         if (data?.message == "ok") {
           router.push(localePath("/users"));
-          toast.success(data?.message || "Success", {
+          toast.success(data?.message || i18n.t("error"), {
             position: "top-right",
             timeout: 2000,
           });
@@ -139,7 +140,7 @@ async function userApi() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -206,7 +207,7 @@ async function refresh() {
       toast.error(
         error?.response?._data?.message ||
           error?.response?._data?.error ||
-          "Error",
+          i18n.t("error"),
         {
           position: "top-right",
           timeout: 2000,

@@ -111,7 +111,7 @@ import { useToast } from "vue-toastification";
 const toast = useToast();
 import { useStore } from "~/store/store";
 const store = useStore();
-const i18n = useI18n();
+const i18n = useI18n()
 const fullName = ref("");
 const userFullName = ref("");
 const username = ref("");
@@ -176,7 +176,7 @@ async function refresh() {
       toast.error(
         error?.response?._data?.message ||
           error?.response?._data?.error ||
-          "Error",
+          i18n.t("error"),
         {
           position: "top-right",
           timeout: 2000,
@@ -214,7 +214,7 @@ async function companyPutApi() {
       if (data.message == "ok") {
         router.push(localePath("/company"));
         store.loader = false;
-        toast.success(data?.message || "Success", {
+        toast.success(data?.message || i18n.t("susses"), {
           position: "top-right",
           timeout: 2000,
         });
@@ -226,7 +226,7 @@ async function companyPutApi() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -262,7 +262,7 @@ async function companyOneApi() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,

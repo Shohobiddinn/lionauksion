@@ -55,12 +55,10 @@ import { useToast } from "vue-toastification";
 const localePath = useLocalePath();
 const toast = useToast();
 const store = useStore();
+const i18n = useI18n();
 definePageMeta({
   layout: "view",
 });
-function tekshiruv(){
-  alert("hello")
-}
 const router = useRouter();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const username = ref("");
@@ -105,7 +103,7 @@ async function loginApi() {
         } else {
           localStorage.setItem("userCompanyId", "");
         }
-        toast.success(data?.message || "Success", {
+        toast.success(data?.message || i18n.t("susses"), {
           position: "top-right",
           timeout: 2000,
         });

@@ -224,6 +224,7 @@ const toast = useToast();
 const selectModal = ref(false);
 const currensyModal = ref(false);
 const router = useRouter();
+const i18n = useI18n();
 const currensyTitle = ref("");
 const currensy = ref(null);
 const currencyId = ref(null);
@@ -251,7 +252,7 @@ async function currensyApi() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -299,7 +300,7 @@ async function categoryFatherApi() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -349,7 +350,7 @@ async function categoryChildApi(e) {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -403,7 +404,7 @@ async function productAddApi() {
     if (data?.message == "ok") {
       router.push("/");
       store.loader = false;
-      toast.success(data?.message || "Success", {
+      toast.success(data?.message || i18n.t("susses"), {
         position: "top-right",
         timeout: 2000,
       });
@@ -413,7 +414,7 @@ async function productAddApi() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -473,7 +474,7 @@ async function refresh() {
       toast.error(
         error?.response?._data?.message ||
           error?.response?._data?.error ||
-          "Error",
+          i18n.t("error"),
         {
           position: "top-right",
           timeout: 2000,

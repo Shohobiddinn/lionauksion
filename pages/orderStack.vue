@@ -147,6 +147,7 @@
   const store = useStore();
   const { locale } = useI18n();
   const localePath = useLocalePath();
+  const i18n = useI18n();
   const baseUrl = useRuntimeConfig().public.baseUrl;
   const filterModal = ref(false);
   const router = useRouter();
@@ -178,7 +179,7 @@
       toast.error(
         error?.response?._data?.message ||
           error?.response?._data?.error ||
-          "Error",
+          i18n.t("error"),
         {
           position: "top-right",
           timeout: 2000,
@@ -214,7 +215,7 @@
       });
       if (data.message == "ok") {
         store.loader = false;
-        toast.success(data?.message || "Success", {
+        toast.success(data?.message || i18n.t("susses"), {
           position: "top-right",
           timeout: 2000,
         });
@@ -226,7 +227,7 @@
       toast.error(
         error?.response?._data?.message ||
           error?.response?._data?.error ||
-          "Error",
+          i18n.t("error"),
         {
           position: "top-right",
           timeout: 2000,
@@ -259,7 +260,7 @@
       toast.error(
         error?.response?._data?.message ||
           error?.response?._data?.error ||
-          "Error",
+          i18n.t("error"),
         {
           position: "top-right",
           timeout: 2000,
@@ -319,7 +320,7 @@
         toast.error(
           error?.response?._data?.message ||
             error?.response?._data?.error ||
-            "Error",
+            i18n.t("error"),
           {
             position: "top-right",
             timeout: 2000,

@@ -197,6 +197,7 @@ const toast = useToast();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const router = useRouter();
 const { locale } = useI18n();
+const i18n = useI18n();
 const currensy = ref(null);
 const bgmodol = ref(false);
 const currensyModal = ref(false);
@@ -229,7 +230,7 @@ async function currensyApi() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -258,7 +259,7 @@ async function currencyType() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -296,7 +297,7 @@ async function currensySubmit() {
       currensyModal.value = false;
       store.loader = false;
       currensyApi();
-      toast.success(data?.message || "Success", {
+      toast.success(data?.message || i18n.t("susses"), {
         position: "top-right",
         timeout: 2000,
       });
@@ -306,7 +307,7 @@ async function currensySubmit() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -349,7 +350,7 @@ async function currensyEditSubmit() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -370,7 +371,7 @@ async function currensyDelete(e) {
     if (data.message == "ok") {
       store.loader = false;
       currensyApi();
-      toast.success(data?.message || "Success", {
+      toast.success(data?.message || i18n.t("susses"), {
         position: "top-right",
         timeout: 2000,
       });
@@ -380,7 +381,7 @@ async function currensyDelete(e) {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -439,7 +440,7 @@ async function refresh() {
       toast.error(
         error?.response?._data?.message ||
           error?.response?._data?.error ||
-          "Error",
+          i18n.t("error"),
         {
           position: "top-right",
           timeout: 2000,

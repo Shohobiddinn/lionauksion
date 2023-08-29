@@ -115,6 +115,7 @@ const toast = useToast();
 const store = useStore();
 const { locale } = useI18n();
 const localePath = useLocalePath();
+const i18n = useI18n();
 import IMask from "imask";
 const fullName = ref("");
 const userFullName = ref("");
@@ -146,7 +147,7 @@ async function companyApi() {
     if (data?.message == "ok") {
       router.push("/company");
       store.loader = false;
-      toast.success(data?.message || "Success", {
+      toast.success(data?.message || i18n.t("susses"), {
         position: "top-right",
         timeout: 2000,
       });
@@ -156,7 +157,7 @@ async function companyApi() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -230,7 +231,7 @@ async function refresh() {
       toast.error(
         error?.response?._data?.message ||
           error?.response?._data?.error ||
-          "Error",
+          i18n.t("error"),
         {
           position: "top-right",
           timeout: 2000,

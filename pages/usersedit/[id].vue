@@ -82,6 +82,7 @@ const localePath = useLocalePath();
 const inputTypeInfo = ref(null);
 const router = useRouter();
 const route = useRoute();
+const i18n = useI18n();
 const { id } = route.params;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 async function userPutApi() {
@@ -105,7 +106,7 @@ async function userPutApi() {
         });
         if (data?.message == "ok") {
           router.push(localePath("/users"));
-          toast.success(data?.message || "Success", {
+          toast.success(data?.message || i18n.t("susses"), {
             position: "top-right",
             timeout: 2000,
           });
@@ -126,7 +127,7 @@ async function userPutApi() {
     toast.error(
       error?.response?._data?.message ||
         error?.response?._data?.error ||
-        "Error",
+        i18n.t("error"),
       {
         position: "top-right",
         timeout: 2000,
@@ -210,7 +211,7 @@ async function refresh() {
       toast.error(
         error?.response?._data?.message ||
           error?.response?._data?.error ||
-          "Error",
+          i18n.t("error"),
         {
           position: "top-right",
           timeout: 2000,
