@@ -175,7 +175,7 @@
             <div class="menu_content_title" v-if="orderPage">
               <NuxtLink
                 class="menu_content_title_link"
-                :to="localePath('/order')"
+                :to="localePath('/orderStack')"
               >
                 <div class="menu_content_title_link_icon">
                   <svg
