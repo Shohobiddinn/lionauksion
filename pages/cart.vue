@@ -419,6 +419,7 @@ async function orderAddApi() {
     });
     if(data){
       store.loader = false;
+      localStorage.removeItem("cart")
       toast.success(i18n.t("susses"), {
             position: "top-right",
             timeout: 2000,

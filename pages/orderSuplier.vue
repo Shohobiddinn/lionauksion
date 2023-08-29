@@ -82,7 +82,7 @@
                 </div>
               </div>
               <div class="info_bottom_deliverys">
-                <div class="delivery" v-for="p in order?.orders" :key="p?.id">
+                <div class="delivery" v-for="p in order?.content" :key="p?.id">
                   <div class="delivery_content">
                     <div class="delivery_content_title name">
                       {{ p?.supplierName }}
@@ -404,7 +404,7 @@
                   </div>
                 </div>
               </div>
-              <div class="pagination" v-if="order?.orders.length">
+              <div class="pagination" v-if="order?.content.length">
                 <div class="pagination_icon" @click="pageDown">
                   <svg
                     width="24"
@@ -476,7 +476,7 @@
     console.log(id);
     try {
       store.loader = true;
-      const data = await $fetch(baseUrl + `/order-stack/${id}`, {
+      const data = await $fetch(baseUrl + `/order`, {
         method: "GET",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("userToken"),
@@ -697,7 +697,6 @@
     try {
       cartModal.value = true;
       bgModal.value = true;
-  
       store.loader = true;
       const data = await $fetch(baseUrl + `/order/${id}`, {
         method: "GET",
