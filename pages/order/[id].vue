@@ -463,6 +463,7 @@
   const { locale } = useI18n();
   const localePath = useLocalePath();
   const baseUrl = useRuntimeConfig().public.baseUrl;
+  const i18n = useI18n();
   const page = ref(0);
   const cartModal = ref(false);
   const order = ref(null);
@@ -676,7 +677,7 @@
     }
   }
   function warn() {
-    toast.warning("Yo'lda", {
+    toast.warning(i18n.t("onWay"), {
       position: "top-right",
       timeout: 2000,
     });
