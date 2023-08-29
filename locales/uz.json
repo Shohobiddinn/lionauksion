@@ -96,5 +96,6 @@
     "delivered":"yetkazildi",
     "expected":"kutilmoqda",
     "susses":"Muvaffaqiyatli",
-    "error":"Xatolik yuz berdi"
+    "error":"Xatolik yuz berdi",
+    "orderCount":"Buyurtmalar soni"
 }
