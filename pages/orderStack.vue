@@ -43,7 +43,7 @@
                   {{ $t("Logotip") }}
                 </div>
                 <div class="order_info_bottom_top_title">
-                  {{ $t("orderName") }}
+                  {{ $t("suplierName") }}
                 </div>
                 <div class="order_info_bottom_top_title">
                   {{ $t("DateCurrency") }}
