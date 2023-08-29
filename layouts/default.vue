@@ -172,6 +172,29 @@
                 </div>
               </NuxtLink>
             </div>
+            <div class="menu_content_title" v-if="orderSuplierPage">
+              <NuxtLink
+                class="menu_content_title_link"
+                :to="localePath('/orderSuplier')"
+              >
+                <div class="menu_content_title_link_icon">
+                  <svg
+                    width="30"
+                    height="30"
+                    fill="white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 640 512"
+                  >
+                    <path
+                      d="M36.8 192H603.2c20.3 0 36.8-16.5 36.8-36.8c0-7.3-2.2-14.4-6.2-20.4L558.2 21.4C549.3 8 534.4 0 518.3 0H121.7c-16 0-31 8-39.9 21.4L6.2 134.7c-4 6.1-6.2 13.2-6.2 20.4C0 175.5 16.5 192 36.8 192zM64 224V384v80c0 26.5 21.5 48 48 48H336c26.5 0 48-21.5 48-48V384 224H320V384H128V224H64zm448 0V480c0 17.7 14.3 32 32 32s32-14.3 32-32V224H512z"
+                    />
+                  </svg>
+                </div>
+                <div class="menu_content_title_link_text">
+                  {{ $t("order") }}
+                </div>
+              </NuxtLink>
+            </div>
             <div class="menu_content_title" v-if="orderPage">
               <NuxtLink
                 class="menu_content_title_link"
@@ -361,6 +384,7 @@ const currensyTypePage = ref(false);
 const supplierPage = ref(false);
 const productAddPage = ref(false);
 const cartPage = ref(false);
+const orderSuplierPage = ref(false);
 const userPage = ref(false);
 const langModal = ref(false);
 const passwordModal = ref(false);
@@ -442,6 +466,7 @@ onMounted(() => {
     productAddPage.value = false;
     orderPage.value = false;
     cartPage.value = false;
+    orderSuplierPage.value = false;
   }
   if (role == "ROLE_SUPPLIER_ADMIN") {
     productPage.value = true;
@@ -453,6 +478,7 @@ onMounted(() => {
     userPage.value = true;
     orderPage.value = true;
     cartPage.value = false;
+    orderSuplierPage.value = true;
   }
   if (role == "ROLE_COMPANY_ADMIN") {
     productPage.value = true;
@@ -464,6 +490,7 @@ onMounted(() => {
     userPage.value = true;
     orderPage.value = true;
     cartPage.value = true;
+    orderSuplierPage.value = false;
   }
   if (role == "ROLE_COMPANY_MANAGER") {
     productPage.value = true;
@@ -474,6 +501,7 @@ onMounted(() => {
     productAddPage.value = true;
     orderPage.value = true;
     cartPage.value = true;
+    orderSuplierPage.value = false;
   }
   document.querySelectorAll(".language_content_title").forEach((item) => {
     if (locale.value === item.textContent) {
