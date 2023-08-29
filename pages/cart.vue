@@ -300,70 +300,11 @@ const toast = useToast();
 const { locale } = useI18n();
 const localePath = useLocalePath();
 const baseUrl = useRuntimeConfig().public.baseUrl;
-const page = ref(0);
 const cartModal = ref(false);
 const order = ref(null);
 const bgModal = ref(false);
 const deleteMessage = ref(true);
 const iconRole = ref(false);
-
-function pageDown() {
-  if (page.value !== 0) {
-    page.value--;
-    orderApi();
-  }
-}
-function pageUpDown() {
-  if (order.value.totalPages - 1 > page.value) {
-    page.value++;
-    orderApi();
-  } else {
-  }
-}
-function pageApi(p) {
-  page.value = p - 1;
-  orderApi();
-}
-const searchInfo = ref();
-async function search() {
-  try {
-    store.loader = true;
-    const data = await $fetch(baseUrl + "/order", {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("userToken"),
-        "Accept-Language": locale.value,
-      },
-      params: {
-        page: page.value,
-        size: 10,
-        name: searchInfo.value,
-        companyId: localStorage.getItem("userCompanyId")
-          ? localStorage.getItem("userCompanyId")
-          : null,
-        supplierId: localStorage.getItem("userSupplierId")
-          ? localStorage.getItem("userSupplierId")
-          : null,
-      },
-    });
-
-    order.value = data;
-    if (data) {
-      store.loader = false;
-    }
-  } catch (error) {
-    store.loader = false;
-    toast.error(
-      error?.response?._data?.message ||
-        error?.response?._data?.error ||
-        "Error",
-      {
-        position: "top-right",
-        timeout: 2000,
-      }
-    );
-  }
-}
 const role = localStorage.getItem("role");
 onMounted(() => {
   order.value = JSON.parse(localStorage.getItem("cart"));
@@ -486,12 +427,7 @@ async function cartEditApi(e) {
     );
     if (removeIndex !== -1) {
       productAll.splice(removeIndex, 1);
-      console.log("hello");
-    } else {
-      console.log("bug");
     }
-  } else {
-    console.log("topilmadi", product);
   }
   productAll.push(item);
   localStorage.setItem("cart", JSON.stringify(productAll));
