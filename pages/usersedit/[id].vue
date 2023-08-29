@@ -15,7 +15,17 @@
                 v-model="fullName"
               />
             </div>
-
+            <div class="info">
+              <label class="info_label" for="com_name">{{
+                $t("userPhone")
+              }}</label>
+              <input
+                class="info_input"
+                type="text"
+                ref="userPhone"
+                id="com_name"
+              />
+            </div>
             <div class="info">
               <label class="info_label" for="start_date">{{
                 $t("Login")
@@ -80,6 +90,7 @@ const password = ref("");
 const { locale } = useI18n();
 const localePath = useLocalePath();
 const inputTypeInfo = ref(null);
+const userPhone = ref("");
 const router = useRouter();
 const route = useRoute();
 const i18n = useI18n();
@@ -87,11 +98,6 @@ const { id } = route.params;
 const baseUrl = useRuntimeConfig().public.baseUrl;
 async function userPutApi() {
   try {
-    if (
-      fullName.value !== "" &&
-      username.value !== "" &&
-      password.value !== ""
-    ) {
         const data = await $fetch(baseUrl + "/user", {
           method: "PUT",
           headers: {
@@ -102,6 +108,7 @@ async function userPutApi() {
             fullName: fullName.value,
             username: username.value,
             password: password.value,
+            phone:userPhone.value.value
           }),
         });
         if (data?.message == "ok") {
@@ -111,18 +118,6 @@ async function userPutApi() {
             timeout: 2000,
           });
         }
-      
-    }else{
-      toast.error(
-      error?.response?._data?.message ||
-        error?.response?._data?.error ||
-        "Bo'shliqni",
-      {
-        position: "top-right",
-        timeout: 2000,
-      }
-    );
-    }
   } catch (error) {
     toast.error(
       error?.response?._data?.message ||
@@ -149,6 +144,7 @@ async function userOneApi() {
       fullName.value = data?.fullName;
       username.value = data?.username;
       password.value = data?.password;
+      userPhone.value.value = data?.phone;
     }
   } catch (error) {}
 }
@@ -221,6 +217,13 @@ async function refresh() {
   }
 }
 refresh();
+onMounted(() => {
+  var maskUserOptions = {
+    mask: "+{998}(00) 000-00-00",
+    lazy: false,
+  };
+  var userMask = new IMask(userPhone.value, maskUserOptions);
+});
 </script>
   
   <style lang="scss" scoped>

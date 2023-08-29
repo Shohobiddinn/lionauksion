@@ -30,6 +30,12 @@
               />
             </div>
             <div class="info">
+              <label class="info_label" for="com_name">{{
+                $t("PhoneNumber")
+              }}</label>
+              <input class="info_input" type="text" ref="phone" id="com_name" />
+            </div>
+            <div class="info">
               <label class="info_label" for="com_leader">{{
                 $t("userFio")
               }}</label>
@@ -42,9 +48,14 @@
             </div>
             <div class="info">
               <label class="info_label" for="com_name">{{
-                $t("PhoneNumber")
+                $t("userPhone")
               }}</label>
-              <input class="info_input" type="text" ref="phone" id="com_name" />
+              <input
+                class="info_input"
+                type="text"
+                ref="userPhone"
+                id="com_name"
+              />
             </div>
             <div class="info">
               <label class="info_label" for="start_date">{{
@@ -123,6 +134,7 @@ const username = ref("");
 const password = ref("");
 const companyName = ref("");
 const phone = ref("");
+const userPhone = ref("");
 const inputTypeInfo = ref(null);
 const atvet = ref(null);
 const router = useRouter();
@@ -133,7 +145,7 @@ async function suplierApi() {
       !companyName.value == "" &&
       !fullName.value == "" &&
       !password.value == "" &&
-      !username.value == ""&&
+      !username.value == "" &&
       !userFullName.value == ""
     ) {
       store.loader = true;
@@ -149,6 +161,7 @@ async function suplierApi() {
           phone: phone.value.value,
           userFullName: userFullName.value,
           username: username.value,
+          userPhone: userPhone.value.value,
           password: password.value,
         }),
       });
@@ -210,7 +223,6 @@ async function refresh() {
       }
     }
   } catch (error) {
-    
     if (error?.response?._data?.status == 401) {
       localStorage.removeItem("userToken");
       localStorage.removeItem("role");
@@ -228,7 +240,6 @@ async function refresh() {
       localStorage.removeItem("userRefreshToken");
       localStorage.removeItem("userId");
       localStorage.removeItem("fullName");
-
     } else {
       store.loader = false;
       toast.error(
@@ -250,6 +261,11 @@ onMounted(() => {
     lazy: false,
   };
   var mask = new IMask(phone.value, maskOptions);
+  var maskUserOptions = {
+    mask: "+{998}(00) 000-00-00",
+    lazy: false,
+  };
+  var userMask = new IMask(userPhone.value, maskUserOptions);
 });
 </script>
   

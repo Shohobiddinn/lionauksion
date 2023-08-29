@@ -1,7 +1,7 @@
 <template>
-     <Head>
-      <Title>{{ $t("userAdd") }}</Title>
-    </Head>
+  <Head>
+    <Title>{{ $t("userAdd") }}</Title>
+  </Head>
   <div>
     <div class="companyadd_page">
       <div class="container">
@@ -18,7 +18,17 @@
                 v-model="fullName"
               />
             </div>
-
+            <div class="info">
+              <label class="info_label" for="com_name">{{
+                $t("userPhone")
+              }}</label>
+              <input
+                class="info_input"
+                type="text"
+                ref="userPhone"
+                id="com_name"
+              />
+            </div>
             <div class="info">
               <label class="info_label" for="start_date">{{
                 $t("Login")
@@ -76,6 +86,7 @@
 import { useToast } from "vue-toastification";
 const toast = useToast();
 import { useStore } from "~/store/store";
+import IMask from "imask";
 const store = useStore();
 const i18n = useI18n();
 const fullName = ref("");
@@ -84,16 +95,12 @@ const password = ref("");
 const { locale } = useI18n();
 const localePath = useLocalePath();
 const inputTypeInfo = ref(null);
+const userPhone = ref("");
 const router = useRouter();
 const baseUrl = useRuntimeConfig().public.baseUrl;
 async function userApi() {
   try {
-    if (
-      fullName.value !== "" &&
-      username.value !== "" &&
-      password.value !== ""
-    ) {
-      if(localStorage.getItem("userSupplierId") !== ""){
+      if (localStorage.getItem("userSupplierId") !== "") {
         const data = await $fetch(baseUrl + "/supplier/add-user", {
           method: "POST",
           headers: {
@@ -102,6 +109,7 @@ async function userApi() {
           },
           body: JSON.stringify({
             fullName: fullName.value,
+            phone: userPhone.value.value,
             username: username.value,
             password: password.value,
           }),
@@ -113,7 +121,7 @@ async function userApi() {
             timeout: 2000,
           });
         }
-      }else{
+      } else {
         const data = await $fetch(baseUrl + "/company/add-user", {
           method: "POST",
           headers: {
@@ -123,6 +131,7 @@ async function userApi() {
           body: JSON.stringify({
             fullName: fullName.value,
             username: username.value,
+            phone: userPhone.value.value,
             password: password.value,
           }),
         });
@@ -133,9 +142,8 @@ async function userApi() {
             timeout: 2000,
           });
         }
-
       }
-    }
+    
   } catch (error) {
     toast.error(
       error?.response?._data?.message ||
@@ -183,7 +191,6 @@ async function refresh() {
       }
     }
   } catch (error) {
-    
     if (error?.response?._data?.status == 401) {
       localStorage.removeItem("userToken");
       localStorage.removeItem("role");
@@ -201,7 +208,6 @@ async function refresh() {
       localStorage.removeItem("userRefreshToken");
       localStorage.removeItem("userId");
       localStorage.removeItem("fullName");
-
     } else {
       store.loader = false;
       toast.error(
@@ -217,6 +223,13 @@ async function refresh() {
   }
 }
 refresh();
+onMounted(() => {
+  var maskUserOptions = {
+    mask: "+{998}(00) 000-00-00",
+    lazy: false,
+  };
+  var userMask = new IMask(userPhone.value, maskUserOptions);
+});
 </script>
   
   <style lang="scss" scoped>

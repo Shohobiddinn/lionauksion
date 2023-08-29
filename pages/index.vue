@@ -404,7 +404,7 @@
                 </div>
               </div>
             </div>
-            <div class="pagination" v-if="products?.content.length">
+            <div class="pagination" v-if="!(products?.isFirst && products?.isLast )">
               <div class="pagination_icon" @click="pageDown">
                 <svg
                   width="24"

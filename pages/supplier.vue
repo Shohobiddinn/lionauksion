@@ -145,7 +145,7 @@
               </div>
             </div>
           </div>
-          <div class="pagination" v-if="suplier?.content.length">
+          <div class="pagination" v-if="!(suplier?.isLast && suplier?.isFirst)">
             <div class="pagination_icon" @click="pageDown">
               <svg
                 width="24"

@@ -27,6 +27,12 @@
               />
             </div>
             <div class="info">
+              <label class="info_label" for="com_name">{{
+                $t("PhoneNumber")
+              }}</label>
+              <input class="info_input" type="text" ref="phone" id="com_name" />
+            </div>
+            <div class="info">
               <label class="info_label" for="com_leader">{{
                 $t("userFio")
               }}</label>
@@ -39,9 +45,9 @@
             </div>
             <div class="info">
               <label class="info_label" for="com_name">{{
-                $t("PhoneNumber")
+                $t("userPhone")
               }}</label>
-              <input class="info_input" type="text" ref="phone" id="com_name" />
+              <input class="info_input" type="text" ref="userPhone" id="com_name" />
             </div>
             <div class="info">
               <label class="info_label" for="start_date">{{
@@ -116,6 +122,7 @@ const fullName = ref("");
 const userFullName = ref("");
 const username = ref("");
 const password = ref("");
+const userPhone = ref("")
 const companyName = ref("");
 const route = useRoute();
 const { id } = route.params;
@@ -209,6 +216,7 @@ async function companyPutApi() {
           userFullName: fullName.value,
           username: username.value,
           password: password.value,
+          userPhone:userPhone.value.value
         }),
       });
       if (data.message == "ok") {
@@ -253,6 +261,7 @@ async function companyOneApi() {
     username.value = data?.username;
     password.value = data?.password;
     userFullName.value = data?.userFullName;
+    userPhone.value.value = data?.userPhone
     if (data) {
       store.loader = false;
     }
@@ -284,6 +293,11 @@ onMounted(() => {
     lazy: false,
   };
   var mask = new IMask(phone.value, maskOptions);
+  var maskUserOptions = {
+    mask: "+{998}(00) 000-00-00",
+    lazy: false,
+  };
+  var userMask = new IMask(userPhone.value, maskUserOptions);
 });
 
 </script>

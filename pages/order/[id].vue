@@ -404,7 +404,7 @@
                 </div>
               </div>
             </div>
-            <div class="pagination" v-if="order?.orders.length">
+            <!-- <div class="pagination" v-if="order?.orders.length">
               <div class="pagination_icon" @click="pageDown">
                 <svg
                   width="24"
@@ -447,7 +447,7 @@
                   />
                 </svg>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
