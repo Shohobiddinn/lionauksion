@@ -3,7 +3,7 @@
       <Head>
     <Title>{{ $t("Suppliers") }}</Title>
   </Head>
-      <div class="company_page">
+      <div class="order_page">
         <div class="container">
           <div class="company_info">
             <div class="company_info_top">
