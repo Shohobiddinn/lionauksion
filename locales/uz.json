@@ -94,5 +94,7 @@
     "notAccepted":"qabul qilinmadi",
     "onWay":"yo'lda",
     "delivered":"yetkazildi",
-    "expected":"kutilmoqda"
+    "expected":"kutilmoqda",
+    "susses":"Muvaffaqiyatli",
+    "error":"Xatolik yuz berdi"
 }

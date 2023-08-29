@@ -9,35 +9,7 @@
         <div class="info">
           <div class="info_top">
             <div class="categorys">
-              <!-- <div class="search">
-                <div class="form">
-                  <input
-                    type="text"
-                    :placeholder="$t('search')"
-                    v-model="searchInfo"
-                    @input="search"
-                  />
-                  <div class="form_icon" @click="search">
-                    <svg
-                      width="30"
-                      height="31"
-                      viewBox="0 0 30 31"
-                      fill="white"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M14.3037 28.6074C6.41923 28.6074 0 22.1882 0 14.3037C0 6.41923 6.41923 0 14.3037 0C22.1882 0 28.6074 6.41923 28.6074 14.3037C28.6074 22.1882 22.1882 28.6074 14.3037 28.6074ZM14.3037 2.09323C7.56353 2.09323 2.09323 7.57748 2.09323 14.3037C2.09323 21.03 7.56353 26.5142 14.3037 26.5142C21.0439 26.5142 26.5142 21.03 26.5142 14.3037C26.5142 7.57748 21.0439 2.09323 14.3037 2.09323Z"
-                        fill="white"
-                      />
-                      <path
-                        d="M28.9569 30.0029C28.6918 30.0029 28.4266 29.9052 28.2173 29.6959L25.4263 26.9049C25.0216 26.5002 25.0216 25.8304 25.4263 25.4257C25.831 25.021 26.5008 25.021 26.9055 25.4257L29.6965 28.2167C30.1012 28.6213 30.1012 29.2912 29.6965 29.6959C29.4872 29.9052 29.222 30.0029 28.9569 30.0029Z"
-                        fill="white"
-                      />
-                    </svg>
-                    {{ $t("search") }}
-                  </div>
-                </div>
-              </div> -->
+              <div class="send_btn" @click="orderAddApi">{{ $t("Send") }}</div>
               <div class="categorys_content">
                 <div class="categorys_content_title" v-show="productAddIcon">
                   <NuxtLink
@@ -433,6 +405,36 @@ async function cartEditApi(e) {
   localStorage.setItem("cart", JSON.stringify(productAll));
   bgModal.value = false;
   cartModal.value = false;
+}
+async function orderAddApi() {
+  try {
+    const data = await $fetch(baseUrl + "/order", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("userToken"),
+        "Accept-Language": locale.value,
+      },
+      body: JSON.parse(localStorage.getItem("cart"))
+    });
+    if(data){
+      store.loader = false;
+      toast.success(data?.message || "Success", {
+            position: "top-right",
+            timeout: 2000,
+          });
+    }
+  } catch (error) {
+    store.loader = false;
+    toast.error(
+      error?.response?._data?.message ||
+        error?.response?._data?.error ||
+        "Bo'shliqni",
+      {
+        position: "top-right",
+        timeout: 2000,
+      }
+    );
+  }
 }
 </script>
     
