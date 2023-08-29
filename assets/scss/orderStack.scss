@@ -7,7 +7,7 @@ body {
     padding-top: 60px;
 
     .container {
-        .company_info {
+        .order_info {
             margin-left: 300px;
 
             &_top {
@@ -33,7 +33,7 @@ body {
                     }
                 }
 
-                .company_filter {
+                .order_filter {
                     position: relative;
 
                     &_option {
@@ -60,12 +60,12 @@ body {
                         &:hover {
                             background-color: $pr_blue_color;
 
-                            .company_filter_option_title {
+                            .order_filter_option_title {
                                 color: $pr_white_color;
 
                             }
 
-                            .company_filter_option_icon {
+                            .order_filter_option_icon {
                                 svg {
                                     filter: invert(1);
                                 }
@@ -117,7 +117,7 @@ body {
                     }
 
                     &.active {
-                        .company_filter_content {
+                        .order_filter_content {
                             transform: translateX(0%);
                             visibility: visible;
                             opacity: 1;
@@ -152,8 +152,8 @@ body {
                     }
                 }
 
-                &_companys {
-                    .company {
+                &_orders {
+                    .order {
                         padding: 5px 20px;
                         @include flex(center, flex-start);
                         gap: 100px;
