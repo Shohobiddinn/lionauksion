@@ -404,6 +404,7 @@ async function cartEditApi(e) {
   }
   productAll.push(item);
   localStorage.setItem("cart", JSON.stringify(productAll));
+  window.location.reload();
   bgModal.value = false;
   cartModal.value = false;
 }
@@ -419,7 +420,8 @@ async function orderAddApi() {
     });
     if(data){
       store.loader = false;
-      localStorage.removeItem("cart")
+      localStorage.removeItem("cart");
+      window.location.reload();
       toast.success(i18n.t("susses"), {
             position: "top-right",
             timeout: 2000,
