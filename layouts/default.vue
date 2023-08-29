@@ -476,7 +476,7 @@ onMounted(() => {
     supplierPage.value = false;
     productAddPage.value = false;
     userPage.value = true;
-    orderPage.value = true;
+    orderPage.value = false;
     cartPage.value = false;
     orderSuplierPage.value = true;
   }
