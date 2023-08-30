@@ -154,54 +154,58 @@ body {
 
                 &_orders {
                     .order {
-                        padding: 5px 20px;
-                        @include flex(center, flex-start);
-                        gap: 100px;
+                        @include flex(center,space-between);
                         background-color: $pr_white_color;
                         border-radius: 10px;
                         margin-bottom: 10px;
-
-                        &_title {
-                            @include fond(400, 15);
-                            color: $pr_black_color;
-                            text-transform: capitalize;
-                            width: 200px;
-
-                            &_logo {
-                                width: 50px;
-                                height: 50px;
-                                @include flex(center, center);
-                                background-color: #E2E2E2;
-                                border-radius: 7px;
-
-                                img {
-                                    border-radius: 50%;
+                        padding: 5px 20px;
+                        &_link{
+                            @include flex(center, flex-start);
+                            gap: 100px;
+                      
+    
+                            &_title {
+                                @include fond(400, 15);
+                                color: $pr_black_color;
+                                text-transform: capitalize;
+                                width: 200px;
+    
+                                &_logo {
+                                    width: 50px;
+                                    height: 50px;
+                                    @include flex(center, center);
+                                    background-color: #E2E2E2;
+                                    border-radius: 7px;
+    
+                                    img {
+                                        border-radius: 50%;
+                                    }
                                 }
-                            }
-
-                            &_icon {
-                                svg {
-                                    width: 25px;
-                                    height: 25px;
+    
+                                &_icon {
+                                    svg {
+                                        width: 25px;
+                                        height: 25px;
+                                        cursor: pointer;
+                                    }
+                                }
+    
+                                &.lock {
                                     cursor: pointer;
                                 }
+    
+                                &.lock_open {
+                                    cursor: pointer;
+                                }
+    
+                                &:nth-child(1) {
+                                    width: 50px;
+                                }
+    
+                                // &:nth-child(5) {
+                                //     width: 50px;
+                                // }
                             }
-
-                            &.lock {
-                                cursor: pointer;
-                            }
-
-                            &.lock_open {
-                                cursor: pointer;
-                            }
-
-                            &:nth-child(1) {
-                                width: 50px;
-                            }
-
-                            // &:nth-child(5) {
-                            //     width: 50px;
-                            // }
                         }
                     }
                 }
@@ -222,6 +226,54 @@ body {
                     cursor: pointer;
                 }
             }
+        }
+    }
+}
+@media (max-width:1740px){
+    .order_page{
+        .container{
+          .order_info{
+            margin-left: 100px;
+          }  
+        }
+    }
+}
+
+@media (max-width:1550px) {
+    .order_page {
+        .container {
+            .order_info {
+                &_bottom {
+                    overflow-x: scroll;
+                    white-space: nowrap;
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+                    &_top {
+                        min-width: 1600px;
+                        white-space: nowrap;
+                        overflow-x: scroll;
+                        margin-bottom: 20px;
+                        
+                    }
+                    
+                    &_orders {
+                        margin-top: 70px;
+                        .order {
+                            min-width: 1600px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width:695px){
+    .order_page{
+        .container{
+          .order_info{
+            margin-left: 0;
+          }  
         }
     }
 }

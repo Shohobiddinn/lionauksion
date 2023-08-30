@@ -1,21 +1,30 @@
 <template>
   <div>
     <bgmodal v-if="bgmodol" />
-    <whiteModal
-      @click="(traModal = false), (langModal = false), (profilModal = false)"
-      v-if="traModal"
-    />
+    <whiteModal @click="modalFalse" v-if="traModal" />
     <nav>
       <div class="container">
         <div class="menu">
+          <div class="menu_popup" @click="content">
+            <span></span><span></span><span></span>
+          </div>
           <div class="menu_logo">
             <NuxtLink :to="localePath('/')">
               <img src="@/assets/image/logo.png" alt="" />
             </NuxtLink>
           </div>
-          <div class="menu_content">
+          <div class="menu_logo2">
+            <NuxtLink :to="localePath('/')">
+              <img src="../assets/image/squarelogo.svg" alt="" />
+            </NuxtLink>
+          </div>
+          <div class="menu_content" :class="{ active: contentModal }">
             <div class="menu_content_title" v-if="productPage">
-              <NuxtLink class="menu_content_title_link" :to="localePath('/')">
+              <NuxtLink
+                class="menu_content_title_link"
+                @click="contentModal = false"
+                :to="localePath('/')"
+              >
                 <div class="menu_content_title_link_icon">
                   <svg
                     width="30"
@@ -37,6 +46,7 @@
             <div class="menu_content_title" v-if="companyPage">
               <NuxtLink
                 class="menu_content_title_link"
+                @click="contentModal = false"
                 :to="localePath('/company')"
               >
                 <div class="menu_content_title_link_icon">
@@ -60,6 +70,7 @@
             <div class="menu_content_title" v-if="currensyPage">
               <NuxtLink
                 class="menu_content_title_link"
+                @click="contentModal = false"
                 :to="localePath('/currensy')"
               >
                 <div class="menu_content_title_link_icon">
@@ -83,6 +94,7 @@
             <div class="menu_content_title" v-if="currensyTypePage">
               <NuxtLink
                 class="menu_content_title_link"
+                @click="contentModal = false"
                 :to="localePath('/currensyType')"
               >
                 <div class="menu_content_title_link_icon">
@@ -106,6 +118,7 @@
             <div class="menu_content_title" v-if="supplierPage">
               <NuxtLink
                 class="menu_content_title_link"
+                @click="contentModal = false"
                 :to="localePath('/supplier')"
               >
                 <div class="menu_content_title_link_icon">
@@ -129,6 +142,7 @@
             <div class="menu_content_title" v-if="productAddPage">
               <NuxtLink
                 class="menu_content_title_link"
+                @click="contentModal = false"
                 :to="localePath('/product-prototype')"
               >
                 <div class="menu_content_title_link_icon">
@@ -152,6 +166,7 @@
             <div class="menu_content_title" v-if="userPage">
               <NuxtLink
                 class="menu_content_title_link"
+                @click="contentModal = false"
                 :to="localePath('/users')"
               >
                 <div class="menu_content_title_link_icon">
@@ -175,6 +190,7 @@
             <div class="menu_content_title" v-if="orderSuplierPage">
               <NuxtLink
                 class="menu_content_title_link"
+                @click="contentModal = false"
                 :to="localePath('/orderSuplier')"
               >
                 <div class="menu_content_title_link_icon">
@@ -198,6 +214,7 @@
             <div class="menu_content_title" v-if="orderPage">
               <NuxtLink
                 class="menu_content_title_link"
+                @click="contentModal = false"
                 :to="localePath('/orderStack')"
               >
                 <div class="menu_content_title_link_icon">
@@ -221,6 +238,7 @@
             <div class="menu_content_title" v-if="cartPage">
               <NuxtLink
                 class="menu_content_title_link"
+                @click="contentModal = false"
                 :to="localePath('/cart')"
               >
                 <div class="menu_content_title_link_icon">
@@ -370,6 +388,16 @@ import { useStore } from "~/store/store";
 import { useToast } from "vue-toastification";
 const toast = useToast();
 const store = useStore();
+function content() {
+  contentModal.value = !contentModal.value;
+  traModal.value = !traModal.value;
+}
+function modalFalse() {
+  traModal.value = false;
+  langModal.value = false;
+  contentModal.value = false;
+  profilModal.value = false;
+}
 const { locale, locales } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
 const localePath = useLocalePath();
@@ -377,6 +405,7 @@ const role = localStorage.getItem("role");
 const baseUrl = useRuntimeConfig().public.baseUrl;
 const i18n = useI18n();
 const router = useRouter();
+const contentModal = ref(false);
 const productPage = ref(false);
 const companyPage = ref(false);
 const orderPage = ref(false);
@@ -504,6 +533,17 @@ onMounted(() => {
     cartPage.value = true;
     orderSuplierPage.value = false;
   }
+  // else {
+  //   productPage.value = true;
+  //   companyPage.value = true;
+  //   currensyPage.value = true;
+  //   currensyTypePage.value = true;
+  //   supplierPage.value = true;
+  //   productAddPage.value = true;
+  //   orderPage.value = true;
+  //   cartPage.value = true;
+  //   orderSuplierPage.value = true;
+  // }
   document.querySelectorAll(".language_content_title").forEach((item) => {
     if (locale.value === item.textContent) {
       item.style.display = "none";

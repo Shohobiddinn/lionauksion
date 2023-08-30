@@ -4,22 +4,12 @@
     <Head>
       <Title>{{ $t("order") }}</Title>
     </Head>
-    <div class="informotion">
+    <div class="cart">
       <div class="container">
         <div class="info">
           <div class="info_top">
             <div class="categorys">
               <div class="send_btn" @click="orderAddApi">{{ $t("Send") }}</div>
-              <div class="categorys_content">
-                <div class="categorys_content_title" v-show="productAddIcon">
-                  <NuxtLink
-                    class="categorys_content_title_link"
-                    :to="localePath('/productadd')"
-                  >
-                    {{ $t("Addproduct") }}
-                  </NuxtLink>
-                </div>
-              </div>
             </div>
           </div>
           <div class="info_bottom">

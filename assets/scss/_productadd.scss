@@ -113,16 +113,12 @@
                             height: 15px;
                         }
 
-                        ;
-
                         &_label {
                             @include fond(500, 17);
                             color: $pr_black_color;
                             text-transform: capitalize;
                             cursor: pointer;
                         }
-
-                        ;
                     }
 
                     .infos {
@@ -312,6 +308,103 @@
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:1740px) {
+    .add_page {
+        .container {
+            .add_info {
+                margin-left: 100px;
+            }
+        }
+    }
+}
+
+@media(max-width:900px) {
+    .add_page {
+        .container {
+            .add_info {
+                margin-left: 100px;
+
+                .product_add {
+                    flex-direction: column;
+                    gap: 0;
+
+                    &_father {
+                        border-bottom-right-radius: 0;
+                        border-bottom-left-radius: 0;
+                        width: 100%;
+
+                        .selected {
+                            width: 100%;
+                        }
+
+                        .infos {
+                            input {
+                                width: 100%;
+                            }
+                        }
+
+                        .inputs {
+                            &_input {
+                                width: 100%;
+                            }
+                        }
+
+                        .price {
+                            input {
+                                width: 100%;
+                            }
+                        }
+
+                        .textarea {
+                            &_title {
+                                width: 100%;
+                            }
+                        }
+                    }
+
+                    &_child {
+                        border-top-right-radius: 0;
+                        border-top-left-radius: 0;
+                        width: 100%;
+
+                        &_contents {
+                            height: auto;
+
+                            .info {
+                                &_input {
+                                    width: 100%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:695px) {
+    .add_page {
+        .container {
+            .add_info {
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+@media (max-width:450px) {
+    .add_page {
+        .container {
+            .add_info {
+                .product_add {
+                    padding: 10px;
                 }
             }
         }

@@ -39,7 +39,7 @@
                         background: $pr_white_color;
                         padding: 0 10px;
                         margin-bottom: 10px;
-                        background-color:$pr_bg_color;
+                        background-color: $pr_bg_color;
 
                         &::placeholder {
                             @include fond(400, 13);
@@ -111,6 +111,48 @@
                             filter: invert(0.1);
                         }
                     }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:1300px) {
+    .companyadd_page {
+        .container {
+            .information {
+                margin-left: 100px;
+            }
+        }
+    }
+}
+
+@media (max-width:780px) {
+    .companyadd_page {
+        .container {
+            .information {
+                margin-left: 100px;
+                width: 90%;
+
+                &_inputs {
+                    .info {
+                        &_input {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width:695px) {
+    .companyadd_page {
+        .container {
+            .information {
+                margin-left: 0;
+                width: 100%;
+                &_inputs{
+                    width: 100%;
                 }
             }
         }

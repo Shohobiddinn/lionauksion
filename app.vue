@@ -18,9 +18,9 @@ import { useStore } from "~/store/store";
 const store = useStore();
 const localePath = useLocalePath();
 const router = useRouter();
-if (!localStorage.getItem("userToken")) {
-  router.push(localePath("/login"));
-}
+// if (!localStorage.getItem("userToken")) {
+//   router.push(localePath("/login"));
+// }
 
 onMounted(() => {
   window.addEventListener("keydown", function (event) {

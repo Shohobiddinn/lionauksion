@@ -12,7 +12,6 @@ body {
 
             &_top {
                 @include flex (center, space-between);
-
                 margin-bottom: 35px;
 
                 &_add {
@@ -209,7 +208,7 @@ body {
 
             .pagination {
                 @include flex(center, center);
-          
+
                 gap: 10px;
 
                 &_icon {
@@ -221,6 +220,81 @@ body {
                     color: $pr_black_color;
                     cursor: pointer;
                 }
+            }
+        }
+    }
+}
+
+@media (max-width:1740px) {
+    .company_page {
+        .container {
+            .company_info {
+                margin-left: 100px;
+            }
+        }
+    }
+}
+
+;
+
+@media (max-width:1550px) {
+    .company_page {
+        .container {
+            .company_info {
+                &_bottom {
+                    overflow-x: scroll;
+                    white-space: nowrap;
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+                    &_top {
+                        min-width: 1600px;
+                        white-space: nowrap;
+                        overflow-x: scroll;
+                        margin-bottom: 20px;
+                        
+                    }
+                    
+                    &_companys {
+                        margin-top: 70px;
+                      
+                        .company {
+                            min-width: 1600px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:951px) {
+    .company_page {
+        .container {
+            .company_info{
+                &_top {
+                    flex-direction: column;
+                    gap: 30px;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                    display: inline-block;
+                    .search{
+                        margin-bottom: 20px;
+                    }
+                    &_add{
+                        &_link{
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media(max-width:695px){
+    .company_page{
+        .container{
+            .company_info{
+                margin-left: 0;
             }
         }
     }

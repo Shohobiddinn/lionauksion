@@ -32,7 +32,9 @@
                       fill="white"
                     />
                   </svg>
-                  {{ $t("search") }}
+                  <div class="form_icon_text">
+                    {{ $t("search") }}
+                  </div>
                 </div>
               </div>
             </div>
