@@ -1,4 +1,3 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config  
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['maz-ui/css/main.css', "~/assets/scss/main.scss",],
@@ -8,14 +7,13 @@ export default defineNuxtConfig({
   ],
   app: {
     head: {
-      title: "Lion Print",
-      charset: 'utf-8',
-      viewport: 'width=device-width, initial-scale=1',
+      title: 'LionPrint',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      ],
       link: [
-        {
-          rel: "stylesheet",
-          href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css",
-        },
+        { rel: 'icon', type: 'image/png', href: '/image26.svg',sizes: 'any'},
       ],
     },
   },
@@ -38,7 +36,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      baseUrl: "https://lionprintspringboot-production.up.railway.app/api/v1"
+      baseUrl: "https://localhost:8981/api/v1"
     }
   },
   build: {
@@ -46,3 +44,4 @@ export default defineNuxtConfig({
   },
   ssr: false
 })
+//shuni olavering angular emasmanu
