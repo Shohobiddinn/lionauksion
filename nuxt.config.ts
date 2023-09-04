@@ -36,7 +36,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      baseUrl: "https://localhost:8981/api/v1"
+      baseUrl: "https://lionprintspringboot-production.up.railway.app/api/v1"
     }
   },
   build: {
@@ -44,4 +44,3 @@ export default defineNuxtConfig({
   },
   ssr: false
 })
-//shuni olavering angular emasmanu
